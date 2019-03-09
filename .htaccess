@@ -1,0 +1,19 @@
+ErrorDocument 404 https://joebailey.xyz
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^www\.joebailey\.xyz [NC]
+RewriteRule ^(.*)$ https://joebailey.xyz/$1 [L,R=301]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|otf|eot|woff|woff2|css|js|php|json)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
