@@ -8,9 +8,6 @@
 		<meta name="description" content="Joe Bailey is a web developer and photographer currently living in Southampton studying at Solent University.">
 		
 		<meta property="og:image" content="android-chrome-384x384.png">
-		<meta property="og:title" content="Joe Bailey | Web Designer, Developer, Photographer | Southampton, UK">
-		<meta property="og:description" content="Joe Bailey is a web developer and photographer currently living in Southampton studying at Solent University.">
-		
 		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
