@@ -478,7 +478,7 @@
 					<div class="row" style="margin-top: 25px">
 						<div class="col-md-8 ml-auto mr-auto">
 							<h3>GitHub Contributions</h3>
-							<a href="https://github.com/joebailey26"><img style="margin: 25px 0px;" src="http://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%"></a>
+							<a href="https://github.com/joebailey26"><img style="margin: 25px 0px;" src="https://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%"></a>
 							<a href="https://github.com/joebailey26">View my profile.</a>
 						</div>
 					</div>
