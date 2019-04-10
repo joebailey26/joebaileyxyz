@@ -16,7 +16,16 @@
 		<meta name="msapplication-TileColor" content="#004c3f">
 		<meta name="theme-color" content="#282828">
 		
-		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="assets/css/main.css">
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" integrity="sha384-FKw7x8fCxuvzBwOJmhTJJsKzBl8dnN9e2R4+pXRfYoHivikuHkzWyhKWDSMcGNK8" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+		
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400" rel="stylesheet">
+		
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		
 		<script src="https://www.google.com/recaptcha/api.js?render=6LcLDYgUAAAAAIXDeTU8jn_FTTetybUTIscj8DZX"></script>
 		<script>
@@ -189,26 +198,67 @@
 							<h4 class="info-title" style="margin-top:20px;">Joe Bailey Photography</h4>
 							<p>I am a photographer as well as a web developer. I first used Weebly, then Adobe Muse to create my website. I learnt a variety of web languages to create the current version of the site. The blog uses WordPress.</p>
 							<a rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/category/joe-bailey-photography/website/">View the blog posts...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Therfield Village Pre-School" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/Therfield.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Therfield Village Pre-School</h4>
 							<p>I currently manage Therfield Village Pre-School's website which is made with WordPress. I implemented the blog and created a style guide to ensure consistency when I took over development on the website.</p>
 							<a rel="noreferrer" target="_blank" href="https://therfieldpreschool.co.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="" class="none">View the blog post...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Integrity Politics" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/Integrity.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Integrity Politics</h4>
 							<p>I created this website from scratch using WordPress to promote the new political party Integrity. I currently maintain it by adding content every so often.</p>
 							<a rel="noreferrer" target="_blank" href="https://integritypolitics.org">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/2019/01/integrity-politics/">View the blog post...</a>
 						</div>
 					</div>	
 					<div class="row" style="padding-top:70px">
-						<div class="col-md-4" id="gut">
-							<img alt="Blossom Tree Photography" class="lazy" data-src="assets/img/Portfolio/Websites/Blossom.png" width="150px">
+						<div class="col-md-4">
+							<img alt="Blossom Tree Photography" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/Blossom.jpg" width="150px">
 							<h4 class="info-title">Blossom Tree Photography</h4>
 							<p>I built a website using WordPress for my girlfriend to showcase her photography work to potential universities and employers.</p>
 							<a rel="noreferrer" target="_blank" href="https://blossomtreephoto.co.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/2019/01/blossom-tree-photography/">View the blog post...</a>
+						</div>
+						<div class="col-md-4 none">
+							<img alt="Prospect Sports" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/prospect.jpg" width="150px">
+							<h4 class="info-title">Prospect Sports</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="https://prospectsportscoaching.co.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the blog post...</a>
+						</div>
+						<div class="col-md-4 none">
+							<img alt="We Are Artemis" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/artemis.jpg" width="150px">
+							<h4 class="info-title">We Are Artemis</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="https://artemisband.co.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the blog post...</a>
+						</div>
+					</div>
+					<div class="row none" style="padding-top:70px">
+						<div class="col-md-4">
+							<img alt="Disabled People's Voice" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/dpv.jpg" width="150px">
+							<h4 class="info-title">Disabled People's Voice</h4>
+							<p>Coming Soon.</p>
+							<a rel="noreferrer" target="_blank" href="https://dpv.org.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the blog post...</a>
+						</div>
+						<div class="col-md-4">
+							<img alt="Sour Lemons The Label" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/lemons.jpg" width="150px">
+							<h4 class="info-title">Sour Lemons The Label</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="https://sourlemonsthelabel.co.uk">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the blog post...</a>
+						</div>
+						<div class="col-md-4">
+							<img alt="Nikola Chamberlain" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/.jpg" width="150px">
+							<h4 class="info-title">Nikola Chamberlain</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the blog post...</a>
 						</div>
 					</div>
 					
@@ -222,27 +272,50 @@
 							<img alt="National Hyacinth Collection" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/National-Hyacinth-Collection.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">National Hyacinth Collection</h4>
 							<p>In 2017 I approached the National Hyacinth Collection asking if they wanted a website. I decided it would be a good opportunity to teach myself HTML and CSS. However, the project never came to fruition.</p>
-							<a rel="noreferrer" target="_blank" href="https://nhc.joebailey.xyz">View the template...</a>
+							<a rel="noreferrer" target="_blank" href="https://nhc.joebailey.xyz">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="https://nhc.joebailey.xyz" class="none">View the Behance project...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Projekt" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/Projekt.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Projekt</h4>
 							<p>As part of my media course at Sixth Form we had to create multiple websites. This website is a social media platform for creators to share their work.</p>
-							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74653547/Projekt?">View the template...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74653547/Projekt?">View the Behance project...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Student Photography" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/Student-Photographer.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Student Photographer</h4>
 							<p>As part of my media course at Sixth Form we had to create multiple websites. This website is a social media platform for photographers to share their work.</p>
-							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74653681/Student-Photographer?">View the template...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74653681/Student-Photographer?">View the Behance project...</a>
 						</div>
 					</div>
 					<div class="row" style="padding-top:70px">
-						<div class="col-md-4" id="gut">
+						<div class="col-md-4">
 							<img alt="Project Gutenberg" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/Gutenberg.jpg" width="150px">
 							<h4 class="info-title">Project Gutenberg</h4>
 							<p>My second project at Solent University was to redesign the Project Gutenberg site. As part of this project I learnt how to use Figma.</p>
-							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74308561/Project-Gutenberg-Redesign">View the template...</a>
+							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74308561/Project-Gutenberg-Redesign">View the Behance project...</a>
+						</div>
+						<div class="col-md-4 none">
+							<img alt="Solent App" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/solent.jpg" width="150px">
+							<h4 class="info-title">Solent App</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="">View the Behance project...</a>
+						</div>
+						<div class="col-md-4 none">
+							<img alt="Conspiracy?" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/conspiracy.jpg" width="150px">
+							<h4 class="info-title">Conspiracy?</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="https://web-tech-report.firebaseapp.com/">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the Behance project...</a>
+						</div>
+					</div>
+					<div class="row" style="padding-top:70px">
+						<div class="col-md-4 none">
+							<img alt="Frejdahl" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/Frejdahl.jpg" width="150px">
+							<h4 class="info-title">Frejdahl</h4>
+							<p>Coming Soon</p>
+							<a rel="noreferrer" target="_blank" href="https://frejdahl.joebailey.xyz">View the website...</a>
+							<a rel="noreferrer" target="_blank" href="">View the Behance project...</a>
 						</div>
 					</div>
 					
@@ -339,7 +412,7 @@
 						<div class="col-md-4">
 							<img alt="Natasha Bailey Fashion" class="lazy has-webp" data-src="assets/img/Portfolio/Printed Media/Natasha.jpg" height="200px">
 							<h4 class="info-title">Fashion Leaflets - Natasha Bailey</h4>
-							<p>During the summer of 2017 I took quite a few photos of my mum and wanted to try using InDesign to create soem fashion inspired leaflets.</p>
+							<p>During the summer of 2017 I took quite a few photos of my mum and wanted to try using InDesign to create some fashion inspired leaflets.</p>
 							<a rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/75572061/Fashion-Leaflets">View the item...</a>
 						</div>
 					</div>
@@ -364,7 +437,7 @@
 						</div>
 					</div>
 					<div class="row" style="padding-top:70px">
-						<div class="col-md-4" id="gut">
+						<div class="col-md-4">
 							<img alt="Classics" class="lazy has-webp" id="img" data-src="assets/img/Portfolio/Printed Media/Poster.jpg" height="200px">
 							<h4 class="info-title">Classics Branding Exercise</h4>
 							<p>For one of our electives in media at Sixth Form we had to create an advertising campaign for a product of our choice. I designed a racing video game and came up with a poster, website, and adverts.</p>
@@ -462,23 +535,41 @@
 						<div class="col-md-8 ml-auto mr-auto">
 							<i class="fab fa-windows"></i>
 							<i class="fab fa-apple"></i>
+							<i class="fab fa-ubuntu"></i>
+							<i class="fab fa-raspberry-pi"></i>
+							
 							<i class="fab fa-adobe"></i>
+							<i class="fab fa-npm"></i>
+							<i class="fab fa-yarn"></i>
+							<i class="fab fa-cpanel"></i>
+							
+							<i class="fab fa-markdown"></i>
 							<i class="fab fa-html5"></i>
 							<i class="fab fa-css3-alt"></i>
+							<i class="fab fa-sass"></i>
+							<i class="fab fa-bootstrap"></i>
 							<i class="fab fa-js"></i>
 							<i class="fab fa-php"></i>
 							<i class="fab fa-python"></i>
+							
+							<i class="fab fa-angular none"></i>
+							<i class="fab fa-vuejs none"></i>
+							<i class="fab fa-angular none"></i>
+							<i class="fab fa-node none"></i>
+							
 							<i class="fab fa-figma"></i>
-							<i class="fab fa-raspberry-pi"></i>
+							
 							<i class="fab fa-wordpress"></i>
+							<i class="fab fa-yoast"></i>
 							<i class="fab fa-weebly"></i>
 							<i class="fab fa-wix"></i>
+							<i class="fab fa-blogger"></i>
 						</div>
 					</div>
 					<div class="row" style="margin-top: 25px">
 						<div class="col-md-8 ml-auto mr-auto">
 							<h3>GitHub Contributions</h3>
-							<a href="https://github.com/joebailey26"><img style="margin: 25px 0px;" src="https://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%"></a>
+							<a href="https://github.com/joebailey26"><img style="margin: 25px 0px;" class="lazy" data-src="https://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%"></a>
 							<a href="https://github.com/joebailey26">View my profile.</a>
 						</div>
 					</div>
@@ -518,7 +609,9 @@
 									<label for="subject" class="bmd-label-floating">Your Message</label>
 									<textarea id="subject" name="subject" class="form-control" rows="4" required></textarea>
 								</div>
-								<label for="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+								<div class="form-group">
+									<label for="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+								</div>
 								<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 								<div class="row">
 									<div class="col-md-4 ml-auto mr-auto text-center">
@@ -565,6 +658,25 @@
 				</div>
 			</div>   
 		</footer>
+		<script type="application/ld+json">
+			{
+			  "@context": "http://schema.org",
+			  "@type": "Person",
+			  "email": "mailto:joe@joebailey.xyz",
+			  "image": "https://joebailey.xyz/assets/img/joe.jpg",
+			  "jobTitle": "Web Developer",
+			  "name": "Joe Bailey",
+			  "gender": "male",
+			  "telephone": "+44 7477737535",
+			  "url": "https://joebailey.xyz",
+				"sameAs" : [ "https://www.facebook.com/joebaileyphoto/",
+			  "https://www.linkedin.com/in/joe-bailey-b68b17171/",
+			  "https://www.behance.net/joebailey26",
+			  "https://twitter.com/joebaileyphoto",
+			  "https://www.instagram.com/joebaileyphotography/",
+			  "https://github.com/joebailey26"]
+			}
+    	</script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/lazyload.min.js"></script>
 		<script>			
