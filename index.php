@@ -533,37 +533,37 @@
 					</div>
 					<div class="row skills">
 						<div class="col-md-8 ml-auto mr-auto">
-							<i class="fab fa-windows" tooltip="Windows"></i>
-							<i class="fab fa-apple" tooltip="Apple"></i>
-							<i class="fab fa-ubuntu" tooltip="Ubuntu"></i>
-							<i class="fab fa-raspberry-pi" tooltip="Raspberry Pi"></i>
+							<i class="fab fa-windows" title="Windows"></i>
+							<i class="fab fa-apple" title="Apple"></i>
+							<i class="fab fa-ubuntu" title="Ubuntu"></i>
+							<i class="fab fa-raspberry-pi" title="Raspberry Pi"></i>
 							
-							<i class="fab fa-adobe" tooltip="Adobe"></i>
-							<i class="fab fa-npm" tooltip="NPM"></i>
-							<i class="fab fa-yarn" tooltip="Yarn"></i>
-							<i class="fab fa-cpanel" tooltip="CPanel"></i>
+							<i class="fab fa-adobe" title="Adobe"></i>
+							<i class="fab fa-npm" title="NPM"></i>
+							<i class="fab fa-yarn" title="Yarn"></i>
+							<i class="fab fa-cpanel" title="CPanel"></i>
 							
-							<i class="fab fa-markdown" tooltip="Markdown"></i>
-							<i class="fab fa-html5" tooltip="HTML"></i>
-							<i class="fab fa-css3-alt" tooltip="CSS"></i>
-							<i class="fab fa-sass" tooltip="Sass"></i>
-							<i class="fab fa-bootstrap" tooltip="Bootstrap"></i>
-							<i class="fab fa-js" tooltip="JavaScript"></i>
-							<i class="fab fa-php" tooltip="PHP"></i>
-							<i class="fab fa-python" tooltip="Python"></i>
+							<i class="fab fa-markdown" title="Markdown"></i>
+							<i class="fab fa-html5" title="HTML"></i>
+							<i class="fab fa-css3-alt" title="CSS"></i>
+							<i class="fab fa-sass" title="Sass"></i>
+							<i class="fab fa-bootstrap" title="Bootstrap"></i>
+							<i class="fab fa-js" title="JavaScript"></i>
+							<i class="fab fa-php" title="PHP"></i>
+							<i class="fab fa-python" title="Python"></i>
 							
-							<i class="fab fa-react none" tooltip="React"></i>
-							<i class="fab fa-vuejs none" tooltip="Vue.js"></i>
-							<i class="fab fa-angular none" tooltip="Angular"></i>
-							<i class="fab fa-node none" tooltip="Node.js"></i>
+							<i class="fab fa-react none" title="React"></i>
+							<i class="fab fa-vuejs none" title="Vue.js"></i>
+							<i class="fab fa-angular none" title="Angular"></i>
+							<i class="fab fa-node none" title="Node.js"></i>
 							
-							<i class="fab fa-figma" tooltip="Figma"></i>
+							<i class="fab fa-figma" title="Figma"></i>
 							
-							<i class="fab fa-wordpress" tooltip="WordPress"></i>
-							<i class="fab fa-yoast" tooltip="Yoast SEO"></i>
-							<i class="fab fa-weebly" tooltip="Weebly"></i>
-							<i class="fab fa-wix" tooltip="Wix"></i>
-							<i class="fab fa-blogger" tooltip="Blogger"></i>
+							<i class="fab fa-wordpress" title="WordPress"></i>
+							<i class="fab fa-yoast" title="Yoast SEO"></i>
+							<i class="fab fa-weebly" title="Weebly"></i>
+							<i class="fab fa-wix" title="Wix"></i>
+							<i class="fab fa-blogger" title="Blogger"></i>
 						</div>
 					</div>
 					<div class="row" style="margin-top: 25px">
