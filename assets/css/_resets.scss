@@ -17,3 +17,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+img:not([src]) {
+    visibility: hidden;
+}
+img[data-src],
+img[data-srcset] {
+  display: block;
+  min-height: 1px;
+  margin: auto;
+}
