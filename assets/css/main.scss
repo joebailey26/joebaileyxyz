@@ -1,8 +1,8 @@
+@import 'resets';
 @import 'fonts';
 @import 'mobile';
-@import 'resets';
 
-.none {
+.none, .rss-item div, .rss-item img {
 	display: none!important;
 }
 
@@ -10,36 +10,30 @@ body {
 	scroll-padding-top: 70px;
 }
 
-.section-portfolio .col-md-4 a {
-	display: block;
-    margin-bottom: .5em;
-}
-
-#rammetto,
 .navbar-brand {
     font-family: Rammetto
 }
 
-#rammetto,
-.btn {
-    font-weight: 400
-}
-
 .btn,
-a,
-a:hover {
-    text-decoration: none
-}
-
-body,
-h2,
-h4 {
-    line-height: 1.5em
-}
-
-.btn,
-label {
+label, 
+#header-title a,
+#vid a,
+#vid a h5,
+#vid a i
+{
     display: inline-block
+}
+
+#vid i {
+	width: 35px;
+	font-size: 30px;
+	margin-right: 16px;
+}
+
+#vid h5 {
+	margin: 0;
+	vertical-align: bottom;
+	line-height: 35px;
 }
 
 .video {
@@ -77,20 +71,12 @@ ul {
     justify-self: end
 }
 
-.page-header {
+.no-webp .page-header {
     background-image: url(../img/header.jpg)
 }
 
 .webp .page-header {
     background-image: url(../img/header.webp)
-}
-
-a h3 {
-    color: #fff
-}
-
-a h3:hover {
-    color: #39796b
 }
 
 .section-blog .col-md-4 {
@@ -128,7 +114,10 @@ footer {
 }
 
 .skills .fab {
-    padding: 20px
+    padding: 20px;
+}
+.skills .fab:hover {
+	color: #38786A;
 }
 
 .btn {
@@ -141,48 +130,25 @@ footer {
     cursor: pointer;
     border: 0;
     border-radius: 2px;
-    text-transform: uppercase
+    text-transform: uppercase;
+	font-size: .8em;
+	font-weight: 400;
+	margin-bottom: 16px;
 }
 
 .btn:active {
-    background-color: #151515;
+    background-color: #555555;
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.237602), 0px 0px 8px rgba(0, 0, 0, 0.12);
 }
 .btn:hover {
 	color: white;
 }
 
-a:hover,
-body {
-    color: #3C4858
+.btn.secondary {
+	background-color: #38786A;
 }
-
-* {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
-}
-
-a .material-icons {
-    vertical-align: middle
-}
-
-a:hover {
-    outline: 0
-}
-
-a {
-    color: #38786a;
-    background-color: transparent
-}
-
-body {
-    font-family: Roboto;
-    font-weight: 300;
-    margin: 0;
-    font-size: 1rem;
-    text-align: left;
-    background-color: #fafafa
+.btn.secondary:active {
+	background-color: #608d83;
 }
 
 footer .copyright {
@@ -196,71 +162,6 @@ footer {
 
 form {
     margin-bottom: 1.125rem
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    margin-bottom: 10px;
-    font-family: inherit;
-    font-weight: 400;
-    color: inherit
-}
-
-h1,
-h2,
-h3 {
-    margin-top: 20px
-}
-
-h4,
-h5 {
-    margin-top: 10px
-}
-
-h1 {
-    font-size: 3.3125rem;
-    line-height: 1.15em
-}
-
-h2 {
-    font-size: 2.25rem
-}
-
-h3 {
-    font-size: 1.5625rem;
-    line-height: 1.4em
-}
-
-h4 {
-    font-size: 1.125rem
-}
-
-h5 {
-    font-size: 1.0625rem;
-    line-height: 1.55em;
-    margin-bottom: 15px
-}
-
-label,
-p {
-    font-size: 16px
-}
-
-label {
-    margin-bottom: .5rem;
-    line-height: 1.42857;
-    font-weight: 400
-}
-
-p {
-    margin: 0 0 1rem
-}
-
-ul {
-    margin-top: 0
 }
 
 .text-center {
@@ -311,6 +212,14 @@ ul {
 
 .form-group {
     margin-bottom: 1rem
+}
+
+.section-services .col-md-4 {
+	margin-bottom: 0px!important;
+}
+
+.col-md-4:nth-child(3n+0) {
+	margin-bottom: 70px;
 }
 
 .col-md-4,
@@ -458,6 +367,12 @@ ul {
 	padding: 10px 20px;
 	margin: 0px!important;
 }
+
+.section-portfolio .col-md-4 p {
+	min-height: 120px;
+	margin-bottom: 16px;
+}
+
 .navbar {
 	position: fixed;
     z-index: 55;

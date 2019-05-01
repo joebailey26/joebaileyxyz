@@ -45,8 +45,13 @@
   li.rss-item {
     grid-template-rows: 70px 0px auto auto auto auto; }
 
-  .video {
-    grid-template-columns: 100% !important; } }
+  	.video {
+    	grid-template-columns: 100% !important; 
+	} 
+	.section-portfolio .col-md-4 p {
+		min-height: 1px!important;
+	}
+}
 @media (max-width: 815px) {
   #portfolio-links {
     display: none; }

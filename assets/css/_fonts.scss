@@ -18,3 +18,111 @@ i.fas.fa-bars {
 .icon.icon-success {
     color: #4caf50
 }
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+a .material-icons {
+    vertical-align: middle
+}
+
+a {
+    color: #38786a;
+}
+
+body {
+    font-family: Roboto;
+    font-weight: 300;
+    margin: 0;
+    font-size: 1rem;
+    text-align: left;
+    background-color: #fafafa
+}
+
+body,
+h2,
+h4 {
+    line-height: 1.5em
+}
+
+body {
+    color: #3C4858
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-weight: 400;
+    color: inherit
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 20px
+}
+
+h4,
+h5 {
+    margin-top: 10px
+}
+
+h1 {
+    font-size: 3.3125rem;
+    line-height: 1.15em;
+	font-family: Rammetto;
+	font-weight: 400
+}
+
+h2 {
+    font-size: 2.25rem
+}
+
+h3 {
+    font-size: 1.5625rem;
+    line-height: 1.4em
+}
+
+a h3 {
+    color: white
+}
+
+a h3:hover {
+    color: #38786A
+}
+
+h4 {
+    font-size: 1.125rem
+}
+
+h5 {
+    font-size: 1.0625rem;
+    line-height: 1.55em;
+    margin-bottom: 15px
+}
+
+label,
+p {
+    font-size: 16px
+}
+
+label {
+    margin-bottom: .5rem;
+    line-height: 1.42857;
+    font-weight: 400
+}
+
+p {
+    margin: 0 0 1rem
+}
+
+ul {
+    margin-top: 0
+}
