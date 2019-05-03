@@ -19,18 +19,21 @@ label,
 #header-title a,
 #vid a,
 #vid a h5,
-#vid a i
+#vid a i,
+#git a,
+#git a h5,
+#git a i
 {
     display: inline-block
 }
 
-#vid i {
+#vid i, #git i {
 	width: 35px;
 	font-size: 30px;
 	margin-right: 16px;
 }
 
-#vid h5 {
+#vid h5, #git h5 {
 	margin: 0;
 	vertical-align: bottom;
 	line-height: 35px;
@@ -71,7 +74,7 @@ ul {
     justify-self: end
 }
 
-.no-webp .page-header {
+.page-header {
     background-image: url(../img/header.jpg)
 }
 
@@ -197,7 +200,8 @@ form {
 .col-md-4,
 .col-md-6,
 .col-md-8,
-.container {
+.container,
+.rss-item {
     padding-right: 15px;
     padding-left: 15px;
     width: 100%
@@ -218,13 +222,14 @@ form {
 	margin-bottom: 0px!important;
 }
 
-.col-md-4:nth-child(3n+0) {
+.col-md-4:nth-child(3n+0), .rss-item:nth-child(3n+0) {
 	margin-bottom: 70px;
 }
 
 .col-md-4,
 .col-md-6,
-.col-md-8 {
+.col-md-8,
+.rss-item {
     position: relative;
     min-height: 1px
 }
@@ -265,7 +270,7 @@ form {
     margin-left: auto
 }
 
-.row {
+.row, .rss-items {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
@@ -282,7 +287,7 @@ form {
 }
 
 .header-filter::before {
-    background-color: rgba(0, 0, 0, .5)
+    background-color: rgba(0, 0, 0, .4)
 }
 
 .header-filter:after,
@@ -422,31 +427,18 @@ form {
 }
 
 ul.rss-items {
-	display: grid;
-    grid-template-columns: 32% 32% 32%;
-    grid-gap: 2%;
     list-style-type: none;
-    padding: 0px 15px;
-    margin: 0px;
-    text-align: justify;
+	width: 100%;
+    margin: auto;
 }
 
-li.rss-item {
-    display: grid;
-    grid-template-rows: auto 0px auto auto auto auto;
-}
-
-a.rss-item, a.rss-item:hover {
+a.rss-item {
 	color: #3C4858!important;
 	font-size: 1.5rem;
 	line-height: 2rem;
-	text-align: left!important;
+	padding: 0;
 }
 
 .rss-date {
 	line-height: 2rem;
-}
-
-.link-more {
-	text-align: left!important;
 }

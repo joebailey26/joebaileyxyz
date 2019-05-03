@@ -21,7 +21,7 @@ RewriteRule ^ %{REQUEST_URI}.php [NC,L]
 </IfModule>
 
 <IfModule mod_headers.c>
-  <FilesMatch "\.(ttf|otf|eot|woff|woff2|css|js|php|json|TTF)$">
+  <FilesMatch "\.(ttf|css|js|json)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>

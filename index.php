@@ -6,7 +6,11 @@
 		
 		<title>Joe Bailey | Web Designer, Developer, Photographer | Southampton, UK</title>
 		<meta name="description" content="Joe Bailey is a web developer and photographer currently living in Southampton studying at Solent University.">
-		
+		<script>
+			/*! modernizr 3.6.0 (Custom Build) | MIT *
+			 * https://modernizr.com/download/?-webp-setclasses !*/
+			!function(e,n,A){function o(e,n){return typeof e===n}function t(){var e,n,A,t,a,i,l;for(var f in r)if(r.hasOwnProperty(f)){if(e=[],n=r[f],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(A=0;A<n.options.aliases.length;A++)e.push(n.options.aliases[A].toLowerCase());for(t=o(n.fn,"function")?n.fn():n.fn,a=0;a<e.length;a++)i=e[a],l=i.split("."),1===l.length?Modernizr[l[0]]=t:(!Modernizr[l[0]]||Modernizr[l[0]]instanceof Boolean||(Modernizr[l[0]]=new Boolean(Modernizr[l[0]])),Modernizr[l[0]][l[1]]=t),s.push((t?"":"no-")+l.join("-"))}}function a(e){var n=u.className,A=Modernizr._config.classPrefix||"";if(c&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+A+"no-js(\\s|$)");n=n.replace(o,"$1"+A+"js$2")}Modernizr._config.enableClasses&&(n+=" "+A+e.join(" "+A),c?u.className.baseVal=n:u.className=n)}function i(e,n){if("object"==typeof e)for(var A in e)f(e,A)&&i(A,e[A]);else{e=e.toLowerCase();var o=e.split("."),t=Modernizr[o[0]];if(2==o.length&&(t=t[o[1]]),"undefined"!=typeof t)return Modernizr;n="function"==typeof n?n():n,1==o.length?Modernizr[o[0]]=n:(!Modernizr[o[0]]||Modernizr[o[0]]instanceof Boolean||(Modernizr[o[0]]=new Boolean(Modernizr[o[0]])),Modernizr[o[0]][o[1]]=n),a([(n&&0!=n?"":"no-")+o.join("-")]),Modernizr._trigger(e,n)}return Modernizr}var s=[],r=[],l={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var A=this;setTimeout(function(){n(A[e])},0)},addTest:function(e,n,A){r.push({name:e,fn:n,options:A})},addAsyncTest:function(e){r.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=l,Modernizr=new Modernizr;var f,u=n.documentElement,c="svg"===u.nodeName.toLowerCase();!function(){var e={}.hasOwnProperty;f=o(e,"undefined")||o(e.call,"undefined")?function(e,n){return n in e&&o(e.constructor.prototype[n],"undefined")}:function(n,A){return e.call(n,A)}}(),l._l={},l.on=function(e,n){this._l[e]||(this._l[e]=[]),this._l[e].push(n),Modernizr.hasOwnProperty(e)&&setTimeout(function(){Modernizr._trigger(e,Modernizr[e])},0)},l._trigger=function(e,n){if(this._l[e]){var A=this._l[e];setTimeout(function(){var e,o;for(e=0;e<A.length;e++)(o=A[e])(n)},0),delete this._l[e]}},Modernizr._q.push(function(){l.addTest=i}),Modernizr.addAsyncTest(function(){function e(e,n,A){function o(n){var o=n&&"load"===n.type?1==t.width:!1,a="webp"===e;i(e,a&&o?new Boolean(o):o),A&&A(n)}var t=new Image;t.onerror=o,t.onload=o,t.src=n}var n=[{uri:"data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=",name:"webp"},{uri:"data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==",name:"webp.alpha"},{uri:"data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA",name:"webp.animation"},{uri:"data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=",name:"webp.lossless"}],A=n.shift();e(A.name,A.uri,function(A){if(A&&"load"===A.type)for(var o=0;o<n.length;o++)e(n[o].name,n[o].uri)})}),t(),a(s),delete l.addTest,delete l.addAsyncTest;for(var p=0;p<Modernizr._q.length;p++)Modernizr._q[p]();e.Modernizr=Modernizr}(window,document);
+		</script>
 		<meta property="og:image" content="android-chrome-384x384.png">
 		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -107,7 +111,7 @@
 						<div class="col-md-8 ml-auto mr-auto"></div>
 						<div class="col-md-8 ml-auto mr-auto">
 							<h2 class="title text-center">I’m Joe. I’m a Web Design and Development student.</h2>
-							<h5 class="description">Like anyone, I browse the internet a lot, and I’m astounded by how many poor quality websites there are. I want to change that by designing easy to use, functional websites. I have my own photography website which I’ve been running since 2015. I use my free time to learn about web development, take photos, and make posters, magazines, and websites to practise my skills. I’ve used various website builders and have a good understanding of Front-End languages.</h5>
+							<h5 class="description">Like anyone, I browse the internet a lot, and I’m astounded by how many poor quality websites there are. I want to change that by designing easy to use, functional websites. I have <a href="https://www.joebaileyphotography.com">my own photography website</a> which I’ve been running since 2015. I use my free time to learn about web development, take photos, and make posters, magazines, and websites to practise my skills. I’ve used various website builders and have a good understanding of Front-End languages.</h5>
 						</div>
 					</div>
 				</div>
@@ -185,7 +189,7 @@
 					
 					<div id="web" style="margin-bottom: 50px;">
 						<h2 class="subtitle">Websites</h2>
-						<h5>View all of the websites that I've worked on.</h5>
+						<h5>View all of the websites that I've created.</h5>
 					</div>
 					
 					<div class="row">
@@ -285,21 +289,21 @@
 							<h4 class="info-title" style="margin-top:20px;">National Hyacinth Collection</h4>
 							<p>In 2017 I approached the National Hyacinth Collection asking if they wanted a website. I decided it would be a good opportunity to teach myself HTML and CSS. However, the project never came to fruition.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://nhc.joebailey.xyz">View the website...</a>
-							<a class="btn" rel="noreferrer" target="_blank" href="https://nhc.joebailey.xyz" class="none">View on Behance...</a>
+							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/79742435/National-Hyacinth-Collection">View on Behance...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Conspiracy?" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/conspiracy.jpg" width="150px">
 							<h4 class="info-title">Conspiracy?</h4>
 							<p>We were tasked with creating a website as part of our university work that uses some basic JavaScript and solves a real-world problem. I made a website that displays conspiracy theories as most information is only available on YouTube.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://web-tech-report.firebaseapp.com/">View the website...</a>
-							<a class="btn" rel="noreferrer" target="_blank" href="">View on Behance...</a>
+							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/79730007/Conspiracy">View on Behance...</a>
 						</div>
 						<div class="col-md-4">
 							<img alt="Frejdahl" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/Frejdahl.jpg" width="150px">
 							<h4 class="info-title">Frejdahl</h4>
 							<p>There was a trip abroad advertised with the university to work on a project with other students from around the world. I went to Denmark and paired up with other students to create a site to market a local viking beer.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://frejdahl.joebailey.xyz">View the website...</a>
-							<a class="btn" rel="noreferrer" target="_blank" href="">View on Behance...</a>
+							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/79730267/Frejdahl">View on Behance...</a>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/2019/04/frejdahl-international-it-week-project/">View the blog post...</a>
 						</div>
 						<div class="col-md-4">
@@ -324,7 +328,7 @@
 							<img alt="Solent App" class="lazy has-webp" data-src="assets/img/Portfolio/Website Templates/solent.jpg" width="150px">
 							<h4 class="info-title">Solent App</h4>
 							<p>I wanted to practise my design skills using Adobe XD so I made a mockup of an application that we were tasked with creating that combines current web-based applications that the university offers.</p>
-							<a class="btn" rel="noreferrer" target="_blank" href="">View on Behance...</a>
+							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/77240793/Solent-University-Mobile-Application">View on Behance...</a>
 						</div>
 					</div>
 					
@@ -379,13 +383,13 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/75573207/Materials-Sketchbook">View on Behance...</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Nature" class="lazy has-webp" data-src="assets/img/Portfolio/Printed Media/Nature.jpg" height="200px">
+							<img alt="Nature" class="lazy has-webp landscape" data-src="assets/img/Portfolio/Printed Media/Nature.jpg" height="200px">
 							<h4 class="info-title">Nature Sketchbook</h4>
 							<p>During Sixth Form we had to complete many different projects and show our results in the form of a sketchbook. Here is my project on Nature.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/75576167/Nature-Sketchbook">View on Behance...</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Transport" class="lazy has-webp" data-src="assets/img/Portfolio/Printed Media/Transport.jpg" height="200px">
+							<img alt="Transport" class="lazy has-webp landscape" data-src="assets/img/Portfolio/Printed Media/Transport.jpg" height="200px">
 							<h4 class="info-title">Transport, New, and Old Sketchbook</h4>
 							<p>During Sixth Form we had to complete many different projects and show our results in the form of a sketchbook. Here is my project on Transport, New, and Old.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/75576351/Transport-New-and-Old-Sketchbook">View on Behance...</a>
@@ -439,7 +443,7 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/75576033/Identity">View on Behance...</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Classics" class="lazy has-webp" id="img" data-src="assets/img/Portfolio/Printed Media/Poster.jpg" height="200px">
+							<img alt="Classics" class="lazy has-webp landscape" data-src="assets/img/Portfolio/Printed Media/Poster.jpg" height="200px">
 							<h4 class="info-title">Classics Branding Exercise</h4>
 							<p>For one of our electives in media at Sixth Form we had to create an advertising campaign for a product of our choice. I designed a racing video game and came up with a poster, website, and adverts.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.behance.net/gallery/74656015/Classics">View on Behance...</a>
@@ -530,7 +534,7 @@
 					<div class="row">
 						<div class="col-md-8 ml-auto mr-auto">
 							<h2 class="text-center title">Skills</h2>
-							<h5 class="description">I have a good knowledge of various programming languages such as HTML, CSS, JavaScript, PHP, and Python. I also have experience using the following website builders Adobe Muse, Weebly, WordPress, and Wix. I am capable in setting up new domain names and websites. I am profficient with Adobe Creative Cloud and Microsoft Office on both Windows and Mac. I have experience prototyping websites using Figma.</h5>
+							<h5 class="description">I have a good knowledge of various programming languages such as HTML, CSS, JavaScript, PHP, and Python. I also have experience using the following website builders Adobe Muse, Weebly, WordPress, and Wix. I am capable of setting up new domain names and websites. I am proficient with Adobe Creative Cloud and Microsoft Office on both Windows and Mac. I have experience prototyping websites using Figma.</h5>
 						</div>
 					</div>
 					<div class="row skills">
@@ -568,11 +572,11 @@
 							<i class="fab fa-blogger" title="Blogger"></i>
 						</div>
 					</div>
-					<div class="row" style="margin-top: 25px">
+					<div class="row" style="margin-top: 25px" id="git">
 						<div class="col-md-8 ml-auto mr-auto">
 							<h3>GitHub Contributions</h3>
 							<a title="GitHub Contributions" href="https://github.com/joebailey26"><img style="margin: 25px 0px;" class="lazy" data-src="https://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%"></a>
-							<a style="display:inline-block" href="https://github.com/joebailey26"><h5>View my profile.</h5></a>
+							<a style="margin-bottom:16px" href="https://github.com/joebailey26"><i style="color:#333;" class="fab fa-github"></i><h5>View my profile on GitHub.</h5></a>
 						</div>
 					</div>
 				</div>
