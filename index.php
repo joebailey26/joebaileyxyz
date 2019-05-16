@@ -24,9 +24,9 @@
 		
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		
-		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400&display=swap" rel="stylesheet">
 		
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons&font-display=block" rel="stylesheet">
 		
 		<script src="https://www.google.com/recaptcha/api.js?render=6LcLDYgUAAAAAIXDeTU8jn_FTTetybUTIscj8DZX"></script>
 		<script>
@@ -588,7 +588,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<script src="https://feedroll.com/rssviewer/feed2js.php?src=https%3A%2F%2Fwww.joebaileyphotography.com%2FBlog%2Fcategory%2Fweb-design%2Ffeed%2F&num=6&date=y&tz=0&utf=y&pc=y&html=a"></script>
+						<script src="https://feedroll.com/rssviewer/feed2js.php?src=https%3A%2F%2Fwww.joebaileyphotography.com%2FBlog%2Fcategory%2Fweb-design%2Fnews%2Ffeed%2F&num=6&date=y&tz=0&utf=y&pc=y&html=a"></script>
 					</div>
 				</div>
 				
