@@ -242,7 +242,7 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="https://sourlemonsthelabel.co.uk">View the website...</a>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/2019/04/sour-lemons-the-label/">View the blog post...</a>
 						</div>
-						<div class="col-md-4 none">
+						<div class="col-md-4">
 							<img alt="Prospect Sports" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/prospect.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Prospect Sports</h4>
 							<p>I created a website for someone in their third year at university setting up a childrens football coaching business.They had quite a few ideas of what they wanted from the site and we worked closely to bring his vision to life.</p>
