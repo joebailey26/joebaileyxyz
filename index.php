@@ -417,7 +417,9 @@
 				  scroll >= $('#trans').offset().top - 50
 				);
 			});
-			$(window).scroll();
+			$(document).ready(function() {
+				$(window).scroll();
+			})
 		</script>
 	</body>
 </html>
