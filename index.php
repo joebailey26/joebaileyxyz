@@ -303,57 +303,80 @@
 				$([document.documentElement, document.body]).animate({
 					scrollTop: $(".section-contact").offset().top
 				}, 1000);
-			});		
+			});
+			
 			function scrollone() {
-					var w = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
-					var c = document.querySelectorAll('.section-portfolio .row')[1];
-					if (c.scrollLeft == (w * 4)) {
-						sideScroll(c, 'left', 5, (w * 4), 10);
+				const interval = setInterval(function() {
+					var width = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
+					var container = document.querySelectorAll('.section-portfolio .row')[1];
+					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
 					}
-					else {
-						sideScroll(c,'right',20,w,10);
-					};
-				}
+					if (container.scrollLeft / 5 == 0) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
+					}
+				}, 10000);
+			}
 				
-				function scrolltwo() {
-					var wid = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
-					var cont = document.querySelectorAll('.section-portfolio .row')[2];
-					if (cont.scrollLeft == (wid * 5)) {
-						sideScroll(cont, 'left', 5, (wid * 5), 10);
+			function scrolltwo() {
+				const int = setInterval(function() {
+					var width = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
+					var container = document.querySelectorAll('.section-portfolio .row')[2];
+					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
 					}
-					else {
-						sideScroll(cont,'right',20,wid,10);
+					if (container.scrollLeft / 5 == 0) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
 					}
-				}
-				
-				function scrollthree() {
+				}, 10000);
+			}
+			function scrollthree() {
+				const interv = setInterval(function() {
 					var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
 					var container = document.querySelector('.rss-items');
-					if (container.scrollLeft == (width * 5)) {
-						sideScroll(container, 'left', 5, (width * 5), 10);
+					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
 					}
-					else {
-						sideScroll(container,'right',20,width,10);
+					if (container.scrollLeft / 5 == 0) {
+						if (container.scrollLeft == (width * 5)) {
+								sideScroll(container, 'left', 5, (width * 5), 10);
+						}
+						else {
+							sideScroll(container,'right',20,width,10);
+						}
 					}
-					
-				}
-			const inter = setInterval(function() {
-				scrollone()
-				setTimeout(function(){
-					scrolltwo()
-					setTimeout(function(){
-						scrollthree()
-					}, 2000);
-				}, 2000);
-			}, 10000);
-			
+				}, 10000);
+			}
+			scrollone()
 			setTimeout(function(){
-				scrollone()
+				scrolltwo()
 				setTimeout(function(){
-					scrolltwo()
-					setTimeout(function(){
-						scrollthree()
-					}, 2000);
+					scrollthree()
 				}, 2000);
 			}, 2000);
 			
