@@ -24,7 +24,7 @@
 	}
 	else {
 		echo '<script>';
-		echo 'alert("Please go back and verify you are human.");';
+		echo 'alert("I\'m sorry, we couldn\'t verify that you are human. Please go back and try again.");';
 		echo 'window.history.back();';
 		echo '</script>';
 	}

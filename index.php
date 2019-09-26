@@ -67,7 +67,7 @@
 				<div class="row">
 					<div id="header-title">
 						<h1>I’m Joe, a Full Stack Web Developer.</h1>
-						<h5 class="description" style="margin-top: 20px;">I have been developing websites for close to a decade and strive to create easy to use and up to date websites for my clients. Web technologies change quickly so when I have finished working with a client I educate myself on the latest JavaScript libraries, UI practises, and SEO techniques in order to be competitive in today’s web development market.</h5>
+						<h5 class="description" style="margin-top: 20px;">I have been developing websites for close to a decade and strive to create easy to use and up-to-date websites for my clients. Web technologies change quickly so when I have finished working with a client I educate myself on the latest JavaScript libraries, UI practises, and SEO techniques in order to be competitive in today’s web development market.</h5>
 						<h5 class="description">My passion for web development has always been present in my education from attending Long Road Sixth Form College, where I studied Media which had a great deal of emphasis on web development and design principles, to studying for a degree in Web Design and Development at Southampton Solent University. I am confident that a positive outlook will lead to a long and successful career in the field of Web Development.</h5>
 						<a rel="noreferrer" style="margin-top: 20px; font-size: 1rem" target="_blank" href="https://drive.google.com/open?id=1Mm61EELkpbByy3ADzffmSec_VjH8X7Na" class="btn secondary"> Download my CV </a>
 					</div>
