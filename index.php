@@ -109,7 +109,7 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="http://www.joebaileyphotography.com/Blog/2019/04/disabled-people's-voice/">Read the docs</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Island RIBs" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/IslandRIBs.png" width="150px">
+							<img alt="Island RIBs" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/IslandRIBs.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Island RIBs</h4>
 							<p>I gave this local company's website a design refresh. I worked closely with the client on a development site to help them reach their vision within their budget. I then went through the process of cross-browser testing before pushing the website live.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://island-ribs.co.uk/">View the website</a>
@@ -123,7 +123,7 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="http://www.joebaileyphotography.com/Blog/2019/07/dons-discs/">Read the docs</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Blossom Tree Photography" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/BlossomTree.png" width="150px">
+							<img alt="Blossom Tree Photography" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/BlossomTree.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Blossom Tree Photography</h4>
 							<p>I gave this photographer a bespoke website made with WordPress so that she could show off her portfolio and write about her work in a blog. I used Figma to prototype the site and developed a custom theme for it.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://blossomtreephoto.co.uk">View the website</a>
