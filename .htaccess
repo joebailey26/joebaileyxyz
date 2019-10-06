@@ -25,3 +25,18 @@ RewriteRule ^ %{REQUEST_URI}.php [NC,L]
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+
+# One year for image files
+<filesMatch ".(jpg|jpeg|png|gif|ico|webp|ttf|svg|json|pdf|md|xml)$">
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+
+# One month for js
+<filesMatch ".(js)$">
+Header set Cache-Control "max-age=604800, public"
+</filesMatch>
+
+# One day for css
+<filesMatch ".(css)$">
+Header set Cache-Control "max-age=86400, public"
+</filesMatch>

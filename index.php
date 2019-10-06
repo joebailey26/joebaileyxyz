@@ -111,18 +111,25 @@
 							<a class="btn" rel="noreferrer" target="_blank" href="http://www.joebaileyphotography.com/Blog/2019/04/disabled-people's-voice/">Read the docs</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Island RIBs" class="lazy" data-src="assets/img/Portfolio/Websites/IslandRIBs.png" width="150px">
+							<img alt="Island RIBs" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/IslandRIBs.png" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Island RIBs</h4>
 							<p>I gave this local company's website a design refresh. I worked closely with the client on a development site to help them reach their vision within their budget. I then went through the process of cross-browser testing before pushing the website live.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://island-ribs.co.uk/">View the website</a>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://www.joebaileyphotography.com/Blog/2019/08/island-ribs/">Read the docs</a>
 						</div>
 						<div class="col-md-4">
-							<img alt="Don's Discs" class="lazy" data-src="assets/img/Portfolio/Websites/DonsDiscs.jpg" width="150px">
+							<img alt="Don's Discs" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/DonsDiscs.jpg" width="150px">
 							<h4 class="info-title" style="margin-top:20px;">Don's Discs</h4>
 							<p>This client needed an E-Commerce website in order to sell rare vinyl around the world. I created a site using WooCommerce and worked with them on a procdure for exporting products from Discogs onto the new website.</p>
 							<a class="btn" rel="noreferrer" target="_blank" href="https://donsdiscs.com">View the website</a>
 							<a class="btn" rel="noreferrer" target="_blank" href="http://www.joebaileyphotography.com/Blog/2019/07/dons-discs/">Read the docs</a>
+						</div>
+						<div class="col-md-4">
+							<img alt="Blossom Tree Photography" class="lazy has-webp" data-src="assets/img/Portfolio/Websites/BlossomTree.png" width="150px">
+							<h4 class="info-title" style="margin-top:20px;">Blossom Tree Photography</h4>
+							<p>I gave this photographer a bespoke website made with WordPress so that she could show off her portfolio and write about her work in a blog. I used Figma to prototype the site and developed a custom theme for it.</p>
+							<a class="btn" rel="noreferrer" target="_blank" href="https://blossomtreephoto.co.uk">View the website</a>
+							<a class="btn" rel="noreferrer" target="_blank" href="http://www.joebaileyphotography.com/Blog/2019/01/blossom-tree-photography/">Read the docs</a>
 						</div>
 					</div>
 
@@ -245,6 +252,9 @@
 							&copy; <?php echo date("Y"); ?> Joe Bailey. All rights reserved.
 						</div>
 						<div class="social">
+							<a title="Twitter" href="https://twitter.com/joebaileyphoto" rel="noreferrer" target="_blank">
+								<i class="fab fa-twitter"></i>
+							</a>
 							<a title="LinkedIn" href="https://www.linkedin.com/in/joe-bailey-b68b17171/" rel="noreferrer" target="_blank">
 								<i class="fab fa-linkedin"></i>
 							</a>
@@ -414,16 +424,6 @@
 					lazyLoadInstances.push(oneLL);
 				}
 			});
-			
-			(function () {
-				var llWebp = new LazyLoad({
-					elements_selector: ".lazy.has-webp",
-					to_webp: true,
-				});
-				var llStandard = new LazyLoad({
-					elements_selector: ".lazy:not(.has-webp)",
-				});
-			}());
 			
 			window._idl = {};
 			_idl.variant = "modal";
