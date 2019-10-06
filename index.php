@@ -17,8 +17,6 @@
 		
 		<link rel="stylesheet" href="assets/css/main.css">
 		
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-		
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400&display=swap" rel="stylesheet">
 		
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons&font-display=block" rel="stylesheet">
@@ -252,16 +250,16 @@
 							&copy; <?php echo date("Y"); ?> Joe Bailey. All rights reserved.
 						</div>
 						<div class="social">
-							<a title="Twitter" href="https://twitter.com/joebaileyphoto" rel="noreferrer" target="_blank">
+							<a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/joebaileyphoto" rel="noreferrer" target="_blank">
 								<i class="fab fa-twitter"></i>
 							</a>
-							<a title="LinkedIn" href="https://www.linkedin.com/in/joe-bailey-b68b17171/" rel="noreferrer" target="_blank">
+							<a title="LinkedIn" aria-label="LinkedIn Social Profile Link" href="https://www.linkedin.com/in/joe-bailey-b68b17171/" rel="noreferrer" target="_blank">
 								<i class="fab fa-linkedin"></i>
 							</a>
-							<a title="Behance" href="https://www.behance.net/joebailey26" rel="noreferrer" target="_blank">
+							<a title="Behance" aria-label="Behance Social Profile Link" href="https://www.behance.net/joebailey26" rel="noreferrer" target="_blank">
 								<i class="fab fa-behance-square"></i>
 							</a>
-							<a title="GitHub" href="https://github.com/joebailey26" rel="noreferrer" target="_blank">
+							<a title="GitHub" aria-label="GitHub Social Profile Link" href="https://github.com/joebailey26" rel="noreferrer" target="_blank">
 								<i class="fab fa-github"></i>
 							</a>
 						</div>
