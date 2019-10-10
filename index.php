@@ -261,6 +261,9 @@
 							<a title="GitHub" aria-label="GitHub Social Profile Link" href="https://github.com/joebailey26" rel="noreferrer" target="_blank">
 								<i class="fab fa-github"></i>
 							</a>
+							<a title="CodePen" aria-label="CodePen Social Profile Link" href="https://codepen.io/" rel="noreferrer" target="_blank">
+								<i class="fab fa-codepen"></i>
+							</a>
 						</div>
 					</div>
 				</div>

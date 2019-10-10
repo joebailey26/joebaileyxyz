@@ -72,6 +72,12 @@ img[data-srcset] {
 .fa-linkedin:before {
   content: "\f08c"; }
 
+.fa-twitter:before {
+  content: "\f099"; }
+
+.fa-codepen:before {
+  content: "\f1cb"; }
+
 .fab {
   font-family: "Font Awesome 5 Brands"; }
 
