@@ -204,7 +204,7 @@
 							</div>
 							
 							
-							<form class="contact-form" method="post" name="myemailform" action="/form-to-email">
+							<form id="ajax-contact" class="contact-form" method="post" name="myemailform" action="/form-to-email">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -235,6 +235,7 @@
 									</div>
 								</div>
 							</form>
+							<div id="form-messages"></div>
 						</div>
 					</div>
 				</div>
@@ -443,6 +444,52 @@
 			$(document).ready(function() {
 				$(window).scroll();
 			})
+			
+			$(function() {
+				// Get the form.
+				var form = $('#ajax-contact');
+
+				// Get the messages div.
+				var formMessages = $('#form-messages');
+
+				// Set up an event listener for the contact form.
+				$(form).submit(function(event) {
+				// Stop the browser from submitting the form.
+				event.preventDefault();
+					// Serialize the form data.
+					var formData = $(form).serialize();
+
+					// Submit the form using AJAX.
+					$.ajax({
+						type: 'POST',
+						url: $(form).attr('action'),
+						data: formData
+					})
+						.done(function(response) {
+						// Make sure that the formMessages div has the 'success' class.
+						$(formMessages).removeClass('error');
+						$(formMessages).addClass('success');
+
+						// Set the message text.
+						$(formMessages).text(response);
+
+						if ($(formMessages).text() !== 'I\'m sorry, we couldn\'t verify that you are human. Please try again.') {
+							if ($(formMessages).text() !== 'Oops! There was a problem with your submission. Please try again.') {
+								// Clear the form.
+								$('#name').val('');
+								$('#email').val('');
+								$('#subject').val('');
+							}
+						}
+					})
+						.fail(function(data) {
+						// Make sure that the formMessages div has the 'error' class.
+						$(formMessages).removeClass('success');
+						$(formMessages).addClass('error');
+						$(formMessages).text('Oops! There was a problem with your submission. Please try again.');
+					});
+				});
+			});
 		</script>
 	</body>
 </html>

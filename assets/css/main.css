@@ -367,6 +367,14 @@ ul {
 .none, .rss-item div, .rss-item img, .screen-reader-text, .rss-date, li.rss-item br:first-of-type {
   display: none !important; }
 
+.error {
+  color: red; }
+
+#form-messages {
+  line-height: 1.42857;
+  font-weight: 400;
+  font-size: 16px; }
+
 body {
   scroll-padding-top: 70px;
   user-select: auto !important; }
