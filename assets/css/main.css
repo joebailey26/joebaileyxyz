@@ -114,6 +114,13 @@ a .material-icons {
 a {
   color: #38786a; }
 
+.section-blog .info-title a {
+  display: block;
+  text-align: center;
+  color: #3C4858; }
+  .section-blog .info-title a:hover {
+    color: #38786a; }
+
 body {
   font-family: Roboto;
   font-weight: 300;
@@ -201,7 +208,7 @@ ul {
   .main {
     margin: -60px 10px 0 !important; }
 
-  .rss-box ul.rss-items {
+  #rss-feeds {
     grid-template-columns: 100% !important;
     margin-bottom: 80px; } }
 @media (max-width: 660px) {
@@ -286,11 +293,11 @@ ul {
   .info {
     max-width: auto !important; }
 
-  .section-portfolio .col-md-4, .rss-item:not(a) {
+  .section-portfolio .col-md-4, .rss-item {
     margin-bottom: 50px !important;
     flex: 0 0 auto; }
 
-  .section-portfolio .row, .rss-items {
+  .section-portfolio .row, #rss-feeds {
     padding: 0 !important;
     flex-wrap: nowrap !important;
     overflow-x: auto;
@@ -312,7 +319,7 @@ ul {
   .section-contact .col-md-4:nth-child(1) {
     padding-top: 0 !important; }
 
-  .section-portfolio .row:nth-of-type(2) .col-md-4, li.rss-item {
+  .section-portfolio .row:nth-of-type(2) .col-md-4, .rss-item {
     margin-bottom: 0 !important; } }
 @media (max-width: 815px) {
   .grecaptcha-badge {
@@ -364,7 +371,7 @@ ul {
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px; } }
-.none, .rss-item div, .rss-item img, .screen-reader-text, .rss-date, li.rss-item br:first-of-type {
+.none, .rss-item img, .screen-reader-text {
   display: none !important; }
 
 .error {
@@ -491,7 +498,7 @@ form {
   min-height: 32px; }
 
 .info-title,
-.title, a.rss-item {
+.title {
   font-weight: 700;
   font-family: "Roboto Slab"; }
 
@@ -565,22 +572,11 @@ form {
   margin-right: auto;
   margin-left: auto; }
 
-.section:not(.section-blog) .row, .rss-items {
+.section .row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px; }
-
-li.rss-item {
-  text-align: center; }
-
-a.rss-item {
-  font-size: 1.125rem;
-  line-height: 1.5em;
-  display: block;
-  color: #3C4858 !important;
-  padding: 0;
-  max-width: 100%; }
 
 .section {
   padding: 50px 0; }
@@ -621,6 +617,9 @@ a.rss-item {
   max-width: 50%;
   float: right;
   padding: 0 calc(2em + 15px) 0 0; }
+
+.rss-content {
+  text-align: center; }
 
 .page-header .container {
   max-width: 100%; }
@@ -684,11 +683,6 @@ a.rss-item {
   text-align: center;
   padding: 0px !important;
   margin: 13px 0px 13px 10px; }
-
-ul.rss-items {
-  list-style-type: none;
-  width: 100%;
-  margin: auto; }
 
 .link-more {
   margin-top: 16px; }

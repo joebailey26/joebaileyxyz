@@ -8,7 +8,7 @@
   .main {
     margin: -60px 10px 0 !important; }
 
-  .rss-box ul.rss-items {
+  #rss-feeds {
     grid-template-columns: 100% !important;
     margin-bottom: 80px; } 
 }
@@ -110,12 +110,12 @@
   .info {
     max-width: auto !important; }
 	
-  .section-portfolio .col-md-4, .rss-item:not(a) {
+  .section-portfolio .col-md-4, .rss-item {
     margin-bottom: 50px !important; 
 	flex: 0 0 auto;
 	}
 
-  .section-portfolio .row, .rss-items {
+  .section-portfolio .row, #rss-feeds {
     padding: 0 !important;
 	flex-wrap: nowrap!important;
     overflow-x: auto;
@@ -138,7 +138,7 @@
 	.section-contact .col-md-4:nth-child(1) {
 		padding-top: 0!important;
 	}
-	.section-portfolio .row:nth-of-type(2) .col-md-4, li.rss-item {
+	.section-portfolio .row:nth-of-type(2) .col-md-4, .rss-item {
 		margin-bottom: 0!important;
 	}
 }

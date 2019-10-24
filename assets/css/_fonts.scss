@@ -47,23 +47,30 @@ a {
     color: #38786a;
 }
 
+.section-blog .info-title a {
+	display: block;
+    text-align: center;
+	color: #3C4858;
+	&:hover {color: #38786a}
+}
+
 body {
     font-family: Roboto;
     font-weight: 300;
     margin: 0;
     font-size: 1rem;
     text-align: left;
-    background-color: #fafafa
+    background-color: #fafafa;
 }
 
 body,
 h2,
 h4 {
-    line-height: 1.5em
+    line-height: 1.5em;
 }
 
 body {
-    color: #3C4858
+    color: #3C4858;
 }
 
 h1,

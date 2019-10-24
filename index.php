@@ -182,9 +182,7 @@
 							<h2 class="text-center title">Blog</h2>
 						</div>
 					</div>
-					<div class="row">
-						<script src="https://feedroll.com/rssviewer/feed2js.php?src=https%3A%2F%2Fwww.joebaileyphotography.com%2FBlog%2Fcategory%2Fweb-design%2Fnews%2Ffeed%2F&num=6&date=y&tz=0&utf=y&pc=y&html=a"></script>
-					</div>
+					<div id="rss-feeds" class="row"></div>
 				</div>
 
 				<div class="section section-contact">
@@ -290,124 +288,13 @@
 			}
     	</script>
 		<script src="assets/js/main.min.js"></script>
-		<script>			
-			$("#top").click(function() {
-				appclose();
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $("#joe").offset().top
-				}, 1000);
-			});
-			$("#portfolio").click(function() {
-				appclose();
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $(".section-portfolio").offset().top
-				}, 1000);
-			});
-			$("#blog").click(function() {
-				appclose();
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $(".section-blog").offset().top
-				}, 1000);
-			});
-			$("#contact").click(function() {
-				appclose();
-				$([document.documentElement, document.body]).animate({
-					scrollTop: $(".section-contact").offset().top
-				}, 1000);
-			});
-			
-			function scrollone() {
-				const interval = setInterval(function() {
-					var width = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
-					var container = document.querySelectorAll('.section-portfolio .row')[1];
-					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-					if (container.scrollLeft / 5 == 0) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-				}, 10000);
-			}
-				
-			function scrolltwo() {
-				const int = setInterval(function() {
-					var width = document.querySelectorAll('.section-portfolio .col-md-4')[0].offsetWidth;
-					var container = document.querySelectorAll('.section-portfolio .row')[2];
-					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-					if (container.scrollLeft / 5 == 0) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-				}, 10000);
-			}
-			function scrollthree() {
-				const interv = setInterval(function() {
-					var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
-					var container = document.querySelector('.rss-items');
-					if (container.scrollLeft / 5 === parseInt(container.scrollLeft / 5, 10)) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-					if (container.scrollLeft / 5 == 0) {
-						if (container.scrollLeft == (width * 5)) {
-								sideScroll(container, 'left', 5, (width * 5), 10);
-						}
-						else {
-							sideScroll(container,'right',20,width,10);
-						}
-					}
-				}, 10000);
-			}
-			scrollone()
-			setTimeout(function(){
-				scrolltwo()
-				setTimeout(function(){
-					scrollthree()
-				}, 2000);
-			}, 2000);
-			
-			
-			
-			function sideScroll(element,direction,speed,distance,step){
-				scrollAmount = 0;
-				var slideTimer = setInterval(function(){
-					if(direction == 'left'){
-						element.scrollLeft -= step;
-					} else {
-						element.scrollLeft += step;
-					}
-					scrollAmount += step;
-					if(scrollAmount >= distance){
-						window.clearInterval(slideTimer);
-					}
-				}, speed);
-			}
-			
+		<script>
+			jQuery(function($) {
+				$("#rss-feeds").rss("https://www.joebaileyphotography.com/Blog/category/web-design/news/feed/",
+				{
+					entryTemplate:'<div class="col-md-4 rss-item"><h4 class="info-title"><a href="{url}">{title}</a></h4><div class="rss-content">{body}</div></div>'
+				})
+			})			
 
 			var lazyLoadInstances = [];
 			// The "lazyLazy" instance of lazyload is used (kinda improperly) 
@@ -425,15 +312,6 @@
 					lazyLoadInstances.push(oneLL);
 				}
 			});
-			
-			window._idl = {};
-			_idl.variant = "modal";
-			(function() {
-				var idl = document.createElement('script');
-				idl.async = true;
-				idl.src = 'https://members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'modal');
-				document.getElementsByTagName('body')[0].appendChild(idl);
-			})();
 
 			$(window).scroll(function (event) {
 				var scroll = $(window).scrollTop();
@@ -444,52 +322,6 @@
 			$(document).ready(function() {
 				$(window).scroll();
 			})
-			
-			$(function() {
-				// Get the form.
-				var form = $('#ajax-contact');
-
-				// Get the messages div.
-				var formMessages = $('#form-messages');
-
-				// Set up an event listener for the contact form.
-				$(form).submit(function(event) {
-				// Stop the browser from submitting the form.
-				event.preventDefault();
-					// Serialize the form data.
-					var formData = $(form).serialize();
-
-					// Submit the form using AJAX.
-					$.ajax({
-						type: 'POST',
-						url: $(form).attr('action'),
-						data: formData
-					})
-						.done(function(response) {
-						// Make sure that the formMessages div has the 'success' class.
-						$(formMessages).removeClass('error');
-						$(formMessages).addClass('success');
-
-						// Set the message text.
-						$(formMessages).text(response);
-
-						if ($(formMessages).text() !== 'I\'m sorry, we couldn\'t verify that you are human. Please try again.') {
-							if ($(formMessages).text() !== 'Oops! There was a problem with your submission. Please try again.') {
-								// Clear the form.
-								$('#name').val('');
-								$('#email').val('');
-								$('#subject').val('');
-							}
-						}
-					})
-						.fail(function(data) {
-						// Make sure that the formMessages div has the 'error' class.
-						$(formMessages).removeClass('success');
-						$(formMessages).addClass('error');
-						$(formMessages).text('Oops! There was a problem with your submission. Please try again.');
-					});
-				});
-			});
 		</script>
 	</body>
 </html>

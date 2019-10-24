@@ -2,7 +2,7 @@
 @import 'fonts';
 @import 'mobile';
 
-.none, .rss-item div, .rss-item img, .screen-reader-text, .rss-date, li.rss-item br:first-of-type {
+.none, .rss-item img, .screen-reader-text {
 	display: none!important;
 }
 
@@ -158,7 +158,7 @@ form {
 }
 
 .info-title,
-.title, a.rss-item {
+.title {
     font-weight: 700;
     font-family: "Roboto Slab"
 }
@@ -247,24 +247,11 @@ form {
     margin-left: auto
 }
 
-.section:not(.section-blog) .row, .rss-items {
+.section .row {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px
-}
-
-li.rss-item {
-	text-align: center;
-}
-
-a.rss-item {
-	font-size: 1.125rem;
-	line-height: 1.5em;
-	display: block;
-	color: #3C4858!important;
-	padding: 0;
-	max-width:100%;
 }
 
 .section {
@@ -313,6 +300,10 @@ a.rss-item {
 	max-width: 50%;
 	float: right;
     padding: 0 calc(2em + 15px) 0 0;
+}
+
+.rss-content {
+    text-align: center;
 }
 
 .page-header .container {
@@ -389,12 +380,6 @@ a.rss-item {
 	text-align: center;
 	padding: 0px!important;
 	margin: 13px 0px 13px 10px;
-}
-
-ul.rss-items {
-    list-style-type: none;
-	width: 100%;
-    margin: auto;
 }
 
 .link-more {
