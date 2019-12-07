@@ -14,6 +14,10 @@
 }
 
 @media (max-width: 660px) {
+	#top {
+		margin: 0!important;
+	}
+	
 	.page-header .container .row {
 		padding: 0 15px!important;
 	}

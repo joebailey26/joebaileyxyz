@@ -29,8 +29,7 @@
 					recaptchaResponse.value = token;
 				});
 			});
-		</script>
-		
+		</script>		
 		<link rel="canonical" href="https://joebailey.xyz">
 	</head>
     <body>
@@ -288,7 +287,28 @@
 			}
     	</script>
 		<script src="assets/js/main.min.js"></script>
+
 		<script>
+			// Create a script tag in the Header
+			function createScript(url) {
+				const script = document.createElement('script');
+				script.src = url;
+				document.getElementsByTagName('head')[0].appendChild(script);
+				
+				// GA
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+				  gtag('js', new Date());
+
+				  gtag('config', 'UA-140457046-3');
+
+			};
+
+			// If cookies are accepted then apply JavaScript
+			if (getCookie('cookieconsent_status') == 'dismiss') {
+				createScript('//www.googletagmanager.com/gtag/js?id=UA-140457046-3')
+			}
+			
 			jQuery(function($) {
 				$("#rss-feeds").rss("https://www.joebaileyphotography.com/Blog/category/web-design/news/feed/",
 				{
