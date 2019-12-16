@@ -1,0 +1,149 @@
+@font-face{font-family:"Font Awesome 5 Brands";font-style:normal;font-weight:normal;font-display:auto;src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.eot);src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.eot#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-brands-400.svg#fontawesome) format("svg");}
+@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:400;font-display:auto;src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.eot);src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.eot#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-regular-400.svg#fontawesome) format("svg");}
+@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:900;font-display:auto;src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.eot);src:url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.eot#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.8.1/webfonts/fa-solid-900.svg#fontawesome) format("svg");}
+@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');}
+.fab,.fas{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1;}
+.fa-bars:before{content:"\f0c9";}
+.fa-behance-square:before{content:"\f1b5";}
+.fa-github:before{content:"\f09b";}
+.fa-linkedin:before{content:"\f08c";}
+.fa-twitter:before{content:"\f099";}
+.fa-codepen:before{content:"\f1cb";}
+.fab{font-family:"Font Awesome 5 Brands";}
+.fas{font-family:"Font Awesome 5 Free";}
+.fas{font-weight:900;}
+@font-face {
+  font-display: swap;
+  font-family: Rammetto;
+  src: url(../webfonts/RammettoOne-Regular.ttf) format("trueType"); }
+
+i.fas.fa-bars {
+    font-size: x-large
+}
+
+.icon.icon-danger {
+    color: #f44336
+}
+
+.icon.icon-info {
+    color: #00bcd4
+}
+
+.icon.icon-success {
+    color: #4caf50
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+a .material-icons {
+    vertical-align: middle
+}
+
+a {
+    color: #38786a;
+}
+
+.section-blog .info-title a {
+	display: block;
+    text-align: center;
+	color: #3C4858;
+	&:hover {color: #38786a}
+}
+
+body {
+    font-family: Roboto;
+    font-weight: 300;
+    margin: 0;
+    font-size: 1rem;
+    text-align: left;
+    background-color: #fafafa;
+}
+
+body,
+h2,
+h4 {
+    line-height: 1.5em;
+}
+
+body {
+    color: #3C4858;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-weight: 400;
+    color: inherit
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 20px
+}
+
+h4,
+h5 {
+    margin-top: 10px
+}
+
+h1 {
+    font-size: 3.3125rem;
+    line-height: 1.15em;
+	font-family: Rammetto;
+	font-weight: 400
+}
+
+h2 {
+    font-size: 2.25rem
+}
+
+h3 {
+    font-size: 1.5625rem;
+    line-height: 1.4em
+}
+
+a h3 {
+    color: white
+}
+
+a h3:hover {
+    color: #38786A
+}
+
+h4 {
+    font-size: 1.125rem
+}
+
+h5 {
+    font-size: 1.0625rem;
+    line-height: 1.55em;
+    margin-bottom: 15px
+}
+
+label,
+p {
+    font-size: 16px
+}
+
+label {
+    margin-bottom: .5rem;
+    line-height: 1.42857;
+    font-weight: 400
+}
+
+p {
+    margin: 0 0 1rem
+}
+
+ul {
+    margin-top: 0
+}
