@@ -234,7 +234,7 @@
 				<div class="row">
 					<div class="col-md-8 ml-auto mr-auto">
 						<div class="copyright">
-							&copy; <a id="date">2019</a> Joe Bailey. All rights reserved.
+							&copy; <div id="date" style="display: inline">2019</div> Joe Bailey. All rights reserved.
 						</div>
 						<div class="social">
 							<a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/joebaileyphoto" rel="noreferrer" target="_blank">
@@ -320,6 +320,7 @@
 			  var $form = $(this);
 			  $.post($form.attr("action"), $form.serialize()).then(function() {
 				alert("Thank you!");
+				$form.reset();
 			  });
 			});
 			
