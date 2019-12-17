@@ -18,18 +18,7 @@
 		<link rel="stylesheet" href="assets/css/main.css">
 		
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400&display=swap" rel="stylesheet">
-		
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons&font-display=block" rel="stylesheet">
-		
-		<script src="https://www.google.com/recaptcha/api.js?render=6LcLDYgUAAAAAIXDeTU8jn_FTTetybUTIscj8DZX"></script>
-		<script>
-			grecaptcha.ready(function () {
-				grecaptcha.execute('6LcLDYgUAAAAAIXDeTU8jn_FTTetybUTIscj8DZX', { action: 'contact' }).then(function (token) {
-					var recaptchaResponse = document.getElementById('recaptchaResponse');
-					recaptchaResponse.value = token;
-				});
-			});
-		</script>
 		
 		<link rel="canonical" href="https://joebailey.xyz">
 	</head>
@@ -202,7 +191,7 @@
 							</div>
 							
 							
-							<form id="ajax-contact" class="contact-form" method="post" name="myemailform" action="/form-to-email">
+							<form id="ajax-contact" class="contact-form" method="post" name="myemailform" data-netlify="true" data-netlify-recaptcha="true">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -224,7 +213,7 @@
 								<div class="form-group">
 									<label for="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
 								</div>
-								<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+								<div data-netlify-recaptcha="true"></div>
 								<div class="row">
 									<div class="col-md-4 ml-auto mr-auto text-center">
 										<button class="btn">
@@ -245,7 +234,7 @@
 				<div class="row">
 					<div class="col-md-8 ml-auto mr-auto">
 						<div class="copyright">
-							&copy; <?php echo date("Y"); ?> Joe Bailey. All rights reserved.
+							&copy; <a id="date">2019</a> Joe Bailey. All rights reserved.
 						</div>
 						<div class="social">
 							<a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/joebaileyphoto" rel="noreferrer" target="_blank">
@@ -289,6 +278,8 @@
     	</script>
 		<script src="assets/js/main.min.js"></script>
 		<script>
+			document.querySelector("#date").innerHTML = new Date().getFullYear();
+			
 			jQuery(function($) {
 				$("#rss-feeds").rss("https://www.joebaileyphotography.com/Blog/category/web-design/news/feed/",
 				{
@@ -322,6 +313,35 @@
 			$(document).ready(function() {
 				$(window).scroll();
 			})
+			
+			$("#ajax-contact").submit(function(e) {
+			  e.preventDefault();
+
+			  var $form = $(this);
+			  $.post($form.attr("action"), $form.serialize()).then(function() {
+				alert("Thank you!");
+			  });
+			});
+			
+			// Create a script tag in the Header
+			function createScript(url) {
+				const script = document.createElement('script');
+				script.src = url;
+				document.getElementsByTagName('head')[0].appendChild(script);
+				
+				// GA
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+				  gtag('js', new Date());
+
+				  gtag('config', 'UA-140457046-3');
+
+			};
+
+			// If cookies are accepted then apply JavaScript
+			if (getCookie('cookieconsent_status') == 'dismiss') {
+				createScript('//www.googletagmanager.com/gtag/js?id=UA-140457046-3')
+			}
 		</script>
 	</body>
 </html>
