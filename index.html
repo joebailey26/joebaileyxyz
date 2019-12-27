@@ -16,9 +16,9 @@
 		<meta name="theme-color" content="#282828">
 		
 		<link rel="stylesheet" href="assets/css/main.css">
-		
-		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto:300,400&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons&font-display=block" rel="stylesheet">
+
+		<link rel="dns-prefetch" href="https://www.feedrapp.info">
+		<link rel="dns-prefetch" href="https://members.internetdefenseleague.org">
 		
 		<link rel="canonical" href="https://joebailey.xyz">
 	</head>
@@ -320,7 +320,7 @@
 			  var $form = $(this);
 			  $.post($form.attr("action"), $form.serialize()).then(function() {
 				alert("Thank you!");
-				$form.reset();
+				$form[0].reset();
 			  });
 			});
 			
