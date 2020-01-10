@@ -50,8 +50,12 @@ ul {
     justify-self: end
 }
 
-.page-header {
+.no-webp .page-header {
     background-image: url(../img/header.jpg)
+}
+
+.webp .page-header {
+    background-image: url(../img/header.webp)
 }
 
 .page-header .description a {
