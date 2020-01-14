@@ -417,6 +417,8 @@ ul {
   .section-portfolio .col-md-4, .rss-item {
     margin-bottom: 50px !important;
     flex: 0 0 auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .section-portfolio .row, #rss-feeds {
@@ -424,6 +426,7 @@ ul {
     flex-wrap: nowrap !important;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
 
   .col-md-6 {
