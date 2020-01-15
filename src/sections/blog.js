@@ -18,7 +18,7 @@ function RSSMain() {
         function buildTemplate(b) {
             return `
                 <article class="col-md-4 rss-item">
-                    <h4 class="info-title"><a target="_blank" href="${b.link}">${b.title}</a></h4>
+                    <h4 class="info-title"><a target="_blank" rel="noopener noreferrer" href="${b.link}">${b.title}</a></h4>
                     <div class="rss-content">
                         ${b.content}
                     </div>
