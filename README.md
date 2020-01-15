@@ -14,7 +14,7 @@
 ## Install
 
 ```sh
-npm install
+yarn install
 ```
 
 ## Development
