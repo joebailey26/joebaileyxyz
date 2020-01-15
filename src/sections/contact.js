@@ -47,8 +47,8 @@ class ContactForm extends React.Component {
                 </div>
             </div>
             <div className="form-group">
-                <label htmlFor="subject" className="bmd-label-floating">Your Message</label>
-                <textarea id="subject" name="subject" className="form-control" rows="4" required value={message} onChange={this.handleChange}></textarea>
+                <label htmlFor="message" className="bmd-label-floating">Your Message</label>
+                <textarea id="message" name="message" className="form-control" rows="4" required value={message} onChange={this.handleChange}></textarea>
             </div>
             <div className="form-group">
                 <label htmlFor="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required /> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
