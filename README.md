@@ -1,68 +1,114 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Welcome to the Joe Bailey Website repo</h1>
+<p align="center">This website showcases Joe Bailey's work.</p>
+<p align="center"><a href="https://joebailey.xyz">Live Site</a> <a href="https://github.com/joebailey26/joebaileyxyz">GitHub Repo</a></p>
+<p align="center">
+  <img alt="Version" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
+  <a href="https://twitter.com/joebaileyphoto" target="_blank">
+    <img alt="Twitter: joebaileyphoto" src="https://img.shields.io/twitter/follow/joebaileyphoto.svg?style=social" />
+  </a>
+  <a href="https://app.netlify.com/sites/heuristic-bell-6e94b3/deploys">
+    <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status">
+  </a>
+</p>
 
-## Available Scripts
+## Install
 
-In the project directory, you can run:
+```sh
+npm install
+```
 
-### `yarn start`
+## Development
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+yarn start
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Build
 
-### `yarn test`
+```sh
+yarn build
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Visual Style Guide
 
-### `yarn build`
+![Style Guide](docs/img/StyleGuide.jpg)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Coding Style Guide
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### HTML5 Doctype
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+<!DOCTYPE html>
+```
 
-### `yarn eject`
+### HTML Lang Attribute
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+<html lang=”en-GB”>
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Syntax
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+HTML will be indented consistently by a tab character or 4 spaces.
+Nested elements will be indented once.
+Self closing elements need a trailing slash such as the ```<img />``` element
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Attributes
 
-## Learn More
+Attributes and elements should always be lowercase
+Double quotes should always be used, never single
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### Attribute Order
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+HTML attributes should come in this particular order for easier reading of code.
+```id```
+```class```
+```data-*```
+```for | type | href | src```
 
-### Code Splitting
+### HTML Comments
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Comments are to be used every time a div is closed. They will be on the same line as the closing ```</div>``` tag. Example below:
 
-### Analyzing the Bundle Size
+```sh
+<div id=”foo” class=”bar”>
+…
+</div> <!-- #foo .bar -->
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### HTML5 Tags
 
-### Making a Progressive Web App
+HTML5 tags such as ```<header>``` and ```<footer>``` are preferred over standard ```<div>``` tags.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Branching Strategy
 
-### Advanced Configuration
+Master branch is for tested code and is deployed directly to **Netlify**. Do not push anything to master. Always create pull requests and test code.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Dev branch is for development work on the site. Should always contain close to production ready code requiring minimal commits to get to production status.
 
-### Deployment
+Branches should be created for big projects requiring more than one commit such as adding a new page. They should be titled the project name and then a pull request should be made with dev in order to test it.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Testing
 
-### `yarn build` fails to minify
+Use a local environment if possible otherwise use **Browserstack** to manually test the site by navigating to all pages and performing all actions
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### List of browsers we support
+
+* Last 2 versions of **Mozilla Firefox**
+* Last 2 versions of **Microsoft Edge**
+* Last 2 versions of **Google Chrome**
+* Last 2 versions of **Opera**
+* Last 1 versions of **Safari**
+* Last 1 versions of **iOS Safari**
+* Last 2 versions of **Chrome for Android**
+* Last 2 versions of **Firefox for Android**
+* Last 1 versions of **Samsung Internet**
+
+## Author
+
+👤 **Joe Bailey**
+
+* Website: [joebailey.xyz](joebailey.xyz)
+* Twitter: [@joebaileyphoto](https://twitter.com/joebaileyphoto)
+* Github: [@joebailey26](https://github.com/joebailey26)
+* LinkedIn: [@joe-bailey-b68b17171](https://linkedin.com/in/joe-bailey-b68b17171)
