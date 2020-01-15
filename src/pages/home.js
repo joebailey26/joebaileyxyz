@@ -31,25 +31,6 @@ function scrollPortfolio(i) {
 	}, 10000);
 }
 
-function scrollBlog() {
-	setInterval(function() {
-		var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
-		var container = document.querySelector('#rss-feeds');
-		if (container.scrollLeft === (width * 5)) {
-			container.scrollBy({
-				left: 0,
-				behavior: 'smooth' 
-			})
-		}
-		else {
-			container.scrollBy({
-				left: width,
-				behavior: 'smooth' 
-			})
-		}
-	}, 10000);
-}
-
 class Home extends React.Component {
 	render() {
   		return (
@@ -80,14 +61,8 @@ class Home extends React.Component {
 
   	componentDidMount() {	
 		scrollPortfolio(1);
-	
 		setTimeout(function(){
 			scrollPortfolio(2)
-
-			setTimeout(function(){
-					scrollBlog()
-			}, 2000);
-	
 		}, 2000);
 	}
 }

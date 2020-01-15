@@ -102,11 +102,21 @@ class Nav extends React.Component {
                         }, 
                     900);
                 }
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+
+                const query = '(prefers-reduced-motion: reduce)'
+                const hasOSReducedMotion = window.matchMedia(query).matches
+
+                if (hasOSReducedMotion) {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView();
+                } else {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+
             });
         });
+
         const nav = document.querySelector("#transp")
         const header = document.querySelector(".page-header")
         const header_height = header.offsetHeight - 100
