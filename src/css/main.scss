@@ -40,7 +40,7 @@ ul {
 }
 
 .navbar-brand {
-	padding: 0px;
+	padding: 0px !important;
 	margin: 13px 0px;
 	font-size: 1.5em;
 	font-family: Rammetto
@@ -54,6 +54,11 @@ ul {
 #header-title,
 .navmob {
     justify-self: end
+}
+
+#header-title .btn {
+    margin-top: 20px; 
+    font-size: 1rem
 }
 
 .no-webp .page-header {
@@ -88,6 +93,11 @@ ul {
 
 .section-contact .col-md-4 a {
 	color: #3C4858
+}
+
+.section-contact .col-md-4 * {
+    display: inline;
+    vertical-align: middle;
 }
 
 .section-contact .col-md-4 :link:hover {
@@ -160,6 +170,10 @@ footer,
 }
 .btn.secondary:active {
 	background-color: #608d83;
+}
+
+.btn:first-of-type {
+    margin-right: 4px;
 }
 
 footer .copyright {
@@ -286,9 +300,12 @@ form {
 }
 
 .section {
-    padding: 50px 0
+    padding: 80px 0
 }
 
+.section-blog {
+    margin-bottom: -80px;
+}
 
 .header-filter .container {
     z-index: 2
@@ -417,4 +434,9 @@ form {
 
 .link-more {
 	margin-top: 16px;
+}
+
+#joe {
+    top:0px;
+    position:absolute;
 }

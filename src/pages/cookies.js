@@ -2,7 +2,7 @@ import React from 'react';
 
 function Cookie() {
   return (
-    <div class="content">
+    <div className="content main">
         <h2>Cookie Policy for JoeBailey.xyz</h2>
 
         <h2>What Are Cookies</h2>

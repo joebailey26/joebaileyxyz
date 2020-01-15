@@ -6,12 +6,12 @@ import {
   Route
 } from "react-router-dom";
 
-import Nav from './components/nav';
 import Footer from './components/footer';
 
 import Home from './pages/home';
 import Cookies from './pages/cookies';
 
+import './js/cookies'
 import './css/main.scss';
 
 import { useEffect } from "react";
@@ -35,12 +35,10 @@ function App() {
         <Switch>
           <Route path="/Cookie-Policy">
             <div id="cookies">
-              <Nav></Nav>
               <Cookies />
             </div>
           </Route>
           <Route path="/">
-            <Nav></Nav>
             <Home />
           </Route>
         </Switch>
