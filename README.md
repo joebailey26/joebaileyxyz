@@ -35,30 +35,32 @@ yarn build
 
 ## Coding Style Guide
 
-### HTML5 Doctype
+### HTML
+
+#### HTML5 Doctype
 
 ```sh
 <!DOCTYPE html>
 ```
 
-### HTML Lang Attribute
+#### HTML Lang Attribute
 
 ```sh
 <html lang=”en-GB”>
 ```
 
-### Syntax
+#### Syntax
 
 HTML will be indented consistently by a tab character or 4 spaces.
 Nested elements will be indented once.
 Self closing elements need a trailing slash such as the ```<img />``` element
 
-### Attributes
+#### Attributes
 
 Attributes and elements should always be lowercase
 Double quotes should always be used, never single
 
-#### Attribute Order
+##### Attribute Order
 
 HTML attributes should come in this particular order for easier reading of code.
 ```id```
@@ -66,9 +68,39 @@ HTML attributes should come in this particular order for easier reading of code.
 ```data-*```
 ```for | type | href | src```
 
-### HTML5 Tags
+#### HTML5 Tags
 
 HTML5 tags such as ```<header>```, ```<footer>```, ```<nav>```, and ```<time>``` are preferred over standard ```<div>``` tags.
+
+### SCSS
+
+CSS Files are not needed as Node Sass compiles the SCSS.
+
+SCSS should be included in a CSS folder in the same directory as the component/element
+
+Use one tab to indent each property
+
+Add one blank line between code blocks
+
+Multiple selectors can be on one line and must end with a curly brace
+
+Property-balue pairs should be on their own line with one tab of indentation and ending in a semicolon
+
+The closing brace should be flush left using the same amount of indentation as the opening selector
+
+Colors should use names where possible rather than hex values
+
+```sh
+.Foo, #Bar {
+  background: white;
+  color: black
+}
+
+#Bar {
+  width: 100%;
+  height: auto;
+}
+```
 
 ## Git
 
@@ -108,7 +140,9 @@ HTML5 tags such as ```<header>```, ```<footer>```, ```<nav>```, and ```<time>```
 
 #### Command Line
 
-```git commit -m "Subject" -m "Description..."```
+```sh
+git commit -m "Subject" -m "Description..."
+```
 
 #### Text Editor Template
 
