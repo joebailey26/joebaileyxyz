@@ -90,7 +90,8 @@ The closing brace should be flush left using the same amount of indentation as t
 
 Colors should use names where possible rather than hex values
 
-```.Foo, #Bar {
+```sh
+.Foo, #Bar {
   background: white;
   color: black
 }
@@ -139,7 +140,9 @@ Colors should use names where possible rather than hex values
 
 #### Command Line
 
-```git commit -m "Subject" -m "Description..."```
+```sh
+git commit -m "Subject" -m "Description..."
+```
 
 #### Text Editor Template
 
