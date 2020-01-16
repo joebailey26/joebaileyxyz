@@ -1,7 +1,20 @@
+/* 
+  Home Page
+  Requires:
+	Sections:
+		Portfolio
+		Blog
+		Contact
+	Components:
+		Nav
+		Button
+*/
+
 import React from 'react';
 
-import Nav from '../components/nav';
+import './css/home.scss';
 
+import Nav from '../components/nav';
 import Button from '../components/button';
 
 import Blog from '../sections/blog';
@@ -34,11 +47,10 @@ function scrollPortfolio(i) {
 class Home extends React.Component {
 	render() {
   		return (
-			<div id="home">
-				<div id="joe"></div>
+			<main id="home">
         		<Nav></Nav>
-				<div className="page-header header-filter">
-					<div className="container">
+				<header className="page-header header-filter">
+					<div className="container ml-auto mr-auto">
 						<div className="row">
 							<div id="header-title">
 								<h1>I’m Joe, a Full Stack Web Developer.</h1>
@@ -47,15 +59,15 @@ class Home extends React.Component {
 							</div>
 						</div>
 					</div>
-				</div>
+				</header>
 				<div className="main" id="trans">
-					<div className="container">
+					<div className="container ml-auto mr-auto">
 						<Portfolio></Portfolio>
 						<Blog></Blog>
 						<Contact></Contact>
 					</div>
 				</div>
-			</div>
+			</main>
 		)
 	};
 

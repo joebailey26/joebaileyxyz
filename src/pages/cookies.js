@@ -1,4 +1,10 @@
+/* 
+  Cookies Page
+*/
+
 import React from 'react';
+
+import './css/cookies.scss'
 
 function Cookie() {
   return (

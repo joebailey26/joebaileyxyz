@@ -1,5 +1,11 @@
+/* 
+    Nav component
+    Renders the navigation menu and handles all logic for mobile version with swipe and app drawer
+*/
 import React from 'react';
 import * as Hammer from "hammerjs";
+
+import './css/nav.scss'
 
 let app;
 let aclose;
@@ -10,8 +16,8 @@ class Nav extends React.Component {
             <nav className="navbar" id="transp" >
                 <div className="container">
                     <div className="row">
-                        <a className="navbar-brand" href="#joe">Joe Bailey</a>
-                        <p title="navigation" className="navbar-toggler" onClick={this.appdrawer}>
+                        <div className="navbar-brand"><a href="#home">Joe Bailey</a></div>
+                        <p title="navigation" className="navbar-toggler text-center" onClick={this.appdrawer}>
                             <i className="fas fa-bars"></i>
                         </p>
                         <div className="navmob closed" id="nav">

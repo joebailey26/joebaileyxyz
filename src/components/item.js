@@ -1,4 +1,5 @@
-/* Item Component for Portfolio 
+/* 
+    Item Component for Portfolio 
     Props:
         title
         desc
@@ -26,7 +27,7 @@ function button(link, text) {
 
 function Item(props) {
         return (
-            <div className="col-md-4">
+            <article className="col-md-4">
                 <picture>
                     <source
                         srcSet={`img/Portfolio/${image(props.title)}.webp`}
@@ -49,7 +50,7 @@ function Item(props) {
                 {button(props.websiteLink, "View the website")}
                 {button(props.docsLink, "Read the docs")}
                 {button(props.behanceLink, "View on Behance")}
-            </div>
+            </article>
         )
 }
 

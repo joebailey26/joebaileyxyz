@@ -1,13 +1,20 @@
+/*  
+    Footer component 
+    Included on all pages
+    Requires Font Awesome Brands
+*/
 import React from 'react';
+
+import './css/footer.scss';
 
 function Footer() {
   return (
-    <footer className="footer">
-        <div className="container">
+    <footer className="footer text-center">
+        <div className="container ml-auto mr-auto">
             <div className="row">
                 <div className="col-md-8 ml-auto mr-auto">
                     <div className="copyright">
-                        &copy; {new Date().getFullYear()} Joe Bailey. All rights reserved.
+                        &copy; <time>{new Date().getFullYear()}</time> Joe Bailey. All rights reserved.
                     </div>
                     <div className="social">
                         <a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/joebaileyphoto" rel="noopener noreferrer" target="_blank">

@@ -1,0 +1,21 @@
+#header-title .btn {
+    margin-top: 20px; 
+    font-size: 1rem
+}
+
+.no-webp .page-header {
+    background-image: url(../../img/header.jpg)
+}
+
+.webp .page-header {
+    background-image: url(../../img/header.webp)
+}
+
+.page-header {
+    .description {
+        margin-top: 20px;
+        a {
+            color: white;
+        }
+    }
+}
