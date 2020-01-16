@@ -33,7 +33,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <Switch>
-          <Route path="/Cookie-Policy">
+          <Route path="/cookie-policy">
             <div id="cookies">
               <Cookies />
             </div>
