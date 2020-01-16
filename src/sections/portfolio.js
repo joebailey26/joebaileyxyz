@@ -1,10 +1,16 @@
+/*  
+    Portfolio Section
+    Requires Item Component
+*/
 import React from 'react';
 
 import Item from '../components/item';
 
+import './css/portfolio.scss';
+
 function Portfolio() {
     return (
-        <div className="section section-portfolio" id="section-portfolio">
+        <section className="section section-portfolio" id="section-portfolio">
             <div className="row">
                 <div className="col-md-8 ml-auto mr-auto">
                     <h2 className="text-center title">Portfolio</h2>
@@ -93,7 +99,7 @@ function Portfolio() {
                     behanceLink="https://www.behance.net/gallery/77240793/Solent-University-Mobile-Application">
                 </Item>
             </div>
-        </div> 
+        </section>
     )
 }
 

@@ -14,7 +14,7 @@
 ## Install
 
 ```sh
-npm install
+yarn install
 ```
 
 ## Development
@@ -53,12 +53,12 @@ HTML will be indented consistently by a tab character or 4 spaces.
 Nested elements will be indented once.
 Self closing elements need a trailing slash such as the ```<img />``` element
 
-#### Attributes
+### Attributes
 
 Attributes and elements should always be lowercase
 Double quotes should always be used, never single
 
-##### Attribute Order
+#### Attribute Order
 
 HTML attributes should come in this particular order for easier reading of code.
 ```id```
@@ -66,21 +66,70 @@ HTML attributes should come in this particular order for easier reading of code.
 ```data-*```
 ```for | type | href | src```
 
-### HTML Comments
-
-Comments are to be used every time a div is closed. They will be on the same line as the closing ```</div>``` tag. Example below:
-
-```sh
-<div id=”foo” class=”bar”>
-…
-</div> <!-- #foo .bar -->
-```
-
 ### HTML5 Tags
 
-HTML5 tags such as ```<header>``` and ```<footer>``` are preferred over standard ```<div>``` tags.
+HTML5 tags such as ```<header>```, ```<footer>```, ```<nav>```, and ```<time>``` are preferred over standard ```<div>``` tags.
 
-## Branching Strategy
+## Git
+
+### Commit Messages
+
+1. Specify the type of commit:
+
+  * feat: The new feature you're adding to a particular application
+
+  * fix: A bug fix
+
+  * style: Feature and updates related to styling
+
+  * refactor: Refactoring a specific section of the codebase
+
+  * test: Everything related to testing
+
+  * docs: Everything related to documentation
+
+  * chore: Regular code maintenance.
+
+2. Separate the subject from the body with a blank line
+
+3. Your commit message should not contain any whitespace errors
+
+4. Remove unnecessary punctuation marks
+
+5. Do not end the subject line with a period
+
+6. Capitalize the subject line and each paragraph
+
+7. Use the body to explain what changes you have made and why you made them.
+
+8. Do not assume the reviewer understands what the original problem was, ensure you add it.
+
+9. Do not think your code is self-explanatory
+
+#### Command Line
+
+```git commit -m "Subject" -m "Description..."```
+
+#### Text Editor Template
+
+Capitalized, short (50 chars or less) summary
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely).
+
+Write your commit message in the imperative: "Fix bug" and not "Fixed bug"
+or "Fixes bug."  This convention matches up with commit messages generated
+by commands like git merge and git revert.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too, use a hyphen or asterisk for the bullet, followed by a
+  single space, with blank lines in between
+
+### Branching Strategy
 
 Master branch is for tested code and is deployed directly to **Netlify**. Do not push anything to master. Always create pull requests and test code.
 

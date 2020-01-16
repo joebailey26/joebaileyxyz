@@ -1,4 +1,10 @@
+/*  
+    Contact Section
+    Creates Netlify Compatible Form and handles logic for sending submission via Ajax
+*/
 import React from 'react';
+
+import './css/contact.scss';
 
 const encode = (data) => {
     return Object.keys(data)

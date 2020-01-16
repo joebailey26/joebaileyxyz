@@ -1,0 +1,146 @@
+@import '../../css/fonts';
+
+.navbar-brand {
+	font-size: 1.5em;
+	font-family: Rammetto
+}
+
+.navbar-brand, .navbar-brand a {
+	padding: 0px !important;
+}
+
+.navbar-brand, .navlinks {
+    margin: 12.5px 0px;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 55;
+    width: 100%;
+    padding: 15px 0;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.25s;
+}
+
+.navbar .container {
+    max-width: 100%
+}
+
+.navbar .container .row {
+    padding: 0 2vw;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.navbar a {
+	padding: 30px 10px;
+    color: #fff!important;
+	transition: color 0.25s;
+}
+
+.navbar.transparent {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+.navbar.transparent a {
+    color: #000!important;
+}
+
+.navbar-toggler {
+    display: none;
+    width: 24px;
+    height: 24px;
+	padding: 0px!important;
+	margin: 13px 0px 13px 10px;
+}
+
+.navmob, .navbar-toggler {
+	justify-self: end;
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        background-color: #fff !important;
+        padding: 0px !important;
+        height: 50px;
+        margin-top: -50px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12); 
+    }
+  
+    .navbar .container {
+        height: 50px; 
+    }
+        
+    .navbar .container .row a {
+        color: #000 !important; 
+    }
+}
+
+@media (max-width: 660px) {	
+	.navbar-toggler {
+    	display: block !important;
+		top: 0;
+		position: absolute;
+	}
+	
+	.navbar-brand {
+		text-align: center;
+		display: block;
+		line-height: 50px;
+		margin: 0!important;
+	}
+	
+	.navbar .container .row {
+    	display: block!important;
+	}
+	
+	.navmob {
+		position: fixed;
+		display: block;
+		width: 304px;
+		height: 100vh;
+		background-color: #fff;
+		left: 0;
+		transition: 1s;
+		z-index: 99;
+		top: 50px;
+	}
+	
+	.navmob.closed {
+		left: -304px;
+	}
+	
+	#close.closed {
+		opacity: 0;
+	}
+	
+	#close {
+		width: 100vw;
+		top: 0;
+		height: calc(100vh - 50px);
+		position: absolute;
+		padding: 0;
+		left: 304px;
+		opacity: .7;
+		background-color: #000;
+		transition: opacity 1s;
+	}
+
+  	.navlinks {
+		display: block;
+		background-color: #fff;
+		margin: 0px !important;
+	}
+	
+	.navlinks a:not(#close) {
+		display: block;
+		padding: 15px;
+		margin-left: 10px;
+	}
+
+  	.nav-link {
+    	padding-top: 12.5px !important;
+    	padding-left: 15px !important; 
+	}
+}

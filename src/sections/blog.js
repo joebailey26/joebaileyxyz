@@ -1,5 +1,14 @@
+/* 
+    Blog Section
+    Requires Button Component
+    Fetches RSS Feed and renders content in Articles
+*/
 import React from 'react';
 import * as RSSParser from 'rss-parser';
+
+import './css/blog.scss';
+
+import '../components/button';
 
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
@@ -41,7 +50,7 @@ function RSSMain() {
             return `
                 <article class="col-md-4 rss-item">
                     <h4 class="info-title"><a target="_blank" rel="noopener noreferrer" href="${b.link}">${b.title}</a></h4>
-                    <div class="rss-content">
+                    <div class="rss-content text-center">
                         ${b.content}
                     </div>
                 </article>
@@ -54,14 +63,14 @@ function RSSMain() {
 
 function Blog() {
         return (
-            <div className="section section-blog" id="section-blog">
+            <section className="section section-blog" id="section-blog">
                 <div className="row">
                     <div className="col-md-8 ml-auto mr-auto">
                         <h2 className="text-center title">Blog</h2>
                     </div>
                 </div>
                 <div id="rss-feeds" className="row">{RSSMain()} <h3>Blog Posts are loading...</h3></div>
-            </div>
+            </section>
         )
 }
 
