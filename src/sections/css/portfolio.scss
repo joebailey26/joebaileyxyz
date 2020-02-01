@@ -71,5 +71,14 @@
         p {
             min-height: 1px!important;
         }
-    }
+	}
+	
+	#git a {
+		overflow: hidden;
+		display: block;
+		img {
+			width: 250%;
+    		float: right;
+		}
+	}
 }

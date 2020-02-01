@@ -31,7 +31,7 @@ class Home extends React.Component {
 						<div className="row">
 							<div id="header-title">
 								<h1>I’m Joe, a Full Stack Web Developer.</h1>
-								<h5 className="description">My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWA's, static HTML and CSS sites, and working with clients. I am in the process of learning Vue and React in order to create more advanced applications.</h5>
+								<h5 className="description">My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWA's, static HTML, CSS, and JavaScript sites, and working with clients. During the second year of my University course I plan to learn as much as possible, whilst working with as many different types of clients as possible before I undertake a 12-month placement in Web Development.</h5>
 								<Button link="https://drive.google.com/open?id=1Mm61EELkpbByy3ADzffmSec_VjH8X7Na" text="Download my CV" type="Secondary"></Button>
 							</div>
 						</div>

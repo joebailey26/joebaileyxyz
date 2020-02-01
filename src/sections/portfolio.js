@@ -153,7 +153,7 @@ class Portfolio extends React.Component {
                     <Item 
                         title="Galexia" 
                         tech={["react", "cloud"]}
-                        desc="" 
+                        desc="To learn React I created a website for a fake Digital Agency. This was part of my university course, but I decided to go beyond the brief. It is hosted with Netlify." 
                         projectLink="https://galexia.agency" 
                         gitHubLink="https://github.com/joebailey26/Galexia"
                         picture="no">
@@ -161,7 +161,7 @@ class Portfolio extends React.Component {
                     <Item 
                         title="Weather App"
                         tech={["file-code"]}
-                        desc="" 
+                        desc="My friend made a weather app so that they could learn APIs. I decided to fork it and take it a step further by experimenting with CSS Houdini, Variable Fonts, CSS Variables, and new browser APIs such as the Speech Synthesis API." 
                         projectLink="https://joebailey26.github.io/Weather-App/index.html" 
                         gitHubLink="https://github.com/joebailey26/Weather-App"
                         picture="no">
@@ -169,7 +169,7 @@ class Portfolio extends React.Component {
                     <Item 
                         title="To Do List" 
                         tech={["file-code"]}
-                        desc="" 
+                        desc="As part of my university course we were tasked with creating a To Do List in Vanilla JavaScript. For many, it was also an introduction into using NPM and BrowserSync for the first time. We also experimented with using Local Browser Storage." 
                         projectLink="https://codepen.io/joebailey26/pen/wvvbBpN" 
                         gitHubLink="https://github.com/joebailey26/JavaScript-To-Do-List"
                         picture="no">
@@ -177,15 +177,15 @@ class Portfolio extends React.Component {
                     <Item 
                         title="Vue To Do List" 
                         tech={["vuejs"]}
-                        desc="" 
-                        projectLink="" 
+                        desc="After experimenting using Vue in my Photography Website I decided to have a go at making a To Do List. You can create and delete To Dos but they don't currently persist. This is something I wish to add in the future." 
+                        projectLink="https://relaxed-cori-9310e4.netlify.com/" 
                         gitHubLink="https://github.com/joebailey26/Vue-To-Do-List"
                         picture="no">
                     </Item>
                     <Item 
                         title="React Tic Tac Toe" 
                         tech={["react"]}
-                        desc="" 
+                        desc="My first venture into the world of React was building this Tic Tac Toe game using the React Docs. It also helped me get to grips with CodePen for creating small little projects." 
                         projectLink="https://codepen.io/joebailey26/pen/poogwjN" 
                         gitHubLink="https://github.com/joebailey26/React-Tic-Tac-Toe"
                         picture="no">
@@ -193,7 +193,7 @@ class Portfolio extends React.Component {
                     <Item 
                         title="Firebase Chat App" 
                         tech={["google"]}
-                        desc="" 
+                        desc="In my first year of University I had a go at creating a chat app using Firebase following my lecturers instructions. I waas the only person in my class to succeed. Go ahead, type something." 
                         projectLink="https://chat-app-a7f51.firebaseapp.com/" 
                         gitHubLink="https://github.com/joebailey26/firebase_chat_app"
                         picture="no">
