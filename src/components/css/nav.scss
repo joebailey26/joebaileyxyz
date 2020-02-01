@@ -44,7 +44,11 @@
 }
 
 .navbar.transparent a {
-    color: #000!important;
+	color: #000!important;
+	transition: 0.5s;
+	&:hover {
+		color: #38786a!important
+	}
 }
 
 .navbar-toggler {

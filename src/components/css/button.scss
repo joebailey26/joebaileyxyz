@@ -4,7 +4,7 @@
 
     &.secondary {
         background-color: #38786A;
-        &:active {
+        &:active, &:hover {
             background-color: #608d83;
         }
     }
@@ -29,6 +29,7 @@
 	font-size: .8em;
 	font-weight: 400;
     margin-bottom: 16px;
+    transition: 0.5s;
 
     &:active {
         background-color: #555555;
@@ -37,5 +38,7 @@
 
     &:hover {
         color: white;
+        background-color: #555555;
+	    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.12);
     }
 }

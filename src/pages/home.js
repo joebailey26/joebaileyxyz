@@ -21,29 +21,6 @@ import Blog from '../sections/blog';
 import Portfolio from '../sections/portfolio';
 import Contact from '../sections/contact';
 
-import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
-
-function scrollPortfolio(i) {
-	setInterval(function() {
-		var width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-		var container = document.querySelectorAll('.section-portfolio .row')[i];
-		var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length - 1;
-		if (container.scrollLeft === (width * count)) {
-			container.scrollBy({
-			left: 0,
-			behavior: 'smooth' 
-			})
-		}
-		else {
-			container.scrollBy({
-			left: width,
-			behavior: 'smooth' 
-			})
-		}
-	}, 10000);
-}
-
 class Home extends React.Component {
 	render() {
   		return (
@@ -70,13 +47,6 @@ class Home extends React.Component {
 			</main>
 		)
 	};
-
-  	componentDidMount() {	
-		scrollPortfolio(1);
-		setTimeout(function(){
-			scrollPortfolio(2)
-		}, 2000);
-	}
 }
 
 export default Home;
