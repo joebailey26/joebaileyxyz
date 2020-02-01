@@ -2,14 +2,52 @@
     margin-bottom: 50px;
 }
 
-#temp {
+#designs {
     margin-bottom: 50px; 
     margin-top: 75px;
+}
+
+#projects {
+	margin-top: 75px;
 }
 
 .section-portfolio .col-md-4 p {
 	min-height: 144px;
 	margin-bottom: 16px;
+}
+
+.tech-stack {
+	margin: 1rem 0;
+	a {
+		color: #3C4858;
+		font-size: xx-large;
+		padding: 0.5em;
+	}
+}
+
+#git {
+	margin-bottom: 50px;
+	display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+	a {
+		color: #3C4858;
+		transition: 0.5s;
+		&:hover {
+			h5, .fa-github {
+				color: #38786a
+			}
+		}
+		h5 {
+			float: right;
+		}
+		.fa-github {
+			float: right;
+			margin: 10px 10px 15px 10px;
+			font-size: 1.5em;
+		}
+	}
 }
 
 @media (max-width: 768px) {
@@ -33,5 +71,14 @@
         p {
             min-height: 1px!important;
         }
-    }
+	}
+	
+	#git a {
+		overflow: hidden;
+		display: block;
+		img {
+			width: 250%;
+    		float: right;
+		}
+	}
 }

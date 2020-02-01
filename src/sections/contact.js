@@ -77,10 +77,10 @@ function Contact() {
                     <h2 className="text-center title">Get in touch</h2>
                     <div className="row">
                         <div className="col-md-4">
-                            <i className="material-icons">phone</i> <a href="tel:+4474777535">07477 7535</a>
+                            <a href="tel:+4474777535"><i className="material-icons">phone</i> 07477 7535</a>
                         </div>
                         <div className="col-md-4">
-                            <i className="material-icons">email</i> <a href="mailto:joe@joebailey.xyz">joe@joebailey.xyz</a>
+                            <a href="mailto:joe@joebailey.xyz"><i className="material-icons">email</i> joe@joebailey.xyz</a>
                         </div>
                         <div className="col-md-4">
                             <i className="material-icons">my_location</i><p>Southampton, UK</p>

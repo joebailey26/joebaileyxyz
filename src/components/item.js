@@ -25,31 +25,81 @@ function button(link, text) {
     }
 }
 
+function picture(title, picture) {
+    if (!picture) {
+        return (
+            <picture>
+                <source
+                    srcSet={`img/Portfolio/${image(title)}.webp`}
+                    type="image/webp"
+                />
+                <source
+                    srcSet={`img/Portfolio/${image(title)}.jpg`}
+                    type="image/jpg"
+                />
+                <img
+                    src={`img/Portfolio/${image(title)}.jpg`}
+                    loading="lazy"
+                    alt={title}
+                    width="150px"
+                    height="auto"
+                />
+            </picture>
+        )
+    }
+}
+
+function tech(tech) {
+    let arr = [];
+    for (var i = 0; i < tech.length; i++) {
+        if (tech[i] === "google") {
+            arr.push(
+                <a key={tech[i]} title="Firebase"><i className={"fab fa-" + tech[i]}></i></a>
+            )
+        }
+        else if (tech[i] === "file-code") {
+            arr.push(
+                <a key={tech[i]} title="Custom Solution"><i className={"fas fa-" + tech[i]}></i></a>
+            )
+        }
+        else if (tech[i] === "cloud") {
+            arr.push(
+                <a key={tech[i]} title="Netlify"><i className={"fas fa-" + tech[i]}></i></a>
+            )
+        }
+        else if (tech[i] === "adobe-xd") {
+            arr.push(
+                <a key={tech[i]} title="Adobe XD"><i className="fab fa-adobe"></i></a>
+            )
+        }
+        else if (tech[i] === "adobe") {
+            arr.push(
+                <a key={tech[i]} title="Adobe InDesign"><i className={"fab fa-" + tech[i]}></i></a>
+            )
+        }
+        else {
+            arr.push(
+                <a key={tech[i]} title={tech[i]}><i className={"fab fa-" + tech[i]}></i></a>
+            )
+        }
+    }
+    return (
+        arr
+    )
+}
+
 function Item(props) {
         return (
             <article className="col-md-4">
-                <picture>
-                    <source
-                        srcSet={`img/Portfolio/${image(props.title)}.webp`}
-                        type="image/webp"
-                    />
-                    <source
-                        srcSet={`img/Portfolio/${image(props.title)}.jpg`}
-                        type="image/jpg"
-                    />
-                    <img
-                        src={`img/Portfolio/${image(props.title)}.jpg`}
-                        loading="lazy"
-                        alt={props.title}
-                        width="150px"
-                        height="auto"
-                    />
-            </picture>
                 <h4 className="info-title">{props.title}</h4>
+                {picture(props.title, props.picture)}
+                <div className="tech-stack">{tech(props.tech)}</div>
                 <p>{props.desc}</p>
                 {button(props.websiteLink, "View the website")}
                 {button(props.docsLink, "Read the docs")}
                 {button(props.behanceLink, "View on Behance")}
+                {button(props.projectLink, "View the project")}
+                {button(props.gitHubLink, "View on GitHub")}
             </article>
         )
 }
