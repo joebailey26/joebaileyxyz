@@ -20,15 +20,11 @@
 }
 
 @media (max-width: 768px) {
-	.section-blog {
-		padding: 0!important;
-
-		.col-md-4 {
-			margin-bottom: 50px !important;
-			flex: 0 0 auto;
-			scroll-snap-align: start;
-			scroll-snap-stop: always;
-		}
+	.section-blog .col-md-4 {
+		margin-bottom: 50px !important;
+		flex: 0 0 auto;
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
 	}
 	
 	#rss-feeds {
