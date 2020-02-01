@@ -1,0 +1,8 @@
+/index.html / 301
+
+/* / 200
+
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect default Netlify subdomain to primary domain
+https://heuristic-bell-6e94b3.netlify.com/* https://joebailey.xyz/:splat 301!
