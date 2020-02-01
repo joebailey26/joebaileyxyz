@@ -16,3 +16,7 @@ a {
 :link, :visited {
   text-decoration: none;
 }
+input:not([type=checkbox]), textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
