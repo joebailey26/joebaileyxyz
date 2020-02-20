@@ -21,12 +21,13 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
     white-space: nowrap;
     user-select: none;
-    padding: .8em;
     cursor: pointer;
     border: 0;
     border-radius: 2px;
     text-transform: uppercase;
-	font-size: .8em;
+    padding: 1em;
+    font-size: .8em;
+    line-height: 1.5em;
 	font-weight: 400;
     margin-bottom: 16px;
     transition: 0.5s;
