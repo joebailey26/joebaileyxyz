@@ -32,6 +32,19 @@ class ContactForm extends React.Component {
     };
   
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
+
+    checkform() {
+        if (document.readyState === "complete" || document.readyState === "loaded") {
+            var cansubmit = true;
+            
+            if (document.querySelector("#name").value.length === 0) cansubmit = false;
+            if (document.querySelector("#email").value.length === 0) cansubmit = false;
+            if (document.querySelector("#message").value.length === 0) cansubmit = false;
+            if (document.querySelector("#privacyPolicy").checked === false) cansubmit = false;
+        
+            document.querySelector('input[type="submit"]#formSubmit').disabled = !cansubmit;
+        }
+    }
   
     render() {
       const { name, email, message} = this.state;
@@ -42,26 +55,26 @@ class ContactForm extends React.Component {
                 <div className="col-md-6">
                     <div className="form-group">
                         <label className="bmd-label-floating" htmlFor="name">Your Name</label>
-                        <input id="name" name="name" className="form-control" required value={name} onChange={this.handleChange}/>
+                        <input id="name" name="name" className="form-control" required value={name} onChange={this.handleChange} onKeyUp={this.checkform}/>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="form-group">
                         <label className="bmd-label-floating" htmlFor="email">Your Email</label>
-                        <input id="email" name="email" type="email" className="form-control" required value={email} onChange={this.handleChange}/>
+                        <input id="email" name="email" type="email" className="form-control" required value={email} onChange={this.handleChange} onKeyUp={this.checkform}/>
                     </div>
                 </div>
             </div>
             <div className="form-group">
                 <label htmlFor="message" className="bmd-label-floating">Your Message</label>
-                <textarea id="message" name="message" className="form-control" rows="4" required value={message} onChange={this.handleChange}></textarea>
+                <textarea id="message" name="message" className="form-control" rows="4" required value={message} onChange={this.handleChange} onKeyUp={this.checkform}></textarea>
             </div>
             <div className="form-group">
-                <label htmlFor="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required /> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+                <label htmlFor="privacyPolicy"><input type="checkbox" id="privacyPolicy" name="privacy" value="privacy" required onChange={this.checkform}/> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
             </div>
             <div className="row">
                 <div className="col-md-4 ml-auto mr-auto text-center">
-                    <input className="btn" value="Send Message" type="submit" />
+                    <input className="btn" value="Send Message" type="submit" id="formSubmit" disabled/>
                 </div>
             </div>
         </form>
