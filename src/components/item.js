@@ -95,11 +95,13 @@ function Item(props) {
                 {picture(props.title, props.picture)}
                 <div className="tech-stack">{tech(props.tech)}</div>
                 <p>{props.desc}</p>
-                {button(props.websiteLink, "View the website")}
-                {button(props.docsLink, "Read the docs")}
-                {button(props.behanceLink, "View on Behance")}
-                {button(props.projectLink, "View the project")}
-                {button(props.gitHubLink, "View on GitHub")}
+                <div className="buttonsContainer">
+                    {button(props.websiteLink, "View the website")}
+                    {button(props.docsLink, "Read the docs")}
+                    {button(props.behanceLink, "View on Behance")}
+                    {button(props.projectLink, "View the project")}
+                    {button(props.gitHubLink, "View on GitHub")}
+                </div>
             </article>
         )
 }

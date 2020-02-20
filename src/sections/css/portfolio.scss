@@ -12,8 +12,23 @@
 }
 
 .section-portfolio .col-md-4 p {
-	min-height: 144px;
 	margin-bottom: 16px;
+}
+
+.section .row.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-row-gap: 70px;
+
+	article.col-md-4:not(.rss-item) {
+		display: grid;
+		grid-template-rows: min-content min-content min-content 1fr min-content;
+		max-width: 100%;
+	}
+
+	&.projects article.col-md-4 {
+		grid-template-rows: min-content min-content 1fr min-content;
+	}
 }
 
 .tech-stack {
@@ -50,11 +65,21 @@
 	}
 }
 
+@media (max-width: 1024px) {
+	.section .row.grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 @media (max-width: 768px) {
+	.section .row.grid {
+		grid-auto-columns: 100%;
+		grid-template-columns: initial;
+		grid-auto-flow: column;
+	}
   	.section-portfolio .row {
 		padding: 0 !important;
-		flex-wrap: nowrap!important;
-		overflow-x: auto;
+		overflow-x: scroll;
 		-webkit-overflow-scrolling: touch;
 		scroll-snap-type: x mandatory;
     }
@@ -64,8 +89,7 @@
     }
     
     .section-portfolio .col-md-4 {
-		margin-bottom: 50px !important; 
-		flex: 0 0 auto;
+		margin-bottom: 50px !important;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
         p {

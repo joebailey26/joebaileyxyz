@@ -24,7 +24,7 @@ function scrollBlog() {
 		var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
 		var container = document.querySelector('#rss-feeds');
 		if (container.scrollLeft === (width * 5)) {
-			container.scrollBy({
+			container.scrollTo({
 				left: 0,
 				behavior: 'smooth' 
 			})
@@ -69,7 +69,7 @@ function Blog() {
                         <h2 className="text-center title">Blog</h2>
                     </div>
                 </div>
-                <div id="rss-feeds" className="row">{RSSMain()} <h3>Blog Posts are loading...</h3></div>
+                <div id="rss-feeds" className="row grid">{RSSMain()} <h3>Blog Posts are loading...</h3></div>
             </section>
         )
 }

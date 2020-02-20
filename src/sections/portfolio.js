@@ -15,9 +15,9 @@ function scrollPortfolio(i) {
 	setInterval(function() {
 		var width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
 		var container = document.querySelectorAll('.section-portfolio .row')[i];
-		var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length - 1;
+        var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length - 1;
 		if (container.scrollLeft === (width * count)) {
-			container.scrollBy({
+			container.scrollTo({
 			left: 0,
 			behavior: 'smooth' 
 			})
@@ -46,7 +46,7 @@ class Portfolio extends React.Component {
                     <h5>View some of the websites that I have created.</h5>
                 </div>
 
-                <div className="row">
+                <div className="row grid">
                     <Item 
                         title="Joe Bailey Photography"
                         tech={["php","vuejs","wordpress", "file-code"]}
@@ -95,7 +95,7 @@ class Portfolio extends React.Component {
                     <h2 className="subtitle">Designs</h2>
                     <h5>View some of the websites I have designed.</h5>
                 </div>
-                <div className="row">
+                <div className="row grid">
                     <Item 
                         title="National Hyacinth Collection"
                         tech={["file-code"]}
@@ -149,7 +149,7 @@ class Portfolio extends React.Component {
                         </a>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row grid projects">
                     <Item 
                         title="Galexia" 
                         tech={["react", "cloud"]}
