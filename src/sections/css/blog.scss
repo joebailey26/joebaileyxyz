@@ -63,10 +63,3 @@
 		scroll-snap-type: x mandatory;
 	}
 }
-
-@media (max-width: 576px) {  
-	#rss-feeds {
-	  	grid-template-columns: 100% !important;
-	  	margin-bottom: 80px; 
-	} 
-}

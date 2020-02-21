@@ -54,32 +54,32 @@ function tech(tech) {
     for (var i = 0; i < tech.length; i++) {
         if (tech[i] === "google") {
             arr.push(
-                <a key={tech[i]} title="Firebase"><i className={"fab fa-" + tech[i]}></i></a>
+                <i key={tech[i]} title="Firebase"><i className={"fab fa-" + tech[i]}></i></i>
             )
         }
         else if (tech[i] === "file-code") {
             arr.push(
-                <a key={tech[i]} title="Custom Solution"><i className={"fas fa-" + tech[i]}></i></a>
+                <i key={tech[i]} title="Custom Solution"><i className={"fas fa-" + tech[i]}></i></i>
             )
         }
         else if (tech[i] === "cloud") {
             arr.push(
-                <a key={tech[i]} title="Netlify"><i className={"fas fa-" + tech[i]}></i></a>
+                <i key={tech[i]} title="Netlify"><i className={"fas fa-" + tech[i]}></i></i>
             )
         }
         else if (tech[i] === "adobe-xd") {
             arr.push(
-                <a key={tech[i]} title="Adobe XD"><i className="fab fa-adobe"></i></a>
+                <i key={tech[i]} title="Adobe XD"><i className="fab fa-adobe"></i></i>
             )
         }
         else if (tech[i] === "adobe") {
             arr.push(
-                <a key={tech[i]} title="Adobe InDesign"><i className={"fab fa-" + tech[i]}></i></a>
+                <i key={tech[i]} title="Adobe InDesign"><i className={"fab fa-" + tech[i]}></i></i>
             )
         }
         else {
             arr.push(
-                <a key={tech[i]} title={tech[i]}><i className={"fab fa-" + tech[i]}></i></a>
+                <i key={tech[i]} title={tech[i]}><i className={"fab fa-" + tech[i]}></i></i>
             )
         }
     }

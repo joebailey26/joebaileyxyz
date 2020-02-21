@@ -13,21 +13,19 @@ import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
 function scrollPortfolio(i) {
-    var container = document.querySelectorAll('.section-portfolio .row')[i];
-    var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length;
-    let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-
-    container.addEventListener("change", function(){
-        width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-    })
+    const container = document.querySelectorAll('.section-portfolio .row')[i];
+    const count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length;
+    const icon = document.querySelectorAll('.items')[i-1].querySelectorAll(".icon");
 
     container.addEventListener("scroll", function(){
+        let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
         let v = Math.round(container.scrollLeft / width)
-        container.querySelectorAll(".icon").forEach(e => e.classList.remove("current"))
-        container.querySelectorAll(".icon")[v].classList.add("current")
+        icon.forEach(e => e.classList.remove("current"))
+        icon[v].classList.add("current")
     })
     for (let i = 0; i < count; i++) {
-        container.querySelectorAll(".icon")[i].addEventListener("click", function() {
+        let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
+        icon[i].addEventListener("click", function() {
             container.scrollTo({
 				left: width * i,
 				behavior: 'smooth' 
@@ -50,7 +48,7 @@ class Portfolio extends React.Component {
                     <h2 className="subtitle">Websites</h2>
                     <h5>View some of the websites that I have created.</h5>
                 </div>
-
+                <div className="items">
                 <div className="row grid">
                     <Item 
                         title="Joe Bailey Photography"
@@ -94,13 +92,14 @@ class Portfolio extends React.Component {
                         websiteLink="https://blossomtreephoto.co.uk" 
                         docsLink="http://www.joebaileyphotography.com/Blog/2019/01/blossom-tree-photography/">
                     </Item>
-                    <Icons items="6"></Icons>
                 </div>
-
+                <Icons items="6"></Icons>
+                </div>
                 <div id="designs">
                     <h2 className="subtitle">Designs</h2>
                     <h5>View some of the websites I have designed.</h5>
                 </div>
+                <div className="items">
                 <div className="row grid">
                     <Item 
                         title="National Hyacinth Collection"
@@ -140,7 +139,8 @@ class Portfolio extends React.Component {
                         desc="I wanted to practise my design skills using Adobe XD so I made a mockup of a mobile app that combines current web-based applications that the university offers."
                         behanceLink="https://www.behance.net/gallery/77240793/Solent-University-Mobile-Application">
                     </Item>
-                    <Icons items="6"></Icons>
+                </div>
+                <Icons items="6"></Icons>
                 </div>
                 <div id="projects">
                     <h2 className="subtitle">Projects</h2>
@@ -156,6 +156,7 @@ class Portfolio extends React.Component {
                         </a>
                     </div>
                 </div>
+                <div className="items">
                 <div className="row grid projects">
                     <Item 
                         title="Galexia" 
@@ -205,7 +206,8 @@ class Portfolio extends React.Component {
                         gitHubLink="https://github.com/joebailey26/firebase_chat_app"
                         picture="no">
                     </Item>
-                    <Icons items="6"></Icons>
+                </div>
+                <Icons items="6"></Icons>
                 </div>
             </section>
         )

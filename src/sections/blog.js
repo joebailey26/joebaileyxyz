@@ -21,25 +21,23 @@ var rssList = [];
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 function scrollBlog() {
-    var container = document.querySelector('#rss-feeds');
-    var icon = document.querySelector('.section-blog .row.grid').querySelectorAll(".icon")
-    let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
-
-    container.addEventListener("resize", function(){
-        width = document.getElementsByClassName('rss-item')[0].offsetWidth;
-    })
-
+    const container = document.querySelector('#rss-feeds');
+    const icon = document.querySelector('.section-blog .row.grid').querySelectorAll(".icon")
+        
     container.addEventListener("scroll", function() {
+        let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
         let v = Math.round(container.scrollLeft / width)
         icon.forEach(e => e.classList.remove("current"))
         icon[v].classList.add("current")
     })
+
     for (let i = 0; i < 6; i++) {
+        let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
         icon[i].addEventListener("click", function() {
             container.scrollTo({
-				left: width * i,
-				behavior: 'smooth' 
-			})
+                left: width * i,
+                behavior: 'smooth' 
+            })
         })
     }
 }

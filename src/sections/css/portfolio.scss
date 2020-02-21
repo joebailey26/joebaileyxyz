@@ -33,7 +33,7 @@
 
 .tech-stack {
 	margin: 1rem 0;
-	a {
+	i:not(.fas):not(.fa):not(.fab) {
 		color: #3C4858;
 		font-size: xx-large;
 		padding: 0.5em;
@@ -95,7 +95,7 @@
     }
     
     .section-portfolio .col-md-4 {
-		margin-bottom: 50px !important;
+		margin-bottom: 100px !important;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
         p {
