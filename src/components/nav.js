@@ -23,13 +23,22 @@ class Nav extends React.Component {
                         <div className="navmob closed" id="nav">
                             <div className="navlinks">
                                 <a className="nav-link" id="portfolio" href="#section-portfolio">
-                                    <i className="material-icons">apps</i> Portfolio
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                        <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/>
+                                    </svg>
+                                    Portfolio
                                 </a>
                                 <a className="nav-link" id="blog" href="#section-blog">
-                                    <i className="material-icons">message</i> Blog
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                                    </svg>
+                                    Blog
                                 </a>
                                 <a className="nav-link" id="contact" href="#section-contact">
-                                    <i className="material-icons">send</i> Contact
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                                    </svg>
+                                    Contact
                                 </a>
                                 <div title="close-navigation" id="close" className="closed" onClick={this.appclose}></div>
                             </div>
