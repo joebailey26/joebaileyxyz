@@ -15,9 +15,13 @@ smoothscroll.polyfill();
 function scrollPortfolio(i) {
     var container = document.querySelectorAll('.section-portfolio .row')[i];
     var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length;
+    let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
+
+    container.addEventListener("change", function(){
+        width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
+    })
 
     container.addEventListener("scroll", function(){
-        let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
         let v = Math.round(container.scrollLeft / width)
         container.querySelectorAll(".icon").forEach(e => e.classList.remove("current"))
         container.querySelectorAll(".icon")[v].classList.add("current")

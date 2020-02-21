@@ -8,12 +8,11 @@
 		grid-auto-flow: column;
 		grid-gap: 5px;
 		width: auto;
-		margin: auto;
+		margin: -60px auto auto;
 		justify-items: center;
 		align-items: center;
-		position: sticky;
+        position: sticky;
 		grid-column: 1;
-		margin-top: -60px;
 		grid-auto-columns: 30px;
 		grid-auto-rows: 30px;
 	}
