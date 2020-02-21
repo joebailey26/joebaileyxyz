@@ -1,18 +1,5 @@
 @import '../../css/fonts';
 
-.navbar-brand {
-	font-size: 1.5em;
-	font-family: Rammetto
-}
-
-.navbar-brand, .navbar-brand a {
-	padding: 0px !important;
-}
-
-.navbar-brand, .navlinks {
-    margin: 12.5px 0px;
-}
-
 .navbar {
     position: fixed;
     z-index: 55;
@@ -20,34 +7,69 @@
     padding: 15px 0;
     background-color: rgba(0,0,0,0);
     transition: background-color 0.25s;
+	.container {
+		max-width: 100%;
+		.row {
+			padding: 0 2vw;
+			display: grid;
+			grid-template-columns: 30% 70%;
+
+			.navbar-brand {
+				font-size: 1.5em;
+				font-family: Rammetto;
+				a {
+					color: #fff!important;
+				}
+			}
+			
+			.navbar-brand, .navbar-brand a {
+				padding: 0px !important;
+			}
+			
+			.navbar-brand, .navlinks {
+				margin: 12.5px 0px;
+			}
+		}
+	}
+	a {
+		color: #fff!important;
+		transition: color 0.25s;
+	}
+	svg {
+		fill: #fff;
+		transition: 0.25s;
+	}
 }
 
-.navbar .container {
-    max-width: 100%
-}
-
-.navbar .container .row {
-    padding: 0 2vw;
-    display: grid;
-    grid-template-columns: 30% 70%;
-}
-
-.navbar a {
-	padding: 30px 10px;
-    color: #fff!important;
-	transition: color 0.25s;
+.nav-link {
+	display: inline-grid;
+    grid-auto-flow: column;
+	align-items: center;
+	padding: 0 10px;
+	grid-gap: 4px;
 }
 
 .navbar.transparent {
     background-color: #fff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
-}
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
 
-.navbar.transparent a {
-	color: #000!important;
-	transition: 0.5s;
-	&:hover {
-		color: #38786a!important
+	.container .row {
+		.navbar-brand a {
+			color: #000!important;
+		}
+		svg {
+			fill: #3C4858;
+		}
+		a {
+			color: #3C4858!important;
+			transition: 0.5s;
+			&:hover {
+				color: #38786a!important;
+				svg {
+					fill: #38786a;
+				}
+			}
+		}
 	}
 }
 
@@ -56,7 +78,7 @@
     width: 24px;
     height: 24px;
 	padding: 0px!important;
-	margin: 13px 0px 13px 10px;
+	margin: 13px 0px;
 }
 
 .navmob, .navbar-toggler {
@@ -69,16 +91,22 @@
         padding: 0px !important;
         height: 50px;
         margin-top: -50px;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12); 
-    }
-  
-    .navbar .container {
-        height: 50px; 
-    }
-        
-    .navbar .container .row a {
-        color: #000 !important; 
-    }
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12); 
+		.container {
+			height: 50px; 
+			.row {
+				.navbar-brand a {
+					color: #000!important
+				}
+				a {
+					color: #3C4858 !important; 
+					svg {
+						fill: #3C4858;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media (max-width: 660px) {	
@@ -138,9 +166,10 @@
 	}
 	
 	.navlinks a:not(#close) {
-		display: block;
+		display: grid;
+		grid-template-columns: 24px auto;
 		padding: 15px;
-		margin-left: 10px;
+		margin-left: 2vw;
 	}
 
   	.nav-link {
