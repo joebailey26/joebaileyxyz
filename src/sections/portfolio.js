@@ -5,6 +5,7 @@
 import React from 'react';
 
 import Item from '../components/item';
+import Icons from '../components/icons';
 
 import './css/portfolio.scss';
 
@@ -12,23 +13,23 @@ import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
 function scrollPortfolio(i) {
-	setInterval(function() {
-		var width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-		var container = document.querySelectorAll('.section-portfolio .row')[i];
-        var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length - 1;
-		if (container.scrollLeft === (width * count)) {
-			container.scrollTo({
-			left: 0,
-			behavior: 'smooth' 
+    var width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
+    var container = document.querySelectorAll('.section-portfolio .row')[i];
+    var count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length;
+
+    container.addEventListener("scroll", function(){
+        let v = Math.round(container.scrollLeft / width)
+        container.querySelectorAll(".icon").forEach(e => e.classList.remove("current"))
+        container.querySelectorAll(".icon")[v].classList.add("current")
+    })
+    for (let i = 0; i < count; i++) {
+        container.querySelectorAll(".icon")[i].addEventListener("click", function() {
+            container.scrollTo({
+				left: width * i,
+				behavior: 'smooth' 
 			})
-		}
-		else {
-			container.scrollBy({
-			left: width,
-			behavior: 'smooth' 
-			})
-		}
-	}, 10000);
+        })
+    }
 }
 
 class Portfolio extends React.Component {
@@ -89,6 +90,7 @@ class Portfolio extends React.Component {
                         websiteLink="https://blossomtreephoto.co.uk" 
                         docsLink="http://www.joebaileyphotography.com/Blog/2019/01/blossom-tree-photography/">
                     </Item>
+                    <Icons items="6"></Icons>
                 </div>
 
                 <div id="designs">
@@ -134,6 +136,7 @@ class Portfolio extends React.Component {
                         desc="I wanted to practise my design skills using Adobe XD so I made a mockup of a mobile app that combines current web-based applications that the university offers."
                         behanceLink="https://www.behance.net/gallery/77240793/Solent-University-Mobile-Application">
                     </Item>
+                    <Icons items="6"></Icons>
                 </div>
                 <div id="projects">
                     <h2 className="subtitle">Projects</h2>
@@ -198,18 +201,15 @@ class Portfolio extends React.Component {
                         gitHubLink="https://github.com/joebailey26/firebase_chat_app"
                         picture="no">
                     </Item>
+                    <Icons items="6"></Icons>
                 </div>
             </section>
         )
     }
     componentDidMount() {	
 		scrollPortfolio(1);
-		setTimeout(function(){
-			scrollPortfolio(2)
-		}, 2000);
-		setTimeout(function(){
-			scrollPortfolio(3)
-		}, 4000);
+        scrollPortfolio(2)
+        scrollPortfolio(3)
 	}
 }
 

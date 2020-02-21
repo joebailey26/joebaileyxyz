@@ -15,7 +15,7 @@
 	margin-bottom: 16px;
 }
 
-.section .row.grid {
+.section:not(.section-blog) .row.grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-row-gap: 70px;
@@ -66,13 +66,19 @@
 }
 
 @media (max-width: 1024px) {
-	.section .row.grid {
+	.section:not(.section-blog)  .row.grid {
 		grid-template-columns: 1fr 1fr;
 	}
 }
 
 @media (max-width: 768px) {
-	.section .row.grid {
+	@for $i from 1 through 6 {
+		.section .row.grid article.col-md-4:not(.rss-item):nth-of-type(#{$i}) {
+			grid-column: $i;
+		}
+	}
+
+	.section:not(.section-blog) .row.grid {
 		grid-auto-columns: 100%;
 		grid-template-columns: initial;
 		grid-auto-flow: column;
