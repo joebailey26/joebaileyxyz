@@ -1,0 +1,32 @@
+.icons {
+	display: none;
+}
+
+@media (max-width: 768px) {
+    .icons {
+		display: grid;
+		grid-auto-flow: column;
+		grid-gap: 5px;
+		width: auto;
+		margin: -60px auto auto;
+		justify-items: center;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+		grid-column: 1;
+		grid-auto-columns: 30px;
+		grid-auto-rows: 30px;
+	}
+	
+	.icon {
+		width: 15px;
+		height: 15px;
+		background-color: #555555;
+		border-radius: 7.5px;
+		cursor: pointer;
+	}
+
+	.icon.current {
+		background-color: #282828
+	}
+}

@@ -5,7 +5,9 @@
     &.secondary {
         background-color: #38786A;
         &:active, &:hover {
-            background-color: #608d83;
+            &:not(:disabled) {
+                background-color: #608d83;
+            }
         }
     }
     
@@ -32,20 +34,20 @@
     margin-bottom: 16px;
     transition: 0.5s;
 
-    &:active {
-        background-color: #555555;
-	    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.12);
+    &:active, &:hover  {
+        &:not(:disabled) {
+            background-color: #555555;
+	        box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.12);
+        }
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         color: white;
-        background-color: #555555;
-	    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.12);
     }
 
     &:disabled {
         background-color: rgba(79, 79, 79, 0.26);
-        color: rgba(0, 0, 0, 0.38);
+        color: #3C4858;
         cursor: not-allowed;
     }
 }

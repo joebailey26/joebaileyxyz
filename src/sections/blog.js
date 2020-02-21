@@ -9,6 +9,7 @@ import * as RSSParser from 'rss-parser';
 import './css/blog.scss';
 
 import '../components/button';
+import Icons from '../components/icons';
 
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
@@ -20,22 +21,25 @@ var rssList = [];
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 function scrollBlog() {
-	setInterval(function() {
-		var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
-		var container = document.querySelector('#rss-feeds');
-		if (container.scrollLeft === (width * 5)) {
-			container.scrollBy({
-				left: 0,
-				behavior: 'smooth' 
-			})
-		}
-		else {
-			container.scrollBy({
-				left: width,
-				behavior: 'smooth' 
-			})
-		}
-	}, 10000);
+    const container = document.querySelector('#rss-feeds');
+    const icon = document.querySelector('.section-blog .row.grid').querySelectorAll(".icon")
+        
+    container.addEventListener("scroll", function() {
+        let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
+        let v = Math.round(container.scrollLeft / width)
+        icon.forEach(e => e.classList.remove("current"))
+        icon[v].classList.add("current")
+    })
+
+    for (let i = 0; i < 6; i++) {
+        let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
+        icon[i].addEventListener("click", function() {
+            container.scrollTo({
+                left: width * i,
+                behavior: 'smooth' 
+            })
+        })
+    }
 }
 
 function RSSMain() {
@@ -62,16 +66,16 @@ function RSSMain() {
 }
 
 function Blog() {
-        return (
-            <section className="section section-blog" id="section-blog">
-                <div className="row">
-                    <div className="col-md-8 ml-auto mr-auto">
-                        <h2 className="text-center title">Blog</h2>
-                    </div>
+    return (
+        <section className="section section-blog" id="section-blog">
+            <div className="row">
+                <div className="col-md-8 ml-auto mr-auto">
+                    <h2 className="text-center title">Blog</h2>
                 </div>
-                <div id="rss-feeds" className="row">{RSSMain()} <h3>Blog Posts are loading...</h3></div>
-            </section>
-        )
+            </div>
+            <div className="row grid"><div id="rss-feeds">{RSSMain()} <h3>Blog Posts are loading...</h3></div><Icons items="6"></Icons></div>
+        </section>
+    )
 }
 
 export default Blog;
