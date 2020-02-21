@@ -36,14 +36,22 @@
 @media (max-width: 768px) {
 	@for $i from 1 through 6 {
 		.rss-item:nth-of-type(#{$i}) {
-			grid-column: $i;
+			grid-column: $i+1;
 		}
 	}
 
 	#rss-feeds {
-		grid-auto-columns: 100%;
-		grid-template-columns: initial;
+		grid-template-columns: 10px calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) 10px;
 		grid-auto-flow: column;
+		grid-column-gap: 10px;
+		margin-left: -10px;
+		margin-right: -10px;
+		flex-wrap: wrap;
+		&:before, &:after {
+			display: table;
+			content: '';
+			height: 100%;
+		}
 	}
 
 	.section-blog {
@@ -51,8 +59,11 @@
 		margin-bottom: 0px!important;
 		.col-md-4 {
 			margin-bottom: 100px !important;
-			scroll-snap-align: start;
+			scroll-snap-align: center;
 			scroll-snap-stop: always;
+			background-color: #fff;
+			border-radius: 5px;
+			border: 1px solid #3C4858;
 		}
 	}
 	
