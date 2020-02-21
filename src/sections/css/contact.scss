@@ -21,8 +21,17 @@ label {
     margin-bottom: 0!important;
     
     .col-md-4 {
+        a, p {
+            display: inline-grid;
+            grid-template-columns: 24px auto;
+            grid-gap: 4px;
+        }
         a {
             color: #3C4858;
+            transition: 0.5s;
+        }
+        svg {
+            fill: #3C4858;
             transition: 0.5s;
         }
         * {
@@ -30,7 +39,10 @@ label {
             vertical-align: middle;
         }
         :link:hover {
-            color: #38786a
+            color: #38786a;
+            svg {
+                fill: #38786a
+            }
         }
         i {
             margin-right: 4px;
