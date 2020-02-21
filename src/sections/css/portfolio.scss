@@ -71,7 +71,7 @@
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	@for $i from 1 through 6 {
 		.section .row.grid article.col-md-4:not(.rss-item):nth-of-type(#{$i}) {
 			grid-column: $i+1;
@@ -79,11 +79,12 @@
 	}
 
 	.section:not(.section-blog) .row.grid {
-		grid-template-columns: 10px calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) calc(100vw - 40px) 10px;
+		grid-template-columns: 30px repeat(6, calc(100vw - 80px)) 30px;
 		grid-auto-flow: column;
 		grid-column-gap: 10px;
-		margin-left: -25px;
-		margin-right: -25px;
+		margin-left: calc(-1*((100vw - 100%) / 2));
+		margin-right: calc(-1*((100vw - 100%) / 2));
+		max-width: 100vw;
 		&:before, &:after {
 			display: table;
 			content: '';
@@ -120,5 +121,11 @@
 			width: 250%;
     		float: right;
 		}
+	}
+}
+
+@media (max-width: 576px) {
+	.section:not(.section-blog) .row.grid {
+		grid-template-columns: 10px repeat(6, calc(100vw - 40px)) 10px;
 	}
 }
