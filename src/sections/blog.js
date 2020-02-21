@@ -21,11 +21,11 @@ var rssList = [];
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 function scrollBlog() {
-    var width = document.getElementsByClassName('rss-item')[0].offsetWidth;
     var container = document.querySelector('#rss-feeds');
     var icon = document.querySelector('.section-blog .row.grid').querySelectorAll(".icon")
 
     container.addEventListener("scroll", function() {
+        let width = document.getElementsByClassName('rss-item')[0].offsetWidth;
         let v = Math.round(container.scrollLeft / width)
         icon.forEach(e => e.classList.remove("current"))
         icon[v].classList.add("current")
