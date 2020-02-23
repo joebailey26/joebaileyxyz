@@ -43,7 +43,7 @@ function scrollBlog() {
 }
 
 function RSSMain() {
-    new RSSParser().parseURL(CORS_PROXY + "https://www.joebaileyphotography.com/Blog/category/web-design/news/feed/", function(err, feed) {
+    new RSSParser().parseURL(CORS_PROXY + "https://blog.joebailey.xyz/rss.xml", function(err, feed) {
         if (err) throw err;
 
         rssList = feed.items.splice(0, 6)
@@ -51,11 +51,13 @@ function RSSMain() {
         let list = rssList.map((b) => buildTemplate(b)).join('');
 
         function buildTemplate(b) {
+            console.log(b)
             return `
                 <article class="col-md-4 rss-item">
                     <h4 class="info-title"><a target="_blank" rel="noopener noreferrer" href="${b.link}">${b.title}</a></h4>
                     <div class="rss-content text-center">
                         ${b.content}
+                        <p><a class="btn" href="${b.guid}">Continue Reading</a></p>
                     </div>
                 </article>
             `;
@@ -70,7 +72,7 @@ function Blog() {
         <section className="section section-blog" id="section-blog">
             <div className="row">
                 <div className="col-md-8 ml-auto mr-auto">
-                    <h2 className="text-center title">Blog</h2>
+                    <h2 className="text-center title"><a href="https://blog.joebailey.xyz">Blog</a></h2>
                 </div>
             </div>
             <div className="row grid"><div id="rss-feeds">{RSSMain()} <h3>Blog Posts are loading...</h3></div><Icons items="6"></Icons></div>

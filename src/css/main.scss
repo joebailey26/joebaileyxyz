@@ -2,6 +2,10 @@
 @import 'fonts';
 @import 'cookies';
 
+.more-link {
+	display: none
+}
+
 @media (min-width: 576px) {
     .container {
         max-width: 540px; 

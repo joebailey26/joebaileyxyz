@@ -1,3 +1,11 @@
+.section-blog h2 a {
+	color: #3C4858
+}
+
+.section-blog h2 a:hover {
+	color: #38786a
+}
+
 #rss-feeds {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -14,17 +22,8 @@
 	}
 }
 
-.rss-item img, .screen-reader-text {
+.rss-item img {
 	display: none!important;
-}
-
-.more-link {
-	display: inline-block
-}
-
-.link-more {
-	margin-top: 16px;
-	text-align: center;
 }
 
 @media (max-width: 1024px) {
