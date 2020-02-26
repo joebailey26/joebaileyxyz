@@ -10,11 +10,16 @@
     line-height: 1.25;
     color: #495057;
     border: 1px solid #3c4858;
+    border-radius: 5px;
     resize: vertical;
 }
 
 label {
     display: inline-block
+}
+
+address {
+    font-style: normal;
 }
 
 .section-contact {
