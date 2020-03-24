@@ -1,0 +1,136 @@
+main:not(#trans) {
+
+.link-more {
+    display: none;
+}
+
+.main {
+    margin: 50px 30px 70px;
+    min-height: calc(100vh - 280px);
+}
+
+.navbar {
+    top: 0;
+}
+
+time {
+    margin-bottom: 10px;
+    display: block;
+}
+
+h1 {
+    font-weight: 700;
+    font-family: "Roboto Slab";
+    margin-bottom: 30px;
+}
+
+h2 a {
+    color: #3C4858;
+}
+
+h2 a:hover {
+    color: #38786a
+}
+
+h4 {
+    font-size: 1.33rem;
+    font-family: "Roboto Slab";
+}
+
+a {
+    transition: 0.25s;
+}
+
+a {
+    font-weight: 900;
+}
+
+a:hover {
+    color: #3C4858;
+}
+
+article {
+    margin: 60px 0;
+}
+
+article:first-of-type {
+    margin-top: 0;
+}
+
+li.blocks-gallery-item {
+    display: block;
+}
+
+.wp-block-gallery.columns-3.is-cropped {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-content: center;
+}
+
+.wp-block-gallery.columns-3.is-cropped img {
+    width: 100%;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.navigation:first-of-type {
+    margin-bottom: 30px
+}
+
+.navigation:last-of-type {
+    margin-top: 60px;
+    margin-bottom: -30px;
+}
+
+.indexlink a {
+    display: block;
+    text-align: center;
+}
+
+.next {
+    justify-self: end;
+}
+
+@media (max-width: 992px) {
+    margin: -50px 30px 70px!important;
+
+    .navigation {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-gap: 1em;
+        text-align: center;
+    }
+    .indexlink {
+        grid-row: 1;
+    }
+    .next {
+        justify-self: center;
+    }
+    .navigation:first-of-type {
+        margin-bottom: 60px
+    }
+    .navigation:last-of-type {
+        margin-top: 60px;
+        margin-bottom: -60px;
+    }
+    .navbar {
+        margin-top: 0!important;
+    }
+}
+@media (max-width: 768px) {
+    .navigation:last-of-type {
+        margin-top: 60px;
+        margin-bottom: 0px;
+    }
+}
+@media (max-width: 576px) {
+    margin: -50px 10px 70px !important;
+
+    .navigation {
+        grid-gap: 0;
+    }
+}
+}

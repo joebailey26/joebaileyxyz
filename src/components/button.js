@@ -19,7 +19,7 @@ function Button(props) {
     className = "btn"
   }
   return (
-    <a className={className} rel="noopener noreferrer" target="_blank" href={props.link}>{props.text}</a>
+    <a className={className} href={props.link}>{props.text}</a>
   )
 }
 
