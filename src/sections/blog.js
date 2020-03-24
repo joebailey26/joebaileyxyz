@@ -51,7 +51,6 @@ function RSSMain() {
         let list = rssList.map((b) => buildTemplate(b)).join('');
 
         function buildTemplate(b) {
-            console.log(b)
             return `
                 <article class="col-md-4 rss-item">
                     <h4 class="info-title"><a target="_blank" rel="noopener noreferrer" href="${b.link}">${b.title}</a></h4>
