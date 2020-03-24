@@ -17,7 +17,7 @@ function Footer() {
                         &copy; <time>{new Date().getFullYear()}</time> Joe Bailey. All rights reserved.
                     </div>
                     <div className="social">
-                        <a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/joebaileyphoto" rel="noopener noreferrer" target="_blank">
+                        <a title="Twitter" aria-label="Twitter Social Profile Link" href="https://twitter.com/JoeBailey26" rel="noopener noreferrer" target="_blank">
                             <i className="fab fa-twitter"></i>
                         </a>
                         <a title="LinkedIn" aria-label="LinkedIn Social Profile Link" href="https://www.linkedin.com/in/joe-bailey-b68b17171/" rel="noopener noreferrer" target="_blank">
