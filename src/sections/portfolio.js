@@ -5,7 +5,6 @@
 import React from 'react'
 
 import Websites from './sub_sections/websites'
-import Designs from './sub_sections/designs'
 import Projects from './sub_sections/projects'
 
 import './css/portfolio.scss'
@@ -50,11 +49,6 @@ class Portfolio extends React.Component {
                     <h5>View some of the websites that I have created.</h5>
                 </div>
                 <Websites></Websites>
-                <div id="designs">
-                    <a href="/website-templates"><h2 className="subtitle">Designs</h2></a>
-                    <h5>View some of the websites I have designed.</h5>
-                </div>
-                <Designs></Designs>
                 <div id="projects">
                     <a href="/projects"><h2 className="subtitle">Projects</h2></a>
                     <h5>View some of my projects.</h5>
