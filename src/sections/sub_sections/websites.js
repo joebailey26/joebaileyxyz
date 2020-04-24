@@ -7,7 +7,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Icons from '../../components/icons';
 import Item from '../../components/item';
 
-const Designs = () => {
+const Websites = () => {
     const { allWordpressPost } = useStaticQuery(
         graphql`
             query {
@@ -30,10 +30,11 @@ const Designs = () => {
       )
     const posts = allWordpressPost.edges
     return (
-        <div class="items">
-            <div className="row grid designs">{posts.map(({ node }) => {
+        <div className="items">
+            <div className="row grid websites">{posts.map(({ node }) => {
                 return (
                     <Item 
+                        key={node.title}
                         title={node.title}
                         tech={node.acf.icons}
                         desc={node.excerpt}
@@ -51,4 +52,4 @@ const Designs = () => {
     )
 }
 
-export default Designs
+export default Websites

@@ -141,27 +141,29 @@ h3 {
     line-height: 1.4em;
 }
 
-h4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-
 a h3 {
-    color: white
-}
-
-a h3:hover {
-    color: #38786A
+    color: white;
+    &:hover {
+        color: #38786A
+    }
 }
 
 h4 {
-    font-size: 1.125rem
+    font-size: 1.125rem;
+    font-weight: 600;
 }
 
 h5 {
     font-size: 1em;
     line-height: 1.5em;
     margin-bottom: 15px
+}
+
+.subtitle, .title {
+    color: #3C4858;
+    &:hover {
+        color: #38786a
+    }
 }
 
 label,

@@ -2,9 +2,7 @@
     Blog Section
 */
 import React from 'react'
-import { useStaticQuery,Link, graphql } from "gatsby"
-
-import './css/blog.scss'
+import { useStaticQuery, graphql } from "gatsby"
 
 import Icons from '../components/icons';
 import Item from '../components/item';
@@ -45,20 +43,23 @@ const Blog = () => {
         <section className="section section-blog" id="section-blog">
             <div className="row">
                 <div className="col-md-8 ml-auto mr-auto">
-                    <h2 className="text-center title"><a href="/blog">Blog</a></h2>
+                    <a href="/blog"><h2 className="text-center title">Blog</h2></a>
                 </div>
             </div>
-            <div className="row grid blog">{posts.map(({ node }) => {
-                return (
-                    <Item 
-                        title={node.title}
-                        desc={node.excerpt}
-                        Link={node.slug}>
-                    </Item>
-                )
-                })}
+            <div className="items">
+                <div className="row grid blog">{posts.map(({ node }) => {
+                    return (
+                        <Item 
+                            key={node.title}
+                            title={node.title}
+                            desc={node.excerpt}
+                            Link={node.slug}>
+                        </Item>
+                    )
+                    })}
+                </div>
+                <Icons items="6"></Icons>
             </div>
-            <Icons items="6"></Icons>
         </section>
     )
 }

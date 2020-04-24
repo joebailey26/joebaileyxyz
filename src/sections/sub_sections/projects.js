@@ -30,10 +30,11 @@ const Projects = () => {
       )
     const posts = allWordpressPost.edges
     return (
-        <div class="items">
+        <div className="items">
             <div className="row grid projects">{posts.map(({ node }) => {
                 return (
-                    <Item 
+                    <Item
+                        key={node.title} 
                         title={node.title}
                         tech={node.acf.icons}
                         desc={node.excerpt}

@@ -12,9 +12,9 @@ class Nav extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="navbar-brand"><a href="https://joebailey.xyz/#home">Joe Bailey</a></div>
-                        <p title="navigation" className="navbar-toggler text-center" onClick={this.appdrawer}>
+                        <a href="javascript:void(0)" title="navigation" className="navbar-toggler text-center" onClick={this.appdrawer}>
                             <i className="fas fa-bars"></i>
-                        </p>
+                        </a>
                         <div className="navmob closed" id="nav">
                             <div className="navlinks">
                                 <a className="nav-link" id="portfolio" href="https://joebailey.xyz/#section-portfolio">
@@ -35,7 +35,7 @@ class Nav extends React.Component {
                                     </svg>
                                     Contact
                                 </a>
-                                <div title="close-navigation" id="close" className="closed" onClick={this.appclose}></div>
+                                <a href="javascript:void(0)" title="close-navigation" id="close" className="closed" onClick={this.appclose}></a>
                             </div>
                         </div>
                     </div>

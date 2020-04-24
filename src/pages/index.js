@@ -43,9 +43,9 @@ class Home extends React.Component {
 					<div className="container">
 						<div className="row">
 							<div className="navbar-brand"><a href="#home">Joe Bailey</a></div>
-							<p title="navigation" className="navbar-toggler text-center" onClick={this.appdrawer}>
+							<a href="javascript:void(0)" title="navigation" className="navbar-toggler text-center" onClick={this.appdrawer}>
 								<i className="fas fa-bars"></i>
-							</p>
+							</a>
 							<div className="navmob closed" id="nav">
 								<div className="navlinks">
 									<a className="nav-link" id="portfolio" href="#section-portfolio">
@@ -66,7 +66,7 @@ class Home extends React.Component {
 										</svg>
 										Contact
 									</a>
-									<div title="close-navigation" id="close" className="closed" onClick={this.appclose}></div>
+									<a href="javascript:void(0)" title="close-navigation" id="close" className="closed" onClick={this.appclose}></a>
 								</div>
 							</div>
 						</div>
@@ -93,7 +93,7 @@ class Home extends React.Component {
 				<Footer></Footer>
 			</div>
 		)
-	};
+	}
 
     /* Mobile Navigation JS */
     appdrawer(){
@@ -116,8 +116,7 @@ class Home extends React.Component {
 					aclose.setAttribute("style", "display: none");
 				}, 900);
 		}
-
-	};
+	}
 
 	appclose(){
 		if (app.classList.contains('open') === true){
@@ -131,9 +130,32 @@ class Home extends React.Component {
                 }, 
             900);
 		}
-	};
+	}
+
+	scrollBlog() {
+		const container = document.querySelector('.section-blog .items .row.grid');
+		const count = document.querySelector('.section-blog .items .row.grid').querySelectorAll('.col-md-4').length;
+		const icon = document.querySelector('.section-blog .items').querySelectorAll(".icon");
+	
+		container.addEventListener("scroll", function(){
+			let width = document.querySelector('.section-blog .col-md-4').offsetWidth;
+			let v = Math.round(container.scrollLeft / width)
+			icon.forEach(e => e.classList.remove("current"))
+			icon[v].classList.add("current")
+		})
+		for (let i = 0; i < count; i++) {
+			let width = document.querySelector('.section-blog .col-md-4').offsetWidth;
+			icon[i].addEventListener("click", function() {
+				container.scrollTo({
+					left: width * i,
+					behavior: 'smooth' 
+				})
+			})
+		}
+	}
     
     componentDidMount() {
+		this.scrollBlog()
         app = document.getElementsByClassName('navmob')[0];
         aclose = document.getElementById('close');
         aclose.setAttribute("style", "display: none");

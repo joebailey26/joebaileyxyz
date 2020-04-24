@@ -13,9 +13,9 @@ import smoothscroll from 'smoothscroll-polyfill'
 smoothscroll.polyfill();
 
 function scrollPortfolio(i) {
-    const container = document.querySelectorAll('.section-portfolio .row')[i];
-    const count = document.querySelectorAll('.section-portfolio .row')[i].querySelectorAll('.col-md-4').length;
-    const icon = document.querySelectorAll('.items')[i-1].querySelectorAll(".icon");
+    const container = document.querySelectorAll('.section-portfolio .items .row.grid')[i];
+    const count = document.querySelectorAll('.section-portfolio .items .row.grid')[i].querySelectorAll('.col-md-4').length;
+    const icon = document.querySelectorAll('.section-portfolio .items')[i].querySelectorAll(".icon");
 
     container.addEventListener("scroll", function(){
         let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
@@ -68,12 +68,8 @@ class Portfolio extends React.Component {
         )
     }
     componentDidMount() {
-        /*
-		scrollPortfolio(1)
-        scrollPortfolio(2)
-        scrollPortfolio(3)
-        scrollPortfolio(4)
-        */
+        scrollPortfolio(0)
+        scrollPortfolio(1)
 	}
 }
 
