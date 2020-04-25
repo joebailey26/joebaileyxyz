@@ -1,26 +1,28 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 
-import {tech, button} from "../../../components/individualItem"
+import {picture, tech, button} from "../../components/individualItem"
 
-const websitesIndex = ({ data }) => {
+const websiteDesignsIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
     return (
       <Layout>
-        <SEO title="Websites" />
+        <SEO title="Website Designs" />
         {posts.map(({ node }) => {
           const title = node.title
           return (
               <article key={node.title} id={node.slug}>
+                {picture(node.jetpack_featured_media_url, node.title)}
                 <header>
                   <h2 className="title">
                     <Link to={node.slug}>
                       {title}
                     </Link>
                   </h2>
+                  <div className="tech-stack">{tech(node.acf.icons)}</div>
                 </header>
                 <div
                   dangerouslySetInnerHTML={{
@@ -29,6 +31,8 @@ const websitesIndex = ({ data }) => {
                 >
                 </div>
                 <div className="buttonsContainer">
+                    {button(node.acf.website, "View the website")}
+                    {button(node.acf.behance, "View on Behance")}
                     {button(node.acf.slug, "Continue Reading")}
                 </div>
               </article>
@@ -38,18 +42,24 @@ const websitesIndex = ({ data }) => {
     )
 }
 
-export default websitesIndex
+export default websiteDesignsIndex
 
 export const pageQuery = graphql`
   query {
-    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Joe Bailey XYZ"}}}, status: {eq: "publish"}}) {
-        edges {
-          node {
-            title
-            excerpt
-            slug
+    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Website Templates"}}}, status: {eq: "publish"}}) {
+      edges {
+        node {
+          title
+          excerpt
+          slug
+          jetpack_featured_media_url
+          acf {
+            website
+            behance
+            icons
           }
         }
       }
     }
+  }
 `

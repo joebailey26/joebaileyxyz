@@ -45,12 +45,12 @@ class Portfolio extends React.Component {
                 </div>
 
                 <div id="web">
-                    <a href="/websites"><h2 className="subtitle">Websites</h2></a>
+                    <a href="/portfolio/websites"><h2 className="subtitle">Websites</h2></a>
                     <h5>View some of the websites that I have created.</h5>
                 </div>
                 <Websites></Websites>
                 <div id="projects">
-                    <a href="/projects"><h2 className="subtitle">Projects</h2></a>
+                    <a href="/portfolio/projects"><h2 className="subtitle">Projects</h2></a>
                     <h5>View some of my projects.</h5>
                 </div>
                 <div id="git">
