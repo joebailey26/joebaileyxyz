@@ -6,7 +6,9 @@
     type
   If type is secondary then component adds the secondary class to the button
 */
-import React from 'react';
+import React from 'react'
+
+import { Link } from 'gatsby'
 
 import './css/button.scss'
 
@@ -19,7 +21,7 @@ function Button(props) {
     className = "btn"
   }
   return (
-    <a className={className} href={props.link}>{props.text}</a>
+    <Link className={className} to={props.link}>{props.text}</Link>
   )
 }
 

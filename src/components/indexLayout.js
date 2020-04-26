@@ -6,6 +6,7 @@ import "./css/layout.scss"
 
 import Nav from "./nav"
 import Footer from "./footer"
+import Sidebar from "./sidebar"
 
 import "../css/featherlight.scss"
 
@@ -23,6 +24,9 @@ const Layout = ({ children }) => {
                 <div className="row">
                     <div className="col-md-8 ml-auto mr-auto">
                         {children}
+                    </div>
+                    <div className="col-md-4 ml-auto mr-auto">
+                      <Sidebar></Sidebar>
                     </div>
                 </div>
             </section>

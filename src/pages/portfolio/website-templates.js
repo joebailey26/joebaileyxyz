@@ -4,15 +4,15 @@ import { graphql } from "gatsby"
 import IndexLayout from "../../components/indexLayout"
 import SEO from "../../components/seo"
 import Share from "../../components/share"
-import {tech, button} from "../../components/individualItem"
+import {picture, tech, button} from "../../components/individualItem"
 
-const ProjectsIndex = ({ data }) => {
+const websiteDesignsIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const categories = data.allWordpressCategory.edges
   const site = data.site.siteMetadata
     return (
       <IndexLayout>
-        <SEO title="Projects | Portfolio" slug="/portfolio/projects" />
+        <SEO title="Website Designs | Portfolio" slug="/portfolio/website-templates" />
         {categories.map(({ node }) => {
           return (
             <header>
@@ -22,12 +22,12 @@ const ProjectsIndex = ({ data }) => {
           )
         })}
         {posts.map(({ node }) => {
-          const title = node.title
           return (
-              <article key={node.title} id={node.slug}>
+              <article key={node.title} id={node.slug} className="with_featureImage">
+                {picture(node.jetpack_featured_media_url, node.title)}
                 <header>
-                  <h2 className="title">
-                      {title}
+                  <h2 class="subtitle">
+                      {node.title}
                   </h2>
                   <div className="tech-stack">{tech(node.acf.icons)}</div>
                 </header>
@@ -39,11 +39,11 @@ const ProjectsIndex = ({ data }) => {
                 </div>
                 <footer>
                   <div className="buttonsContainer">
-                      {button(node.acf.project_url, "View the project")}
-                      {button(node.acf.github, "View on GitHub")}
+                    {button(node.acf.website, "View the website")}
+                    {button(node.acf.behance, "View on Behance")}
                   </div>
                   <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
-                  </footer>
+                </footer>
               </article>
           )
         })}
@@ -51,7 +51,7 @@ const ProjectsIndex = ({ data }) => {
     )
 }
 
-export default ProjectsIndex
+export default websiteDesignsIndex
 
 export const pageQuery = graphql`
   query {
@@ -61,7 +61,7 @@ export const pageQuery = graphql`
         twitterHandle
       }
     },
-    allWordpressCategory(filter: {name: {eq: "Projects"}}) {
+    allWordpressCategory(filter: {name: {eq: "Website Templates"}}) {
       edges {
         node {
           name
@@ -69,18 +69,20 @@ export const pageQuery = graphql`
         }
       }
     },
-    allWordpressPost(filter: {categories: {elemMatch: {id: {eq: "625c7672-54a8-58c8-8055-a10672bcf3f6"}}}, status: {eq: "publish"}}) {
-        edges {
-          node {
-            title
-            content
-            acf {
-              project_url
-              github
-              icons
-            }
+    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Website Templates"}}}, status: {eq: "publish"}}) {
+      edges {
+        node {
+          title
+          content
+          slug
+          jetpack_featured_media_url
+          acf {
+            website
+            behance
+            icons
           }
         }
       }
+    }
   }
 `

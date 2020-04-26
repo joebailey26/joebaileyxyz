@@ -53,7 +53,7 @@ const Blog = () => {
                             key={node.title}
                             title={node.title}
                             desc={node.excerpt}
-                            Link={node.slug}>
+                            Link={"blog/" + node.slug}>
                         </Item>
                     )
                     })}

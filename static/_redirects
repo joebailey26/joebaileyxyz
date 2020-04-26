@@ -6,3 +6,5 @@
 
 # Redirect default Netlify subdomain to primary domain
 https://heuristic-bell-6e94b3.netlify.com/* https://joebailey.xyz/:splat 301!
+
+https://heuristic-bell-6e94b3.netlify.app/* https://joebailey.xyz/:splat 301!

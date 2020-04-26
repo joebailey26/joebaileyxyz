@@ -9,8 +9,10 @@ import Projects from './sub_sections/projects'
 
 import './css/portfolio.scss'
 
-import smoothscroll from 'smoothscroll-polyfill'
-smoothscroll.polyfill();
+if (typeof window !== `undefined`) {
+	const smoothscroll = require('smoothscroll-polyfill')
+	smoothscroll.polyfill()
+}
 
 function scrollPortfolio(i) {
     const container = document.querySelectorAll('.section-portfolio .items .row.grid')[i];
@@ -40,7 +42,7 @@ class Portfolio extends React.Component {
             <section className="section section-portfolio" id="section-portfolio">
                 <div className="row">
                     <div className="col-md-8 ml-auto mr-auto">
-                        <a href="/portfolio"><h2 className="text-center title">Portfolio</h2></a>
+                        <h2 className="text-center title">Portfolio</h2>
                     </div>
                 </div>
 

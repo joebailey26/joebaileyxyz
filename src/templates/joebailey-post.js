@@ -8,7 +8,7 @@ import Share from "../components/share"
 export default ({ data, pageContext }) => {
   const post = data.allWordpressPost.edges[0].node
   const site = data.site.siteMetadata
-
+  
   let t = post.date
   let date = new Date(t.substring(0, t.indexOf('T')))
   let day = date.getDay()
@@ -27,28 +27,28 @@ export default ({ data, pageContext }) => {
     monthArr[11] = "Dec"
   let month = monthArr[date.getMonth()]
   let year = date.getFullYear().toString().substring(2)
-
+  
   const {next, previous } = pageContext
   const nextArticle = next && (
-    <Link to={"blog/" + next.slug} className="next">
+    <Link to={"portfolio/websites/joe-bailey-xyz/" + next.slug} className="next">
       <strong>Next Article </strong>
       <span dangerouslySetInnerHTML={{__html: next.title}}></span>
     </Link>
   )
 
   const prevArticle = previous && (
-    <Link to={"blog/" + previous.slug} className="previous">
+    <Link to={"portfolio/websites/joe-bailey-xyz/" + previous.slug} className="previous">
       <strong>Previous Article </strong>
       <span dangerouslySetInnerHTML={{__html: previous.title}}></span>
     </Link>
   )
   return (
     <Layout>
-      <SEO title={post.title} slug={"/blog/" + post.slug} type="article"/>
+      <SEO title={post.title} slug={"/portfolio/websites/joe-bailey-xyz/" + post.slug} type="article"/>
       <article className="single">
         <div className="navigation">
           <span className="previous">{prevArticle}</span>
-          <span className="navIndex"><Link to="blog">Back to Blog</Link></span>
+          <span className="navIndex"><Link to="portfolio/websites/joe-bailey-xyz">Back to Index</Link></span>
           <span className="next">{nextArticle}</span>
         </div>
         <h1 dangerouslySetInnerHTML={{__html: post.title}}></h1>
@@ -59,7 +59,7 @@ export default ({ data, pageContext }) => {
         </footer>
         <div className="navigation">
           <span className="previous">{prevArticle}</span>
-          <span className="navIndex"><Link to="blog">Back to Blog</Link></span>
+          <span className="navIndex"><Link to="portfolio/websites/joe-bailey-xyz">Back to Index</Link></span>
           <span className="next">{nextArticle}</span>
         </div>
       </article>

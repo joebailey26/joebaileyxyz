@@ -1,24 +1,64 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../../../components/layout"
+import IndexLayout from "../../../components/indexLayout"
 import SEO from "../../../components/seo"
-
-import {tech, button} from "../../../components/individualItem"
+import Share from "../../../components/share"
+import {button} from "../../../components/individualItem"
 
 const websitesIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
+  const categories = data.allWordpressCategory.edges
+  const site = data.site.siteMetadata
     return (
-      <Layout>
-        <SEO title="Websites" />
+      <IndexLayout>
+        <SEO title="Joe Bailey | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-xyz" />
+        {categories.map(({ node }) => {
+          return (
+            <header>
+              <h1 class="title">{node.name}</h1>
+              <p className="description">{node.description}</p>
+            </header>
+          )
+        })}
         {posts.map(({ node }) => {
           const title = node.title
+
+          let t = node.date
+          let date = new Date(t.substring(0, t.indexOf('T')))
+          let day = date.getDay()
+          let monthArr = []
+            monthArr[0] = "Jan"
+            monthArr[1] = "Feb"
+            monthArr[2] = "Mar"
+            monthArr[3] = "Apr"
+            monthArr[4] = "May"
+            monthArr[5] = "Jun"
+            monthArr[6] = "Jul"
+            monthArr[7] = "Aug"
+            monthArr[8] = "Sep"
+            monthArr[9] = "Oct"
+            monthArr[10] = "Nov"
+            monthArr[11] = "Dec"
+          let month = monthArr[date.getMonth()]
+          let year = date.getFullYear().toString().substring(2)
+
           return (
-              <article key={node.title} id={node.slug}>
+              <article key={node.title} id={node.slug} className="with_featureImage">
+                <div className="date">
+                  <div className="day">
+                    {day}
+                  </div>
+                  <div className="monthYear">
+                    {month + " '" + year}
+                  </div>
+                </div>
                 <header>
                   <h2 className="title">
-                    <Link to={node.slug}>
-                      {title}
+                    <Link to={"portfolio/websites/joe-bailey-xyz/" + node.slug}
+                      dangerouslySetInnerHTML={{
+                      __html: title,
+                      }}>
                     </Link>
                   </h2>
                 </header>
@@ -28,13 +68,16 @@ const websitesIndex = ({ data }) => {
                   }}
                 >
                 </div>
-                <div className="buttonsContainer">
-                    {button(node.acf.slug, "Continue Reading")}
-                </div>
+                <footer>
+                  <div className="buttonsContainer">
+                    {button("portfolio/websites/joe-bailey-xyz/" + node.slug, "Continue Reading")}
+                  </div>
+                  <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
+                </footer>
               </article>
           )
         })}
-      </Layout>
+      </IndexLayout>
     )
 }
 
@@ -42,12 +85,27 @@ export default websitesIndex
 
 export const pageQuery = graphql`
   query {
+    site {
+      siteMetadata {
+        siteUrl
+        twitterHandle
+      }
+    },
+    allWordpressCategory(filter: {name: {eq: "Joe Bailey XYZ"}}) {
+      edges {
+        node {
+          name
+          description
+        }
+      }
+    },
     allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Joe Bailey XYZ"}}}, status: {eq: "publish"}}) {
         edges {
           node {
             title
             excerpt
             slug
+            date
           }
         }
       }

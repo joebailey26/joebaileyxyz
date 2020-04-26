@@ -9,27 +9,26 @@
 		Button
 */
 
-import React from 'react';
+import React from 'react'
 
-import '../css/main.scss';
+import '../css/main.scss'
 
-import './css/home.scss';
+import './css/home.scss'
 
-import Button from '../components/button';
-import SEO from '../components/seo';
+import Button from '../components/button'
+import SEO from '../components/seo'
 
-import Blog from '../sections/blog';
-import Portfolio from '../sections/portfolio';
-import Contact from '../sections/contact';
-
-import * as Hammer from "hammerjs";
+import Blog from '../sections/blog'
+import Portfolio from '../sections/portfolio'
+import Contact from '../sections/contact'
 
 import Footer from '../components/footer'
 
-import '../js/modernizer';
-
-import smoothscroll from 'smoothscroll-polyfill'
-smoothscroll.polyfill()
+if (typeof window !== `undefined`) {
+	require('../js/modernizer')
+	const smoothscroll = require('smoothscroll-polyfill')
+	smoothscroll.polyfill()
+}
 
 let app;
 let aclose;
@@ -38,7 +37,7 @@ class Home extends React.Component {
 	render() {
   		return (
 			<div>
-				<SEO title="Home"/>
+				<SEO title="Home" slug=""/>
 				<nav className="navbar" id="transp" >
 					<div className="container">
 						<div className="row">
@@ -77,7 +76,7 @@ class Home extends React.Component {
 						<div className="row">
 							<div id="header-title">
 								<h1><span>I’m Joe, a</span> <span>Front-End </span><span>Web Developer.</span></h1>
-								<h5 className="description">My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWA's, static HTML, CSS, and JavaScript sites, and working with clients. During the second year of my University course I plan to learn as much as possible, whilst working with as many different types of clients as possible before I undertake a 12-month placement in Web Development.</h5>
+								<h5 className="description">My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWAs and APIs, static HTML, CSS, and JavaScript sites, dynamic Jamstack sites, and working with clients. I'm currently freelancing whilst studying at Southampton Solent University.</h5>
 								<Button link="https://drive.google.com/open?id=1Mm61EELkpbByy3ADzffmSec_VjH8X7Na" text="Download my CV" type="Secondary"></Button>
 							</div>
 						</div>
@@ -159,17 +158,6 @@ class Home extends React.Component {
         app = document.getElementsByClassName('navmob')[0];
         aclose = document.getElementById('close');
         aclose.setAttribute("style", "display: none");
-
-        /*Hammer.js Init*/
-		var myElement = document.body;
-
-		// create a simple instance
-		// by default, it only adds horizontal recognizers
-		var mc = new Hammer(myElement);
-
-		// listen to events...
-		mc.on("swipeleft", this.appclose);
-        mc.on("swiperight", this.appdrawer);
         
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

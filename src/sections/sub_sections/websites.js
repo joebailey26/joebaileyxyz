@@ -38,10 +38,7 @@ const Websites = () => {
                         title={node.title}
                         tech={node.acf.icons}
                         desc={node.excerpt}
-                        infoLink={node.slug}
                         websiteLink={node.acf.website}
-                        Link={node.slug}
-                        docsLink={node.slug}
                         imgURL={node.jetpack_featured_media_url}>
                     </Item>
                 )

@@ -1,97 +1,197 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
+<h1 align="center">Welcome to the Joe Bailey Website repo</h1>
+<p align="center">This website showcases Joe Bailey's work.</p>
+<p align="center"><a href="https://joebailey.xyz">Live Site</a> <a href="https://github.com/joebailey26/joebaileyxyz">GitHub Repo</a></p>
 <p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2-blue.svg?cacheSeconds=2592000" />
+  <a href="https://twitter.com/joebaileyphoto" target="_blank">
+    <img alt="Twitter: joebaileyphoto" src="https://img.shields.io/twitter/follow/joebaileyphoto.svg?style=social" />
+  </a>
+  <a href="https://app.netlify.com/sites/heuristic-bell-6e94b3/deploys">
+    <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status">
   </a>
 </p>
-<h1 align="center">
-  Gatsby's blog starter
-</h1>
 
-Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Install
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+```sh
+npm install
+```
 
-## 🚀 Quick start
+## Development
 
-1.  **Create a Gatsby site.**
+```sh
+gatsby develop
+```
 
-    Use the Gatsby CLI to create a new site, specifying the blog starter.
+## Build
 
-    ```shell
-    # create a new Gatsby site using the blog starter
-    gatsby new my-blog-starter https://github.com/gatsbyjs/gatsby-starter-blog
-    ```
+```sh
+gatsby build
+```
 
-1.  **Start developing.**
+## Visual Style Guide
 
-    Navigate into your new site’s directory and start it up.
+![Style Guide](docs/img/StyleGuide.jpg)
 
-    ```shell
-    cd my-blog-starter/
-    gatsby develop
-    ```
+## Coding Style Guide
 
-1.  **Open the source code and start editing!**
+### HTML
 
-    Your site is now running at `http://localhost:8000`!
+#### HTML5 Doctype
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+```sh
+<!DOCTYPE html>
+```
 
-    Open the `my-blog-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+#### HTML Lang Attribute
 
-## 🧐 What's inside?
+```sh
+<html lang=”en-GB”>
+```
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+#### Syntax
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+HTML will be indented consistently by a tab character or 4 spaces.
+Nested elements will be indented once.
+Self closing elements need a trailing slash such as the ```<img />``` element
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+#### Attributes
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+Attributes and elements should always be lowercase
+Double quotes should always be used, never single
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+##### Attribute Order
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+HTML attributes should come in this particular order for easier reading of code.
+```id```
+```class```
+```data-*```
+```for | type | href | src```
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+#### HTML5 Tags
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+HTML5 tags such as ```<header>```, ```<footer>```, ```<nav>```, and ```<time>``` are preferred over standard ```<div>``` tags.
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+### SCSS
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+CSS Files are not needed as Node Sass compiles the SCSS.
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+SCSS should be included in a CSS folder in the same directory as the component/element
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+Use one tab to indent each property
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+Add one blank line between code blocks
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+Multiple selectors can be on one line and must end with a curly brace
 
-## 🎓 Learning Gatsby
+Property-balue pairs should be on their own line with one tab of indentation and ending in a semicolon
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+The closing brace should be flush left using the same amount of indentation as the opening selector
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+Colors should use names where possible rather than hex values
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+```sh
+.Foo, #Bar {
+  background: white;
+  color: black
+}
 
-## 💫 Deploy
+#Bar {
+  width: 100%;
+  height: auto;
+}
+```
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-blog)
+## Git
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+### Commit Messages
+
+1. Specify the type of commit:
+
+  * feat: The new feature you're adding to a particular application
+
+  * fix: A bug fix
+
+  * style: Feature and updates related to styling
+
+  * refactor: Refactoring a specific section of the codebase
+
+  * test: Everything related to testing
+
+  * docs: Everything related to documentation
+
+  * chore: Regular code maintenance.
+
+2. Separate the subject from the body with a blank line
+
+3. Your commit message should not contain any whitespace errors
+
+4. Remove unnecessary punctuation marks
+
+5. Do not end the subject line with a period
+
+6. Capitalize the subject line and each paragraph
+
+7. Use the body to explain what changes you have made and why you made them.
+
+8. Do not assume the reviewer understands what the original problem was, ensure you add it.
+
+9. Do not think your code is self-explanatory
+
+#### Command Line
+
+```sh
+git commit -m "Subject" -m "Description..."
+```
+
+#### Text Editor Template
+
+Capitalized, short (50 chars or less) summary
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely).
+
+Write your commit message in the imperative: "Fix bug" and not "Fixed bug"
+or "Fixes bug."  This convention matches up with commit messages generated
+by commands like git merge and git revert.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too, use a hyphen or asterisk for the bullet, followed by a
+  single space, with blank lines in between
+
+### Branching Strategy
+
+Master branch is for tested code and is deployed directly to **Netlify**. Do not push anything to master. Always create pull requests and test code.
+
+Dev branch is for development work on the site. Should always contain close to production ready code requiring minimal commits to get to production status.
+
+Branches should be created for big projects requiring more than one commit such as adding a new page. They should be titled the project name and then a pull request should be made with dev in order to test it.
+
+## Testing
+
+Use a local environment if possible otherwise use **Browserstack** to manually test the site by navigating to all pages and performing all actions
+
+### List of browsers we support
+
+* Last 2 versions of **Mozilla Firefox**
+* Last 2 versions of **Microsoft Edge**
+* Last 2 versions of **Google Chrome**
+* Last 2 versions of **Opera**
+* Last 1 versions of **Safari**
+* Last 1 versions of **iOS Safari**
+* Last 2 versions of **Chrome for Android**
+* Last 2 versions of **Firefox for Android**
+* Last 1 versions of **Samsung Internet**
+
+## Author
+
+👤 **Joe Bailey**
+
+* Website: [joebailey.xyz](joebailey.xyz)
+* Twitter: [@joebaileyphoto](https://twitter.com/joebaileyphoto)
+* Github: [@joebailey26](https://github.com/joebailey26)
+* LinkedIn: [@joe-bailey-b68b17171](https://linkedin.com/in/joe-bailey-b68b17171)

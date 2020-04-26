@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Button from '../../components/button';
+import Buttons from './button';
 
-function button(link, text) {
+export function button(link, text) {
     if (link) {
         return (
-            <Button link={link} text={text}></Button>
+            <Buttons link={link} text={text}></Buttons>
         )
     }
 }
 
-function tech(tech) {
+export function tech(tech) {
   if (tech) {
       let arr = [];
       for (var i = 0; i < tech.length; i++) {
@@ -71,7 +71,7 @@ function tech(tech) {
   }
 }
 
-function picture(imgURL, title) {
+export function picture(imgURL, title) {
   if (imgURL) {
       return (
           <img
@@ -84,5 +84,3 @@ function picture(imgURL, title) {
       )
   }
 }
-
-export default {picture, tech, button}

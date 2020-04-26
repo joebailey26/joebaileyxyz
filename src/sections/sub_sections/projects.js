@@ -38,10 +38,7 @@ const Projects = () => {
                         title={node.title}
                         tech={node.acf.icons}
                         desc={node.excerpt}
-                        infoLink={node.slug}
-                        projectLink={node.acf.project_url}
-                        Link={node.slug}
-                        docsLink={node.slug}>
+                        projectLink={node.acf.project_url}>
                     </Item>
                 )
                 })}

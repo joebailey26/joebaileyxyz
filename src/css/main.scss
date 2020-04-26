@@ -255,6 +255,9 @@ h2.title {
 
 @media (max-width: 576px) {
     .main {
+        margin: 0 10px 75px!important;
+    }
+    .main#trans {
         margin: -60px 10px 0 !important; 
     }
 }

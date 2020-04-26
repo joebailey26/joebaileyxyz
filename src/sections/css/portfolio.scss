@@ -11,7 +11,7 @@
 		img {
 			margin: auto;
 		}
-		a .info-title {
+		:any-link .info-title {
 			color: #3C4858;
 			&:hover {
 				color: #38786a
@@ -37,7 +37,7 @@
 	}
 }
 
-#git {
+.section-portfolio #git {
 	margin-bottom: 50px;
 	display: flex;
     flex-wrap: wrap;
@@ -118,7 +118,7 @@
 }
 
 @media (max-width: 576px) {
-	.section .row.grid {
+	.section .items .row.grid {
 		grid-template-columns: 10px repeat(6, calc(100vw - 40px)) 10px;
 	}
 }
