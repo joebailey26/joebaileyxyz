@@ -39,7 +39,8 @@ const Websites = () => {
                         tech={node.acf.icons}
                         desc={node.excerpt}
                         websiteLink={node.acf.website}
-                        imgURL={node.jetpack_featured_media_url}>
+                        imgURL={node.jetpack_featured_media_url}
+                        >
                     </Item>
                 )
                 })}

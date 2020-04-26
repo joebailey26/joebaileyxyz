@@ -7,7 +7,6 @@
         Link
         websiteLink
         projectLink
-        docsLink
         behanceLink
     Requires Individual Item Component
 */
@@ -28,12 +27,10 @@ function Item(props) {
             </a>
             {picture(props.imgURL, props.title)}
             <div className="tech-stack">{tech(props.tech)}</div>
-            <p dangerouslySetInnerHTML={{
-                    __html: props.desc,
-            }}></p>
+            <div dangerouslySetInnerHTML={{__html: props.desc}}></div>
             <div className="buttonsContainer">
                 {button(props.websiteLink, "View the website")}
-                {button(props.docsLink, "Read the Docs") || button(props.Link, "Continue Reading")}
+                {button(props.Link, "Continue Reading")}
                 {button(props.behanceLink, "View on Behance")}
                 {button(props.projectLink, "View the project")}
                 {button(props.gitHubLink, "View on GitHub")}

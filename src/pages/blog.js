@@ -4,7 +4,6 @@ import { Link, graphql } from "gatsby"
 import IndexLayout from "../components/indexLayout"
 import SEO from "../components/seo"
 import Share from "../components/share"
-import {button} from "../components/individualItem"
 
 const BlogIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
@@ -71,7 +70,7 @@ const BlogIndex = ({ data }) => {
                 </div>
                 <footer>
                   <div className="buttonsContainer">
-                    {button("blog/" + node.slug, "Continue Reading")}
+                    <Link className="btn" to={"blog/" + node.slug}>Continue Reading</Link>
                   </div>
                   <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
                 </footer>

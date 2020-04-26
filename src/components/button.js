@@ -21,7 +21,7 @@ function Button(props) {
     className = "btn"
   }
   return (
-    <Link className={className} to={props.link}>{props.text}</Link>
+    <a className={className} href={props.link}>{props.text}</a>
   )
 }
 

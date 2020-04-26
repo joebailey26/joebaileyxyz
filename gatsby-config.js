@@ -57,6 +57,7 @@ module.exports = {
           globPatterns: ['**/*']
         },
         precachePages: [`/blog`],
+        navigateFallbackWhitelist: [`_redirects`, `_headers`],
       },
     },
   ],

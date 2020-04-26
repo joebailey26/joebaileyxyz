@@ -38,7 +38,8 @@ const Projects = () => {
                         title={node.title}
                         tech={node.acf.icons}
                         desc={node.excerpt}
-                        projectLink={node.acf.project_url}>
+                        projectLink={node.acf.project_url}
+                        gitHubLink={node.acf.github}>
                     </Item>
                 )
                 })}
