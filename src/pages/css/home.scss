@@ -25,3 +25,9 @@ h1 span {
         }
     }
 }
+
+main#trans {
+    a:not(.btn) {
+        color: #3C4858;
+    }
+}

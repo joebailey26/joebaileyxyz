@@ -2,7 +2,7 @@
 <p align="center">This website showcases Joe Bailey's work.</p>
 <p align="center"><a href="https://joebailey.xyz">Live Site</a> <a href="https://github.com/joebailey26/joebaileyxyz">GitHub Repo</a></p>
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2-blue.svg?cacheSeconds=2592000" />
   <a href="https://twitter.com/joebaileyphoto" target="_blank">
     <img alt="Twitter: joebaileyphoto" src="https://img.shields.io/twitter/follow/joebaileyphoto.svg?style=social" />
   </a>
@@ -14,19 +14,19 @@
 ## Install
 
 ```sh
-yarn install
+npm install
 ```
 
 ## Development
 
 ```sh
-yarn start
+gatsby develop
 ```
 
 ## Build
 
 ```sh
-yarn build
+gatsby build
 ```
 
 ## Visual Style Guide

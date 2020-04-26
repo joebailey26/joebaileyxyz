@@ -4,11 +4,9 @@
 
 import React from 'react';
 
-import './css/cookies.scss'
-
 function Cookie() {
   return (
-    <div className="content main">
+    <div style={{padding: "16px"}}>
         <h2>Cookie Policy for JoeBailey.xyz</h2>
 
         <h2>What Are Cookies</h2>
