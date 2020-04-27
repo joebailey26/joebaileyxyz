@@ -11,20 +11,38 @@
     Requires Individual Item Component
 */
 
-import React from 'react';
+import React from 'react'
+import {Link} from 'gatsby'
 
 import {picture, tech, button} from "./individualItem"
+
+function links(link, title) {
+    if (link) {
+        return (
+            <Link to={Link}>
+                <h4 className="info-title" 
+                dangerouslySetInnerHTML={{
+                    __html: title,
+                }}>
+                </h4>
+            </Link>
+        )
+    }
+    else {
+        return (
+            <h4 className="info-title" 
+                dangerouslySetInnerHTML={{
+                    __html: title,
+                }}>
+            </h4>
+        )
+    }
+}
 
 function Item(props) {
     return (
         <article className="col-md-4">
-            <a href={props.Link}>
-                <h4 className="info-title" 
-                dangerouslySetInnerHTML={{
-                    __html: props.title,
-                }}>
-                </h4>
-            </a>
+            {links(props.Link, props.title)}
             {picture(props.imgURL, props.title)}
             <div className="tech-stack">{tech(props.tech)}</div>
             <div dangerouslySetInnerHTML={{__html: props.desc}}></div>

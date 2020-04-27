@@ -71,7 +71,7 @@ const websitesIndex = ({ data }) => {
                   <div className="buttonsContainer">
                     <Link className="btn" to={"portfolio/websites/joe-bailey-photography/" + node.slug}>Continue Reading</Link>
                   </div>
-                  <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
+                  <Share url={site.siteUrl + "/" + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
                 </footer>
               </article>
           )

@@ -43,7 +43,7 @@ const websitesIndex = ({ data }) => {
                       {button(node.acf.project_url, "Read the docs")}
                       {button(node.acf.website, "View the website")}
                   </div>
-                  <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
+                  <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
                 </footer>
               </article>
           )

@@ -42,7 +42,7 @@ const ProjectsIndex = ({ data }) => {
                       {button(node.acf.project_url, "View the project")}
                       {button(node.acf.github, "View on GitHub")}
                   </div>
-                  <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
+                  <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
                   </footer>
               </article>
           )

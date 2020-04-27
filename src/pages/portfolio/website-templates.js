@@ -42,7 +42,7 @@ const websiteDesignsIndex = ({ data }) => {
                     {button(node.acf.website, "View the website")}
                     {button(node.acf.behance, "View on Behance")}
                   </div>
-                  <Share url={site.siteUrl + node.slug} title={node.title} twitterHandle={site.twitterHandle}></Share>
+                  <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
                 </footer>
               </article>
           )

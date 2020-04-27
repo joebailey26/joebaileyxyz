@@ -3,6 +3,7 @@
     Requires Item Component
 */
 import React from 'react'
+import {Link} from 'gatsby'
 
 import Websites from './sub_sections/websites'
 import Projects from './sub_sections/projects'
@@ -47,12 +48,12 @@ class Portfolio extends React.Component {
                 </div>
 
                 <div id="web">
-                    <a href="/portfolio/websites"><h2 className="subtitle">Websites</h2></a>
+                    <Link to="/portfolio/websites"><h2 className="subtitle">Websites</h2></Link>
                     <h5>View some of the websites that I have created.</h5>
                 </div>
                 <Websites></Websites>
                 <div id="projects">
-                    <a href="/portfolio/projects"><h2 className="subtitle">Projects</h2></a>
+                    <Link to="portfolio/projects"><h2 className="subtitle">Projects</h2></Link>
                     <h5>View some of my projects.</h5>
                 </div>
                 <div id="git">

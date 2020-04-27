@@ -155,6 +155,9 @@ main:not(#trans) {
         margin: 1rem 0;
         display: block;
         max-width: 100%;
+        img {
+            max-width: 100%;
+        }
     }
 
     figure.wp-block-gallery {

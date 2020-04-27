@@ -50,15 +50,5 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          globPatterns: ['**/*']
-        },
-        precachePages: [`/blog`],
-        navigateFallbackWhitelist: [`_redirects`, `_headers`],
-      },
-    },
   ],
 }

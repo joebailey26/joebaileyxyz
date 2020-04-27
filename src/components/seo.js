@@ -24,13 +24,13 @@ const SEO = ({ title, slug, image, lang, type }) => {
     `
   )
 
-  const metaImage = image || site.siteMetadata.siteUrl + "/assets/img/header.jpg"
+  const metaImage = image || site.siteMetadata.siteUrl + "/header.jpg"
 
   let schema = {
     "@context": "https://schema.org",
       "@type": "Person",
       "email": "joe@joebailey.xyz",
-      "image": site.siteMetadata.siteUrl + "/assets/img/Me.jpg",
+      "image": site.siteMetadata.siteUrl + "/Me.jpg",
       "jobTitle": "Front-End Web Developer",
       "name": "Joe Bailey",
       "birthPlace": "Cambridge, UK",
@@ -75,7 +75,7 @@ const SEO = ({ title, slug, image, lang, type }) => {
 
 SEO.defaultProps = {
   lang: `en-GB`,
-  image: `/assets/img/header.jpg`,
+  image: `/header.jpg`,
   type: "website"
 }
 
