@@ -69,7 +69,7 @@ export const pageQuery = graphql`
         }
       }
     },
-    allWordpressPost(filter: {categories: {elemMatch: {id: {eq: "625c7672-54a8-58c8-8055-a10672bcf3f6"}}}, status: {eq: "publish"}}) {
+    allWordpressPost(filter: {categories: {elemMatch: {id: {eq: "625c7672-54a8-58c8-8055-a10672bcf3f6"}}}, status: {eq: "publish"}}, sort: { fields: [date] order: DESC }) {
         edges {
           node {
             title

@@ -69,7 +69,7 @@ export const pageQuery = graphql`
         }
       }
     },
-    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Website Templates"}}}, status: {eq: "publish"}}) {
+    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Website Templates"}}}, status: {eq: "publish"}}, sort: { fields: [date] order: DESC }) {
       edges {
         node {
           title

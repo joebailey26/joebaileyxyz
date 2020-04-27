@@ -24,8 +24,8 @@ const websitesIndex = ({ data }) => {
           const title = node.title
 
           let t = node.date
-          let date = new Date(t.substring(0, t.indexOf('T')))
-          let day = date.getDay()
+          let date = new Date(t)
+          let day = date.getDate()
           let monthArr = []
             monthArr[0] = "Jan"
             monthArr[1] = "Feb"
@@ -98,7 +98,7 @@ export const pageQuery = graphql`
         }
       }
     },
-    allWordpressPost(filter: {categories: {elemMatch: {id: {eq: "a6ddce2d-885a-5e1c-96f3-8647e5ebdb49"}}}, status: {eq: "publish"}}) {
+    allWordpressPost(filter: {categories: {elemMatch: {id: {eq: "a6ddce2d-885a-5e1c-96f3-8647e5ebdb49"}}}, status: {eq: "publish"}}, sort: { fields: [date] order: DESC }) {
         edges {
           node {
             title
