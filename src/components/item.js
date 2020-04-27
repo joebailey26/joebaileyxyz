@@ -19,7 +19,7 @@ import {picture, tech, button} from "./individualItem"
 function links(link, title) {
     if (link) {
         return (
-            <Link to={Link}>
+            <Link to={link}>
                 <h4 className="info-title" 
                 dangerouslySetInnerHTML={{
                     __html: title,
@@ -39,6 +39,12 @@ function links(link, title) {
     }
 }
 
+function continueReading(link) {
+    if (link) {
+        return <Link to={link} className="btn">Continue Reading</Link>
+    }
+}
+
 function Item(props) {
     return (
         <article className="col-md-4">
@@ -48,7 +54,7 @@ function Item(props) {
             <div dangerouslySetInnerHTML={{__html: props.desc}}></div>
             <div className="buttonsContainer">
                 {button(props.websiteLink, "View the website")}
-                {button(props.Link, "Continue Reading")}
+                {continueReading(props.Link)}
                 {button(props.behanceLink, "View on Behance")}
                 {button(props.projectLink, "View the project")}
                 {button(props.gitHubLink, "View on GitHub")}

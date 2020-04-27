@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import IndexLayout from "../../../components/indexLayout"
 import SEO from "../../../components/seo"
@@ -10,19 +10,32 @@ const websitesIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const categories = data.allWordpressCategory.edges
   const site = data.site.siteMetadata
+  function readDocs(link) {
+    if (link) {
+        return <Link to={link} className="btn">Read the docs</Link>
+    }
+  }
     return (
       <IndexLayout>
         <SEO title="Websites" slug="/portfolio/websites" />
         {categories.map(({ node }) => {
           return (
-            <header>
-              <h1 class="title">{node.name}</h1>
+            <header key={node.name}>
+              <h1 className="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
           )
         })}
         {posts.map(({ node }) => {
           const title = node.title
+
+          /*                                                  *^
+          const excerpt = node.content.replace(/^(.{1}[^\s]*)./, "$1")
+          console.log(excerpt)
+          const content = node.content.replace(excerpt, "")
+
+          */
+
           return (
               <article key={node.title} id={node.slug} className="with_featureImage">
                 {picture(node.jetpack_featured_media_url, node.title)}
@@ -32,15 +45,28 @@ const websitesIndex = ({ data }) => {
                   </h2>
                 </header>
                 <div className="tech-stack">{tech(node.acf.icons)}</div>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: node.content,
-                  }}
-                >
-                </div>
+                {/*
+                <details>
+                  <summary dangerouslySetInnerHTML={{
+                    __html: excerpt
+                  }}></summary>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: content
+                    }}
+                  >
+                  </div>
+                </details>
+                  */}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: node.content
+                    }}
+                  >
+                  </div>
                 <footer>
                   <div className="buttonsContainer">
-                      {button(node.acf.project_url, "Read the docs")}
+                      {readDocs(node.acf.project_url)}
                       {button(node.acf.website, "View the website")}
                   </div>
                   <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
