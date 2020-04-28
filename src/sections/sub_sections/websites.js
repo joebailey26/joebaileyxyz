@@ -11,7 +11,7 @@ const Websites = () => {
     const { allWordpressPost } = useStaticQuery(
         graphql`
             query {
-                allWordpressPost(filter: {tags: {eq: 99}, categories: {elemMatch: {name: {eq: "Websites"}}}, status: {eq: "publish"}}, limit: 6) {
+                allWordpressPost(filter: {tags: {eq: 99}, categories: {elemMatch: {name: {eq: "Websites"}}}, status: {eq: "publish"}}, limit: 6, sort: { fields: [date] order: DESC }) {
                     edges {
                       node {
                         title
@@ -19,8 +19,9 @@ const Websites = () => {
                         slug
                         jetpack_featured_media_url
                         acf {
-                          website
-                          icons
+                            project_url
+                            website
+                            icons
                         }
                       }
                     }
@@ -39,6 +40,7 @@ const Websites = () => {
                         tech={node.acf.icons}
                         desc={node.excerpt}
                         websiteLink={node.acf.website}
+                        docsLink={node.acf.project_url}
                         imgURL={node.jetpack_featured_media_url}
                         >
                     </Item>

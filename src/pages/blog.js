@@ -9,12 +9,15 @@ const BlogIndex = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const site = data.site.siteMetadata
     return (
-      <IndexLayout>
+      <IndexLayout header=
+        {[
+          <header>
+            <h1 className="title">Blog</h1>
+            <p className="description">Keep up to date with my latest adventures in the world of Web Development and tech in general.</p>
+          </header>
+        ]}
+        >
         <SEO title="Blog" slug="/blog"/>
-        <header>
-          <h1 className="title">Blog</h1>
-          <p className="description">Keep up to date with my latest adventures in the world of Web Development and tech in general.</p>
-        </header>
         {posts.map(({ node }) => {
           const title = node.title
 

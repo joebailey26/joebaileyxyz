@@ -48,12 +48,12 @@ class Portfolio extends React.Component {
                 </div>
 
                 <div id="web">
-                    <Link to="/portfolio/websites"><h2 className="subtitle">Websites</h2></Link>
+                    <Link to="/portfolio"><h2 className="subtitle">Websites</h2></Link>
                     <h5>View some of the websites that I have created.</h5>
                 </div>
                 <Websites></Websites>
                 <div id="projects">
-                    <Link to="portfolio/projects"><h2 className="subtitle">Projects</h2></Link>
+                    <Link to="projects"><h2 className="subtitle">Projects</h2></Link>
                     <h5>View some of my projects.</h5>
                 </div>
                 <div id="git">

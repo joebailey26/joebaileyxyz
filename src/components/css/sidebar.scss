@@ -2,12 +2,19 @@
     display: grid;
     text-align: left;
     font-size: 20px;
-    margin-top: 240px;
     position: sticky;
     top: 120px;
 
+    details summary::-webkit-details-marker {
+        display:none;
+    }
+    
+    details summary::marker {
+        display:none;
+    }
+
     > ul {
-        margin-left: 140px;
+        margin-left: 3rem;
     }
 
     li {
@@ -22,11 +29,10 @@
                 color: #38786a!important
             }
         }
-    }
-
-    ul ul {
-        padding-left: 1rem;
-        padding-top: 0.5rem;
+        ul {
+            padding-left: 1.75rem;
+            padding-top: 0.5rem;
+        }
     }
 
     @media (max-width: 992px) {

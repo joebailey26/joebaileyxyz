@@ -11,7 +11,7 @@ export default ({ data, pageContext }) => {
   
   let t = post.date
   let date = new Date(t.substring(0, t.indexOf('T')))
-  let day = date.getDay()
+  let day = date.getDate()
   let monthArr = []
     monthArr[0] = "Jan"
     monthArr[1] = "Feb"

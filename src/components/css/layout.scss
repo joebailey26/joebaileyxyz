@@ -1,3 +1,7 @@
+#tv-app-prototype, #job-app-prototype {
+    margin-left: 150px!important;
+}
+
 main:not(#trans) {
     margin: 0 30px 75px;
     min-height: calc(100vh - 280px);
@@ -8,6 +12,7 @@ main:not(#trans) {
         .col-md-8 {
             display: grid;
             grid-gap: 32px;
+            padding: 0;
 
             article {
                 margin: 0;
@@ -74,7 +79,7 @@ main:not(#trans) {
                         .monthYear {
                             background-color: #3C4858;
                             margin-top: -1px;
-                            width: 65.5px;
+                            width: 65px;
                             height: 48px;
                             padding-top: 4px;
                             clip-path: polygon(0 0,100% 0,100% 100%,50% 70%,0 100%);

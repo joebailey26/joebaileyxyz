@@ -23,9 +23,10 @@ const Blog = () => {
                         status: {
                             eq: "publish"
                         }
-                        },
-                        limit: 6
-                    ) 
+                    },
+                    limit: 6,
+                    sort: { fields: [date] order: DESC }
+                ) 
                 {
                 edges {
                     node {

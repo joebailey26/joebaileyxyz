@@ -1,63 +1,42 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import IndexLayout from "../../../components/indexLayout"
-import SEO from "../../../components/seo"
-import Share from "../../../components/share"
-import {picture, tech, button} from "../../../components/individualItem"
+import IndexLayout from "../../components/indexLayout"
+import SEO from "../../components/seo"
+import {picture, tech, button} from "../../components/individualItem"
 
-const websitesIndex = ({ data }) => {
+const Page = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const categories = data.allWordpressCategory.edges
-  const site = data.site.siteMetadata
   function readDocs(link) {
     if (link) {
         return <Link to={link} className="btn">Read the docs</Link>
     }
   }
     return (
-      <IndexLayout>
-        <SEO title="Websites" slug="/portfolio/websites" />
+      <IndexLayout header=
         {categories.map(({ node }) => {
-          return (
+          return ([
             <header key={node.name}>
               <h1 className="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
-          )
-        })}
+          ])
+        })}>
+        <SEO title="Websites | Archive" slug="/archive/websites" />
         {posts.map(({ node }) => {
           const title = node.title
-
-          /*                                                  *^
-          const excerpt = node.content.replace(/^(.{1}[^\s]*)./, "$1")
-          console.log(excerpt)
-          const content = node.content.replace(excerpt, "")
-
-          */
-
           return (
               <article key={node.title} id={node.slug} className="with_featureImage">
                 {picture(node.jetpack_featured_media_url, node.title)}
                 <header>
-                  <h2 className="title">
-                      {title}
+                  <h2 className="title"dangerouslySetInnerHTML={{
+                      __html: node.title
+                    }}
+                    >
                   </h2>
                 </header>
                 <div className="tech-stack">{tech(node.acf.icons)}</div>
-                {/*
-                <details>
-                  <summary dangerouslySetInnerHTML={{
-                    __html: excerpt
-                  }}></summary>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: content
-                    }}
-                  >
-                  </div>
-                </details>
-                  */}
                   <div
                     dangerouslySetInnerHTML={{
                       __html: node.content
@@ -69,7 +48,6 @@ const websitesIndex = ({ data }) => {
                       {readDocs(node.acf.project_url)}
                       {button(node.acf.website, "View the website")}
                   </div>
-                  <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
                 </footer>
               </article>
           )
@@ -78,16 +56,10 @@ const websitesIndex = ({ data }) => {
     )
 }
 
-export default websitesIndex
+export default Page
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        siteUrl
-        twitterHandle
-      }
-    },
     allWordpressCategory(filter: {name: {eq: "Websites"}}) {
       edges {
         node {
@@ -96,7 +68,7 @@ export const pageQuery = graphql`
         }
       }
     },
-    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Websites"}}}, status: {eq: "publish"}}, sort: { fields: [date] order: DESC }) {
+    allWordpressPost(filter: {categories: {elemMatch: {name: {eq: "Websites"}}}, status: {eq: "publish"}, tags: { eq: 101 }}, sort: { fields: [date] order: DESC }) {
         edges {
           node {
             title

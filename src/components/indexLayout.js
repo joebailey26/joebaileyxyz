@@ -14,13 +14,16 @@ if (typeof window !== `undefined`) {
 	require('../js/featherlight')
 }
 
-const Layout = ({ children }) => {
+const Layout = ({ children, header }) => {
   return (
     <div>
       <Nav></Nav>
       <main className="main">
         <div className="container ml-auto mr-auto">
             <section className="section">
+                <div className="row">
+                  {header}
+                </div>
                 <div className="row">
                     <div className="col-md-8 ml-auto mr-auto">
                         {children}

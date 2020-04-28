@@ -10,16 +10,17 @@ const websitesIndex = ({ data }) => {
   const categories = data.allWordpressCategory.edges
   const site = data.site.siteMetadata
     return (
-      <IndexLayout>
-        <SEO title="Joe Bailey | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-xyz" />
+      <IndexLayout header=
+        
         {categories.map(({ node }) => {
-          return (
+          return ([
             <header>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
-          )
-        })}
+          ])
+        })}>
+        <SEO title="Joe Bailey | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-xyz" />
         {posts.map(({ node }) => {
           const title = node.title
 

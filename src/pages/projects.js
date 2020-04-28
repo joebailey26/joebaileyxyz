@@ -1,33 +1,32 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import IndexLayout from "../../components/indexLayout"
-import SEO from "../../components/seo"
-import Share from "../../components/share"
-import {tech, button} from "../../components/individualItem"
+import IndexLayout from "../components/indexLayout"
+import SEO from "../components/seo"
+import {tech, button} from "../components/individualItem"
 
-const ProjectsIndex = ({ data }) => {
+const Page = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const categories = data.allWordpressCategory.edges
-  const site = data.site.siteMetadata
     return (
-      <IndexLayout>
-        <SEO title="Projects | Portfolio" slug="/portfolio/projects" />
+      <IndexLayout header=        
         {categories.map(({ node }) => {
-          return (
+          return ([
             <header>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
-          )
-        })}
+          ])
+        })}>
+        <SEO title="Projects" slug="/projects" />
         {posts.map(({ node }) => {
-          const title = node.title
           return (
               <article key={node.title} id={node.slug}>
                 <header>
-                  <h2 className="title">
-                      {title}
+                  <h2 className="title"dangerouslySetInnerHTML={{
+                        __html: node.title
+                      }}
+                  >
                   </h2>
                   <div className="tech-stack">{tech(node.acf.icons)}</div>
                 </header>
@@ -42,7 +41,6 @@ const ProjectsIndex = ({ data }) => {
                       {button(node.acf.project_url, "View the project")}
                       {button(node.acf.github, "View on GitHub")}
                   </div>
-                  <Share url={site.siteUrl} title={node.title} twitterHandle={site.twitterHandle}></Share>
                   </footer>
               </article>
           )
@@ -51,16 +49,10 @@ const ProjectsIndex = ({ data }) => {
     )
 }
 
-export default ProjectsIndex
+export default Page
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        siteUrl
-        twitterHandle
-      }
-    },
     allWordpressCategory(filter: {name: {eq: "Projects"}}) {
       edges {
         node {
