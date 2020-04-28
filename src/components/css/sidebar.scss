@@ -6,11 +6,11 @@
     top: 120px;
 
     details summary::-webkit-details-marker {
-        display:none;
+        display: none;
     }
     
     details summary::marker {
-        display:none;
+        display: none;
     }
 
     > ul {
@@ -20,6 +20,15 @@
     li {
         padding: 0.5rem 0;
         font-weight: 400;
+
+        summary {
+            cursor: pointer;
+            transition: .25s;
+            
+            &:hover {
+                color: #38786a!important
+            }
+        }
 
         a {
             color: #3C4858!important;
