@@ -20,7 +20,7 @@ const Layout = ({ children, header }) => {
       <Nav></Nav>
       <main className="main">
         <div className="container ml-auto mr-auto">
-            <section className="section">
+            <section className="section has-sidebar">
                 <div className="row">
                   {header}
                 </div>

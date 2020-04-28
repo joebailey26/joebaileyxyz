@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import IndexLayout from "../../../components/indexLayout"
+import Layout from "../../../components/Layout"
 import SEO from "../../../components/seo"
 import Share from "../../../components/share"
 
@@ -10,16 +10,16 @@ const websitesIndex = ({ data }) => {
   const categories = data.allWordpressCategory.edges
   const site = data.site.siteMetadata
     return (
-      <IndexLayout header=
+      <Layout>
+        <SEO title="Joe Bailey Photography | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-photography" />
         {categories.map(({ node }) => {
-          return ([
+          return (
             <header>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
-          ])
-        })}>
-        <SEO title="Joe Bailey Photography | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-photography" />
+          )
+        })}
         {posts.map(({ node }) => {
           const title = node.title
 
@@ -76,7 +76,7 @@ const websitesIndex = ({ data }) => {
               </article>
           )
         })}
-      </IndexLayout>
+      </Layout>
     )
 }
 

@@ -6,21 +6,25 @@ main:not(#trans) {
     margin: 0 30px 75px;
     min-height: calc(100vh - 280px);
 
-    .row {
-        margin-top: 32px;
-
-        &:first-of-type {
-            margin-top: 0;
-
-            header {
-                padding: 0 15px;
-                width: 100%;
+    .section.has-sidebar {
+        .row {
+            &:first-of-type {
+                margin-top: 0;
     
-                h1 {
-                    font-size: 2.5rem
+                header {
+                    padding: 0 15px;
+                    width: 100%;
+        
+                    h1 {
+                        font-size: 2.5rem
+                    }
                 }
             }
         }
+    }
+
+    .row {
+        margin-top: 32px;
 
         .col-md-8 {
             display: grid;

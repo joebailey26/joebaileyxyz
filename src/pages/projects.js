@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import IndexLayout from "../components/indexLayout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import {tech, button} from "../components/individualItem"
 
@@ -9,16 +9,16 @@ const Page = ({ data }) => {
   const posts = data.allWordpressPost.edges
   const categories = data.allWordpressCategory.edges
     return (
-      <IndexLayout header=        
+      <Layout>
+        <SEO title="Projects" slug="/projects" />
         {categories.map(({ node }) => {
-          return ([
+          return (
             <header>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
-          ])
-        })}>
-        <SEO title="Projects" slug="/projects" />
+          )
+        })}
         {posts.map(({ node }) => {
           return (
               <article key={node.title} id={node.slug}>
@@ -45,7 +45,7 @@ const Page = ({ data }) => {
               </article>
           )
         })}
-      </IndexLayout>
+      </Layout>
     )
 }
 

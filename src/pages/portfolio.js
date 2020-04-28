@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import IndexLayout from "../components/indexLayout"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 import {picture, tech, button} from "../components/individualItem"
 
@@ -14,16 +14,16 @@ const Page = ({ data }) => {
     }
   }
     return (
-      <IndexLayout header=
+      <Layout>
+        <SEO title="Portfolio" slug="/portfolio" />
         {categories.map(({ node }) => {
-          return ([
+          return (
             <header key={node.name}>
               <h1 className="title">Portfolio</h1>
               <p className="description">{node.description}</p>
             </header>
-          ])
-        })}>
-        <SEO title="Portfolio" slug="/portfolio" />
+          )
+        })}
         {posts.map(({ node }) => {
           return (
               <article key={node.title} id={node.slug} className="with_featureImage">
@@ -51,7 +51,7 @@ const Page = ({ data }) => {
               </article>
           )
         })}
-      </IndexLayout>
+      </Layout>
     )
 }
 

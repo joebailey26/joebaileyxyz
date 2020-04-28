@@ -47,7 +47,7 @@
 	grid-gap: 4px;
 	font-size: 1.2rem;
     font-weight: 400;
-    line-height: 24px;
+	line-height: 24px;
 }
 
 .navbar.transparent {
@@ -64,7 +64,7 @@
 		a {
 			color: #3C4858!important;
 			transition: 0.5s;
-			&:hover {
+			&:hover, &[aria-current] {
 				color: #38786a!important;
 				svg {
 					fill: #38786a;
