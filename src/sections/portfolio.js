@@ -1,79 +1,58 @@
-/*  
-    Portfolio Section
-    Requires Item Component
+/* 
+    Designs Section
 */
 import React from 'react'
-import {Link} from 'gatsby'
+import { useStaticQuery, graphql, Link } from "gatsby"
 
-import Websites from './sub_sections/websites'
-import Projects from './sub_sections/projects'
+import Icons from '../components/icons';
+import Item from '../components/item';
 
-import './css/portfolio.scss'
-
-if (typeof window !== `undefined`) {
-	const smoothscroll = require('smoothscroll-polyfill')
-	smoothscroll.polyfill()
-}
-
-function scrollPortfolio(i) {
-    const container = document.querySelectorAll('.section-portfolio .items .row.grid')[i];
-    const count = document.querySelectorAll('.section-portfolio .items .row.grid')[i].querySelectorAll('.col-md-4').length;
-    const icon = document.querySelectorAll('.section-portfolio .items')[i].querySelectorAll(".icon");
-
-    container.addEventListener("scroll", function(){
-        let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-        let v = Math.round(container.scrollLeft / width)
-        icon.forEach(e => e.classList.remove("current"))
-        icon[v].classList.add("current")
-    })
-    for (let i = 0; i < count; i++) {
-        let width = document.querySelector('.section-portfolio .col-md-4').offsetWidth;
-        icon[i].addEventListener("click", function() {
-            container.scrollTo({
-				left: width * i,
-				behavior: 'smooth' 
-			})
-        })
-    }
-}
-
-class Portfolio extends React.Component {
-	render() {
-        return (
-            <section className="section section-portfolio" id="section-portfolio">
-                <div className="row">
-                    <div className="col-md-8 ml-auto mr-auto">
-                        <h2 className="text-center title">Portfolio</h2>
-                    </div>
+const Portfolio = () => {
+    const { allWordpressPost } = useStaticQuery(
+        graphql`
+            query {
+                allWordpressPost(filter: {tags: {eq: 99}, categories: {elemMatch: {name: {eq: "Websites"}}}, status: {eq: "publish"}}, limit: 6, sort: { fields: [date] order: DESC }) {
+                    edges {
+                      node {
+                        title
+                        excerpt
+                        slug
+                        jetpack_featured_media_url
+                        acf {
+                            project_url
+                            website
+                            icons
+                        }
+                      }
+                    }
+                  }
+            }
+        `
+      )
+    const posts = allWordpressPost.edges
+    return (
+        <div>
+            <Link to="/portfolio"><h2 className="text-center title">Portfolio</h2></Link>
+            <div className="items">
+                <div className="row grid websites">{posts.map(({ node }) => {
+                    return (
+                        <Item 
+                            key={node.title}
+                            title={node.title}
+                            tech={node.acf.icons}
+                            desc={node.excerpt}
+                            websiteLink={node.acf.website}
+                            docsLink={node.acf.project_url}
+                            imgURL={node.jetpack_featured_media_url}
+                            >
+                        </Item>
+                    )
+                    })}
                 </div>
-
-                <div id="web">
-                    <Link to="/portfolio"><h2 className="subtitle">Websites</h2></Link>
-                    <h5>View some of the websites that I have created.</h5>
-                </div>
-                <Websites></Websites>
-                <div id="projects">
-                    <Link to="projects"><h2 className="subtitle">Projects</h2></Link>
-                    <h5>View some of my projects.</h5>
-                </div>
-                <div id="git">
-                    <div className="col-md-8 ml-auto mr-auto">
-                        <h3>GitHub Contributions</h3>
-                        <a title="GitHub Contributions" href="https://github.com/joebailey26">
-                            <img src="https://ghchart.rshah.org/joebailey26" alt="Joe's Github chart" width="100%" />
-                            <i className="fab fa-github"></i>
-                            <h5>View my profile on GitHub.</h5>
-                        </a>
-                    </div>
-                </div>
-                <Projects></Projects>
-            </section>
-        )
-    }
-    componentDidMount() {
-        scrollPortfolio(0)
-        scrollPortfolio(1)
-	}
+                <Icons items="6"></Icons>
+            </div>
+        </div>
+    )
 }
 
 export default Portfolio
