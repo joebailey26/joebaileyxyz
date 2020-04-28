@@ -9,10 +9,24 @@ main:not(#trans) {
     .row {
         margin-top: 32px;
 
+        &:first-of-type {
+            margin-top: 0;
+
+            header {
+                padding: 0 15px;
+                width: 100%;
+    
+                h1 {
+                    font-size: 2.5rem
+                }
+            }
+        }
+
+        
+
         .col-md-8 {
             display: grid;
             grid-gap: 32px;
-            padding: 0;
 
             article {
                 margin: 0;
