@@ -171,6 +171,16 @@ h2.title {
     border: 0;
     display: flex;
     align-items: center;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Cfilter id='blur' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='20 20' edgeMode='duplicate' /%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='1 1' /%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cimage filter='url(%23blur)' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/CABEIABcAKAMBIgACEQEDEQH/xAAZAAEAAgMAAAAAAAAAAAAAAAAFAAQBAgf/2gAIAQEAAAAA4ApSLEbbLgmi+LAn/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAMEAf/aAAgBAhAAAABGFETf/8QAFgEBAQEAAAAAAAAAAAAAAAAABAAD/9oACAEDEAAAAEHkai//xAAsEAABAwICBwkBAAAAAAAAAAAEAAMFExQBAgYjJDEzcYMREhUhIjQ1U1R0/9oACAEBAAE/AJdmztf5VpFBx0DHRTwcqUR4h7mo9W6g3oUdHXnBKt1dyL2p2XZxaaL135R1LyIzxIt5dUVIy4z0KKG8KLRA4SiDK1q8H0kzqSSk7bWwqlXQiM4oxecjHNgQyU2/2+fd+rkqS0XIFbZhGAxsMRBN2Dm9/mpD5GVRbuzCr//EABYRAQEBAAAAAAAAAAAAAAAAAAQQFP/aAAgBAgEBPwDOqmv/xAAWEQADAAAAAAAAAAAAAAAAAAAEECD/2gAIAQMBAT8Aghf/2Q==' x='0' y='0' height='100%25' width='100%25'/%3E%3C/svg%3E");
+    transition: background-image 1s;
+
+    .description {
+        margin-top: 24px;
+        font-size: 1.15rem;
+        a {
+            color: white;
+        }
+    }
 
     .row {
         display: grid;
@@ -184,33 +194,42 @@ h2.title {
     }
 }
 
+.no-webp .page-header-enhanced {
+    background-image: url(../img/header.jpg);
+}
+
+.webp .page-header-enhanced {
+    background-image: url(../img/header.webp);
+}
+
 @media (max-width: 992px) {
     body {
-      margin-top: 50px !important; 
+      margin-top: 50px; 
     }
-  
-    .no-webp .page-header {
-        background-image: url(../img/mobile-header.jpg)!important
-    }
-    
-    .webp .page-header {
-        background-image: url(../img/mobile-header.webp)!important
-    }
-  
+
     .page-header {
-        height: auto !important; 
+        height: auto;
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='891' height='891' viewBox='0 0 891 891'%3E%3Cfilter id='blur' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='20 20' edgeMode='duplicate' /%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='1 1' /%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cimage filter='url(%23blur)' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/CABEIAB4AHgMBIgACEQEDEQH/xAAZAAACAwEAAAAAAAAAAAAAAAAEBgADBQf/2gAIAQEAAAAA42oQJhpoEc1CZ7rghZH/xAAWAQEBAQAAAAAAAAAAAAAAAAADAAT/2gAIAQIQAAAAzxL/AP/EABQBAQAAAAAAAAAAAAAAAAAAAAT/2gAIAQMQAAAAQdwf/8QAJxAAAQMDAgQHAAAAAAAAAAAAAwAEEwIFFAE0IyREUQYREiFBY3T/2gAIAQEAAT8Ad4xrK62sze6JoHmWv6kYMLlTKZzjOmYeoTPc8HK5dTTXH7k2rjduR9tV4XaZja6GN06aGcoIcxyiB41SsxC6kuQ6KvIdcPr07oO5QdynBC5dfv8AC//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8AH//EABURAQEAAAAAAAAAAAAAAAAAABAE/9oACAEDAQE/ACg//9k=' x='0' y='0' height='100%25' width='100%25'/%3E%3C/svg%3E");
+        
+        .row {
+            float: none;
+            max-width: 100%;
+            margin: 0;
+            padding: 0 calc(2em + 15px);
+            margin-top: 30px;
+        }
+    }
+  
+    .no-webp .page-header-enhanced {
+        background-image: url(../img/mobile-header.jpg)
     }
     
-    .page-header .row {
-        float: none!important;
-        max-width: 100%!important;
-        margin: 0!important;
-        padding: 0 calc(2em + 15px)!important;
-        margin-top: 30px!important;
+    .webp .page-header-enhanced {
+        background-image: url(../img/mobile-header.webp)
     }
   
     #header-title {
-        justify-self: center !important;
+        justify-self: center;
         margin-bottom: 100px; 
     }
 
@@ -225,17 +244,17 @@ h2.title {
 
 @media (max-width: 768px) {
 	h2, #temp {
-		margin-top: 0!important;
+		margin-top: 0;
 	}
 
   	.col-md-8 {
-    	flex: 100% !important;
-		max-width: 100% !important; 
+    	flex: 100%;
+		max-width: 100%; 
 	}
 
   	.col-md-6 {
-		flex: 100% !important;
-		max-width: 100% !important; 
+		flex: 100%;
+		max-width: 100%; 
     }
     
     .section {
@@ -245,7 +264,7 @@ h2.title {
 
 @media (max-width: 660px) {
 	.page-header .container .row {
-		padding: 0 15px!important;
+		padding: 0 15px;
 	}
 	
 	h1 {
@@ -255,9 +274,9 @@ h2.title {
 
 @media (max-width: 576px) {
     .main {
-        margin: 0 10px 75px!important;
+        margin: 0 10px 75px;
     }
     .main#trans {
-        margin: -60px 10px 0 !important; 
+        margin: -60px 10px 0; 
     }
 }

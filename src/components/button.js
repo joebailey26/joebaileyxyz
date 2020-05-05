@@ -8,8 +8,6 @@
 */
 import React from 'react'
 
-import { Link } from 'gatsby'
-
 import './css/button.scss'
 
 let className

@@ -5,26 +5,8 @@
     line-height: 1.5em;
 }
 
-.no-webp .page-header {
-    background-image: url(../../img/header.jpg)
-}
-
-.webp .page-header {
-    background-image: url(../../img/header.webp)
-}
-
 h1 span {
     display: inline-block
-}
-
-.page-header {
-    .description {
-        margin-top: 24px;
-        font-size: 1.15rem;
-        a {
-            color: white;
-        }
-    }
 }
 
 main#trans {
