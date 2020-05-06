@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ title, slug, image, lang, type }) => {
+const SEO = ({ title, slug, image, lang, type, description }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,11 +18,14 @@ const SEO = ({ title, slug, image, lang, type }) => {
           siteMetadata {
             title
             siteUrl
+            description
           }
         }
       }
     `
   )
+
+  const metaDescription = description || site.siteMetadata.description
 
   const metaImage = image || site.siteMetadata.siteUrl + "/header.jpg"
 
@@ -55,20 +58,29 @@ const SEO = ({ title, slug, image, lang, type }) => {
       <script type="application/ld+json">
         {JSON.stringify(schema)}
       </script>
-      <link rel="canonical" href={site.siteMetadata.siteUrl + slug} />
-      <meta name="og:url" content={site.siteMetadata.siteUrl + slug} />
+      <link rel="canonical" href={site.siteMetadata.siteUrl + slug + "/"} />
+
+      <meta name="description" content={metaDescription}/>
+
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#004c3f"/>
+
       <meta name="msapplication-TileColor" content="#004c3f"/>
+
       <meta name="theme-color" content="#282828"/>
-      <meta name="og:image" content={site.siteMetadata.siteUrl + metaImage} />
-      <meta name="og:title" content={title} />
-      <meta name="og:type" content={type} />
+
+      <meta property="og:url" content={site.siteMetadata.siteUrl + slug + "/"} />
+      <meta property="og:image" content={site.siteMetadata.siteUrl + metaImage} />
+      <meta property="og:title" content={title + ' | ' + site.siteMetadata.title} />
+      <meta property="og:type" content={type} />
+      <meta property="og:description" content={metaDescription} />
+
       <meta name="twitter:creator" content="@JoeBailey26" />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={title + ' | ' + site.siteMetadata.title} />
       <meta name="twitter:image" content={site.siteMetadata.siteUrl + metaImage} />
+      <meta name="twitter:description" content={metaDescription} />
     </Helmet>
   )
 }
@@ -84,7 +96,8 @@ SEO.propTypes = {
   lang: PropTypes.string,
   type: PropTypes.string,
   title: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired  
+  slug: PropTypes.string.isRequired,
+  description: PropTypes.string
 }
 
 export default SEO

@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Joe Bailey | Web Designer, Developer, Photographer | Southampton, UK`,
     author: `Joe Bailey`,
-    description: `Joe Bailey is a web developer and photographer currently living in Southampton studying at Solent University.`,
+    description: `My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWAs and APIs, static HTML, CSS, and JavaScript sites, dynamic Jamstack sites, and working with clients. I'm currently freelancing whilst studying at Southampton Solent University.`,
     siteUrl: `https://joebailey.xyz`,
     twitterHandle: `@joebailey26`,
   },

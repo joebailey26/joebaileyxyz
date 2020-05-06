@@ -10,7 +10,7 @@ const BlogIndex = ({ data }) => {
   const site = data.site.siteMetadata
     return (
       <Layout>
-        <SEO title="Blog" slug="/blog"/>
+        <SEO title="Blog" slug="/blog" description="Keep up to date with my latest adventures in the world of Web Development and tech in general."/>
         <header>
           <h1 className="title">Blog</h1>
           <p className="description">Keep up to date with my latest adventures in the world of Web Development and tech in general.</p>

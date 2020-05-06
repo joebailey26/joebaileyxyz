@@ -13,12 +13,12 @@ const Page = ({ data }) => {
         {categories.map(({ node }) => {
           return ([
             <header key={node.name}>
+              <SEO title="Graphic Design | Archive" slug="/archive/graphic-design" description={node.description}/>
               <h1 className="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
           ])
         })}>
-        <SEO title="Graphic Design | Archive" slug="/archive/graphic-design" />
         {posts.map(({ node }) => {
           return (
               <article key={node.title} id={node.slug} className="with_featureImage">

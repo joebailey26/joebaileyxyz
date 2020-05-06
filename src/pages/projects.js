@@ -10,10 +10,10 @@ const Page = ({ data }) => {
   const categories = data.allWordpressCategory.edges
     return (
       <Layout>
-        <SEO title="Projects" slug="/projects" />
         {categories.map(({ node }) => {
           return (
             <header>
+              <SEO title="Projects" slug="/projects" description={node.description}/>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>

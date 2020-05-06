@@ -26,12 +26,14 @@ import Contact from '../sections/contact'
 
 import Footer from '../components/footer'
 
+import Description from '../components/description'
+
 if (typeof window !== `undefined`) {
 	require('../js/modernizer')
 }
 
-let app;
-let aclose;
+let app
+let aclose
 
 class Home extends React.Component {
 	render() {
@@ -84,7 +86,7 @@ class Home extends React.Component {
 						<div className="row">
 							<div id="header-title">
 								<h1><span>I’m Joe, a</span> <span>Front-End </span><span>Web Developer.</span></h1>
-								<h5 className="description">My passion for web development has always been present both prior to, and at College and University. As a result, I have gained experience in a variety of areas. This includes developing bespoke WordPress sites, creating PWAs and APIs, static HTML, CSS, and JavaScript sites, dynamic Jamstack sites, and working with clients. I'm currently freelancing whilst studying at Southampton Solent University.</h5>
+		  						<Description></Description>
 								<Button link="https://drive.google.com/open?id=1Mm61EELkpbByy3ADzffmSec_VjH8X7Na" text="Download my CV" type="Secondary"></Button>
 							</div>
 						</div>

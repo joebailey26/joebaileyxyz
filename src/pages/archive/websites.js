@@ -18,14 +18,13 @@ const Page = ({ data }) => {
         {categories.map(({ node }) => {
           return ([
             <header key={node.name}>
+              <SEO title="Websites | Archive" slug="/archive/websites" description={node.description}/>
               <h1 className="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>
           ])
         })}>
-        <SEO title="Websites | Archive" slug="/archive/websites" />
         {posts.map(({ node }) => {
-          const title = node.title
           return (
               <article key={node.title} id={node.slug} className="with_featureImage">
                 {picture(node.jetpack_featured_media_url, node.title)}

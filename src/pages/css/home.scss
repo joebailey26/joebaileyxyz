@@ -14,3 +14,8 @@ main#trans {
         color: #3C4858;
     }
 }
+@media (min-width: 992px) {
+    .description {
+        max-width: 80%;
+    }
+}

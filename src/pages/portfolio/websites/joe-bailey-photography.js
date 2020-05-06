@@ -11,10 +11,10 @@ const websitesIndex = ({ data }) => {
   const site = data.site.siteMetadata
     return (
       <Layout>
-        <SEO title="Joe Bailey Photography | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-photography" />
         {categories.map(({ node }) => {
           return (
             <header>
+              <SEO title="Joe Bailey Photography | Websites | Portfolio" slug="/portfolio/websites/joe-bailey-photography" description={node.description}/>
               <h1 class="title">{node.name}</h1>
               <p className="description">{node.description}</p>
             </header>

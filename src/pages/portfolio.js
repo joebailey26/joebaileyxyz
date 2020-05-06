@@ -15,10 +15,10 @@ const Page = ({ data }) => {
   }
     return (
       <Layout>
-        <SEO title="Portfolio" slug="/portfolio" />
         {categories.map(({ node }) => {
           return (
             <header key={node.name}>
+              <SEO title="Portfolio" slug="/portfolio" description={node.description}/>
               <h1 className="title">Portfolio</h1>
               <p className="description">{node.description}</p>
             </header>

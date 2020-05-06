@@ -44,7 +44,7 @@ export default ({ data, pageContext }) => {
   )
   return (
     <Layout>
-      <SEO title={post.title} slug={"/portfolio/websites/joe-bailey-xyz/" + post.slug} type="article"/>
+      <SEO title={post.title} slug={"/portfolio/websites/joe-bailey-xyz/" + post.slug} type="article" description={post.excerpt}/>
       <article className="single">
         <div className="navigation">
           <span className="previous">{prevArticle}</span>
@@ -81,6 +81,7 @@ export const query = graphql`
           date
           content
           slug
+          excerpt
         }
         next {
           title
