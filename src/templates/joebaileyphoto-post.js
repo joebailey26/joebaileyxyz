@@ -55,7 +55,7 @@ export default ({ data, pageContext }) => {
         <section dangerouslySetInnerHTML={{ __html: post.content }} ></section>
         <footer>
           <p><span>Published </span><time datetime={date}>{day} {month} '{year}</time></p>
-          <Share url={site.siteUrl + post.slug} title={post.title} twitterHandle={site.twitterHandle}></Share>
+          <Share url={site.siteUrl + '/websites/joe-bailey-photography/' + post.slug} title={post.title} twitterHandle={site.twitterHandle}></Share>
         </footer>
         <div className="navigation">
           <span className="previous">{prevArticle}</span>
