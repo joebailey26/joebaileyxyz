@@ -11,3 +11,9 @@ footer, .copyright {
 .social a:hover {
     color: #38786a
 }
+
+@media (prefers-color-scheme: dark) {
+    .social a {
+        color: lightgrey
+    }
+}

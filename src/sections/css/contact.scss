@@ -68,3 +68,12 @@ address {
 		padding-top: 0!important;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+    .section-contact .col-md-4 svg {
+        fill: lightgrey
+    }
+    main#trans .section-contact .col-md-4 a:any-link:hover {
+        color: #38786a;
+    }
+}

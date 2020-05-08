@@ -50,3 +50,15 @@
         cursor: not-allowed;
     }
 }
+@media (prefers-color-scheme: dark) {
+    .btn:active:not(:disabled), .btn:hover:not(:disabled) {
+        background-color: #608d83
+    }
+    .btn {
+        background-color: #38786A;
+    }
+    .btn:disabled {
+        color: #fff;
+        background-color: rgb(79,79,79)
+    }
+}

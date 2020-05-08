@@ -64,3 +64,9 @@ article.single {
         }
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    details summary svg {
+        fill: #fff
+    }
+}

@@ -204,3 +204,79 @@
 		justify-self: end;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.navbar {	
+		@media (max-width: 992px) {
+			background-color: #282828;
+	
+			.container {
+	
+				.row {
+					.navbar-brand {
+						a {
+							color: #fff
+						}
+					}
+	
+					.navmob {
+						.navlinks {
+							a.nav-link {
+								color: #fff;
+								
+								svg {
+									fill: #fff;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	
+		@media (max-width: 692px) {
+			.container {
+				.row {		
+					.navbar-toggler {
+						color: #fff
+					}
+		
+					.navmob {
+						background-color: #282828;
+		
+						.navlinks {
+							background-color: #282828;							
+						}
+					}
+				}
+			}
+		}
+	
+		&.transparent {
+			background-color: #282828;
+	
+			.container {
+				.row {
+					.navbar-brand a {
+						color: #fff;
+	
+						&:hover, &[aria-current] {
+							color: #fff;
+						}
+					}
+	
+					.navmob {
+						.navlinks {
+							a.nav-link {
+								color: #fff;
+								svg {
+									fill: #fff
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

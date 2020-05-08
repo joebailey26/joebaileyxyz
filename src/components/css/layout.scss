@@ -339,6 +339,8 @@ main:not(#trans) {
         }
     }
     @media (max-width: 576px) {
+        margin: 0 10px 75px;
+
         .navigation {
             grid-gap: 0;
         }
@@ -406,6 +408,15 @@ main:not(#trans) {
                     }
                 }
             }
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        a:not(.btn) {
+            font-weight: 400
+        }
+        .row .col-md-8 article h2 a {
+            color: #fff;
         }
     }
 }
