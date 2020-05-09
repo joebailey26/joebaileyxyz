@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Joe Bailey | Web Designer, Developer, Photographer | Southampton, UK`,
+    title: `Joe Bailey | Front-End Web Developer | Southampton, UK / Cambridge, UK`,
     author: `Joe Bailey`,
     description: `My passion for web development has always been present. I am excited by building sites that are accessible, SEO friendly and fast. To do this I use a variety of tools such as WordPress, Gatsby, React, Vue, and other frameworks. Despite using many current frameworks, I have a strong grounding in HTML, CSS, and JavaScript. Whilst developing sites I have gained experience with CI/CD chains and a variety of hosting platforms such as Digital Ocean, Netlify, Firebase, and Cloudflare. I have been following the continuous growth of technologies such as PWAs and the Jamstack. I'm currently freelancing whilst studying at Southampton Solent University.`,
     siteUrl: `https://joebailey.xyz`,
