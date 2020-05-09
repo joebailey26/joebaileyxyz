@@ -282,10 +282,11 @@ h2.title {
 }
 
 @media (prefers-color-scheme: dark) {
-    body, .main {
-        background-color: #282828;
-    }
     body {
-        color: #fff;
+        background-color: #282828;
+        color: #fff
+    }
+    .main {
+        background-color: #333
     }
 }

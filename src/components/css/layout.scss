@@ -283,12 +283,15 @@ main:not(#trans) {
                 text-align: center;
             }
             &:first-of-type {
-                margin-bottom: 60px
+                margin-bottom: 40px
             }
             &:last-of-type {
-                margin-top: 60px;
+                margin-top: 40px;
                 margin-bottom: 0;
             }
+        }
+        h1 {
+            text-align: left;
         }
         .section {
             padding: 10px 0 0 0;
@@ -301,7 +304,8 @@ main:not(#trans) {
             }
         }
     }
-    @media (max-width: 768px) {    
+    @media (max-width: 768px) {
+        min-height: auto;
         figure.wp-block-gallery {    
             &.columns-3, &.columns-4 {
                 ul {
@@ -343,6 +347,12 @@ main:not(#trans) {
 
         .navigation {
             grid-gap: 0;
+            &:first-of-type {
+                margin-bottom: 24px;
+            }
+            &:last-of-type {
+                margin-top: 24px;
+            }
         }
 
         .row {
