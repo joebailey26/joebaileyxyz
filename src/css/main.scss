@@ -167,7 +167,7 @@ h2.title {
     background-position: center center;
     background-size: cover;
     margin: 0;
-    padding: 0;
+    padding: 80px 0 100px;
     border: 0;
     display: flex;
     align-items: center;
@@ -209,6 +209,7 @@ h2.title {
 
     .page-header {
         height: auto;
+        padding: 0;
         background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='891' height='891' viewBox='0 0 891 891'%3E%3Cfilter id='blur' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='20 20' edgeMode='duplicate' /%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='1 1' /%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cimage filter='url(%23blur)' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMDAwMDAwQEBAQFBQUFBQcHBgYHBwsICQgJCAsRCwwLCwwLEQ8SDw4PEg8bFRMTFRsfGhkaHyYiIiYwLTA+PlQBAwMDAwMDBAQEBAUFBQUFBwcGBgcHCwgJCAkICxELDAsLDAsRDxIPDg8SDxsVExMVGx8aGRofJiIiJjAtMD4+VP/CABEIAB4AHgMBIgACEQEDEQH/xAAZAAACAwEAAAAAAAAAAAAAAAAEBgADBQf/2gAIAQEAAAAA42oQJhpoEc1CZ7rghZH/xAAWAQEBAQAAAAAAAAAAAAAAAAADAAT/2gAIAQIQAAAAzxL/AP/EABQBAQAAAAAAAAAAAAAAAAAAAAT/2gAIAQMQAAAAQdwf/8QAJxAAAQMDAgQHAAAAAAAAAAAAAwAEEwIFFAE0IyREUQYREiFBY3T/2gAIAQEAAT8Ad4xrK62sze6JoHmWv6kYMLlTKZzjOmYeoTPc8HK5dTTXH7k2rjduR9tV4XaZja6GN06aGcoIcxyiB41SsxC6kuQ6KvIdcPr07oO5QdynBC5dfv8AC//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8AH//EABURAQEAAAAAAAAAAAAAAAAAABAE/9oACAEDAQE/ACg//9k=' x='0' y='0' height='100%25' width='100%25'/%3E%3C/svg%3E");
         
         .row {
