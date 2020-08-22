@@ -18,7 +18,7 @@ exports.onRouteUpdate = ({ location }) => {
             script.src = url
             document.getElementsByTagName('head')[0].appendChild(script)
             const script2 = document.createElement('script')
-            script2.text = "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag('js', new Date());gtag('config', 'UA-140457046-3')"
+            script2.text = "window.dataLayer = window.dataLayer || [];function gtag(){window.dataLayer.push(arguments)};gtag('set', 'anonymizeIp', true);gtag('js', new Date());gtag('config', 'UA-140457046-3', { anonymize_ip: true })"
             document.getElementsByTagName('head')[0].appendChild(script2)
             
         };
