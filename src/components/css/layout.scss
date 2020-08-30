@@ -178,6 +178,7 @@ main:not(#trans) {
         max-width: 100%;
         img {
             max-width: 100%;
+            height: auto
         }
     }
 
@@ -240,6 +241,7 @@ main:not(#trans) {
 
                 img {
                     width: 100%;
+                    height: auto
                 }
 
                 figcaption {
