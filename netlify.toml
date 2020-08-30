@@ -9,16 +9,3 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "upgrade-insecure-requests"
-    Feature-Policy = '''
-    accelerometer 'none';
-    ambient-light-sensor 'none';
-    autoplay 'none';
-    battery 'none';
-    camera 'none';
-    display-capture 'none';
-    document-domain 'none';
-    encrypted-media 'none';
-    web-share 'self';
-    microphone 'none';
-    geolocation 'none';
-    '''
