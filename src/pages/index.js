@@ -87,7 +87,7 @@ class Home extends React.Component {
 							<div id="header-title">
 								<h1><span>I’m Joe, a</span> <span>Front-End </span><span>Web Developer.</span></h1>
 		  						<Description></Description>
-								<Button link="https://drive.google.com/open?id=1Mm61EELkpbByy3ADzffmSec_VjH8X7Na" text="Download my CV" type="Secondary"></Button>
+								<Button link="https://drive.google.com/file/d/116W_5ZSvSk_UG5ujWpeu33oPK2cr7WMs/view?usp=sharing" text="Download my CV" type="Secondary"></Button>
 							</div>
 						</div>
 					</div>
