@@ -49,10 +49,11 @@ function getReadingTime (content) {
 export const actions = {
   async nuxtServerInit ({ commit }, { error }) {
     try {
-      let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then((res) => {
-        console.error(res)
-        // res.json()
-      })
+      let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99', {
+        headers: {
+          Authorization: 'Basic ' + `${process.env.WP_USER}:${process.env.WP_PASS}`.toString('base64')
+        }
+      }).then(res => res.json())
       projects = projects
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
@@ -64,7 +65,11 @@ export const actions = {
           acf,
           yoast_head_json
         }))
-      let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99').then(res => res.json())
+      let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99', {
+        headers: {
+          Authorization: 'Basic ' + `${process.env.WP_USER}:${process.env.WP_PASS}`.toString('base64')
+        }
+      }).then(res => res.json())
       blogPosts = blogPosts
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
