@@ -47,7 +47,7 @@ function getReadingTime (content) {
 }
 
 export const actions = {
-  async nuxtServerInit ({ state, commit }) {
+  async nuxtServerInit ({ commit }, { error }) {
     try {
       let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then(res => res.json())
       projects = projects
@@ -81,8 +81,7 @@ export const actions = {
       commit('updateProjects', projects)
       commit('updateBlogPosts', blogPosts)
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      error({ statusCode: 500, message: err })
     }
   }
 }
