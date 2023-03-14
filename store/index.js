@@ -48,8 +48,10 @@ function getReadingTime (content) {
 
 export const actions = {
   async nuxtServerInit ({ commit }, { error }) {
+    let projects
+    let blogPosts
     try {
-      let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then(res => res.json())
+      projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then(res => res.json())
       projects = projects
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
@@ -61,7 +63,7 @@ export const actions = {
           acf,
           yoast_head_json
         }))
-      let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99').then(res => res.json())
+      blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99').then(res => res.json())
       blogPosts = blogPosts
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
@@ -81,7 +83,7 @@ export const actions = {
       commit('updateProjects', projects)
       commit('updateBlogPosts', blogPosts)
     } catch (err) {
-      error({ statusCode: 500, message: err })
+      error({ statusCode: 500, message: { Error: err, ProjectsAxios: projects, BlogPostsAxios: blogPosts } })
     }
   }
 }

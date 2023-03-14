@@ -1,5 +1,5 @@
 [build]
-  command = "yarn generate --no-optional --fail-on-error"
+  command = "yarn generate"
   publish = "dist"
 
 [build.environment]
