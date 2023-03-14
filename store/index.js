@@ -48,40 +48,36 @@ function getReadingTime (content) {
 
 export const actions = {
   async nuxtServerInit ({ commit }) {
-    try {
-      let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then(res => res.json())
-      projects = projects
-        .filter(el => el.status === 'publish')
-        // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, content, slug, acf, yoast_head_json }) => ({
-          title: title.rendered,
-          excerpt: excerpt.rendered,
-          content: content.rendered,
-          slug,
-          acf,
-          yoast_head_json
-        }))
-      let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99').then(res => res.json())
-      blogPosts = blogPosts
-        .filter(el => el.status === 'publish')
-        // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, slug, date, content }) => ({
-          title: title.rendered,
-          excerpt: excerpt.rendered,
-          slug,
-          date: {
-            fullDate: new Date(date.substring(0, date.indexOf('T'))),
-            year: getYear(date),
-            month: getMonth(date),
-            day: getDay(date)
-          },
-          content: content.rendered,
-          readingTime: getReadingTime(content.rendered)
-        }))
-      commit('updateProjects', projects)
-      commit('updateBlogPosts', blogPosts)
-    } catch (err) {
-      throw Err
-    }
+    let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then(res => res.json())
+    projects = projects
+      .filter(el => el.status === 'publish')
+      // eslint-disable-next-line camelcase
+      .map(({ title, excerpt, content, slug, acf, yoast_head_json }) => ({
+        title: title.rendered,
+        excerpt: excerpt.rendered,
+        content: content.rendered,
+        slug,
+        acf,
+        yoast_head_json
+      }))
+    let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99').then(res => res.json())
+    blogPosts = blogPosts
+      .filter(el => el.status === 'publish')
+      // eslint-disable-next-line camelcase
+      .map(({ title, excerpt, slug, date, content }) => ({
+        title: title.rendered,
+        excerpt: excerpt.rendered,
+        slug,
+        date: {
+          fullDate: new Date(date.substring(0, date.indexOf('T'))),
+          year: getYear(date),
+          month: getMonth(date),
+          day: getDay(date)
+        },
+        content: content.rendered,
+        readingTime: getReadingTime(content.rendered)
+      }))
+    commit('updateProjects', projects)
+    commit('updateBlogPosts', blogPosts)
   }
 }
