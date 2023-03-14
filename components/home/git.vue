@@ -31,7 +31,10 @@
       min-height: 114px;
       margin-bottom: .5rem
     }
-    @media (max-width: 768px) {
+  }
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+    :any-link {
       overflow: hidden;
       &:before,
       &:after {
