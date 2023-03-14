@@ -7,8 +7,17 @@ h6 {
   :any-link:not(.btn) {
     color: inherit;
     transition: color .25s ease-in-out;
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       color: var(--green)
+    }
+    @media (prefers-color-scheme: dark) {
+      &:hover,
+      &:active,
+      &:focus {
+        color: var(--light-green)
+      }
     }
   }
 }

@@ -15,12 +15,14 @@ footer {
     display: inline-flex;
     color: var(--grey);
     font-size: 1.5rem;
+    transition: color .25s ease-in-out;
     &:hover,
-    &:active {
+    &:active,
+    &:focus {
       color: var(--green)
     }
     @media (prefers-color-scheme: dark) {
-      color: var(--light-grey)
+      color: var(--light-green)
     }
   }
 }

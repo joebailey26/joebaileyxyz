@@ -38,13 +38,11 @@ main {
     padding: 40px 0
   }
 }
-
 @media (prefers-color-scheme: dark) {
   body {
-    color: white;
-    background-color: var(--dark-grey)
+    background-color: #333333
   }
   main {
-    background-color: #333333
+    background-color: var(--dark-grey)
   }
 }

@@ -38,7 +38,8 @@
   @media (prefers-color-scheme: dark) {
     background-color: var(--green);
     &:active:not(:disabled),
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
       background-color: var(--light-green)
     }
     &:disabled {

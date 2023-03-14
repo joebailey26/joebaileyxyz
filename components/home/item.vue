@@ -8,7 +8,10 @@ article {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 1.125rem;
-    line-height: 1.25
+    line-height: 1.25;
+    @media (prefers-color-scheme: dark) {
+      color: white
+    }
   }
   &:has(.tech-stack) {
     grid-template-rows: max-content min-content 1fr min-content
@@ -22,10 +25,8 @@ article {
     border: 1px solid var(--grey);
     border-radius: 4px;
     scroll-snap-align: center;
-    scroll-snap-stop: always
-  }
-  @media (prefers-color-scheme: dark) {
-    @media (max-width: 768px) {
+    scroll-snap-stop: always;
+    @media (prefers-color-scheme: dark) {
       background-color: var(--dark-grey);
       border-color: white
     }

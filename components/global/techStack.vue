@@ -8,7 +8,7 @@
     color: var(--grey);
     font-size: xx-large;
     @media (prefers-color-scheme: dark) {
-      color: var(--light-grey)
+      color: var(--light-green)
     }
   }
 }

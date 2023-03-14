@@ -12,16 +12,29 @@
     transition: fill .25s ease-in-out;
     fill: var(--grey);
     @media (prefers-color-scheme: dark) {
-      fill: var(--light-grey)
+      fill: var(--light-green)
     }
   }
   :any-link {
     color: var(--grey);
     transition: color .25s ease-in-out;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
       color: var(--green);
       svg {
         fill: var(--green)
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      color: white;
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--light-green);
+        svg {
+          fill: var(--light-green)
+        }
       }
     }
   }
@@ -49,7 +62,12 @@
     line-height: 1.25;
     border: 1px solid var(--grey);
     border-radius: 4px;
-    resize: vertical
+    resize: vertical;
+    @media (prefers-color-scheme: dark) {
+      color: #EEEEEE;
+      background-color: #333333;
+      border-color: #EEEEEE
+    }
   }
 }
 </style>

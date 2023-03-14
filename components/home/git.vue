@@ -11,7 +11,9 @@
     display: block;
     color: var(--grey);
     transition: color .25s ease-in-out;
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       color: var(--green)
     }
     .git__text-link {
@@ -45,6 +47,16 @@
       img {
         float: right;
         width: 250%
+      }
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :any-link {
+      color: white;
+      &:hover,
+      &:active,
+      &:focus {
+        color: var(--light-green)
       }
     }
   }

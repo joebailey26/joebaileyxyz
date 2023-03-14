@@ -1,7 +1,21 @@
 @use 'pre';
 @use 'headings';
 :any-link:not(.btn) {
-  color: var(--green)
+  color: var(--green);
+  transition: color .25s ease-in-out;
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--light-green)
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--light-green);
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--green)
+    }
+  }
 }
 body {
   color: var(--grey);
@@ -10,7 +24,10 @@ body {
   line-height: 1.5;
   text-align: left;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  -moz-osx-font-smoothing: grayscale;
+  @media (prefers-color-scheme: dark) {
+    color: #EEEEEE
+  }
 }
 p {
   margin: 0 0 1rem;
