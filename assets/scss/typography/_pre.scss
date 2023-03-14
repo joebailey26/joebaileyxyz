@@ -1,0 +1,56 @@
+pre {
+  --wght: 'wght' 400;
+  --mono: 'MONO' 1;
+  --casl: 'CASL' 0;
+  --slnt: 'slnt' 0;
+  // stylelint-disable-next-line custom-property-pattern
+  --CRSV: 'CRSV' .5;
+  margin: .5em 0;
+  padding: 1em;
+  overflow: auto;
+  overflow-y: scroll;
+  color: white;
+  font-size: 1rem;
+  font-family: Recursive, monospace;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  text-align: left;
+  word-wrap: normal;
+  word-break: normal;
+  word-spacing: normal;
+  tab-size: 2;
+  hyphens: none;
+  background: var(--dark-grey);
+  border-radius: .5em;
+
+  // stylelint-disable-next-line custom-property-pattern
+  font-variation-settings: var(--mono), var(--casl), var(--wght), var(--slnt), var(--CRSV);
+  code {
+    position: relative;
+    white-space: inherit
+  }
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 10px
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: var(--dark-grey);
+    border-radius: 0 .5em .5em 0
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #888888
+  }
+
+  @media (orientation: landscape) {
+    max-height: 50vh
+  }
+
+  @media (orientation: portrait) {
+    max-height: 75vh
+  }
+}

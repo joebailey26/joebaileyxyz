@@ -1,0 +1,33 @@
+.post__header {
+  margin-bottom: 1rem
+}
+.post__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  &:has(+ .post__read-time) {
+    margin-bottom: 4px;
+    @media (max-width: 576px) {
+      margin-bottom: 10px
+    }
+  }
+  &:has(+ .post__tech-stack) {
+    margin-bottom: 1rem
+  }
+  a {
+    color: var(--grey);
+    &:hover {
+      color: var(--green)
+    }
+  }
+}
+.post__read-time {
+  margin-bottom: 10px;
+  font-size: .9rem;
+  font-style: italic
+}
+.post__content {
+  margin-bottom: 1rem;
+  p {
+    margin: 0
+  }
+}

@@ -1,0 +1,8 @@
+:root {
+  --dark-grey: #282828;
+  --grey: #3C4858;
+  --light-grey: #555555;
+  --green: #38786A;
+  --light-green: #608D83;
+  --100vw: calc(100vw - var(--scrollbar-width, 0px))
+}

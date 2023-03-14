@@ -1,0 +1,27 @@
+.page-header {
+  padding: 40px 0;
+  @media (min-width: 1225px) {
+    padding: 60px 0
+  }
+}
+p.page-header__description {
+  margin-top: .5rem;
+  font-size: 1.33rem;
+  letter-spacing: -.015em
+}
+.page-header--with-image {
+  .page-header__wrapper {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    column-gap: clamp(1rem, 3vw, 2rem);
+    .page-header__image {
+      width: clamp(100px, 3vw, 150px);
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: 42% 50%;
+      border-radius: 4px
+    }
+  }
+}
