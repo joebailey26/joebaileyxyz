@@ -83,7 +83,7 @@ export const actions = {
       commit('updateProjects', projects)
       commit('updateBlogPosts', blogPosts)
     } catch (err) {
-      error({ statusCode: 500, message: { Error: err, ProjectsAxios: projects, BlogPostsAxios: blogPosts } })
+      error({ statusCode: 500, message: JSON.stringify({ Error: err, ProjectsAxios: projects, BlogPostsAxios: blogPosts }) })
     }
   }
 }
