@@ -51,7 +51,7 @@ export const actions = {
     try {
       let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99', {
         headers: {
-          Authorization: 'Basic ' + `${process.env.WP_USER}:${process.env.WP_PASS}`.toString('base64')
+          Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
         }
       }).then(res => res.json())
       projects = projects
@@ -67,7 +67,7 @@ export const actions = {
         }))
       let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99', {
         headers: {
-          Authorization: 'Basic ' + `${process.env.WP_USER}:${process.env.WP_PASS}`.toString('base64')
+          Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
         }
       }).then(res => res.json())
       blogPosts = blogPosts
