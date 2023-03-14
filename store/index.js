@@ -50,7 +50,7 @@ export const actions = {
   async nuxtServerInit ({ commit }, { error }) {
     try {
       let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99').then((res) => {
-        throw res
+        console.error(res)
         // res.json()
       })
       projects = projects
