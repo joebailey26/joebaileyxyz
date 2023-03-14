@@ -42,7 +42,7 @@
       }
     }
     @media (max-width: 576px) {
-      grid-template-columns: 10px repeat(6, calc(var(--100vw) - 60px)) 10px
+      grid-template-columns: 10px repeat(6, calc(var(--100vw) - 40px)) 10px
     }
   }
 }

@@ -17,9 +17,9 @@ article {
     grid-template-rows: max-content min-content 1fr min-content
   }
   @media (max-width: 768px) {
-    margin-right: 15px;
+    margin-right: 0;
     margin-bottom: 100px;
-    margin-left: 15px;
+    margin-left: 0;
     padding: 20px;
     background-color: white;
     border: 1px solid var(--grey);
