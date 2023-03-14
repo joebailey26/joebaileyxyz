@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .git {
+  margin-top: 50px;
   margin-right: -15px;
-  margin-bottom: 50px;
   margin-left: -15px;
   h3 {
     margin-top: 0;
