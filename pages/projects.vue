@@ -8,7 +8,7 @@
               Projects
             </h1>
             <p class="page-header__description">
-              Some loose notes and on tech demonstrations and projects that I have created.
+              Some loose notes on tech demonstrations and projects that I have created.
             </p>
           </div>
         </div>
@@ -59,11 +59,11 @@ export default {
     return {
       title: 'Projects',
       meta: [
-        { hid: 'description', name: 'description', content: 'Some loose notes and on tech demonstrations and projects that I have created.' },
+        { hid: 'description', name: 'description', content: 'Some loose notes on tech demonstrations and projects that I have created.' },
         { hid: 'og:title', property: 'og:title', content: 'Projects' },
-        { hid: 'og:description', property: 'og:description', content: 'Some loose notes and on tech demonstrations and projects that I have created.' },
+        { hid: 'og:description', property: 'og:description', content: 'Some loose notes on tech demonstrations and projects that I have created.' },
         { hid: 'twitter:title', name: 'twitter:title', content: 'Projects' },
-        { hid: 'twitter:description', name: 'twitter:description', content: 'Some loose notes and on tech demonstrations and projects that I have created.' }
+        { hid: 'twitter:description', name: 'twitter:description', content: 'Some loose notes on tech demonstrations and projects that I have created.' }
       ]
     }
   }
