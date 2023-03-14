@@ -2,6 +2,9 @@
   command = "npm run generate --no-optional"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "16"
+
 [[redirects]]
   from = "https://heuristic-bell-6e94b3.netlify.com/*"
   to = "https://joebailey.xyz/:splat"

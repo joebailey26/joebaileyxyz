@@ -52,5 +52,8 @@
   },
   "browserslist": [
     "last 5 versions and not ie <= 11 and > 0.2% and not dead and not op_mini all"
-  ]
+  ],
+  "engines": {
+    "node": "^16.14.2"
+  }
 }
