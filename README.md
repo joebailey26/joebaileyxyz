@@ -3,9 +3,6 @@
 <p align="center"><a href="https://joebailey.xyz">Live Site</a> <a href="https://github.com/joebailey26/joebaileyxyz">GitHub Repo</a></p>
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-2-blue.svg?cacheSeconds=2592000" />
-  <a href="https://twitter.com/joebaileyphoto" target="_blank">
-    <img alt="Twitter: joebaileyphoto" src="https://img.shields.io/twitter/follow/joebaileyphoto.svg?style=social" />
-  </a>
   <a href="https://app.netlify.com/sites/heuristic-bell-6e94b3/deploys">
     <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status">
   </a>
@@ -14,19 +11,19 @@
 ## Install
 
 ```sh
-npm install
+yarn install
 ```
 
 ## Development
 
 ```sh
-gatsby develop
+yarn start
 ```
 
 ## Build
 
 ```sh
-gatsby build
+yarn generate
 ```
 
 ## Visual Style Guide
@@ -108,19 +105,19 @@ Colors should use names where possible rather than hex values
 
 1. Specify the type of commit:
 
-  * feat: The new feature you're adding to a particular application
+* feat: The new feature you're adding to a particular application
 
-  * fix: A bug fix
+* fix: A bug fix
 
-  * style: Feature and updates related to styling
+* style: Feature and updates related to styling
 
-  * refactor: Refactoring a specific section of the codebase
+* refactor: Refactoring a specific section of the codebase
 
-  * test: Everything related to testing
+* test: Everything related to testing
 
-  * docs: Everything related to documentation
+* docs: Everything related to documentation
 
-  * chore: Regular code maintenance.
+* chore: Regular code maintenance.
 
 2. Separate the subject from the body with a blank line
 
@@ -160,7 +157,7 @@ by commands like git merge and git revert.
 
 Further paragraphs come after blank lines.
 
-- Bullet points are okay, too, use a hyphen or asterisk for the bullet, followed by a
+* Bullet points are okay, too, use a hyphen or asterisk for the bullet, followed by a
   single space, with blank lines in between
 
 ### Branching Strategy
@@ -192,6 +189,5 @@ Use a local environment if possible otherwise use **Browserstack** to manually t
 👤 **Joe Bailey**
 
 * Website: [joebailey.xyz](joebailey.xyz)
-* Twitter: [@joebaileyphoto](https://twitter.com/joebaileyphoto)
 * Github: [@joebailey26](https://github.com/joebailey26)
 * LinkedIn: [@joe-bailey-b68b17171](https://linkedin.com/in/joe-bailey-b68b17171)

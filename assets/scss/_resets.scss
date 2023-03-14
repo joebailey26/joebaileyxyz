@@ -1,0 +1,29 @@
+html,
+body,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  margin: 0;
+  padding: 0
+}
+:link,
+:visited {
+  text-decoration: none
+}
+input:not([type='checkbox']),
+textarea {
+  appearance: none
+}
+:focus:not(:focus-visible) {
+  outline: none
+}
+* {
+  box-sizing: border-box
+}

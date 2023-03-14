@@ -1,0 +1,31 @@
+@use 'pre';
+@use 'headings';
+:any-link:not(.btn) {
+  color: var(--green)
+}
+body {
+  color: var(--grey);
+  font-size: 1rem;
+  font-family: Roboto, sans-serif;
+  line-height: 1.5;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+p {
+  margin: 0 0 1rem;
+  &:last-child {
+    margin: 0
+  }
+}
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  li {
+    padding: .25rem 0
+  }
+}
+.text-center {
+  text-align: center
+}

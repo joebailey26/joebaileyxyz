@@ -1,0 +1,50 @@
+@use 'resets';
+@use 'variables';
+@use 'typography';
+@use 'bootstrap';
+@use 'nav';
+@use 'button';
+@use 'page-header';
+@use 'post-index';
+@use 'wordpress';
+body {
+  scroll-padding-top: 70px;
+  margin: 0;
+  background-color: #FAFAFA;
+  // stylelint-disable-next-line declaration-no-important
+  user-select: auto!important
+}
+main {
+  position: relative;
+  z-index: 3;
+  min-height: calc(100vh - 280px);
+  margin: 0 30px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+
+  @media (max-width: 576px) {
+    margin: 0 10px
+  }
+}
+.title {
+  min-height: 2rem;
+  margin-top: 0;
+  margin-bottom: 3.125rem
+}
+@media (max-width: 768px) {
+  .post-index .section,
+  .post-single .section {
+    padding: 40px 0
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: white;
+    background-color: var(--dark-grey)
+  }
+  main {
+    background-color: #333333
+  }
+}

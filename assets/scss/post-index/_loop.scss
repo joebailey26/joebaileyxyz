@@ -1,0 +1,12 @@
+.post-index__loop {
+  display: grid;
+  grid-gap: 32px
+}
+
+@media (min-width: 577px) {
+  .post-index__post--with-date {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 32px
+  }
+}
