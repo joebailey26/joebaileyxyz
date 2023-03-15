@@ -116,8 +116,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@aceforth/nuxt-optimized-images',
-    '@nuxtjs/redirect-module'
+    '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {
     optimizeImages: true,
