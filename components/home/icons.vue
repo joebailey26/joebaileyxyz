@@ -53,11 +53,11 @@ export default {
   props: {
     items: {
       type: Number,
-      default: 0
+      required: true
     },
     current: {
       type: Number,
-      default: 0
+      required: true
     }
   },
   methods: {

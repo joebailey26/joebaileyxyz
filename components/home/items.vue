@@ -78,13 +78,11 @@ export default {
   props: {
     items: {
       type: Array,
-      default () {
-        return []
-      }
+      required: true
     },
     linkPrefix: {
       type: String,
-      default: ''
+      required: true
     },
     showLinks: {
       type: Boolean,

@@ -46,50 +46,54 @@ function getReadingTime (content) {
   return Math.ceil(count / avgWordsPerMin)
 }
 
-export const actions = {
-  async nuxtServerInit ({ commit }, { error }) {
-    try {
-      let projects = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=96&per_page=99', {
-        headers: {
-          Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
-        }
-      }).then(res => res.json())
-      projects = projects
-        .filter(el => el.status === 'publish')
-        // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, slug, content, acf }) => ({
-          title: title.rendered,
-          excerpt: excerpt.rendered,
-          slug,
-          content: content.rendered,
-          acf
-        }))
-      let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99', {
-        headers: {
-          Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
-        }
-      }).then(res => res.json())
-      blogPosts = blogPosts
-        .filter(el => el.status === 'publish')
-        // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, slug, date, content, acf }) => ({
-          title: title.rendered,
-          excerpt: excerpt.rendered,
-          slug,
-          date: {
-            fullDate: new Date(date.substring(0, date.indexOf('T'))),
-            year: getYear(date),
-            month: getMonth(date),
-            day: getDay(date)
-          },
-          content: content.rendered,
-          readingTime: getReadingTime(content.rendered),
-          acf
-        }))
-      commit('updateProjects', projects)
-      commit('updateBlogPosts', blogPosts)
-    } catch (err) {
-      error({ statusCode: 500, message: err })
+function getRequiredInfoFromPosts (posts) {
+  if (!posts) {
+    return null
+  }
+  return posts.map(({ title, excerpt, slug, date, content, acf }) => ({
+    title: title.rendered,
+    excerpt: excerpt.rendered,
+    slug,
+    date: {
+      fullDate: new Date(date.substring(0, date.indexOf('T'))),
+      year: getYear(date),
+      month: getMonth(date),
+      day: getDay(date)
+    },
+    content: content.rendered,
+    readingTime: getReadingTime(content.rendered),
+    acf
+  }))
+}
+
+const postsPerPage = 10
+
+async function fetchPosts (categoryId) {
+  const posts = []
+  const initialCall = await fetch(`https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&per_page=${postsPerPage}`, {
+    headers: {
+      Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
     }
+  }).then((response) => {
+    const totalPosts = response.headers.get('X-WP-Total')
+    const totalPages = response.headers.get('X-WP-TotalPages')
+    return response.json().then(posts => ({ totalPosts, totalPages, posts }))
+  })
+  posts.push(getRequiredInfoFromPosts(initialCall.posts))
+  for (let page = 2; page <= initialCall.totalPages; page++) {
+    const paginatedCall = await fetch(`https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&page=${page}&per_page=${postsPerPage}`, {
+      headers: {
+        Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
+      }
+    }).then(response => response.json())
+    posts.push(getRequiredInfoFromPosts(paginatedCall))
+  }
+  return posts
+}
+
+export const actions = {
+  async nuxtServerInit ({ commit }) {
+    commit('updateProjects', await fetchPosts(96))
+    commit('updateBlogPosts', await fetchPosts(39))
   }
 }

@@ -40,13 +40,7 @@ export default {
   props: {
     date: {
       type: Object,
-      default () {
-        return {
-          day: 0,
-          month: 0,
-          year: 0
-        }
-      }
+      required: true
     }
   }
 }

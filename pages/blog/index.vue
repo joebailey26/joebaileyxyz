@@ -15,9 +15,9 @@
         <section class="section">
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
-              <div class="post-index__loop">
-                <template v-for="post in blogPosts">
-                  <article :id="post.slug" :key="post.title" class="post-index__post post-index__post--with-date">
+              <div v-if="paginatedPosts" class="post-index__loop">
+                <template v-for="post in paginatedPosts">
+                  <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post post-index__post--with-date">
                     <Date class="post__date" :date="post.date" />
                     <header class="post__header">
                       <h2 class="post__title">
@@ -33,6 +33,10 @@
                     </div>
                   </article>
                 </template>
+                <Pagination
+                  :page-count="pageCount"
+                  link-prefix="blog"
+                />
               </div>
             </div>
           </div>
@@ -44,10 +48,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import Pagination from '~/components/posts/pagination'
 import Date from '~/components/posts/date'
 
 export default {
   components: {
+    Pagination,
     Date
   },
   data () {
@@ -61,7 +67,16 @@ export default {
   computed: {
     ...mapState([
       'blogPosts'
-    ])
+    ]),
+    pageCount () {
+      return this.blogPosts.length
+    },
+    currentPage () {
+      return parseInt(this.$route.params.page) || 1
+    },
+    paginatedPosts () {
+      return this.blogPosts[this.currentPage - 1]
+    }
   },
   head () {
     return {

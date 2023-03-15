@@ -138,8 +138,21 @@ export default {
       ]
     }
   },
+  generate: {
+    fallback: true
+  },
   router: {
-    trailingSlash: true
+    trailingSlash: true,
+    extendRoutes (routes, resolve) {
+      routes.push({
+        path: '/blog/page/:page',
+        component: resolve(__dirname, 'pages/blog/index.vue')
+      })
+      routes.push({
+        path: '/projects/page/:page',
+        component: resolve(__dirname, 'pages/projects/index.vue')
+      })
+    }
   },
   /*
    ** Build configuration

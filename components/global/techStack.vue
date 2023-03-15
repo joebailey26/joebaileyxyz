@@ -56,9 +56,7 @@ export default {
   props: {
     techStack: {
       type: Array,
-      default () {
-        return []
-      }
+      required: true
     }
   }
 }

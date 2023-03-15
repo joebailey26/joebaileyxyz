@@ -15,25 +15,29 @@
         <section class="section">
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
-              <div class="post-index__loop">
-                <template v-for="project in projects">
-                  <article :id="project.slug" :key="project.title" class="post-index__post">
+              <div v-if="paginatedPosts" class="post-index__loop">
+                <template v-for="project in paginatedPosts">
+                  <article v-if="project && project.slug" :id="project.slug" :key="project.title" class="post-index__post">
                     <header class="post__header">
                       <h2 class="post__title">
                         <nuxt-link :to="`/projects/${project.slug}/`" v-html="project.title" />
                       </h2>
-                      <TechStack class="post__tech-stack" :tech-stack="project.acf.icons" />
+                      <TechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
                     </header>
                     <div class="post__content" v-html="project.excerpt" />
                     <div class="post__buttons buttonsContainer">
                       <nuxt-link class="btn" :to="`/projects/${project.slug}/`">
                         Continue Reading
                       </nuxt-link>
-                      <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View the project</a>
-                      <a v-if="project.acf.github" class="btn" :href="project.acf.github">View on GitHub</a>
+                      <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View the project</a>
+                      <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View on GitHub</a>
                     </div>
                   </article>
                 </template>
+                <Pagination
+                  :page-count="pageCount"
+                  link-prefix="projects"
+                />
               </div>
             </div>
           </div>
@@ -45,10 +49,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import Pagination from '~/components/posts/pagination'
 import TechStack from '~/components/global/techStack'
 
 export default {
   components: {
+    Pagination,
     TechStack
   },
   data () {
@@ -62,7 +68,16 @@ export default {
   computed: {
     ...mapState([
       'projects'
-    ])
+    ]),
+    pageCount () {
+      return this.projects.length
+    },
+    currentPage () {
+      return parseInt(this.$route.params.page) || 1
+    },
+    paginatedPosts () {
+      return this.projects[this.currentPage - 1]
+    }
   },
   head () {
     return {

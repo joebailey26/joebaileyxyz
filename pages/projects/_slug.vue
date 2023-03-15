@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div v-if="project">
     <header class="page-header">
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
             <h1 class="page-header__title" v-html="project.title" />
-            <TechStack class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" />
+            <TechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" />
           </div>
         </div>
       </div>
@@ -42,26 +42,32 @@ export default {
   },
   computed: {
     project () {
-      return this.$store.state.projects.find(item => item.slug === this.$route.params.slug)
+      return this.$store.state.projects.flat().find(item => item.slug === this.$route.params.slug)
+    },
+    head () {
+      return {
+        title: this.project ? this.project.title : '',
+        description: this.project ? this.project.excerpt : ''
+      }
     }
   },
   beforeMount () {
     if (!this.project) {
-      this.$nuxt.context.error({ statusCode: 404, message: 'project not found' })
+      this.$nuxt.context.error({ statusCode: 404, message: 'Project not found' })
     }
   },
   head () {
     return {
-      title: this.project.title,
+      title: this.head.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.project.excerpt },
-        { hid: 'og:title', property: 'og:title', content: this.project.title },
-        { hid: 'og:description', property: 'og:description', content: this.project.excerpt },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.project.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.project.excerpt }
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/projects/${this.$route.slug}/` }
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
       ]
     }
   }

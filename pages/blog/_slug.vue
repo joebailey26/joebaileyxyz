@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="post">
     <header class="page-header">
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
@@ -39,7 +39,13 @@
 export default {
   computed: {
     post () {
-      return this.$store.state.blogPosts.find(item => item.slug === this.$route.params.slug)
+      return this.$store.state.blogPosts.flat().find(item => item.slug === this.$route.params.slug)
+    },
+    head () {
+      return {
+        title: this.post ? this.post.title : '',
+        description: this.post ? this.post.excerpt : ''
+      }
     }
   },
   beforeMount () {
@@ -49,16 +55,16 @@ export default {
   },
   head () {
     return {
-      title: this.post.title,
+      title: this.head.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.post.excerpt },
-        { hid: 'og:title', property: 'og:title', content: this.post.title },
-        { hid: 'og:description', property: 'og:description', content: this.post.excerpt },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.post.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.post.excerpt }
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.slug}/` }
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
       ]
     }
   }
