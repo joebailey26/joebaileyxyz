@@ -43,7 +43,7 @@ article {
     <TechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
     <div v-html="item.excerpt" />
     <div class="buttonsContainer">
-      <nuxt-link :to="link" class="btn">
+      <nuxt-link v-if="showLink" :to="link" class="btn">
         Continue Reading
       </nuxt-link>
       <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View the project</a>
