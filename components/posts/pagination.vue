@@ -25,7 +25,10 @@
 .active :any-link,
 .disabled :any-link {
   color: var(--dark-grey);
-  pointer-events: none
+  pointer-events: none;
+  @media (prefers-color-scheme: dark) {
+    color: white
+  }
 }
 </style>
 
