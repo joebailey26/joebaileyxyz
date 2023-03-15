@@ -73,10 +73,27 @@ export default {
       return this.projects.length
     },
     currentPage () {
-      return parseInt(this.$route.params.page) || 1
+      if (!this.$route.params.page) {
+        return 1
+      }
+      const page = parseInt(this.$route.params.page)
+      if (page) {
+        if (page === 1) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.$router.push('/projects/')
+          return 1
+        }
+        return page
+      }
+      return null
     },
     paginatedPosts () {
       return this.projects[this.currentPage - 1]
+    }
+  },
+  created () {
+    if (!this.currentPage || this.currentPage < 1 || this.currentPage > this.pageCount) {
+      this.$nuxt.context.error({ statusCode: 404, message: 'Page not found' })
     }
   },
   head () {

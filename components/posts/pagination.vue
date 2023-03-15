@@ -32,15 +32,22 @@
 <template>
   <ul v-if="pageCount > 1" class="pagination">
     <li v-if="!(firstPageSelected())" :class="[firstPageSelected() ? 'disabled' : '']">
-      <a
-        href="javascript:void(0)"
+      <nuxt-link
+        v-if="currentPage - 1 === 1"
+        :to="`/${linkPrefix}/`"
         aria-label="Previous Page"
         :tabindex="firstPageSelected() ? -1 : 0"
-        @click="prevPage()"
-        @keyup.enter="prevPage()"
       >
         Prev
-      </a>
+      </nuxt-link>
+      <nuxt-link
+        v-else
+        :to="`/${linkPrefix}/page/${currentPage - 1}/`"
+        aria-label="Previous Page"
+        :tabindex="firstPageSelected() ? -1 : 0"
+      >
+        Prev
+      </nuxt-link>
     </li>
 
     <li v-for="(page, idx) in pages" :key="idx" :class="[page.selected ? 'active' : '', page.disabled ? 'disabled' : '']">
@@ -56,6 +63,16 @@
         {{ page.content }}
       </span>
       <nuxt-link
+        v-if="page.index + 1 === 1"
+        :to="`/${linkPrefix}/`"
+        :aria-label="'Page' + ' ' + page.content"
+        :aria-current="page.selected"
+        :tabindex="page.selected ? '-1' : '0'"
+        :aria-hidden="page.selected ? 'true' : 'false'"
+      >
+        {{ page.content }} <span class="sr-only">(current)</span>
+      </nuxt-link>
+      <nuxt-link
         v-else
         :to="`/${linkPrefix}/page/${page.index + 1}/`"
         :aria-label="'Page' + ' ' + page.content"
@@ -68,15 +85,13 @@
     </li>
 
     <li v-if="!(lastPageSelected())" :class="[lastPageSelected() ? 'disabled' : '']">
-      <a
-        href="javascript:void(0)"
+      <nuxt-link
+        :to="`/${linkPrefix}/page/${currentPage + 1}/`"
         aria-label="Next Page"
         :tabindex="lastPageSelected() ? -1 : 0"
-        @click="nextPage()"
-        @keyup.enter="nextPage()"
       >
         Next
-      </a>
+      </nuxt-link>
     </li>
   </ul>
 </template>
@@ -170,21 +185,6 @@ export default {
     }
   },
   methods: {
-    handlePageSelected (selected) {
-      if (this.currentPage === selected) { return }
-
-      this.clickHandler(selected)
-    },
-    prevPage () {
-      if (this.currentPage <= 1) { return }
-
-      this.handlePageSelected(this.currentPage - 1)
-    },
-    nextPage () {
-      if (this.currentPage >= this.pageCount) { return }
-
-      this.handlePageSelected(this.currentPage + 1)
-    },
     firstPageSelected () {
       return this.currentPage === 1
     },

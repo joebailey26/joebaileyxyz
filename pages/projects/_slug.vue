@@ -51,7 +51,7 @@ export default {
       }
     }
   },
-  beforeMount () {
+  created () {
     if (!this.project) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Project not found' })
     }

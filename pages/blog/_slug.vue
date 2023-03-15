@@ -48,7 +48,7 @@ export default {
       }
     }
   },
-  beforeMount () {
+  created () {
     if (!this.post) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Post not found' })
     }
