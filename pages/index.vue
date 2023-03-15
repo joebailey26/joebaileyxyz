@@ -31,15 +31,23 @@ export default {
     Blog,
     Contact
   },
+  data () {
+    return {
+      head: {
+        title: 'Home',
+        description: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.'
+      }
+    }
+  },
   head () {
     return {
-      title: 'Home',
+      title: this.title,
       meta: [
-        { hid: 'description', name: 'description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.' },
-        { hid: 'og:title', property: 'og:title', content: 'Home' },
-        { hid: 'og:description', property: 'og:description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.' },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'Home' },
-        { hid: 'twitter:description', name: 'twitter:description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.' }
+        { hid: 'description', name: 'description', content: this.description },
+        { hid: 'og:title', property: 'og:title', content: this.title },
+        { hid: 'og:description', property: 'og:description', content: this.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.description }
       ]
     }
   }

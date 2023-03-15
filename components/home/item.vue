@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     link () {
-      return `/${this.linkPrefix}/${this.item.slug}`
+      return `/${this.linkPrefix}/${this.item.slug}/`
     }
   }
 }

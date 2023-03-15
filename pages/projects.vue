@@ -4,12 +4,8 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
-            <h1 class="page-header__title">
-              Projects
-            </h1>
-            <p class="page-header__description">
-              Some loose notes on tech demonstrations and projects that I have created.
-            </p>
+            <h1 class="page-header__title" v-text="title" />
+            <p class="page-header__description" v-text="description" />
           </div>
         </div>
       </div>
@@ -50,6 +46,14 @@ export default {
   components: {
     TechStack
   },
+  data () {
+    return {
+      head: {
+        title: 'Projects',
+        description: 'Some loose notes on tech demonstrations and projects that I have created.'
+      }
+    }
+  },
   computed: {
     ...mapState([
       'projects'
@@ -57,13 +61,16 @@ export default {
   },
   head () {
     return {
-      title: 'Projects',
+      title: this.title,
       meta: [
-        { hid: 'description', name: 'description', content: 'Some loose notes on tech demonstrations and projects that I have created.' },
-        { hid: 'og:title', property: 'og:title', content: 'Projects' },
-        { hid: 'og:description', property: 'og:description', content: 'Some loose notes on tech demonstrations and projects that I have created.' },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'Projects' },
-        { hid: 'twitter:description', name: 'twitter:description', content: 'Some loose notes on tech demonstrations and projects that I have created.' }
+        { hid: 'description', name: 'description', content: this.description },
+        { hid: 'og:title', property: 'og:title', content: this.title },
+        { hid: 'og:description', property: 'og:description', content: this.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.description }
+      ],
+      link: [
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
       ]
     }
   }

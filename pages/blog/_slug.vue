@@ -54,7 +54,7 @@ export default {
         { hid: 'twitter:description', name: 'twitter:description', content: this.post.excerpt }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/${this.$route.slug}` }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/${this.$route.slug}/` }
       ]
     }
   }

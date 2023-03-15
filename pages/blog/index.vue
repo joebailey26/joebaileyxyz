@@ -4,12 +4,8 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
-            <h1 class="page-header__title">
-              Blog
-            </h1>
-            <p class="page-header__description">
-              Some of my ramblings on tech, websites, and self-development.
-            </p>
+            <h1 class="page-header__title" v-text="title" />
+            <p class="page-header__description" v-text="description" />
           </div>
         </div>
       </div>
@@ -25,7 +21,7 @@
                     <Date class="post__date" :date="post.date" />
                     <header class="post__header">
                       <h2 class="post__title">
-                        <nuxt-link :to="`blog/${post.slug}`" v-html="post.title" />
+                        <nuxt-link :to="`/blog/${post.slug}/`" v-html="post.title" />
                       </h2>
                       <span class="post__read-time">{{ post.readingTime }} minute read</span>
                     </header>
@@ -54,6 +50,14 @@ export default {
   components: {
     Date
   },
+  data () {
+    return {
+      head: {
+        title: 'Blog',
+        description: 'Some of my ramblings on tech, websites, and self-development.'
+      }
+    }
+  },
   computed: {
     ...mapState([
       'blogPosts'
@@ -61,13 +65,16 @@ export default {
   },
   head () {
     return {
-      title: 'Blog',
+      title: this.title,
       meta: [
-        { hid: 'description', name: 'description', content: 'Some of my ramblings on tech, websites, and self-development.' },
-        { hid: 'og:title', property: 'og:title', content: 'Blog' },
-        { hid: 'og:description', property: 'og:description', content: 'Some of my ramblings on tech, websites, and self-development.' },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'Blog' },
-        { hid: 'twitter:description', name: 'twitter:description', content: 'Some of my ramblings on tech, websites, and self-development.' }
+        { hid: 'description', name: 'description', content: this.description },
+        { hid: 'og:title', property: 'og:title', content: this.title },
+        { hid: 'og:description', property: 'og:description', content: this.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.description }
+      ],
+      link: [
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/blog/' }
       ]
     }
   }

@@ -116,7 +116,8 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@aceforth/nuxt-optimized-images'
+    '@aceforth/nuxt-optimized-images',
+    '@nuxtjs/redirect-module'
   ],
   optimizedImages: {
     optimizeImages: true,
@@ -137,6 +138,9 @@ export default {
         { removeScriptElement: true }
       ]
     }
+  },
+  router: {
+    trailingSlash: true
   },
   /*
    ** Build configuration

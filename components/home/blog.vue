@@ -1,7 +1,7 @@
 <template>
   <section id="section-blog" class="section section-blog">
     <h2 class="text-center title">
-      <nuxt-link to="blog">
+      <nuxt-link to="/blog/">
         Blog
       </nuxt-link>
     </h2>
