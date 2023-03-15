@@ -31,7 +31,7 @@
 
 <template>
   <ul v-if="pageCount > 1" class="pagination">
-    <li v-if="!(firstPageSelected())" :class="[firstPageSelected() ? 'disabled' : '']">
+    <li v-if="!(firstPageSelected())">
       <nuxt-link
         v-if="currentPage - 1 === 1"
         :to="`/${linkPrefix}/`"
@@ -63,7 +63,7 @@
         {{ page.content }}
       </span>
       <nuxt-link
-        v-if="page.index + 1 === 1"
+        v-else-if="page.index + 1 === 1"
         :to="`/${linkPrefix}/`"
         :aria-label="'Page' + ' ' + page.content"
         :aria-current="page.selected"
@@ -84,7 +84,7 @@
       </nuxt-link>
     </li>
 
-    <li v-if="!(lastPageSelected())" :class="[lastPageSelected() ? 'disabled' : '']">
+    <li v-if="!(lastPageSelected())">
       <nuxt-link
         :to="`/${linkPrefix}/page/${currentPage + 1}/`"
         aria-label="Next Page"
