@@ -4,8 +4,8 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
-            <h1 class="page-header__title" v-text="title" />
-            <p class="page-header__description" v-text="description" />
+            <h1 class="page-header__title" v-text="head.title" />
+            <p class="page-header__description" v-text="head.description" />
           </div>
         </div>
       </div>
@@ -65,13 +65,13 @@ export default {
   },
   head () {
     return {
-      title: this.title,
+      title: this.head.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.description },
-        { hid: 'og:title', property: 'og:title', content: this.title },
-        { hid: 'og:description', property: 'og:description', content: this.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.description }
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
       ],
       link: [
         { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/blog/' }
