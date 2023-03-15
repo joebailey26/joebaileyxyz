@@ -46,8 +46,8 @@ article {
       <nuxt-link v-if="showLink" :to="link" class="btn">
         Continue Reading
       </nuxt-link>
-      <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View the project</a>
-      <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github" target="_blank">View on GitHub</a>
+      <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View project</a>
+      <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github" target="_blank">View repo</a>
     </div>
   </article>
 </template>

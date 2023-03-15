@@ -29,8 +29,8 @@
                       <nuxt-link class="btn" :to="`/projects/${project.slug}/`">
                         Continue Reading
                       </nuxt-link>
-                      <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View the project</a>
-                      <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View on GitHub</a>
+                      <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
+                      <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                     </div>
                   </article>
                 </template>

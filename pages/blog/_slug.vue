@@ -21,8 +21,8 @@
                 <!-- TO DO: Add Navigation -->
                 <div class="post__content" v-html="post.content" />
                 <div class="post__buttons buttonsContainer">
-                  <a v-if="post.acf && post.acf.project_url" class="btn" :href="post.acf.project_url">View the project</a>
-                  <a v-if="post.acf && post.acf.github" class="btn" :href="post.acf.github">View on GitHub</a>
+                  <a v-if="post.acf && post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
+                  <a v-if="post.acf && post.acf.github" class="btn" :href="post.acf.github">View repo</a>
                 </div>
                 <!-- TO DO: Add Galexia Share Integration -->
                 <!-- TO DO: Add Navigation -->
