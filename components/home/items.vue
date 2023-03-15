@@ -62,7 +62,7 @@
         />
       </template>
     </div>
-    <Icons :items="6" :current="current" @iconClicked="iconScroll" />
+    <Icons :items="items.length" :current="current" @iconClicked="iconScroll" />
   </div>
 </template>
 
