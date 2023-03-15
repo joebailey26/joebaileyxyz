@@ -19,7 +19,11 @@
             <div class="col-md-8 ml-auto mr-auto">
               <article>
                 <!-- TO DO: Add Navigation -->
-                <section v-html="post.content" />
+                <div class="post__content" v-html="post.content" />
+                <div class="post__buttons buttonsContainer">
+                  <a v-if="post.acf && post.acf.project_url" class="btn" :href="post.acf.project_url">View the project</a>
+                  <a v-if="post.acf && post.acf.github" class="btn" :href="post.acf.github">View on GitHub</a>
+                </div>
                 <!-- TO DO: Add Galexia Share Integration -->
                 <!-- TO DO: Add Navigation -->
               </article>
@@ -54,7 +58,7 @@ export default {
         { hid: 'twitter:description', name: 'twitter:description', content: this.post.excerpt }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/${this.$route.slug}/` }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.slug}/` }
       ]
     }
   }

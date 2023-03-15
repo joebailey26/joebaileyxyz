@@ -5,7 +5,7 @@
         Projects
       </nuxt-link>
     </h2>
-    <Items :items="projects.slice(0, 6)" link-prefix="projects" :show-links="false" />
+    <Items :items="projects.slice(0, 6)" link-prefix="projects" />
     <Git />
   </section>
 </template>

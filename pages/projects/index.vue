@@ -19,11 +19,16 @@
                 <template v-for="project in projects">
                   <article :id="project.slug" :key="project.title" class="post-index__post">
                     <header class="post__header">
-                      <h2 class="post__title" v-html="project.title" />
+                      <h2 class="post__title">
+                        <nuxt-link :to="`/projects/${project.slug}/`" v-html="project.title" />
+                      </h2>
                       <TechStack class="post__tech-stack" :tech-stack="project.acf.icons" />
                     </header>
-                    <div class="post__content" v-html="project.content" />
+                    <div class="post__content" v-html="project.excerpt" />
                     <div class="post__buttons buttonsContainer">
+                      <nuxt-link class="btn" :to="`/projects/${project.slug}/`">
+                        Continue Reading
+                      </nuxt-link>
                       <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View the project</a>
                       <a v-if="project.acf.github" class="btn" :href="project.acf.github">View on GitHub</a>
                     </div>

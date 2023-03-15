@@ -27,7 +27,7 @@
                     </header>
                     <div class="post__content" v-html="post.excerpt" />
                     <div class="post__buttons buttonsContainer">
-                      <nuxt-link class="btn" :to="`blog/${post.slug}`">
+                      <nuxt-link class="btn" :to="`/blog/${post.slug}/`">
                         Continue Reading
                       </nuxt-link>
                     </div>

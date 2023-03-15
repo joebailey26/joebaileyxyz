@@ -40,14 +40,14 @@ article {
       <nuxt-link v-if="showLink" :to="link" v-html="item.title" />
       <span v-else v-html="item.title" />
     </h3>
-    <TechStack v-if="item.acf && item.acf.icons" :tech-stack="item.acf.icons" />
+    <TechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
     <div v-html="item.excerpt" />
     <div class="buttonsContainer">
-      <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url">View the project</a>
-      <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github">View on GitHub</a>
-      <nuxt-link v-if="!item.acf || (item.acf && (!item.acf.github && !item.acf.project_url))" :to="link" class="btn">
+      <nuxt-link :to="link" class="btn">
         Continue Reading
       </nuxt-link>
+      <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View the project</a>
+      <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github" target="_blank">View on GitHub</a>
     </div>
   </article>
 </template>
@@ -71,6 +71,10 @@ export default {
       default: ''
     },
     showLink: {
+      type: Boolean,
+      default: true
+    },
+    showTechStack: {
       type: Boolean,
       default: true
     }

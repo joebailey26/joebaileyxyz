@@ -57,13 +57,12 @@ export const actions = {
       projects = projects
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, content, slug, acf, yoast_head_json }) => ({
+        .map(({ title, excerpt, slug, content, acf }) => ({
           title: title.rendered,
           excerpt: excerpt.rendered,
-          content: content.rendered,
           slug,
-          acf,
-          yoast_head_json
+          content: content.rendered,
+          acf
         }))
       let blogPosts = await fetch('https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&categories=39&per_page=99', {
         headers: {
@@ -73,7 +72,7 @@ export const actions = {
       blogPosts = blogPosts
         .filter(el => el.status === 'publish')
         // eslint-disable-next-line camelcase
-        .map(({ title, excerpt, slug, date, content }) => ({
+        .map(({ title, excerpt, slug, date, content, acf }) => ({
           title: title.rendered,
           excerpt: excerpt.rendered,
           slug,
@@ -84,7 +83,8 @@ export const actions = {
             day: getDay(date)
           },
           content: content.rendered,
-          readingTime: getReadingTime(content.rendered)
+          readingTime: getReadingTime(content.rendered),
+          acf
         }))
       commit('updateProjects', projects)
       commit('updateBlogPosts', blogPosts)

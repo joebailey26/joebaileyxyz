@@ -58,6 +58,7 @@
           :item="item"
           :link-prefix="linkPrefix"
           :show-link="showLinks"
+          :show-tech-stack="showTechStack"
         />
       </template>
     </div>
@@ -86,6 +87,10 @@ export default {
       default: ''
     },
     showLinks: {
+      type: Boolean,
+      default: true
+    },
+    showTechStack: {
       type: Boolean,
       default: true
     }
