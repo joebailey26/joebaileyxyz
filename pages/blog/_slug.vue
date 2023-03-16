@@ -39,7 +39,7 @@
 export default {
   computed: {
     post () {
-      return this.$store.state.blogPosts.flat().find(item => item.slug === this.$route.params.slug)
+      return this.$store.state.blogPosts.flat().find((item) => item.slug === this.$route.params.slug)
     },
     head () {
       return {

@@ -70,22 +70,36 @@ const postsPerPage = 10
 
 async function fetchPosts (categoryId) {
   const posts = []
-  const initialCall = await fetch(`https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&per_page=${postsPerPage}`, {
-    headers: {
-      Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
+  const initialCall = await fetch(
+    `https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&per_page=${postsPerPage}`,
+    {
+      headers: {
+        Authorization:
+          'Basic ' +
+          Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString(
+            'base64'
+          )
+      }
     }
-  }).then((response) => {
+  ).then((response) => {
     const totalPosts = response.headers.get('X-WP-Total')
     const totalPages = response.headers.get('X-WP-TotalPages')
-    return response.json().then(posts => ({ totalPosts, totalPages, posts }))
+    return response.json().then((posts) => ({ totalPosts, totalPages, posts }))
   })
   posts.push(getRequiredInfoFromPosts(initialCall.posts))
   for (let page = 2; page <= initialCall.totalPages; page++) {
-    const paginatedCall = await fetch(`https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&page=${page}&per_page=${postsPerPage}`, {
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(`${process.env.WP_USER}:${process.env.WP_PASS}`).toString('base64')
+    const paginatedCall = await fetch(
+      `https://joebaileyphotography.com/Blog/wp-json/wp/v2/posts?_embed=1&status=publish&categories=${categoryId}&page=${page}&per_page=${postsPerPage}`,
+      {
+        headers: {
+          Authorization:
+            'Basic ' +
+            Buffer.from(
+              `${process.env.WP_USER}:${process.env.WP_PASS}`
+            ).toString('base64')
+        }
       }
-    }).then(response => response.json())
+    ).then((response) => response.json())
     posts.push(getRequiredInfoFromPosts(paginatedCall))
   }
   return posts

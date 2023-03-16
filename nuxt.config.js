@@ -17,12 +17,12 @@ export default {
       { name: 'msapplication-TileImage', content: 'https://joebailey.xyz/mstile-144x144.png' },
 
       // Twitter Card data
-      { hid: 'twitter:title', name: 'twitter:title', template: chunk => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
+      { hid: 'twitter:title', name: 'twitter:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
       { hid: 'twitter:description', name: 'twitter:description' },
       { name: 'twitter:creator', content: '@JoeBailey26' },
 
       // Open Graph data
-      { hid: 'og:title', property: 'og:title', template: chunk => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
+      { hid: 'og:title', property: 'og:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
       { hid: 'og:description', property: 'og:description' },
       { property: 'og:type', content: 'website' }
     ],
