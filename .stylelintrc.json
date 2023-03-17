@@ -1,4 +1,10 @@
 {
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ],
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-rational-order",

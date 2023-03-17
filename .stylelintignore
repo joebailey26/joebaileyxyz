@@ -1,3 +1,4 @@
-"node_modules/**/*",
-"*/.js",
-"*/.vue"
+# ignore all files except .scss and .vue files
+#*
+!*.scss
+!*.vue

@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "stylelint.vscode-stylelint",
+        "phoenisx.cssvar",
+        "mikestead.dotenv",
+        "dbaeumer.vscode-eslint",
+        "wix.vscode-import-cost",
+        "zignd.html-css-class-completion",
+        "sburg.vscode-javascript-booster",
+        "jamesqquick.netlify-toml-snippets",
+        "gencer.html-slim-scss-css-class-completion",
+        "mrmlnc.vscode-scss",
+        "octref.vetur"
+    ]
+}
