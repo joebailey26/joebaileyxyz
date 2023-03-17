@@ -5,6 +5,7 @@
       "customSyntax": "postcss-scss"
     }
   ],
+  "processors": ["stylelint-processor-html"],
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-rational-order",
@@ -12,6 +13,9 @@
   ],
   "defaultSeverity": "warning",
   "rules": {
+    "custom-property-empty-line-before": null,
+    "selector-id-pattern": null,
+    "declaration-property-value-no-unknown": true,
     "custom-property-pattern": null,
     "block-closing-brace-newline-before": null,
     "indentation": 2,

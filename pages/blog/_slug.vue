@@ -37,6 +37,21 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: this.head.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
+      ],
+      link: [
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
+      ]
+    }
+  },
   computed: {
     post () {
       return this.$store.state.blogPosts.flat().find((item) => item.slug === this.$route.params.slug)
@@ -51,21 +66,6 @@ export default {
   created () {
     if (!this.post) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Post not found' })
-    }
-  },
-  head () {
-    return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
-      link: [
-        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
-      ]
     }
   }
 }

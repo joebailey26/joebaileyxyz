@@ -40,17 +40,17 @@ export default {
       default: null
     }
   },
+  head () {
+    return {
+      title: this.message
+    }
+  },
   computed: {
     statusCode () {
       return (this.error && this.error.statusCode) || 500
     },
     message () {
       return this.error.message
-    }
-  },
-  head () {
-    return {
-      title: this.message
     }
   }
 }

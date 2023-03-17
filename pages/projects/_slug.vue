@@ -40,6 +40,21 @@ export default {
   components: {
     TechStack
   },
+  head () {
+    return {
+      title: this.head.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
+      ],
+      link: [
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
+      ]
+    }
+  },
   computed: {
     project () {
       return this.$store.state.projects.flat().find((item) => item.slug === this.$route.params.slug)
@@ -54,21 +69,6 @@ export default {
   created () {
     if (!this.project) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Project not found' })
-    }
-  },
-  head () {
-    return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
-      link: [
-        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
-      ]
     }
   }
 }

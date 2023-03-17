@@ -7,8 +7,8 @@
   "scripts": {
     "start": "nuxt",
     "generate": "nuxt generate --modern --quiet --fail-on-error",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "fix:js": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
+    "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "fix:scripts": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
     "lint:styles": "stylelint \"**/*.{vue,scss}\"",
     "fix:styles": "stylelint \"**/*.{vue,scss}\" --fix"
   },
@@ -32,7 +32,7 @@
     "webp-loader": "^0.6.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "6",
+    "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.1.0",
     "@nuxtjs/stylelint-module": "^4.2.1",
     "eslint": "^7.29.0",
@@ -41,9 +41,11 @@
     "stylelint": "^15.3.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended-vue": "^1.4.0",
-    "stylelint-config-standard-scss": "^7.0.1"
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-processor-html": "^1.0.0"
   },
   "optionalDependencies": {
+    "@babel/core": "^7.21.3",
     "consola": "^2.15.3",
     "postcss": "8.4.19",
     "postcss-html": "1.0.0",
@@ -60,6 +62,6 @@
   ],
   "engines": {
     "node": "^16.14.2",
-    "yarn": "^1.22.18"
+    "yarn": "^1.10"
   }
 }

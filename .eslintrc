@@ -9,10 +9,22 @@
     "@nuxtjs",
     "plugin:nuxt/recommended"
   ],
+  "parserOptions": {
+    "requireConfigFile": false,
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
   // add your custom rules here
   "rules": {
     "vue/comment-directive": 0,
     "vue/no-v-html": 0,
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": [ "style", "template", "script"  ]
+      }
+    ],
     "quotes": [
       "error",
       "single"
