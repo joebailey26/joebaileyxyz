@@ -10,9 +10,6 @@
     "stylelint-config-rational-order",
     "stylelint-config-recommended-vue"
   ],
-  "plugins": [
-    "./node_modules/stylelint-value-no-unknown-custom-properties/dist/index.cjs"
-  ],
   "defaultSeverity": "warning",
   "rules": {
     "custom-property-pattern": null,
