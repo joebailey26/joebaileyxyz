@@ -47,7 +47,7 @@ function getReadingTime (content) {
 }
 
 function getRequiredInfoFromPosts (posts) {
-  if (!posts) {
+  if (!posts.length) {
     return null
   }
   return posts.map(({ title, excerpt, slug, date, content, acf }) => ({
