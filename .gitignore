@@ -93,3 +93,5 @@ sw.*
 .netlify
 
 .yarn
+
+.yarnrc
