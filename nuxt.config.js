@@ -40,7 +40,7 @@ export default {
     __dangerouslyDisableSanitizers: ['script', 'noscript'],
     noscript: [
       { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Recursive&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" />' },
-      { innerHTML: '<p><img src="https://analytics.galexia.agency/matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" /></p>' }
+      { innerHTML: '<img src="https://analytics.galexia.agency/matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" />' }
     ],
     script: [
       {
