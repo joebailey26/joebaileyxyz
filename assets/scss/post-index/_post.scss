@@ -3,11 +3,11 @@
 }
 .post__title {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: .625rem;
   &:has(+ .post__read-time) {
-    margin-bottom: 4px;
+    margin-bottom: .25rem;
     @media (max-width: 576px) {
-      margin-bottom: 10px
+      margin-bottom: .625rem
     }
   }
   &:has(+ .post__tech-stack) {
@@ -23,7 +23,7 @@
   }
 }
 .post__read-time {
-  margin-bottom: 10px;
+  margin-bottom: .625rem;
   font-size: .9rem;
   font-style: italic
 }

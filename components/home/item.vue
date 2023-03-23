@@ -1,7 +1,6 @@
 <style lang="scss" scoped>
 article {
   display: grid;
-  grid-template-rows: max-content 1fr calc(5.6em + 1rem);
   gap: 1rem;
   max-width: 100%;
   .info-title {
@@ -13,8 +12,11 @@ article {
       color: white
     }
   }
-  &:has(.tech-stack) {
-    grid-template-rows: max-content min-content 1fr calc(5.6em + 1rem)
+  @supports selector(:has(+ * )) {
+    grid-template-rows: max-content 1fr calc(5.6em + 1rem);
+    &:has(.tech-stack) {
+      grid-template-rows: max-content min-content 1fr calc(5.6em + 1rem)
+    }
   }
   @media (max-width: 768px) {
     margin-right: 0;
