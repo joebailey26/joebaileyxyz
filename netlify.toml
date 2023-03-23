@@ -41,3 +41,6 @@
 
 [[plugins]]
   package = "netlify-plugin-submit-sitemap"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
