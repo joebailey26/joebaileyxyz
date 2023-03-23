@@ -37,6 +37,7 @@
     "@nuxtjs/stylelint-module": "^4.2.1",
     "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^4.0.0",
+    "netlify-plugin-checklinks": "^4.1.1",
     "netlify-plugin-submit-sitemap": "^0.4.0",
     "postcss-scss": "^4.0.6",
     "stylelint": "^15.3.0",
