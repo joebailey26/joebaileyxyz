@@ -30,14 +30,14 @@
     "webp-loader": "^0.6.0"
   },
   "devDependencies": {
-    "@netlify/plugin-sitemap": "^0.8.1",
     "@netlify/plugin-lighthouse": "^4.0.7",
-    "netlify-plugin-submit-sitemap": "^0.4.0",
+    "@netlify/plugin-sitemap": "^0.8.1",
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.1.0",
     "@nuxtjs/stylelint-module": "^4.2.1",
     "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^4.0.0",
+    "netlify-plugin-submit-sitemap": "^0.4.0",
     "postcss-scss": "^4.0.6",
     "stylelint": "^15.3.0",
     "stylelint-config-rational-order": "^0.1.2",
