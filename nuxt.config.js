@@ -14,7 +14,7 @@ export default {
       { name: 'application-name', content: 'Joe Bailey' },
       { name: 'theme-color', content: '#282828' },
       { name: 'msapplication-TileColor', content: '#004c3f' },
-      { name: 'msapplication-TileImage', content: 'https://joebailey.xyz/mstile-144x144.png' },
+      { name: 'msapplication-TileImage', content: 'https://joebailey.xyz/mstile-150x150.png' },
 
       // Twitter Card data
       { hid: 'twitter:title', name: 'twitter:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
@@ -28,7 +28,7 @@ export default {
     ],
     link: [
       { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/' },
-      { rel: 'apple-touch-icon', sizes: '180x180', href: 'https://joebailey.xyz/apple-touch-icon-180x180.png' },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: 'https://joebailey.xyz/apple-touch-icon-192x192.png' },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'https://joebailey.xyz/favicon-32x32.png' },
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: 'https://joebailey.xyz/favicon-16x16.png' },
       { rel: 'mask-icon', href: 'https://joebailey.xyz/safari-pinned-tab.svg', color: '#004c3f' },
