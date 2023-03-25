@@ -116,6 +116,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
+    '~/modules/only-once.js',
     '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {
