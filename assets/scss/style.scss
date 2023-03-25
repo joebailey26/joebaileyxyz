@@ -7,6 +7,9 @@
 @use 'page-header';
 @use 'post-index';
 @use 'wordpress';
+:root {
+  scroll-behavior: smooth
+}
 body {
   scroll-padding-top: 70px;
   margin: 0;
