@@ -57,7 +57,7 @@ footer {
             >
               <font-awesome-icon :icon="['fa-brands', 'fa-github']" />
             </a>
-            <img src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status" height="20" width="auto">
+            <img src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status" height="20" width="auto" alt="Netlify Status">
           </div>
         </div>
       </div>
