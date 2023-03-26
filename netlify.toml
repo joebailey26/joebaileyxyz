@@ -6,7 +6,7 @@
   NODE_VERSION = "16"
 
 [[redirects]]
-  from = "https://heuristic-bell-6e94b3.netlify.com/*"
+  from = "https://joebailey.netlify.app/*"
   to = "https://joebailey.xyz/:splat"
   status = 301
   force = true
