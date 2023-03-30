@@ -1,4 +1,7 @@
+import fs from 'fs'
+import path from 'path'
 import fetch from 'node-fetch'
+import { load } from 'cheerio'
 
 function getDay (date) {
   date = new Date(date.substring(0, date.indexOf('T')))
@@ -90,7 +93,39 @@ async function fetchPosts (categoryId) {
     ).then((response) => response.json())
     posts.push(getRequiredInfoFromPosts(paginatedCall))
   }
+  for (const post of posts.flat()) {
+    const regex = /<img.*?>/g
+    const matches = post.content.match(regex)
+    if (matches) {
+      console.log(post.content)
+      console.log(await downloadAndReplaceImages(post.content))
+      post.content = await downloadAndReplaceImages(post.content)
+      throw new Error('error')
+    }
+  }
   return posts
+}
+
+async function downloadAndReplaceImages (htmlString) {
+  const $ = load(htmlString)
+  const promises = []
+  $('img').each((i, elem) => {
+    // Need to skip if images are already local
+    // Need to set proper directory to store images
+    // Need to pass images through to nuxt to allow optimised versions to be created
+    // Need to remove the srcset and sizes properties
+    const imgUrl = $(elem).attr('src')
+    promises.push(fetch(imgUrl).then((response) => {
+      const extension = path.extname(imgUrl)
+      const fileName = `image-${i}${extension}`
+      const localPath = path.join(__dirname, fileName)
+      const dest = fs.createWriteStream(localPath)
+      response.body.pipe(dest)
+      $(elem).attr('src', localPath)
+    }))
+  })
+  await Promise.all(promises)
+  return $.html()
 }
 
 export default async function () {
