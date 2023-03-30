@@ -20,7 +20,7 @@
       margin-right: calc(-1 * ((var(--100vw) - 100%) / 2));
       margin-left: calc(-1 * ((var(--100vw) - 100%) / 2));
       padding: 0;
-      overflow-x: scroll;
+      overflow-x: auto;
       column-gap: 10px;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type: x mandatory;
@@ -44,6 +44,14 @@
     @media (max-width: 576px) {
       grid-template-columns: 10px repeat(6, calc(var(--100vw) - 40px)) 10px
     }
+  }
+  .drag-scroll--enabled {
+    cursor: grab
+  }
+  .drag-scroll--scrolling {
+    cursor: grabbing;
+    user-select: none;
+    scroll-snap-type: none
   }
 }
 </style>
@@ -96,17 +104,77 @@ export default {
   data () {
     return {
       current: 0,
-      itemWidth: 0
+      itemWidth: 0,
+      position: {
+        left: 0,
+        x: 0
+      }
     }
   },
   mounted () {
     this.updateWidth()
     window.addEventListener('resize', this.updateWidth)
+    this.dragScrollWatcher()
+    window.addEventListener('resize', this.dragScrollWatcher)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.updateWidth)
+    this.stopDragScroll()
+    window.removeEventListener('resize', this.dragScrollWatcher)
   },
   methods: {
+    dragScrollWatcher () {
+      if (!this.hasTouchScreen() && this.hasOverflowAuto()) {
+        this.startDragScroll()
+      } else {
+        this.stopDragScroll()
+      }
+    },
+    startDragScroll () {
+      document.addEventListener('mousedown', this.mouseDownHandler)
+      this.$refs.container.classList.add('drag-scroll--enabled')
+    },
+    stopDragScroll () {
+      document.removeEventListener('mousedown', this.mouseDownHandler)
+      this.$refs.container.classList.remove('drag-scroll--enabled')
+      // This clears up some event listeners and resets our classes
+      this.mouseUpHandler()
+    },
+    hasTouchScreen () {
+      return ('ontouchstart' in window)
+    },
+    hasOverflowAuto () {
+      /*
+        Rather than worrying about breakpoints here, we let CSS handle it, as they may be different for each component
+        If overflow-x: auto is not on the element, then it is not a scrolling element, so we don't need to run DragToScroll
+      */
+      return (getComputedStyle(this.$refs.container).getPropertyValue('overflow-x') === 'auto')
+    },
+    mouseDownHandler (e) {
+      this.$refs.container.classList.add('drag-scroll--scrolling')
+
+      this.position = {
+        // The current scroll
+        left: this.$refs.container.scrollLeft,
+        // Get the current mouse position
+        x: e.clientX
+      }
+      document.addEventListener('mousemove', this.mouseMoveHandler)
+      document.addEventListener('mouseup', this.mouseUpHandler)
+    },
+    mouseMoveHandler (e) {
+      // How far the mouse has been moved
+      const dx = e.clientX - this.position.x
+
+      // Scroll the element
+      this.$refs.container.scrollLeft = this.position.left - dx
+    },
+    mouseUpHandler () {
+      document.removeEventListener('mousemove', this.mouseMoveHandler)
+      document.removeEventListener('mouseup', this.mouseUpHandler)
+
+      this.$refs.container.classList.remove('drag-scroll--scrolling')
+    },
     updateWidth () {
       if (this.$refs.item[0]) {
         this.itemWidth = this.$refs.item[0].$el.offsetWidth
