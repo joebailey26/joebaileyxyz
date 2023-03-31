@@ -40,24 +40,29 @@ export default async function downloadAndReplaceImages (postContent) {
     }
 
     const saveFirstFrame = () => {
-      return spawn(ffmpeg, [
-        '-i',
-        localAbsolutePath,
-        '-ss',
-        '00:00:00.001',
-        '-vframes',
-        '1',
-        posterImageAbsolutePath
-      ])
+      // Check if the file already exists
+      if (!(fs.existsSync(posterImageAbsolutePath))) {
+        return spawn(ffmpeg, [
+          '-i',
+          localAbsolutePath,
+          '-ss',
+          '00:00:00.001',
+          '-vframes',
+          '1',
+          posterImageAbsolutePath
+        ])
+      }
+      // Return a resolved promise if avif file already exists
+      return Promise.resolve()
     }
 
     promises.push(loadVideo().then(saveFirstFrame))
 
     // Replace the video element with one that uses the local files
     $(elem).replaceWith(`
-    <video controls loading="lazy" poster="/img/wordpress/${fileNameWithoutExtension}.jpg">
-      <source src="/video/wordpress/${fileName}">
-      <p>Your browser cannot play the provided video file.</p>
+    <video controls loading="lazy" poster="/img/wordpress/${fileNameWithoutExtension}.jpg" playsinline>
+      <source src="/video/wordpress/${fileName}" type='video/mp4'>
+      <p>Your browser doesn't support HTML5 video. Here is a <a href="/video/wordpress/${fileName}">link to the video</a> instead.</p>
     </video>
     `)
   })
