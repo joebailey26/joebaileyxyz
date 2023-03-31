@@ -95,6 +95,3 @@ sw.*
 .yarn
 
 .yarnrc
-
-/static/img/wordpress/*
-/static/video/wordpress/*
