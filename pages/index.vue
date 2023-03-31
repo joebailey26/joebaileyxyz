@@ -2,7 +2,16 @@
   <div>
     <header class="page-header page-header--with-image">
       <div class="container ml-auto mr-auto page-header__wrapper">
-        <img class="page-header__image" :src="require('~/assets/img/joe-bailey.jpg?format=webp&resize&size=200')" width="150" alt="Joe Bailey Portrait">
+        <galexia-image
+          class="page-header__image"
+          :avif="require('~/assets/img/joe-bailey.jpg?format=avif&resize&size=150')"
+          :webp="require('~/assets/img/joe-bailey.jpg?format=webp&resize&size=150')"
+          :src="require('~/assets/img/joe-bailey.jpg?size=150')"
+          width="150"
+          loading="eager"
+          fetchpriority="high"
+          alt="Joe Bailey Portrait"
+        />
         <div class="page-header__content">
           <h1 class="page-header__title">
             Hi, I’m Joe -<br>I make websites work
@@ -56,7 +65,7 @@ export default {
             "@context": "https://schema.org",
               "@type": "Person",
               "email": "joe@joebailey.xyz",
-              "image": "https://joebailey.xyz/joe-bailey.jpg",
+              "image": "https://joebailey.xyz/img/joe-bailey.jpg",
               "jobTitle": "Front-End Web Developer",
               "name": "Joe Bailey",
               "birthPlace": "Cambridge, UK",

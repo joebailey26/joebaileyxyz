@@ -79,7 +79,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~plugins/fontAwesome'
+    '~plugins/fontAwesome',
+    '~plugins/galexiaImage'
   ],
   /*
    ** Nuxt.js dev-modules
