@@ -13,4 +13,13 @@
   li {
     padding: 0
   }
+  :any-link {
+    display: inline-flex;
+    gap: .2em;
+    align-items: center;
+    picture {
+      display: inline-flex
+    }
+
+  }
 }
