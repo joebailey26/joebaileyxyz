@@ -1,0 +1,25 @@
+
+@use 'wp-block-gallery';
+@use 'wp-block-image';
+@use 'wp-block-video';
+.post__content {
+  margin-bottom: 1rem;
+  *:first-child {
+    margin-top: 0
+  }
+  *:last-child {
+    margin-bottom: 0
+  }
+  li {
+    padding: 0
+  }
+  :any-link {
+    display: inline-flex;
+    gap: .2em;
+    align-items: center;
+    picture {
+      display: inline-flex
+    }
+
+  }
+}

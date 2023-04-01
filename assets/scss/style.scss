@@ -6,7 +6,7 @@
 @use 'button';
 @use 'page-header';
 @use 'post-index';
-@use 'wordpress';
+@use 'post-content';
 :root {
   scroll-behavior: smooth
 }
@@ -37,6 +37,11 @@ main {
 }
 .svg-inline--fa {
   height: 1em
+}
+
+// This is for WordPress read more links
+.link-more {
+  display: none
 }
 @media (max-width: 768px) {
   .post-index .section,

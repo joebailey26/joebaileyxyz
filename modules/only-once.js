@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import prepareWordPressContent from './prepare-wordpress-content'
 
 function getDay (date) {
   date = new Date(date.substring(0, date.indexOf('T')))
@@ -89,6 +90,9 @@ async function fetchPosts (categoryId) {
       }
     ).then((response) => response.json())
     posts.push(getRequiredInfoFromPosts(paginatedCall))
+  }
+  for (const post of posts.flat()) {
+    await prepareWordPressContent(post)
   }
   return posts
 }

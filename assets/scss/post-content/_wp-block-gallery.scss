@@ -1,0 +1,26 @@
+.post__content {
+  .wp-block-gallery {
+    display: grid;
+    grid-gap: 1rem;
+    align-content: center;
+    margin: 1rem 0;
+    padding-left: 0;
+    text-align: center;
+    list-style-type: none;
+    @media (min-width: 769px) {
+      &.columns-2,
+      &.columns-3,
+      &.columns-4 {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+    @media(min-width: 1200px) {
+      &.columns-4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr
+      }
+      &.columns-3 {
+        grid-template-columns: 1fr 1fr 1fr
+      }
+    }
+  }
+}

@@ -20,9 +20,14 @@
     .page-header__image {
       width: clamp(100px, 3vw, 150px);
       aspect-ratio: 1;
-      object-fit: cover;
-      object-position: 42% 50%;
-      border-radius: 4px
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 42% 50%;
+        border-radius: 4px
+      }
     }
   }
 }
