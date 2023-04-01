@@ -8,9 +8,8 @@ export default class FetchFavicon {
 
   isFullUrl (url) {
     try {
-      // eslint-disable-next-line no-new
-      new URL(url)
-      return true
+      const parsedUrl = new URL(url)
+      return parsedUrl
     } catch (e) {
       // invalid url OR local path
       return false
