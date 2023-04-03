@@ -131,11 +131,11 @@ export default {
       }
     },
     startDragScroll () {
-      document.addEventListener('mousedown', this.mouseDownHandler)
+      this.$refs.container.addEventListener('mousedown', this.mouseDownHandler)
       this.$refs.container.classList.add('drag-scroll--enabled')
     },
     stopDragScroll () {
-      document.removeEventListener('mousedown', this.mouseDownHandler)
+      this.$refs.container.removeEventListener('mousedown', this.mouseDownHandler)
       this.$refs.container.classList.remove('drag-scroll--enabled')
       // This clears up some event listeners and resets our classes
       this.mouseUpHandler()
@@ -159,8 +159,8 @@ export default {
         // Get the current mouse position
         x: e.clientX
       }
-      document.addEventListener('mousemove', this.mouseMoveHandler)
-      document.addEventListener('mouseup', this.mouseUpHandler)
+      this.$refs.container.addEventListener('mousemove', this.mouseMoveHandler)
+      this.$refs.container.addEventListener('mouseup', this.mouseUpHandler)
     },
     mouseMoveHandler (e) {
       // How far the mouse has been moved
@@ -170,8 +170,8 @@ export default {
       this.$refs.container.scrollLeft = this.position.left - dx
     },
     mouseUpHandler () {
-      document.removeEventListener('mousemove', this.mouseMoveHandler)
-      document.removeEventListener('mouseup', this.mouseUpHandler)
+      this.$refs.container.removeEventListener('mousemove', this.mouseMoveHandler)
+      this.$refs.container.removeEventListener('mouseup', this.mouseUpHandler)
 
       this.$refs.container.classList.remove('drag-scroll--scrolling')
     },
