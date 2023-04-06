@@ -26,14 +26,14 @@ h1 {
   margin-bottom: 0;
   font-weight: 400;
   font-size: clamp(1.33rem, 3vw, 2.5rem);
-  font-family: Rammetto One, sans-serif;
+  font-family: Rammetto One, Rammetto One fallback, sans-serif;
   line-height: 1.15
 }
 h2 {
   margin-top: .625rem;
   margin-bottom: 1rem;
   font-size: 2.25rem;
-  font-family: Roboto Slab, serif;
+  font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.25;
   @media (max-width: 768px) {
     margin-top: 0;
@@ -44,7 +44,7 @@ h3 {
   margin-top: .625rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  font-family: Roboto Slab, serif;
+  font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.4
 }
 h4 {
@@ -52,20 +52,20 @@ h4 {
   margin-bottom: 1rem;
   font-weight: 700;
   font-size: 1.33rem;
-  font-family: Roboto Slab, serif;
+  font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.5
 }
 h5 {
   margin-top: .625rem;
   margin-bottom: 1rem;
   font-size: 1.25rem;
-  font-family: Roboto Slab, serif;
+  font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.5
 }
 h6 {
   margin-top: .625rem;
   margin-bottom: 1rem;
   font-size: 1.125rem;
-  font-family: Roboto Slab, serif;
+  font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.5
 }

@@ -20,7 +20,7 @@
 body {
   color: var(--grey);
   font-size: 1rem;
-  font-family: Roboto, sans-serif;
+  font-family: Roboto, Roboto fallback, sans-serif;
   line-height: 1.5;
   text-align: left;
   -webkit-font-smoothing: antialiased;
