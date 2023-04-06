@@ -20,11 +20,11 @@
               <article>
                 <!-- TO DO: Add Navigation -->
                 <div class="post__content" v-html="post.content.trim()" />
-                <div class="post__buttons buttonsContainer">
-                  <a v-if="post.acf && post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
-                  <a v-if="post.acf && post.acf.github" class="btn" :href="post.acf.github">View repo</a>
+                <div v-if="post.acf && (post.acf.project_url || post.acf.github)" class="post__buttons buttonsContainer">
+                  <a v-if="post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
+                  <a v-if="post.acf.github" class="btn" :href="post.acf.github">View repo</a>
                 </div>
-                <!-- TO DO: Add Galexia Share Integration -->
+                <Share :title="post.title" :excerpt="post.excerpt" />
                 <!-- TO DO: Add Navigation -->
               </article>
             </div>
@@ -36,7 +36,12 @@
 </template>
 
 <script>
+import Share from '~/components/posts/share'
+
 export default {
+  components: {
+    Share
+  },
   head () {
     return {
       title: this.head.title,

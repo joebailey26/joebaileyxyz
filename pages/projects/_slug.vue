@@ -18,11 +18,11 @@
               <article>
                 <!-- TO DO: Add Navigation -->
                 <div class="post__content" v-html="project.content" />
-                <div class="post__buttons buttonsContainer">
-                  <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
-                  <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View repo</a>
+                <div v-if="project.acf && (project.acf.project_url || project.acf.github)" class="post__buttons buttonsContainer">
+                  <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
+                  <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                 </div>
-                <!-- TO DO: Add Galexia Share Integration -->
+                <Share :title="project.title" :excerpt="project.excerpt" />
                 <!-- TO DO: Add Navigation -->
               </article>
             </div>
@@ -34,10 +34,12 @@
 </template>
 
 <script>
+import Share from '~/components/posts/share'
 import TechStack from '~/components/global/techStack'
 
 export default {
   components: {
+    Share,
     TechStack
   },
   head () {

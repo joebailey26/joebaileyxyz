@@ -96,6 +96,7 @@ export default {
    */
   modules: [
     '~/modules/only-once.js',
+    'vue-social-sharing/nuxt',
     '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {

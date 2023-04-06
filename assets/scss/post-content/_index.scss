@@ -20,6 +20,8 @@
     picture {
       display: inline-flex
     }
-
   }
+}
+.post__buttons:has(+ .share) {
+  margin-bottom: 2rem
 }

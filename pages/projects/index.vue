@@ -65,6 +65,21 @@ export default {
       }
     }
   },
+  head () {
+    return {
+      title: this.head.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.head.description },
+        { hid: 'og:title', property: 'og:title', content: this.head.title },
+        { hid: 'og:description', property: 'og:description', content: this.head.description },
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
+      ],
+      link: [
+        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
+      ]
+    }
+  },
   computed: {
     ...mapState([
       'projects'
@@ -85,21 +100,6 @@ export default {
     }
     if (!this.currentPage || this.currentPage < 1 || this.currentPage > this.pageCount) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Page not found' })
-    }
-  },
-  head () {
-    return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
-      link: [
-        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
-      ]
     }
   }
 }
