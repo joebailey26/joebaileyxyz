@@ -1,48 +1,8 @@
+@import 'mixins';
 .share-title {
   margin-top: 0;
   margin-bottom: 1rem
 }
-.share-button-group {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: .5rem;
-  row-gap: 1rem
-}
 .share-button:any-link {
-  display: block;
-  width: fit-content;
-  height: fit-content;
-  padding: .375em .625em;
-  /* stylelint-disable-next-line declaration-no-important */
-  color: white!important;
-  font-size: .8em;
-  line-height: 1.25em;
-  letter-spacing: .05em;
-  white-space: nowrap;
-  text-align: center;
-  text-transform: uppercase;
-  background-color: var(--dark-grey);
-  border: 0;
-  border-radius: 4px;
-  box-shadow: 0 2px 2px rgb(0 0 0 / 24%), 0 0 2px rgb(0 0 0 / 12%);
-  cursor: pointer;
-  transition: background-color .25s ease-in-out, box-shadow .25s ease-in-out;
-  user-select: none;
-  &:active,
-  &:hover {
-    &:not(:disabled) {
-      /* stylelint-disable-next-line declaration-no-important */
-      color: white!important;
-      background-color: #353535;
-      box-shadow: 0 8px 8px rgb(0 0 0 / 24%), 0 0 8px rgb(0 0 0 / 12%)
-    }
-  }
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--green);
-    &:active:not(:disabled),
-    &:hover:not(:disabled),
-    &:focus:not(:disabled) {
-      background-color: var(--light-green)
-    }
-  }
+  @include button
 }

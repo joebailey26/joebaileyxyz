@@ -1,3 +1,12 @@
+<style>
+.share-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: .5rem;
+  row-gap: 1rem
+}
+</style>
+
 <template>
   <div class="share">
     <h4 class="share-title">
@@ -20,7 +29,7 @@
       </div>
     </template>
     <template v-else>
-      <a class="share-button share-button--native" href="javascript:void(0)" @click="navigator.share(shareObject)">
+      <a class="share-button share-button--native" href="javascript:void(0)" @click="nativeShare">
         <font-awesome-icon :icon="['fas', 'share-alt']" /> Share this blog post
       </a>
     </template>
@@ -69,6 +78,11 @@ export default {
       } catch (e) {
         return false
       }
+    }
+  },
+  methods: {
+    nativeShare () {
+      navigator.share(this.shareObject)
     }
   }
 }
