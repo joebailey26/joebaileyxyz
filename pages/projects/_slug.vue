@@ -51,7 +51,13 @@ export default {
         { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/projects/' }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/projects/${this.$route.params.slug}/` },
+        { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Recursive&display=swap' },
+        { rel: 'stylesheet', media: 'print', onload: 'this.media="all"', href: 'https://fonts.googleapis.com/css2?family=Recursive&display=swap' }
+      ],
+      __dangerouslyDisableSanitizers: ['script', 'noscript'],
+      noscript: [
+        { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Recursive&display=swap" />' }
       ]
     }
   },

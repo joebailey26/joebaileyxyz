@@ -34,12 +34,12 @@ export default {
       { rel: 'mask-icon', href: 'https://joebailey.xyz/safari-pinned-tab.svg', color: '#004c3f' },
       // Fonts
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-      { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Recursive&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block' },
-      { rel: 'stylesheet', media: 'print', onload: 'this.media="all"', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Recursive&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block' }
+      { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block' },
+      { rel: 'stylesheet', media: 'print', onload: 'this.media="all"', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block' }
     ],
     __dangerouslyDisableSanitizers: ['script', 'noscript'],
     noscript: [
-      { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Recursive&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block" />' },
+      { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=block" />' },
       { innerHTML: '<img src="https://analytics.galexia.agency/matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" />' }
     ],
     script: [
