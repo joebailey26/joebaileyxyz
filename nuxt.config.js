@@ -19,7 +19,6 @@ export default {
       // Twitter Card data
       { hid: 'twitter:title', name: 'twitter:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
       { hid: 'twitter:description', name: 'twitter:description' },
-      { name: 'twitter:creator', content: '@JoeBailey26' },
 
       // Open Graph data
       { hid: 'og:title', property: 'og:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
@@ -97,7 +96,8 @@ export default {
   modules: [
     '~/modules/only-once.js',
     'vue-social-sharing/nuxt',
-    '@aceforth/nuxt-optimized-images'
+    '@aceforth/nuxt-optimized-images',
+    '@nuxtjs/pwa'
   ],
   optimizedImages: {
     optimizeImages: true,
@@ -121,6 +121,17 @@ export default {
   },
   generate: {
     fallback: true
+  },
+  pwa: {
+    workbox: {
+      preCaching: [
+        '/',
+        '/blog/',
+        '/projects/'
+      ],
+      offlinePage: '/404.html',
+      cacheAssets: false
+    }
   },
   router: {
     trailingSlash: true,

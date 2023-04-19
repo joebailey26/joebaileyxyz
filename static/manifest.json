@@ -12,8 +12,6 @@
       "type": "image/png"
     }
   ],
-  "main.js": "render-page.js",
-  "main.js.map": "render-page.js.map",
   "name": "Joe Bailey",
   "short_name": "Joe Bailey",
   "theme_color": "#004c3f"
