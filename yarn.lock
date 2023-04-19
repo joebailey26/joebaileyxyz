@@ -1190,6 +1190,26 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/rammetto-one@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/rammetto-one/-/rammetto-one-4.5.11.tgz#7b6771d835fea9878de40bc4d83fc85cddbb0fda"
+  integrity sha512-fiREzWC0RFE8nyJtOyV412swOUU4KNIlsP8cVute4oFtxojJPK85GCCBRp2az6PXuro29XB6qPhVak+GtIEI8w==
+
+"@fontsource/recursive@^4.5.13":
+  version "4.5.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/recursive/-/recursive-4.5.13.tgz#4d3a61638ac5604ca049fd285d35fbe99fcccf04"
+  integrity sha512-d40oYxlkac4rrDo/4GkdvkUopyc7WzAlX0vAuUzKVqh7X1qZlSteckvQWdPnjEFMG599JiwKXJK7qXLvgvwdYg==
+
+"@fontsource/roboto-slab@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto-slab/-/roboto-slab-4.5.11.tgz#fb5290d3d5c9ca6974e6b3a20441a30114d9e47b"
+  integrity sha512-0HXK8WNvZZg4vglhUY4ySBmlh+wnO1JsGcPfCaxDhY24gtRf2POmmeNpSxKFjjQTDV8BiYDXF2H9p15d/6c/YA==
+
+"@fontsource/roboto@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-4.5.8.tgz#56347764786079838faf43f0eeda22dd7328437f"
+  integrity sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==
+
 "@fortawesome/fontawesome-common-types@6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.3.0.tgz#51f734e64511dbc3674cd347044d02f4dd26e86b"

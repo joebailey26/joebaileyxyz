@@ -30,15 +30,10 @@ export default {
       { rel: 'apple-touch-icon', sizes: '180x180', href: 'https://joebailey.xyz/apple-touch-icon.png' },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'https://joebailey.xyz/favicon-32x32.png' },
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: 'https://joebailey.xyz/favicon-16x16.png' },
-      { rel: 'mask-icon', href: 'https://joebailey.xyz/safari-pinned-tab.svg', color: '#004c3f' },
-      // Fonts
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-      { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap' },
-      { rel: 'stylesheet', media: 'print', onload: 'this.media="all"', href: 'https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap' }
+      { rel: 'mask-icon', href: 'https://joebailey.xyz/safari-pinned-tab.svg', color: '#004c3f' }
     ],
     __dangerouslyDisableSanitizers: ['script', 'noscript'],
     noscript: [
-      { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Roboto+Slab:wght@400;600;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" />' },
       { innerHTML: '<img src="https://analytics.galexia.agency/matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" />' }
     ],
     script: [
@@ -72,6 +67,14 @@ export default {
    ** Global CSS
    */
   css: [
+    '@fontsource/rammetto-one/index.css',
+    '@fontsource/recursive/index.css',
+    '@fontsource/roboto-slab/400.css',
+    '@fontsource/roboto-slab/700.css',
+    '@fontsource/roboto/400.css',
+    '@fontsource/roboto/700.css',
+    '@fontsource/roboto/400-italic.css',
+    '@fontsource/roboto/700-italic.css',
     '~/assets/scss/style.scss'
   ],
   /*
