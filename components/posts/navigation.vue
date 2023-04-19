@@ -10,6 +10,12 @@
       &:hover {
         color: var(--green)
       }
+      @media (prefers-color-scheme: dark) {
+        color: white;
+        &:hover {
+          color: var(--light-green)
+        }
+      }
     }
     .navigation-item {
       width: min(250px, calc(50% - .5rem))
@@ -21,11 +27,11 @@
       margin-bottom: .25rem
     }
     .navigation-link__title {
-      font-weight: 700;
+      font-weight: 700
     }
     .navigation-link__article-name {
       margin-top: 1rem;
-      font-weight: 400;
+      font-weight: 400
     }
     .next {
       text-align: right;

@@ -36,6 +36,12 @@
     &:hover {
       color: var(--green)
     }
+    @media (prefers-color-scheme: dark) {
+      color: white;
+      &:hover {
+        color: var(--light-green)
+      }
+    }
   }
 }
 .navigation-wrapper {
