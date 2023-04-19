@@ -133,13 +133,7 @@ export default {
         '/projects/'
       ],
       offlinePage: '/404.html',
-      cacheAssets: false,
-      runtimeCaching: [
-        {
-          urlPattern: '/_nuxt/node_modules/',
-          handler: 'cacheFirst'
-        }
-      ]
+      cacheAssets: false
     }
   },
   router: {
