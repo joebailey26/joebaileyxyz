@@ -4,8 +4,14 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
+            <div class="navigation-index">
+              <nuxt-link :to="'/projects/'" class="navigation-index__link">
+                <font-awesome-icon :icon="['fa-regular', 'fa-hand-point-left']" class="navigation-link__icon" />
+                Back to projects
+              </nuxt-link>
+            </div>
             <h1 class="page-header__title" v-html="project.title" />
-            <TechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" />
+            <TechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" :show-post-name="true" />
           </div>
         </div>
       </div>
@@ -16,29 +22,37 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <article>
-                <!-- TO DO: Add Navigation -->
                 <div class="post__content" v-html="project.content" />
                 <div v-if="project.acf && (project.acf.project_url || project.acf.github)" class="post__buttons buttonsContainer">
                   <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
                   <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                 </div>
                 <Share :title="project.title" :excerpt="project.excerpt" />
-                <!-- TO DO: Add Navigation -->
               </article>
             </div>
           </div>
         </section>
       </div>
     </main>
+    <div class="container ml-auto mr-auto">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <Navigation post-type="projects" next-post-text="Next Project" previous-post-text="Previous Project" :show-post-name="true" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Navigation from '~/components/posts/navigation'
 import Share from '~/components/posts/share'
 import TechStack from '~/components/global/techStack'
 
 export default {
   components: {
+    Navigation,
     Share,
     TechStack
   },
@@ -64,14 +78,17 @@ export default {
     }
   },
   computed: {
-    project () {
-      return this.$store.state.projects.flat().find((item) => item.slug === this.$route.params.slug)
-    },
     head () {
       return {
         title: this.project ? this.project.title : '',
         description: this.project ? this.project.excerpt : ''
       }
+    },
+    ...mapState([
+      'projects'
+    ]),
+    project () {
+      return this.projects.flat().find((item) => item.slug === this.$route.params.slug)
     }
   },
   created () {

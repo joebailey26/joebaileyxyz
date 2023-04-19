@@ -4,6 +4,12 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
+            <div class="navigation-index">
+              <nuxt-link :to="'/blog/'" class="navigation-index__link">
+                <font-awesome-icon :icon="['fa-regular', 'fa-hand-point-left']" class="navigation-link__icon" />
+                Back to blog
+              </nuxt-link>
+            </div>
             <h1 class="page-header__title" v-html="post.title" />
             <p class="page-header__description">
               <span>Published </span><time :datetime="post.date.fullDate" v-html="`${post.date.day} ${post.date.month} '${post.date.year}`" />
@@ -18,28 +24,36 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <article>
-                <!-- TO DO: Add Navigation -->
                 <div class="post__content" v-html="post.content.trim()" />
                 <div v-if="post.acf && (post.acf.project_url || post.acf.github)" class="post__buttons buttonsContainer">
                   <a v-if="post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
                   <a v-if="post.acf.github" class="btn" :href="post.acf.github">View repo</a>
                 </div>
                 <Share :title="post.title" :excerpt="post.excerpt" />
-                <!-- TO DO: Add Navigation -->
               </article>
             </div>
           </div>
         </section>
       </div>
     </main>
+    <div class="container ml-auto mr-auto">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <Navigation post-type="blog" next-post-text="Next Blog Post" previous-post-text="Previous Blog Post" :show-post-name="true" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Navigation from '~/components/posts/navigation'
 import Share from '~/components/posts/share'
 
 export default {
   components: {
+    Navigation,
     Share
   },
   head () {
@@ -64,14 +78,17 @@ export default {
     }
   },
   computed: {
-    post () {
-      return this.$store.state.blogPosts.flat().find((item) => item.slug === this.$route.params.slug)
-    },
     head () {
       return {
         title: this.post ? this.post.title : '',
         description: this.post ? this.post.excerpt : ''
       }
+    },
+    ...mapState([
+      'blog'
+    ]),
+    post () {
+      return this.blog.flat().find((item) => item.slug === this.$route.params.slug)
     }
   },
   created () {

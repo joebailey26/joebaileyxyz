@@ -81,16 +81,16 @@ export default {
   },
   computed: {
     ...mapState([
-      'blogPosts'
+      'blog'
     ]),
     pageCount () {
-      return this.blogPosts.length
+      return this.blog.length
     },
     currentPage () {
       return parseInt(this.$route.params.page) || 1
     },
     paginatedPosts () {
-      return this.blogPosts[this.currentPage - 1]
+      return this.blog[this.currentPage - 1]
     }
   },
   created () {

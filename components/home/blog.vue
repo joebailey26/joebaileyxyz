@@ -5,7 +5,7 @@
         Blog
       </nuxt-link>
     </h2>
-    <Items :items="blogPosts[0].slice(0, 6)" link-prefix="blog" :show-tech-stack="false" />
+    <Items :items="blog[0].slice(0, 6)" link-prefix="blog" :show-tech-stack="false" />
   </section>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'blogPosts'
+      'blog'
     ])
   }
 }

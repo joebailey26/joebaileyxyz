@@ -25,3 +25,24 @@
 .post__buttons:has(+ .share) {
   margin-bottom: 2rem
 }
+.navigation-index__link {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  &:any-link {
+    color: var(--grey);
+    &:hover {
+      color: var(--green)
+    }
+  }
+}
+.navigation-wrapper {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  @media (max-width: 576px) {
+    padding-right: 10px;
+    padding-left: 10px
+  }
+}

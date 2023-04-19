@@ -100,7 +100,7 @@ async function fetchPosts (categoryId) {
 export default async function () {
   const state = {
     projects: await fetchPosts(96),
-    blogPosts: await fetchPosts(39)
+    blog: await fetchPosts(39)
   }
 
   this.nuxt.hook('vue-renderer:ssr:prepareContext', (ssrContext) => {

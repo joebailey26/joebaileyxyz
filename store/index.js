@@ -1,10 +1,10 @@
 export const state = () => ({
   projects: [],
-  blogPosts: []
+  blog: []
 })
 export const actions = {
   nuxtServerInit ({ state }, context) {
     state.projects = context.ssrContext.$state.projects
-    state.blogPosts = context.ssrContext.$state.blogPosts
+    state.blog = context.ssrContext.$state.blog
   }
 }
