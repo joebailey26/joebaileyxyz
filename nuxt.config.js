@@ -43,15 +43,6 @@ export default {
       },
       {
         innerHTML: `
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.ready.then(registration => {
-              registration.unregister();
-            });
-          }
-        `
-      },
-      {
-        innerHTML: `
           var _paq = window._paq = window._paq || [];
           /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
           _paq.push(["setDoNotTrack", true]);
