@@ -11,6 +11,7 @@ if ('serviceWorker' in navigator) {
             }
           })
         })
-    };
+    }
+    self.skipWaiting()
   })
 }
