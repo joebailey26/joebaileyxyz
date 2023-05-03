@@ -82,6 +82,9 @@
     .view-more-items__plus {
       transition: transform 150ms ease-in-out
     }
+    @media (prefers-color-scheme: dark) {
+      color: white
+    }
     &:hover {
       .view-more-items__plus {
         transform: scale(1.1)
