@@ -99,8 +99,7 @@ export default {
   modules: [
     '~/modules/only-once.js',
     'vue-social-sharing/nuxt',
-    '@aceforth/nuxt-optimized-images',
-    '@nuxtjs/pwa'
+    '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {
     optimizeImages: true,
@@ -124,17 +123,6 @@ export default {
   },
   generate: {
     fallback: true
-  },
-  pwa: {
-    workbox: {
-      preCaching: [
-        '/',
-        '/blog/',
-        '/projects/'
-      ],
-      offlinePage: '/404.html',
-      cacheAssets: false
-    }
   },
   router: {
     trailingSlash: true,

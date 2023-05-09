@@ -15,7 +15,7 @@
     }
     @media (max-width: 768px) {
       grid-auto-flow: column;
-      grid-template-columns: 30px repeat(6, calc(var(--100vw) - 80px)) 30px;
+      grid-template-columns: 30px repeat(7, calc(var(--100vw) - 80px)) 30px;
       max-width: var(--100vw);
       margin-right: calc(-1 * ((var(--100vw) - 100%) / 2));
       margin-left: calc(-1 * ((var(--100vw) - 100%) / 2));
@@ -35,14 +35,14 @@
         height: 100%;
         content: ''
       }
-      @for $i from 1 through 6 {
+      @for $i from 1 through 7 {
         article:nth-of-type(#{$i}) {
           grid-column: $i + 1
         }
       }
     }
     @media (max-width: 576px) {
-      grid-template-columns: 10px repeat(6, calc(var(--100vw) - 40px)) 10px
+      grid-template-columns: 10px repeat(7, calc(var(--100vw) - 40px)) 10px
     }
   }
   .drag-scroll--enabled {
@@ -52,6 +52,65 @@
     cursor: grabbing;
     user-select: none;
     scroll-snap-type: none
+  }
+}
+.view-more-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--dark-grey);
+    border-color: white
+  }
+  @media (min-width: 769px) {
+    display: none
+  }
+  :any-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+    color: var(--grey);
+    .view-more-items__plus {
+      transition: transform 150ms ease-in-out
+    }
+    @media (prefers-color-scheme: dark) {
+      color: white
+    }
+    &:hover {
+      .view-more-items__plus {
+        transform: scale(1.1)
+      }
+      @media (prefers-color-scheme: dark) {
+        color: white
+      }
+    }
+  }
+}
+.view-more-items__plus {
+  display: block;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  padding: .5rem;
+  font-size: 2rem;
+  border: 2px solid var(--grey);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  @media (prefers-color-scheme: dark) {
+    border-color: white
+  }
+  svg {
+    margin-top: 2px;
+    margin-left: 2px
   }
 }
 </style>
@@ -69,8 +128,18 @@
           :show-tech-stack="showTechStack"
         />
       </template>
+      <article v-if="items.length === 6" class="view-more-items">
+        <nuxt-link :to="`/${linkPrefix}/`">
+          <h3 class="view-more-items__title">
+            View more
+          </h3>
+          <div class="view-more-items__plus">
+            <font-awesome-icon :icon="['fa-solid', 'fa-plus']" />
+          </div>
+        </nuxt-link>
+      </article>
     </div>
-    <Icons :items="items.length" :current="current" @iconClicked="iconScroll" />
+    <Icons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @iconClicked="iconScroll" />
   </div>
 </template>
 
