@@ -50,7 +50,7 @@
           <font-awesome-icon :icon="['fa-solid', 'fa-long-arrow-alt-left']" class="navigation-link__icon" />
           <span class="navigation-link__title" v-html="previousPostText" />
         </div>
-        <span v-if="showPostName" class="navigation-link__article-name" v-text="previousPage.title" />
+        <span v-if="showPostName" class="navigation-link__article-name" v-html="previousPage.title" />
       </nuxt-link>
     </div>
     <div class="navigation-item next">
@@ -59,7 +59,7 @@
           <span class="navigation-link__title" v-html="nextPostText" />
           <font-awesome-icon :icon="['fa-solid', 'fa-long-arrow-alt-right']" class="navigation-link__icon" />
         </div>
-        <span v-if="showPostName" class="navigation-link__article-name" v-text="nextPage.title" />
+        <span v-if="showPostName" class="navigation-link__article-name" v-html="nextPage.title" />
       </nuxt-link>
     </div>
   </div>
