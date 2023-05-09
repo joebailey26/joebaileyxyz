@@ -49,6 +49,8 @@
     "eslint-plugin-nuxt": "^4.0.0",
     "netlify-plugin-checklinks": "^4.1.1",
     "netlify-plugin-submit-sitemap": "^0.4.0",
+    "postcss": "8.4.19",
+    "postcss-html": "1.0.0",
     "postcss-scss": "^4.0.6",
     "stylelint": "^15.3.0",
     "stylelint-config-rational-order": "^0.1.2",
@@ -59,8 +61,6 @@
   "optionalDependencies": {
     "@babel/core": "^7.21.3",
     "consola": "^2.15.3",
-    "postcss": "8.4.19",
-    "postcss-html": "1.0.0",
     "stylelint-config-recommended": "^11.0.0",
     "stylelint-config-standard": "^31.0.0",
     "stylelint-order": "^6.0.3",
