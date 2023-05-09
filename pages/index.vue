@@ -4,7 +4,7 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <GalexiaImage
           class="page-header__image"
-          :avif="require('~/assets/img/joe-bailey.jpg?format=avif&resize&size=150')"
+          :avif="avifImage"
           :webp="require('~/assets/img/joe-bailey.jpg?format=webp&resize&size=150')"
           :src="require('~/assets/img/joe-bailey.jpg?size=150')"
           width="150"
@@ -42,6 +42,7 @@ export default {
   },
   data () {
     return {
+      avifImage: require('~/assets/img/joe-bailey.jpg?format=avif&resize&size=150'),
       head: {
         title: 'Home',
         description: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.'
