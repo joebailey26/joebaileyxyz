@@ -29,15 +29,14 @@
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-pngquant": "^9.0.1",
     "imagemin-svgo": "^8.0.0",
-    "jimp": "^0.16.1",
     "nuxt": "^2.16.2",
+    "nuxt-component-image": "https://github.com/Galexia-Agency/nuxt-component-image",
     "path": "^0.12.7",
     "responsive-loader": "^2.3.0",
     "sass": "^1.59.2",
     "sass-loader": "^10.1.1",
     "sharp": "^0.30.5",
-    "vue-social-sharing": "^3.0.4",
-    "webp-loader": "^0.6.0"
+    "vue-social-sharing": "^3.0.4"
   },
   "devDependencies": {
     "@netlify/plugin-sitemap": "^0.8.1",

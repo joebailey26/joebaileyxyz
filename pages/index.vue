@@ -2,7 +2,7 @@
   <div>
     <header class="page-header page-header--with-image">
       <div class="container ml-auto mr-auto page-header__wrapper">
-        <galexia-image
+        <GalexiaImage
           class="page-header__image"
           :avif="require('~/assets/img/joe-bailey.jpg?format=avif&resize&size=150')"
           :webp="require('~/assets/img/joe-bailey.jpg?format=webp&resize&size=150')"

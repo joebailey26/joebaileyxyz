@@ -82,7 +82,7 @@ export default {
    */
   plugins: [
     '~plugins/fontAwesome',
-    '~plugins/galexiaImage'
+    '~plugins/galexia/components/image.js'
   ],
   /*
    ** Nuxt.js dev-modules
