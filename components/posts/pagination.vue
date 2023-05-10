@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import '~assets/scss/mixins';
 .sr-only {
   display: none
 }
@@ -26,7 +27,7 @@
 .disabled :any-link {
   color: var(--dark-grey);
   pointer-events: none;
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     color: white
   }
 }

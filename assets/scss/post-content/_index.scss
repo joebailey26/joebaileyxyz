@@ -1,7 +1,7 @@
-
 @use 'wp-block-gallery';
 @use 'wp-block-image';
 @use 'wp-block-video';
+@import '../mixins';
 .post__content {
   margin-bottom: 1rem;
   *:first-child {
@@ -36,7 +36,7 @@
     &:hover {
       color: var(--green)
     }
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       color: white;
       &:hover {
         color: var(--light-green)

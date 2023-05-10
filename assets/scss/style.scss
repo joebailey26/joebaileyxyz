@@ -9,6 +9,7 @@
 @use 'page-header';
 @use 'post-index';
 @use 'post-content';
+@import 'mixins';
 :root {
   scroll-behavior: smooth
 }
@@ -52,7 +53,7 @@ main {
     padding: 40px 0
   }
 }
-@media (prefers-color-scheme: dark) {
+@include dark-theme {
   body {
     background-color: #333333
   }

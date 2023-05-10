@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+  @import '~assets/scss/mixins';
   .navigation-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -10,7 +11,7 @@
       &:hover {
         color: var(--green)
       }
-      @media (prefers-color-scheme: dark) {
+      @include dark-theme {
         color: white;
         &:hover {
           color: var(--light-green)

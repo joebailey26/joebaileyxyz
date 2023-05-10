@@ -1,3 +1,4 @@
+@import 'mixins';
 .navbar {
   position: sticky;
   top: 0;
@@ -47,10 +48,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    column-gap: 1rem;
-    @media (max-width: 576px) {
-      display: none
-    }
+    column-gap: 1rem
+    
   }
   .nav-link {
     display: inline-grid;
@@ -61,6 +60,9 @@
     font-size: 1.2rem;
     line-height: 1.25;
     transition: color .25s ease-in-out;
+    @media (max-width: 576px) {
+      display: none
+    }
     svg {
       transition: fill .25s ease-in-out;
       fill: var(--grey)
@@ -75,7 +77,7 @@
       }
     }
   }
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     background-color: var(--dark-grey);
     .navbar__brand {
       :any-link {

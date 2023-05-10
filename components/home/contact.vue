@@ -1,4 +1,5 @@
 <style lang="scss">
+@import '~assets/scss/mixins';
 .contact-methods {
   text-align: center;
   :any-link,
@@ -11,7 +12,7 @@
   svg {
     transition: fill .25s ease-in-out;
     fill: var(--grey);
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       fill: var(--light-green)
     }
   }
@@ -26,7 +27,7 @@
         fill: var(--green)
       }
     }
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       color: white;
       &:hover,
       &:focus,
@@ -63,7 +64,7 @@
     border: 1px solid var(--grey);
     border-radius: 4px;
     resize: vertical;
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       color: #EEEEEE;
       background-color: #333333;
       border-color: #EEEEEE

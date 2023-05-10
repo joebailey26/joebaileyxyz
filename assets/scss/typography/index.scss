@@ -1,5 +1,6 @@
 @use 'pre';
 @use 'headings';
+@import '../mixins';
 :any-link:not(.btn) {
   color: var(--green);
   transition: color .25s ease-in-out;
@@ -8,7 +9,7 @@
   &:active {
     color: var(--light-green)
   }
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     color: var(--light-green);
     &:hover,
     &:focus,
@@ -25,7 +26,7 @@ body {
   text-align: left;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     color: #EEEEEE
   }
 }

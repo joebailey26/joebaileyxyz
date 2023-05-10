@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import '~assets/scss/mixins';
 .items {
   @media (max-width: 768px) {
     margin-bottom: 50px
@@ -66,7 +67,7 @@
   border-radius: 4px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     background-color: var(--dark-grey);
     border-color: white
   }
@@ -82,14 +83,14 @@
     .view-more-items__plus {
       transition: transform 150ms ease-in-out
     }
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       color: white
     }
     &:hover {
       .view-more-items__plus {
         transform: scale(1.1)
       }
-      @media (prefers-color-scheme: dark) {
+      @include dark-theme {
         color: white
       }
     }
@@ -105,7 +106,7 @@
   border: 2px solid var(--grey);
   border-radius: 50%;
   aspect-ratio: 1;
-  @media (prefers-color-scheme: dark) {
+  @include dark-theme {
     border-color: white
   }
   svg {

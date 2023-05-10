@@ -1,3 +1,4 @@
+@import '../mixins';
 h1,
 h2,
 h3,
@@ -12,7 +13,7 @@ h6 {
     &:focus {
       color: var(--green)
     }
-    @media (prefers-color-scheme: dark) {
+    @include dark-theme {
       &:hover,
       &:active,
       &:focus {

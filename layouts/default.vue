@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ darkTheme: darkmode }">
     <nav class="navbar">
       <div class="container ml-auto mr-auto">
         <div class="navbar__container">
@@ -28,6 +28,7 @@
               </svg>
               Contact
             </a>
+            <DarkmodeToggle :model="darkmode" @input="darkmode = $event" />
           </div>
         </div>
       </div>
@@ -38,11 +39,18 @@
 </template>
 
 <script>
+import DarkmodeToggle from '~/components/global/darkmodeToggle'
 import Footer from '~/components/global/footer'
 
 export default {
   components: {
+    DarkmodeToggle,
     Footer
+  },
+  data () {
+    return {
+      darkmode: false
+    }
   }
 }
 </script>
