@@ -67,10 +67,6 @@
   border-radius: 4px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  @include dark-theme {
-    background-color: var(--dark-grey);
-    border-color: white
-  }
   @media (min-width: 769px) {
     display: none
   }
@@ -83,15 +79,9 @@
     .view-more-items__plus {
       transition: transform 150ms ease-in-out
     }
-    @include dark-theme {
-      color: white
-    }
     &:hover {
       .view-more-items__plus {
         transform: scale(1.1)
-      }
-      @include dark-theme {
-        color: white
       }
     }
   }
@@ -106,12 +96,22 @@
   border: 2px solid var(--grey);
   border-radius: 50%;
   aspect-ratio: 1;
-  @include dark-theme {
-    border-color: white
-  }
   svg {
     margin-top: 2px;
     margin-left: 2px
+  }
+}
+@include dark-theme {
+  .view-more-items {
+    background-color: var(--dark-grey);
+    border-color: white;
+    :any-link,
+    :any-link:hover {
+      color: white
+    }
+  }
+  .view-more-items__plus {
+    border-color: white
   }
 }
 </style>

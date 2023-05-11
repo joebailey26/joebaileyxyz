@@ -13,13 +13,6 @@ h6 {
     &:focus {
       color: var(--green)
     }
-    @include dark-theme {
-      &:hover,
-      &:active,
-      &:focus {
-        color: var(--light-green)
-      }
-    }
   }
 }
 h1 {
@@ -69,4 +62,22 @@ h6 {
   font-size: 1.125rem;
   font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.5
+}
+
+@include dark-theme {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    :any-link:not(.btn) {
+      color: inherit;
+      &:hover,
+      &:active,
+      &:focus {
+        color: var(--light-green)
+      }
+    }
+  }
 }

@@ -77,7 +77,9 @@
       }
     }
   }
-  @include dark-theme {
+}
+@include dark-theme {
+  .navbar {
     background-color: var(--dark-grey);
     .navbar__brand {
       :any-link {

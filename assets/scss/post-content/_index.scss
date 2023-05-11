@@ -36,12 +36,6 @@
     &:hover {
       color: var(--green)
     }
-    @include dark-theme {
-      color: white;
-      &:hover {
-        color: var(--light-green)
-      }
-    }
   }
 }
 .navigation-wrapper {
@@ -50,5 +44,15 @@
   @media (max-width: 576px) {
     padding-right: 10px;
     padding-left: 10px
+  }
+}
+@include dark-theme {
+  .navigation-index__link {
+    &:any-link {
+      color: white;
+      &:hover {
+        color: var(--light-green)
+      }
+    }
   }
 }

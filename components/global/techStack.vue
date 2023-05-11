@@ -7,10 +7,12 @@
   i {
     display: inline-flex;
     color: var(--grey);
-    font-size: xx-large;
-    @include dark-theme {
-      color: var(--light-green)
-    }
+    font-size: xx-large
+  }
+}
+@include dark-theme {
+  .tech-stack i{
+    color: var(--light-green)
   }
 }
 </style>

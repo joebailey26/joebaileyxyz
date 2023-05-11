@@ -18,7 +18,6 @@
     min-width: 50px;
     background-color: #CCCCCC;
     border-radius: 34px;
-    transition: .4s;
     &:before,
     &:after {
       position: absolute;
@@ -45,12 +44,16 @@
   }
   input {
     &:checked + .slider {
-      background-color: var(--dark-grey);
       &:before,
       &:after {
         transform: translateX(20px)
       }
+      &:before {
+        background-color: var(--dark-grey)
+      }
       &:after {
+        mask-size: 12px;
+        background-color: white;
         mask-image: var(--moonIcon)
       }
     }

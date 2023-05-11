@@ -54,7 +54,9 @@
       }
     }
   }
-  @include dark-theme {
+}
+@include dark-theme {
+  .git {
     :any-link {
       color: white;
       &:hover,

@@ -9,7 +9,9 @@
   &:active {
     color: var(--light-green)
   }
-  @include dark-theme {
+}
+@include dark-theme {
+  :any-link:not(.btn) {
     color: var(--light-green);
     &:hover,
     &:focus,

@@ -28,7 +28,7 @@
               </svg>
               Contact
             </a>
-            <DarkmodeToggle :model="darkmode" @input="darkmode = $event" />
+            <DarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
           </div>
         </div>
       </div>
@@ -49,7 +49,17 @@ export default {
   },
   data () {
     return {
-      darkmode: false
+      darkmode: false,
+      darkmodeSet: false
+    }
+  },
+  beforeMount () {
+    this.darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
+  },
+  methods: {
+    handleDarkmodeChange ($event) {
+      this.darkmode = $event
+      window.localStorage.setItem('darkmode', $event)
     }
   }
 }

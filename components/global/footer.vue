@@ -23,7 +23,11 @@ footer {
     &:focus {
       color: var(--green)
     }
-    @include dark-theme {
+  }
+}
+@include dark-theme {
+  .socials {
+    :any-link {
       color: var(--light-green)
     }
   }

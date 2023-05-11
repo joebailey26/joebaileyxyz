@@ -26,8 +26,11 @@
 .active :any-link,
 .disabled :any-link {
   color: var(--dark-grey);
-  pointer-events: none;
-  @include dark-theme {
+  pointer-events: none
+}
+@include dark-theme {
+  .active :any-link,
+  .disabled :any-link {
     color: white
   }
 }

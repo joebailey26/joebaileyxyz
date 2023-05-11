@@ -50,7 +50,20 @@
     background-color: rgb(79 79 79 / 26%);
     cursor: not-allowed
   }
-  @include dark-theme {
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--green);
+    &:active:not(:disabled),
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background-color: var(--light-green)
+    }
+    &:disabled {
+      /* stylelint-disable-next-line declaration-no-important */
+      color: white!important;
+      background-color: #4F4F4F
+    }
+  }
+  .darkTheme & {
     background-color: var(--green);
     &:active:not(:disabled),
     &:hover:not(:disabled),

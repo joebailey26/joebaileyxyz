@@ -11,10 +11,7 @@
   }
   svg {
     transition: fill .25s ease-in-out;
-    fill: var(--grey);
-    @include dark-theme {
-      fill: var(--light-green)
-    }
+    fill: var(--grey)
   }
   :any-link {
     color: var(--grey);
@@ -25,17 +22,6 @@
       color: var(--green);
       svg {
         fill: var(--green)
-      }
-    }
-    @include dark-theme {
-      color: white;
-      &:hover,
-      &:focus,
-      &:active {
-        color: var(--light-green);
-        svg {
-          fill: var(--light-green)
-        }
       }
     }
   }
@@ -63,8 +49,28 @@
     line-height: 1.25;
     border: 1px solid var(--grey);
     border-radius: 4px;
-    resize: vertical;
-    @include dark-theme {
+    resize: vertical
+  }
+}
+@include dark-theme {
+  .contact-methods {
+    svg {
+      fill: var(--light-green)
+    }
+    :any-link {
+      color: white;
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--light-green);
+        svg {
+          fill: var(--light-green)
+        }
+      }
+    }
+  }
+  .form-group {
+    .form-control {
       color: #EEEEEE;
       background-color: #333333;
       border-color: #EEEEEE
