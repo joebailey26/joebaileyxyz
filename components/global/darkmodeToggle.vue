@@ -36,7 +36,7 @@
     &:after {
       left: 3.5px;
       background-color: var(--dark-grey);
-      mask-image: var(--sunIcon);
+      mask-image: var(--sun-icon);
       mask-repeat: no-repeat;
       mask-position: center;
       mask-size: 14px
@@ -54,7 +54,7 @@
       &:after {
         mask-size: 12px;
         background-color: white;
-        mask-image: var(--moonIcon)
+        mask-image: var(--moon-icon)
       }
     }
     &:focus + .slider {
@@ -64,7 +64,7 @@
 </style>
 
 <template>
-  <label class="switch darkmode-toggle" :class="{toggled: inputVal}" :style="`--sunIcon: url(${sunIcon}); --moonIcon: url(${moonIcon})`">
+  <label class="switch darkmode-toggle" :class="{toggled: inputVal}" :style="`--sun-icon: url(${sunIcon}); --moon-icon: url(${moonIcon})`">
     <input v-model="inputVal" type="checkbox" aria-label="Toggle Darkmode">
     <span class="slider round" />
   </label>
