@@ -28,6 +28,7 @@
               </svg>
               Contact
             </a>
+            <DarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
           </div>
         </div>
       </div>
@@ -38,11 +39,29 @@
 </template>
 
 <script>
+import DarkmodeToggle from '~/components/global/darkmodeToggle'
 import Footer from '~/components/global/footer'
 
 export default {
   components: {
+    DarkmodeToggle,
     Footer
+  },
+  data () {
+    return {
+      darkmode: false
+    }
+  },
+  beforeMount () {
+    this.darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
+  },
+  methods: {
+    handleDarkmodeChange ($event) {
+      this.darkmode = $event
+      const bodyClasses = document.body.classList
+      this.darkmode ? bodyClasses.add('darkTheme') : bodyClasses.remove('darkTheme')
+      window.localStorage.setItem('darkmode', $event)
+    }
   }
 }
 </script>

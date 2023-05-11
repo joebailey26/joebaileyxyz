@@ -1,4 +1,5 @@
 <style lang="scss">
+@import '~assets/scss/mixins';
 footer {
   padding-top: 30px;
   padding-bottom: 15px
@@ -22,7 +23,11 @@ footer {
     &:focus {
       color: var(--green)
     }
-    @media (prefers-color-scheme: dark) {
+  }
+}
+@include dark-theme {
+  .socials {
+    :any-link {
       color: var(--light-green)
     }
   }

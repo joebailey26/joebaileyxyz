@@ -1,3 +1,4 @@
+@import '../mixins';
 h1,
 h2,
 h3,
@@ -11,13 +12,6 @@ h6 {
     &:active,
     &:focus {
       color: var(--green)
-    }
-    @media (prefers-color-scheme: dark) {
-      &:hover,
-      &:active,
-      &:focus {
-        color: var(--light-green)
-      }
     }
   }
 }
@@ -68,4 +62,22 @@ h6 {
   font-size: 1.125rem;
   font-family: Roboto Slab, Roboto Slab fallback, serif;
   line-height: 1.5
+}
+
+@include dark-theme {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    :any-link:not(.btn) {
+      color: inherit;
+      &:hover,
+      &:active,
+      &:focus {
+        color: var(--light-green)
+      }
+    }
+  }
 }

@@ -1,4 +1,5 @@
 <style lang="scss">
+@import '~assets/scss/mixins';
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
@@ -6,10 +7,12 @@
   i {
     display: inline-flex;
     color: var(--grey);
-    font-size: xx-large;
-    @media (prefers-color-scheme: dark) {
-      color: var(--light-green)
-    }
+    font-size: xx-large
+  }
+}
+@include dark-theme {
+  .tech-stack i{
+    color: var(--light-green)
   }
 }
 </style>

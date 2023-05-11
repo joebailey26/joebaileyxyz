@@ -1,7 +1,7 @@
-
 @use 'wp-block-gallery';
 @use 'wp-block-image';
 @use 'wp-block-video';
+@import '../mixins';
 .post__content {
   margin-bottom: 1rem;
   *:first-child {
@@ -36,12 +36,6 @@
     &:hover {
       color: var(--green)
     }
-    @media (prefers-color-scheme: dark) {
-      color: white;
-      &:hover {
-        color: var(--light-green)
-      }
-    }
   }
 }
 .navigation-wrapper {
@@ -50,5 +44,15 @@
   @media (max-width: 576px) {
     padding-right: 10px;
     padding-left: 10px
+  }
+}
+@include dark-theme {
+  .navigation-index__link {
+    &:any-link {
+      color: white;
+      &:hover {
+        color: var(--light-green)
+      }
+    }
   }
 }

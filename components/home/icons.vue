@@ -1,4 +1,5 @@
 <style lang="scss">
+@import '~assets/scss/mixins';
 .icons {
   display: none
 }
@@ -30,7 +31,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@include dark-theme {
   .icon {
     border: 2px solid white;
     &.current {

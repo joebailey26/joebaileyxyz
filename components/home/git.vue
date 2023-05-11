@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import '~assets/scss/mixins';
 .git {
   margin-top: 50px;
   margin-right: -15px;
@@ -53,7 +54,9 @@
       }
     }
   }
-  @media (prefers-color-scheme: dark) {
+}
+@include dark-theme {
+  .git {
     :any-link {
       color: white;
       &:hover,

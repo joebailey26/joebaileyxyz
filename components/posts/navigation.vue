@@ -1,45 +1,50 @@
 <style lang="scss" scoped>
-  .navigation-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: space-between;
+@import '~assets/scss/mixins';
+.navigation-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  color: var(--grey);
+  :any-link {
     color: var(--grey);
-    :any-link {
-      color: var(--grey);
-      &:hover {
-        color: var(--green)
-      }
-      @media (prefers-color-scheme: dark) {
-        color: white;
-        &:hover {
-          color: var(--light-green)
-        }
-      }
+    &:hover {
+      color: var(--green)
     }
-    .navigation-item {
-      width: min(250px, calc(50% - .5rem))
-    }
+  }
+  .navigation-item {
+    width: min(250px, calc(50% - .5rem))
+  }
+  .navigation-link__arrow-wrapper {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .25rem
+  }
+  .navigation-link__title {
+    font-weight: 700
+  }
+  .navigation-link__article-name {
+    margin-top: 1rem;
+    font-weight: 400
+  }
+  .next {
+    text-align: right;
     .navigation-link__arrow-wrapper {
-      display: flex;
-      gap: .5rem;
-      align-items: center;
-      margin-bottom: .25rem
+      justify-content: end
     }
-    .navigation-link__title {
-      font-weight: 700
-    }
-    .navigation-link__article-name {
-      margin-top: 1rem;
-      font-weight: 400
-    }
-    .next {
-      text-align: right;
-      .navigation-link__arrow-wrapper {
-        justify-content: end
+  }
+}
+@include dark-theme {
+  .navigation-wrapper {
+    :any-link {
+      color: white;
+      &:hover {
+        color: var(--light-green)
       }
     }
   }
+}
 </style>
 
 <template>

@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import '~assets/scss/mixins';
 article {
   display: grid;
   gap: 1rem;
@@ -7,10 +8,7 @@ article {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 1.125rem;
-    line-height: 1.25;
-    @media (prefers-color-scheme: dark) {
-      color: white
-    }
+    line-height: 1.25
   }
   @supports selector(:has(+ * )) {
     grid-template-rows: max-content 1fr calc(5.6em + 1rem);
@@ -27,8 +25,15 @@ article {
     border: 1px solid var(--grey);
     border-radius: 4px;
     scroll-snap-align: center;
-    scroll-snap-stop: always;
-    @media (prefers-color-scheme: dark) {
+    scroll-snap-stop: always
+  }
+}
+@include dark-theme {
+  article {
+    .info-title {
+      color: white
+    }
+    @media (max-width: 768px) {
       background-color: var(--dark-grey);
       border-color: white
     }
