@@ -1,10 +1,11 @@
 @mixin dark-theme {
   @media (prefers-color-scheme: dark) {
-    // stylelint-disable-next-line
-    @content;
+    body {
+      // stylelint-disable-next-line
+      @content;
+    }
   }
-  .darkTheme,
-  :has(.darkTheme) {
+  body.darkTheme {
     // stylelint-disable-next-line
     @content;
   }

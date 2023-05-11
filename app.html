@@ -4,6 +4,12 @@
     {{ HEAD }}
   </head>
   <body {{ BODY_ATTRS }}>
+    <script>
+      const darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
+      if (darkmode) {
+        document.body.classList.add('darkTheme')
+      }
+    </script>
     {{ APP }}
   </body>
 </html>

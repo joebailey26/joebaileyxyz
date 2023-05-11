@@ -27,10 +27,10 @@ body {
   line-height: 1.5;
   text-align: left;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @include dark-theme {
-    color: #EEEEEE
-  }
+  -moz-osx-font-smoothing: grayscale
+}
+@include dark-theme {
+  color: #EEEEEE
 }
 p {
   margin: 0 0 1rem;

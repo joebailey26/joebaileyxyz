@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ darkTheme: darkmode }">
+  <div>
     <nav class="navbar">
       <div class="container ml-auto mr-auto">
         <div class="navbar__container">
@@ -49,8 +49,7 @@ export default {
   },
   data () {
     return {
-      darkmode: false,
-      darkmodeSet: false
+      darkmode: false
     }
   },
   beforeMount () {
@@ -59,6 +58,8 @@ export default {
   methods: {
     handleDarkmodeChange ($event) {
       this.darkmode = $event
+      const bodyClasses = document.body.classList
+      this.darkmode ? bodyClasses.add('darkTheme') : bodyClasses.remove('darkTheme')
       window.localStorage.setItem('darkmode', $event)
     }
   }

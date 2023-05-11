@@ -54,9 +54,7 @@ main {
   }
 }
 @include dark-theme {
-  body {
-    background-color: #333333
-  }
+  background-color: #333333;
   main {
     background-color: var(--dark-grey)
   }
