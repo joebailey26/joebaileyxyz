@@ -53,7 +53,7 @@ export default {
     }
   },
   beforeMount () {
-    this.darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
+    this.darkmode = window.darkmode
   },
   methods: {
     handleDarkmodeChange ($event) {

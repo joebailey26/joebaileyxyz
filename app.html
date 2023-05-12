@@ -5,8 +5,11 @@
   </head>
   <body {{ BODY_ATTRS }}>
     <script>
-      const darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
-      if (darkmode) {
+      window.darkmode = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (window.localStorage.getItem('darkmode')) {
+        window.darkmode = JSON.parse(window.localStorage.getItem('darkmode'))
+      }
+      if (window.darkmode) {
         document.body.classList.add('darkTheme')
       }
     </script>
