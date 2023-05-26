@@ -33,7 +33,7 @@
     "nuxt-component-image": "https://github.com/Galexia-Agency/nuxt-component-image",
     "path": "^0.12.7",
     "responsive-loader": "^2.3.0",
-    "sass": "^1.59.2",
+    "sass": "^1.62.1",
     "sass-loader": "^10.1.1",
     "sharp": "^0.30.5",
     "vue-social-sharing": "^3.0.4"
