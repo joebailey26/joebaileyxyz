@@ -6,7 +6,6 @@
           class="page-header__image"
           :avif="avifImage"
           :webp="require('~/assets/img/joe-bailey.jpg?format=webp&resize&size=150')"
-          :src="require('~/assets/img/joe-bailey.jpg?size=150')"
           width="150"
           loading="eager"
           fetchpriority="high"

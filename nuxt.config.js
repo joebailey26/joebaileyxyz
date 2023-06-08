@@ -103,23 +103,7 @@ export default {
   ],
   optimizedImages: {
     optimizeImages: true,
-    optimizeImagesInDev: true,
-    mozjpeg: {
-      quality: 70
-    },
-    pngquant: {
-      stripe: true
-    },
-    webp: {
-      quality: 70
-    },
-    svgo: {
-      plugins: [
-        { reusePaths: true },
-        { removeOffCanvasPaths: true },
-        { removeScriptElement: true }
-      ]
-    }
+    optimizeImagesInDev: true
   },
   generate: {
     fallback: true
