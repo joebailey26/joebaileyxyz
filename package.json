@@ -35,7 +35,7 @@
     "responsive-loader": "^2.3.0",
     "sass": "^1.59.2",
     "sass-loader": "^10.1.1",
-    "sharp": "^0.30.5",
+    "sharp": "^0.32.1",
     "vue-social-sharing": "^3.0.4"
   },
   "devDependencies": {
