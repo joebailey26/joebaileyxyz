@@ -94,19 +94,17 @@ export default class HandleExternalImage {
   }
 
   async generatePictureElement () {
-    this.localImagePath = await this.loadImage()
+    await this.loadImage()
     this.localAvifPath = await this.convertToAvif()
     this.localWebpPath = await this.convertToWebP()
-    const localImg = `/img/${this.outputDirectory}/${path.basename(this.fullOutputPath)}`
     const localAvif = `/img/${this.outputDirectory}/${path.basename(this.fullOutputPathAvif)}`
     const localWebp = `/img/${this.outputDirectory}/${path.basename(this.fullOutputPathWebp)}`
 
     return `
     <picture>
       <source type="image/avif" srcset="${localAvif}" width="${this.width ? this.width : 'auto'}" height="${this.height ? this.height : 'auto'}">
-      <source type="image/webp" srcset="${localWebp}" width="${this.width ? this.width : 'auto'}" height="${this.height ? this.height : 'auto'}">
       <img
-        src="${localImg}"
+        src="${localWebp}"
         decoding="async"
         loading="lazy"
         alt="${this.alt}"
