@@ -82,7 +82,8 @@ export default {
    */
   plugins: [
     '~plugins/fontAwesome',
-    '~plugins/galexia/components/image.js'
+    '~plugins/galexia/components/image.js',
+    '~plugins/galexia/components/share.js'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -98,7 +99,6 @@ export default {
    */
   modules: [
     '~/modules/only-once.js',
-    'vue-social-sharing/nuxt',
     '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {

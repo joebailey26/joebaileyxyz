@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faFacebook,
-  faTwitter,
-  faWhatsapp,
   faLinkedin,
   faGithub,
   faGoogle,
@@ -18,7 +15,6 @@ import {
   faCloud,
   faPenNib,
   faBook,
-  faShareAlt,
   faLongArrowAltLeft,
   faLongArrowAltRight,
   faPlus
@@ -27,10 +23,6 @@ import { faHandPointLeft } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
-  faShareAlt,
-  faFacebook,
-  faTwitter,
-  faWhatsapp,
   faLinkedin,
   faGithub,
   faGoogle,

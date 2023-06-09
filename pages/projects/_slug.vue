@@ -27,7 +27,9 @@
                   <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
                   <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                 </div>
-                <Share :title="project.title" :excerpt="project.excerpt" />
+                <ClientOnly>
+                  <GalexiaShare :title="project.title" :description="project.excerpt" />
+                </ClientOnly>
               </article>
             </div>
           </div>
@@ -47,13 +49,11 @@
 <script>
 import { mapState } from 'vuex'
 import Navigation from '~/components/posts/navigation'
-import Share from '~/components/posts/share'
 import TechStack from '~/components/global/techStack'
 
 export default {
   components: {
     Navigation,
-    Share,
     TechStack
   },
   head () {

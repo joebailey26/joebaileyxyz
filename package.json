@@ -28,12 +28,12 @@
     "fs": "^0.0.2",
     "nuxt": "^2.16.2",
     "nuxt-component-image": "https://github.com/Galexia-Agency/nuxt-component-image",
+    "nuxt-component-share": "https://github.com/Galexia-Agency/nuxt-component-share",
     "path": "^0.12.7",
     "responsive-loader": "^2.3.0",
     "sass": "^1.62.1",
     "sass-loader": "^10.1.1",
-    "sharp": "^0.32.1",
-    "vue-social-sharing": "^3.0.4"
+    "sharp": "^0.32.1"
   },
   "devDependencies": {
     "@netlify/plugin-sitemap": "^0.8.1",
