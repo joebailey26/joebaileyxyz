@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <article>
-                <div class="post__content" v-html="project.content" />
+                <div class="post__content" v-html="project.content.trim()" />
                 <div v-if="project.acf && (project.acf.project_url || project.acf.github)" class="post__buttons buttonsContainer">
                   <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
                   <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
