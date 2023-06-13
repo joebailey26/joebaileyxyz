@@ -68,7 +68,9 @@ package = "netlify-plugin-checklinks"
   # You can mark some check as skipped, which will block checklinks
   # from ever attempting to execute them.
   # skipPatterns is an array of strings you can match against failing reports
-  skipPatterns = []
+  skipPatterns = [
+    'foobar'
+  ]
 
 [[plugins]]
 package = "netlify-plugin-cache"
