@@ -13,6 +13,13 @@
     raw-loader "^4.0.2"
     url-loader "^4.1.1"
 
+"@algolia/netlify-plugin-crawler@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@algolia/netlify-plugin-crawler/-/netlify-plugin-crawler-1.0.15.tgz#48c347b8a5d3f42a1f1f84833285150df5c9ee91"
+  integrity sha512-o0LEytX/mQojUzNrCHRHE9zZjZU7YKGVJ6Z+bXDeoskSMbQwdREZEjK/dV2dBVAH61DqItFFYWb/9iIafsiTmw==
+  dependencies:
+    node-fetch "2.6.7"
+
 "@ampproject/remapping@^2.2.0":
   version "2.2.0"
   resolved "https://registry.npmjs.org/@ampproject/remapping/-/remapping-2.2.0.tgz"
@@ -7719,6 +7726,13 @@ node-fetch-native@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/node-fetch-native/-/node-fetch-native-1.0.2.tgz"
   integrity sha512-KIkvH1jl6b3O7es/0ShyCgWLcfXxlBrLBbP3rOr23WArC66IMcU4DeZEeYEOwnopYhawLTn7/y+YtmASe8DFVQ==
+
+node-fetch@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-fetch@^2.6.1, node-fetch@^2.6.7:
   version "2.6.9"

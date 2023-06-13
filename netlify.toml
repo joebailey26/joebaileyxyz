@@ -78,3 +78,6 @@ package = "netlify-plugin-cache"
     "static/img/wordpress",
     "static/img/favicons"
   ]
+
+[[plugins]]
+package = "@algolia/netlify-plugin-crawler"

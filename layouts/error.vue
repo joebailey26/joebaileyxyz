@@ -2,8 +2,15 @@
 .error {
   padding-top: 5rem;
   text-align: center;
+  .error-container {
+    padding-right: 1rem;
+    padding-left: 1rem
+  }
   h1 {
     font-size: clamp(1.75rem, 1vw + 1rem, 3rem)
+  }
+  #search {
+    margin-top: 2rem
   }
   .btn {
     margin-top: 2rem;
@@ -16,10 +23,11 @@
 
 <template>
   <main class="error">
-    <div v-if="error.statusCode === 404">
+    <div v-if="error.statusCode === 404" class="error-container">
       <h1>
         404 - Page not found
       </h1>
+      <Search />
       <a class="btn" href="/">Go back home</a>
     </div>
     <div v-else>
@@ -32,8 +40,13 @@
 </template>
 
 <script>
+import Search from '~/components/global/search'
+
 export default {
   name: 'NuxtError',
+  components: {
+    Search
+  },
   props: {
     error: {
       type: Object,
