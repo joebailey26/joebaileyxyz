@@ -75,12 +75,34 @@ pre {
     }
   }
 }
-.line {
-  padding-left: 1.75rem
-}
-.line-number {
-  margin-left: -1.75rem;
-  padding-right: .75rem
+.torchlight {
+  .line {
+    padding-left: 1.75rem
+  }
+  .line-number {
+    margin-left: -1.75rem;
+    padding-right: .75rem
+  }
+
+  /*
+    Blur and dim the lines that don't have the `.line-focus` class,
+    but are within a code block that contains any focus lines.
+  */
+  &.has-focus-lines {
+    .line:not(.line-focus) {
+      opacity: .65;
+      filter: blur(.095rem);
+      transition: filter .35s, opacity .35s
+    }
+
+    /*
+      When the code block is hovered, bring all the lines into focus.
+    */
+    &:hover .line:not(.line-focus) {
+      opacity: 1;
+      filter: blur(0)
+    }
+  }
 }
 
 /* Copy Button */
