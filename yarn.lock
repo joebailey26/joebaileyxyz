@@ -7671,6 +7671,13 @@ netlify-plugin-checklinks@^4.1.1:
     hyperlink "^4.5.0"
     tap-spot "^1.1.1"
 
+netlify-plugin-debug-cache@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/netlify-plugin-debug-cache/-/netlify-plugin-debug-cache-1.0.4.tgz#bd10695a36023d66a417f227cb95fde07c0488f1"
+  integrity sha512-a9yBPnQlsDaNO8iPiSVxpiFnz3gj8BkhXRwT6bshLMCQRVezf/uIChTB55L675t6mZj+U4PwVIc7u8X2Ptc2Fw==
+  dependencies:
+    make-dir "^3.1.0"
+
 netlify-plugin-submit-sitemap@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/netlify-plugin-submit-sitemap/-/netlify-plugin-submit-sitemap-0.4.0.tgz"
