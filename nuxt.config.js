@@ -83,7 +83,8 @@ export default {
   plugins: [
     '~plugins/fontAwesome',
     '~plugins/galexia/components/image.js',
-    '~plugins/galexia/components/share.js'
+    '~plugins/galexia/components/share.js',
+    '~plugins/mixins/copyToClipboard'
   ],
   /*
    ** Nuxt.js dev-modules

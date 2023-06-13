@@ -1,3 +1,4 @@
+@import '../mixins';
 pre {
   --wght: 'wght' 400;
   --mono: 'MONO' 1;
@@ -5,10 +6,11 @@ pre {
   --slnt: 'slnt' 0;
   // stylelint-disable-next-line custom-property-pattern
   --CRSV: 'CRSV' .5;
-  margin: .5em 0;
-  padding: 1em;
-  overflow: auto;
-  overflow-y: scroll;
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  margin: .5rem 0;
+  overflow: hidden;
   color: white;
   font-size: 1rem;
   font-family: Recursive, monospace;
@@ -20,37 +22,103 @@ pre {
   word-spacing: normal;
   tab-size: 2;
   hyphens: none;
-  background: var(--dark-grey);
-  border-radius: .5em;
+  background: #1E1E1E;
+  border-radius: 8px;
 
   // stylelint-disable-next-line custom-property-pattern
   font-variation-settings: var(--mono), var(--casl), var(--wght), var(--slnt), var(--CRSV);
+
+  /* Language identifier */
+  &:before {
+    position: absolute;
+    top: .75rem;
+    right: 1.25rem;
+    z-index: 10;
+    color: #858585;
+    transition: color .25s ease-out;
+    content: attr(data-language)
+  }
+  &:hover:before {
+    color: white
+  }
   code {
     position: relative;
-    white-space: inherit
-  }
+    padding: 1rem 3rem 1rem 1rem;
+    overflow-y: auto;
+    white-space: inherit;
 
-  /* width */
-  &::-webkit-scrollbar {
-    width: 10px
-  }
+    @media (orientation: landscape) {
+      max-height: 50vh
+    }
+  
+    @media (orientation: portrait) {
+      max-height: 75vh
+    }
 
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: var(--dark-grey);
-    border-radius: 0 .5em .5em 0
+    /* width */
+    &::-webkit-scrollbar {
+      width: 10px
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: var(--dark-grey);
+      border-radius: 0 .5em .5em 0
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #888888
+    }
   }
+}
+.line {
+  padding-left: 1.75rem
+}
+.line-number {
+  margin-left: -1.75rem;
+  padding-right: .75rem
+}
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: #888888
+/* Copy Button */
+.torchlight-copy-target {
+  display: none
+}
+.copy-button__container {
+  position: absolute;
+  right: 1.25rem;
+  bottom: .75rem;
+  z-index: 10;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  height: 2rem;
+  color: #858585;
+  transition: color .25s ease-out;
+  &:hover {
+    color: white;
+    .copy-button__button {
+      background-color: white
+    }
   }
-
-  @media (orientation: landscape) {
-    max-height: 50vh
+}
+.copy-button__text {
+  opacity: 0;
+  transition: opacity .25s ease-out;
+  &.copied {
+    opacity: 1
   }
-
-  @media (orientation: portrait) {
-    max-height: 75vh
-  }
+}
+.copy-button__button {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background-color: #858585;
+  border: 0;
+  cursor: pointer;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75' /%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  transition: background-color .25s ease-out
 }
