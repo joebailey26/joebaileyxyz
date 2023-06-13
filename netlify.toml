@@ -69,3 +69,12 @@ package = "netlify-plugin-checklinks"
   # from ever attempting to execute them.
   # skipPatterns is an array of strings you can match against failing reports
   skipPatterns = []
+
+[[plugins]]
+package = "netlify-plugin-cache"
+  [plugins.inputs]
+  paths = [
+    ".torchlight-cache/",
+    "static/img/wordpress/",
+    "static/img/favicons/"
+  ]
