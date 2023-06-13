@@ -27,7 +27,9 @@
       <h1>
         404 - Page not found
       </h1>
-      <Search />
+      <ClientOnly>
+        <Search />
+      </ClientOnly>
       <a class="btn" href="/">Go back home</a>
     </div>
     <div v-else>
@@ -55,7 +57,18 @@ export default {
   },
   head () {
     return {
-      title: this.message
+      title: this.message,
+      script: [
+        {
+          src: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js'
+        }
+      ],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css'
+        }
+      ]
     }
   },
   computed: {

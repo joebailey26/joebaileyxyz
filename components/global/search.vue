@@ -76,33 +76,15 @@
 
 <script>
 export default {
-  head () {
-    return {
-      script: [
-        {
-          src: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js'
-        }
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css'
-        }
-      ]
-    }
-  },
   mounted () {
     // eslint-disable-next-line no-undef
-    if (algoliasearchNetlify !== undefined) {
-      // eslint-disable-next-line no-undef
-      algoliasearchNetlify({
-        appId: 'UFETFF29BD',
-        apiKey: 'fbc7e9ba54d66ee5d9808ddd17416c78',
-        siteId: '0f6be2d7-6002-4d40-870b-9f3ad6ba7c49',
-        branch: 'master',
-        selector: 'div#search'
-      })
-    }
+    algoliasearchNetlify({
+      appId: 'UFETFF29BD',
+      apiKey: 'fbc7e9ba54d66ee5d9808ddd17416c78',
+      siteId: '0f6be2d7-6002-4d40-870b-9f3ad6ba7c49',
+      branch: 'master',
+      selector: 'div#search'
+    })
   }
 }
 </script>
