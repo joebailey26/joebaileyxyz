@@ -75,6 +75,5 @@ package = "netlify-plugin-cache"
   [plugins.inputs]
   paths = [
     ".torchlight-cache",
-    "static/img/wordpress",
-    "static/img/favicons"
+    "static"
   ]
