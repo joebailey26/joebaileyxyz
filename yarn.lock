@@ -1793,9 +1793,10 @@
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@torchlight-api/client@https://github.com/torchlight-api/js-client":
+"@torchlight-api/client@^0.0.4":
   version "0.0.4"
-  resolved "https://github.com/torchlight-api/js-client#5b1a23fa9e9dc667a0c5610b7b3e928ba13d3059"
+  resolved "https://registry.yarnpkg.com/@torchlight-api/client/-/client-0.0.4.tgz#f14497a97162e07390b5eacd9387ee0e89399d64"
+  integrity sha512-bQG2Bznxk19FZ7da9de+yhqCRpIY6RfHfy++NbMNtHz0nWiOEnBf1LkmzwQ8rSDb/JjIkzLBiowf541UmOxyww==
   dependencies:
     axios "^0.21.1"
     chalk "^4.1.2"
