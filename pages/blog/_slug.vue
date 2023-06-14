@@ -5,14 +5,14 @@
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
             <div class="navigation-index">
-              <nuxt-link :to="'/blog/'" class="navigation-index__link">
+              <NuxtLink :to="'/blog/'" class="navigation-index__link">
                 <font-awesome-icon :icon="['fa-regular', 'fa-hand-point-left']" class="navigation-link__icon" />
                 Back to blog
-              </nuxt-link>
+              </NuxtLink>
             </div>
-            <h1 class="page-header__title" v-html="post.title" />
+            <h1 class="page-header__title" v-text="post.title" />
             <p class="page-header__description">
-              <span>Published </span><time :datetime="post.date.fullDate" v-html="`${post.date.day} ${post.date.month} '${post.date.year}`" />
+              <span>Published </span><time :datetime="post.date.fullDate" v-text="`${post.date.day} ${post.date.month} '${post.date.year}`" />
             </p>
           </div>
         </div>

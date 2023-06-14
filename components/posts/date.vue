@@ -30,8 +30,8 @@
 
 <template>
   <div class="date">
-    <div class="day" v-html="date.day" />
-    <div class="monthYear" v-html="`${date.month} '${date.year}`" />
+    <div class="day" v-text="date.day" />
+    <div class="monthYear" v-text="`${date.month} '${date.year}`" />
   </div>
 </template>
 

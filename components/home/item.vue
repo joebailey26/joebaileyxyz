@@ -44,15 +44,15 @@ article {
 <template>
   <article>
     <h3 class="info-title">
-      <nuxt-link v-if="showLink" :to="link" v-html="item.title" />
-      <span v-else v-html="item.title" />
+      <NuxtLink v-if="showLink" :to="link" v-text="item.title" />
+      <span v-else v-text="item.title" />
     </h3>
     <TechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
-    <div v-html="item.excerpt" />
+    <div v-html="item.excerpt.trim()" />
     <div class="buttonsContainer">
-      <nuxt-link v-if="showLink" :to="link" class="btn">
+      <NuxtLink v-if="showLink" :to="link" class="btn">
         Continue Reading
-      </nuxt-link>
+      </NuxtLink>
       <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View project</a>
       <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github" target="_blank">View repo</a>
     </div>

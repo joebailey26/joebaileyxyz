@@ -5,12 +5,12 @@
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto page-header__content">
             <div class="navigation-index">
-              <nuxt-link :to="'/projects/'" class="navigation-index__link">
+              <NuxtLink :to="'/projects/'" class="navigation-index__link">
                 <font-awesome-icon :icon="['fa-regular', 'fa-hand-point-left']" class="navigation-link__icon" />
                 Back to projects
-              </nuxt-link>
+              </NuxtLink>
             </div>
-            <h1 class="page-header__title" v-html="project.title" />
+            <h1 class="page-header__title" v-text="project.title" />
             <TechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" :show-post-name="true" />
           </div>
         </div>

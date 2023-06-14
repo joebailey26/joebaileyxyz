@@ -39,22 +39,22 @@
 <template>
   <ul v-if="pageCount > 1" class="pagination">
     <li v-if="!(firstPageSelected())">
-      <nuxt-link
+      <NuxtLink
         v-if="currentPage - 1 === 1"
         :to="`/${linkPrefix}/`"
         aria-label="Previous Page"
         :tabindex="firstPageSelected() ? -1 : 0"
       >
         Prev
-      </nuxt-link>
-      <nuxt-link
+      </NuxtLink>
+      <NuxtLink
         v-else
         :to="`/${linkPrefix}/page/${currentPage - 1}/`"
         aria-label="Previous Page"
         :tabindex="firstPageSelected() ? -1 : 0"
       >
         Prev
-      </nuxt-link>
+      </NuxtLink>
     </li>
 
     <li v-for="(page, idx) in pages" :key="idx" :class="[page.selected ? 'active' : '', page.disabled ? 'disabled' : '']">
@@ -69,7 +69,7 @@
       <span v-else-if="page.disabled" aria-label="Page">
         {{ page.content }}
       </span>
-      <nuxt-link
+      <NuxtLink
         v-else-if="page.index + 1 === 1"
         :to="`/${linkPrefix}/`"
         :aria-label="'Page' + ' ' + page.content"
@@ -78,8 +78,8 @@
         :aria-hidden="page.selected ? 'true' : 'false'"
       >
         {{ page.content }} <span class="sr-only">(current)</span>
-      </nuxt-link>
-      <nuxt-link
+      </NuxtLink>
+      <NuxtLink
         v-else
         :to="`/${linkPrefix}/page/${page.index + 1}/`"
         :aria-label="'Page' + ' ' + page.content"
@@ -88,17 +88,17 @@
         :aria-hidden="page.selected ? 'true' : 'false'"
       >
         {{ page.content }} <span class="sr-only">(current)</span>
-      </nuxt-link>
+      </NuxtLink>
     </li>
 
     <li v-if="!(lastPageSelected())">
-      <nuxt-link
+      <NuxtLink
         :to="`/${linkPrefix}/page/${currentPage + 1}/`"
         aria-label="Next Page"
         :tabindex="lastPageSelected() ? -1 : 0"
       >
         Next
-      </nuxt-link>
+      </NuxtLink>
     </li>
   </ul>
 </template>

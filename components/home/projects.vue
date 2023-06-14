@@ -1,9 +1,9 @@
 <template>
   <section id="section-projects" class="section section-projects">
     <h2 class="text-center title">
-      <nuxt-link to="/projects/">
+      <NuxtLink to="/projects/">
         Projects
-      </nuxt-link>
+      </NuxtLink>
     </h2>
     <Items :items="projects[0].slice(0, 6)" link-prefix="projects" />
     <Git />

@@ -50,22 +50,22 @@
 <template>
   <div class="navigation-wrapper">
     <div class="navigation-item previous">
-      <nuxt-link v-if="previousPage" :to="`/${postType}/${previousPage.slug}/`" class="navigation-link">
+      <NuxtLink v-if="previousPage" :to="`/${postType}/${previousPage.slug}/`" class="navigation-link">
         <div class="navigation-link__arrow-wrapper">
           <font-awesome-icon :icon="['fa-solid', 'fa-long-arrow-alt-left']" class="navigation-link__icon" />
-          <span class="navigation-link__title" v-html="previousPostText" />
+          <span class="navigation-link__title" v-text="previousPostText" />
         </div>
-        <span v-if="showPostName" class="navigation-link__article-name" v-html="previousPage.title" />
-      </nuxt-link>
+        <span v-if="showPostName" class="navigation-link__article-name" v-text="previousPage.title" />
+      </NuxtLink>
     </div>
     <div class="navigation-item next">
-      <nuxt-link v-if="nextPage" :to="`/${postType}/${nextPage.slug}/`" class="navigation-link">
+      <NuxtLink v-if="nextPage" :to="`/${postType}/${nextPage.slug}/`" class="navigation-link">
         <div class="navigation-link__arrow-wrapper">
-          <span class="navigation-link__title" v-html="nextPostText" />
+          <span class="navigation-link__title" v-text="nextPostText" />
           <font-awesome-icon :icon="['fa-solid', 'fa-long-arrow-alt-right']" class="navigation-link__icon" />
         </div>
-        <span v-if="showPostName" class="navigation-link__article-name" v-html="nextPage.title" />
-      </nuxt-link>
+        <span v-if="showPostName" class="navigation-link__article-name" v-text="nextPage.title" />
+      </NuxtLink>
     </div>
   </div>
 </template>

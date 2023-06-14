@@ -21,15 +21,15 @@
                     <Date class="post__date" :date="post.date" />
                     <header class="post__header">
                       <h2 class="post__title">
-                        <nuxt-link :to="`/blog/${post.slug}/`" v-html="post.title" />
+                        <NuxtLink :to="`/blog/${post.slug}/`" v-text="post.title" />
                       </h2>
                       <span class="post__read-time">{{ post.readingTime }} minute read</span>
                     </header>
-                    <div class="post__content" v-html="post.excerpt" />
+                    <div class="post__content" v-html="post.excerpt.trim()" />
                     <div class="post__buttons buttonsContainer">
-                      <nuxt-link class="btn" :to="`/blog/${post.slug}/`">
+                      <NuxtLink class="btn" :to="`/blog/${post.slug}/`">
                         Continue Reading
-                      </nuxt-link>
+                      </NuxtLink>
                     </div>
                   </article>
                 </template>

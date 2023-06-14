@@ -130,14 +130,14 @@
         />
       </template>
       <article v-if="items.length === 6" class="view-more-items">
-        <nuxt-link :to="`/${linkPrefix}/`">
+        <NuxtLink :to="`/${linkPrefix}/`">
           <h3 class="view-more-items__title">
             View more
           </h3>
           <div class="view-more-items__plus">
             <font-awesome-icon :icon="['fa-solid', 'fa-plus']" />
           </div>
-        </nuxt-link>
+        </NuxtLink>
       </article>
     </div>
     <Icons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @iconClicked="iconScroll" />

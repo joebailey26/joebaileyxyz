@@ -20,15 +20,15 @@
                   <article v-if="project && project.slug" :id="project.slug" :key="project.title" class="post-index__post">
                     <header class="post__header">
                       <h2 class="post__title">
-                        <nuxt-link :to="`/projects/${project.slug}/`" v-html="project.title" />
+                        <NuxtLink :to="`/projects/${project.slug}/`" v-text="project.title" />
                       </h2>
                       <TechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
                     </header>
-                    <div class="post__content" v-html="project.excerpt" />
+                    <div class="post__content" v-html="project.excerpt.trim()" />
                     <div class="post__buttons buttonsContainer">
-                      <nuxt-link class="btn" :to="`/projects/${project.slug}/`">
+                      <NuxtLink class="btn" :to="`/projects/${project.slug}/`">
                         Continue Reading
-                      </nuxt-link>
+                      </NuxtLink>
                       <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
                       <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                     </div>

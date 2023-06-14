@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import he from 'he'
 import prepareWordPressContent from './prepare-wordpress-content'
 
 function getDay (date) {
@@ -40,7 +41,7 @@ function getRequiredInfoFromPosts (posts) {
     return null
   }
   return posts.map(({ title, excerpt, slug, date, content, acf }) => ({
-    title: title.rendered,
+    title: he.decode(title.rendered),
     excerpt: excerpt.rendered,
     slug,
     date: {
