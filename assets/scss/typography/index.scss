@@ -32,21 +32,6 @@ body {
 @include dark-theme {
   color: #EEEEEE
 }
-p {
-  margin: 0 0 1rem;
-  overflow-wrap: anywhere;
-  &:last-child {
-    margin: 0
-  }
-}
-ul, ol {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  li {
-    padding: .25rem 0
-  }
-}
 .text-center {
   text-align: center
 }

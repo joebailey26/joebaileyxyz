@@ -48,7 +48,7 @@ article {
       <span v-else v-text="item.title" />
     </h3>
     <TechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
-    <div v-html="item.excerpt.raw" />
+    <p v-text="item.excerpt.plain" />
     <div class="buttonsContainer">
       <NuxtLink v-if="showLink" :to="link" class="btn">
         Continue Reading
