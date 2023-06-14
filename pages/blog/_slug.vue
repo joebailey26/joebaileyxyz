@@ -24,13 +24,13 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <article>
-                <div class="post__content" v-html="post.content.trim()" />
+                <div class="post__content" v-html="post.content" />
                 <div v-if="post.acf && (post.acf.project_url || post.acf.github)" class="post__buttons buttonsContainer">
                   <a v-if="post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
                   <a v-if="post.acf.github" class="btn" :href="post.acf.github">View repo</a>
                 </div>
                 <ClientOnly>
-                  <GalexiaShare :title="post.title" :description="post.excerpt" />
+                  <GalexiaShare :title="$nuxt.$options.head.titleTemplate.replace('%s', post.title)" :description="post.excerpt.plain" />
                 </ClientOnly>
               </article>
             </div>
@@ -57,27 +57,32 @@ export default {
     Navigation
   },
   head () {
+    const meta = []
+    let title = ''
+    if (this.post) {
+      if (this.post.title) {
+        title = this.post.title
+        meta.push({ hid: 'og:title', property: 'og:title', content: this.post.title })
+        meta.push({ hid: 'twitter:title', name: 'twitter:title', content: this.post.title })
+      }
+      if (this.post.excerpt.plain) {
+        meta.push({ hid: 'description', name: 'description', content: this.post.excerpt.plain })
+        meta.push({ hid: 'og:description', property: 'og:description', content: this.post.excerpt.plain })
+        meta.push({ hid: 'twitter:description', name: 'twitter:description', content: this.post.excerpt.plain })
+      }
+      if (this.post.featured_media) {
+        meta.push({ hid: 'og:image', property: 'og:image', content: this.post.featured_media })
+      }
+    }
     return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
+      title,
+      meta,
       link: [
         { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.params.slug}/` }
       ]
     }
   },
   computed: {
-    head () {
-      return {
-        title: this.post ? this.post.title : '',
-        description: this.post ? this.post.excerpt : ''
-      }
-    },
     ...mapState([
       'blog'
     ]),

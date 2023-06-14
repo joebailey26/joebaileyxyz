@@ -24,7 +24,7 @@
                       </h2>
                       <TechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
                     </header>
-                    <div class="post__content" v-html="project.excerpt.trim()" />
+                    <div class="post__content" v-html="project.excerpt.raw" />
                     <div class="post__buttons buttonsContainer">
                       <NuxtLink class="btn" :to="`/projects/${project.slug}/`">
                         Continue Reading

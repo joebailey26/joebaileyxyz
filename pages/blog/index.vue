@@ -25,7 +25,7 @@
                       </h2>
                       <span class="post__read-time">{{ post.readingTime }} minute read</span>
                     </header>
-                    <div class="post__content" v-html="post.excerpt.trim()" />
+                    <div class="post__content" v-html="post.excerpt.raw" />
                     <div class="post__buttons buttonsContainer">
                       <NuxtLink class="btn" :to="`/blog/${post.slug}/`">
                         Continue Reading

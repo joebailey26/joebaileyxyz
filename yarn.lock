@@ -8437,7 +8437,7 @@ num2fraction@^1.2.2:
 
 "nuxt-component-share@https://github.com/Galexia-Agency/nuxt-component-share":
   version "1.0.1"
-  resolved "https://git@github.com/Galexia-Agency/nuxt-component-share.git#6429528f2cff6d016c760e2fbad5c79975684819"
+  resolved "https://github.com/Galexia-Agency/nuxt-component-share#da59392a091526362d054881c229a78b4d32e4f9"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.4.0"
     "@fortawesome/free-brands-svg-icons" "^6.4.0"

@@ -22,13 +22,13 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <article>
-                <div class="post__content" v-html="project.content.trim()" />
+                <div class="post__content" v-html="project.content" />
                 <div v-if="project.acf && (project.acf.project_url || project.acf.github)" class="post__buttons buttonsContainer">
                   <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
                   <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                 </div>
                 <ClientOnly>
-                  <GalexiaShare :title="project.title" :description="project.excerpt" />
+                  <GalexiaShare :title="$nuxt.$options.head.titleTemplate.replace('%s', project.title)" :description="project.excerpt.plain" />
                 </ClientOnly>
               </article>
             </div>
@@ -57,27 +57,32 @@ export default {
     TechStack
   },
   head () {
+    const meta = []
+    let title = ''
+    if (this.project) {
+      if (this.project.title) {
+        title = this.project.title
+        meta.push({ hid: 'og:title', property: 'og:title', content: this.project.title })
+        meta.push({ hid: 'twitter:title', name: 'twitter:title', content: this.project.title })
+      }
+      if (this.project.excerpt.plain) {
+        meta.push({ hid: 'description', name: 'description', content: this.project.excerpt.plain })
+        meta.push({ hid: 'og:description', property: 'og:description', content: this.project.excerpt.plain })
+        meta.push({ hid: 'twitter:description', name: 'twitter:description', content: this.project.excerpt.plain })
+      }
+      if (this.project.featured_media) {
+        meta.push({ hid: 'og:image', property: 'og:image', content: this.project.featured_media })
+      }
+    }
     return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
+      title,
+      meta,
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/projects/${this.$route.params.slug}/` }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.params.slug}/` }
       ]
     }
   },
   computed: {
-    head () {
-      return {
-        title: this.project ? this.project.title : '',
-        description: this.project ? this.project.excerpt : ''
-      }
-    },
     ...mapState([
       'projects'
     ]),

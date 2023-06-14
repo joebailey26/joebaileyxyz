@@ -2,7 +2,7 @@ import { load } from 'cheerio'
 import he from 'he'
 import { makeConfig, Block, torchlight, FileCache } from '@torchlight-api/client'
 
-export async function syntaxHighlightCodeWithTorchlight (postContent) {
+export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   const regex = /<pre.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {

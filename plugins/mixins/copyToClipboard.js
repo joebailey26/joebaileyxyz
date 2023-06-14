@@ -16,7 +16,7 @@ class CopyToClipboard {
     })
   }
 }
-export function registerCopyToClipboardContainers () {
+function registerCopyToClipboardContainers () {
   document.querySelectorAll('.js-copy-to-clipboard-container').forEach((element) => {
     return new CopyToClipboard(element)
   })
