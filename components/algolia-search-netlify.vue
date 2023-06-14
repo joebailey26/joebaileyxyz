@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import algoliasearchNetlify from './AlgoliasearchNetlify'
+import algoliasearchNetlify from '~/packages/algolia-search-netlify'
 
 export default {
   mounted () {

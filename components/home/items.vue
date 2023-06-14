@@ -120,7 +120,7 @@
   <div v-if="items" class="items">
     <div ref="container" class="row grid" @scroll="containerScroll">
       <template v-for="item, index in items">
-        <Item
+        <HomeItem
           ref="item"
           :key="`${item.title}${index}`"
           :item="item"
@@ -140,19 +140,12 @@
         </NuxtLink>
       </article>
     </div>
-    <Icons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @iconClicked="iconScroll" />
+    <HomeIcons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @iconClicked="iconScroll" />
   </div>
 </template>
 
 <script>
-import Item from '~/components/home/item'
-import Icons from '~/components/home/icons'
-
 export default {
-  components: {
-    Item,
-    Icons
-  },
   props: {
     items: {
       type: Array,

@@ -1,27 +1,28 @@
 export default {
   target: 'static',
+  components: true,
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s | Joe Bailey | Front-End Web Developer | Cambridge, UK',
+    titleTemplate: '%s | Joe Bailey | Software Engineer | Cambridge, UK',
     htmlAttrs: {
       lang: 'en-GB'
     },
     meta: [
       { name: 'viewport', content: 'width=device-width,initial-scale=1' },
-      { name: 'description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.' },
+      { name: 'description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. By reducing page load times, not only do we improve user experience, but we also reduce our carbon footprint.' },
       { name: 'application-name', content: 'Joe Bailey' },
       { name: 'theme-color', content: '#282828' },
       { name: 'msapplication-TileColor', content: '#004c3f' },
       { name: 'msapplication-TileImage', content: 'https://joebailey.xyz/mstile-150x150.png' },
 
       // Twitter Card data
-      { hid: 'twitter:title', name: 'twitter:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
+      { hid: 'twitter:title', name: 'twitter:title', template: (chunk) => `${chunk} | Joe Bailey | Software Engineer | Cambridge, UK` },
       { hid: 'twitter:description', name: 'twitter:description' },
 
       // Open Graph data
-      { hid: 'og:title', property: 'og:title', template: (chunk) => `${chunk} | Joe Bailey | Front-End Web Developer | Cambridge, UK` },
+      { hid: 'og:title', property: 'og:title', template: (chunk) => `${chunk} | Joe Bailey | Software Engineer | Cambridge, UK` },
       { hid: 'og:description', property: 'og:description' },
       { property: 'og:type', content: 'website' }
     ],

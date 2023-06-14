@@ -44,10 +44,12 @@ article {
 <template>
   <article>
     <h3 class="info-title">
-      <NuxtLink v-if="showLink" :to="link" v-text="item.title" />
+      <NuxtLink v-if="showLink" :to="link">
+        {{ item.title }}
+      </NuxtLink>
       <span v-else v-text="item.title" />
     </h3>
-    <TechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
+    <LayoutTechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
     <p v-text="item.excerpt.plain" />
     <div class="buttonsContainer">
       <NuxtLink v-if="showLink" :to="link" class="btn">
@@ -60,12 +62,7 @@ article {
 </template>
 
 <script>
-import TechStack from '~/components/global/techStack'
-
 export default {
-  components: {
-    TechStack
-  },
   props: {
     item: {
       type: Object,

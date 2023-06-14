@@ -20,31 +20,21 @@
     </header>
     <main>
       <div class="container ml-auto mr-auto">
-        <Projects />
-        <Blog />
-        <Contact />
+        <HomeProjects />
+        <HomeBlog />
+        <HomeContact />
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import Projects from '~/components/home/projects'
-import Blog from '~/components/home/blog'
-import Contact from '~/components/home/contact'
-
 export default {
-  components: {
-    Projects,
-    Blog,
-    Contact
-  },
   data () {
     return {
       avifImage: require('~/assets/img/joe-bailey.jpg?format=avif&resize&size=150'),
       head: {
-        title: 'Home',
-        description: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. I code in VueJS and like to keep things front-end, utilising Netlify wherever possible. I have a thorough understanding of PHP to call on when working with WordPress sites.'
+        title: 'Home'
       }
     }
   },
@@ -52,11 +42,8 @@ export default {
     return {
       title: this.head.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
         { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
+        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title }
       ],
       link: [
         { rel: 'preload', as: 'image', href: this.avifImage }
@@ -69,7 +56,7 @@ export default {
               "@type": "Person",
               "email": "joe@joebailey.xyz",
               "image": "https://joebailey.xyz/img/joe-bailey.jpg",
-              "jobTitle": "Front-End Web Developer",
+              "jobTitle": "Software Engineer",
               "name": "Joe Bailey",
               "birthPlace": "Cambridge, UK",
               "birthDate": "2000-06-02",

@@ -28,25 +28,19 @@
               </svg>
               Contact
             </a>
-            <DarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
+            <LayoutDarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
           </div>
         </div>
       </div>
     </nav>
     <nuxt />
-    <Footer />
+    <LayoutFooter />
   </div>
 </template>
 
 <script>
-import DarkmodeToggle from '~/components/global/darkmodeToggle'
-import Footer from '~/components/global/footer'
 
 export default {
-  components: {
-    DarkmodeToggle,
-    Footer
-  },
   data () {
     return {
       darkmode: false

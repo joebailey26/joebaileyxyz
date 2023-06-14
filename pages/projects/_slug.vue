@@ -11,7 +11,7 @@
               </NuxtLink>
             </div>
             <h1 class="page-header__title" v-text="project.title" />
-            <TechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" :show-post-name="true" />
+            <LayoutTechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" :show-post-name="true" />
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
     <div class="container ml-auto mr-auto">
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
-          <Navigation post-type="projects" next-post-text="Next Project" previous-post-text="Previous Project" :show-post-name="true" />
+          <PostsNavigation post-type="projects" next-post-text="Next Project" previous-post-text="Previous Project" :show-post-name="true" />
         </div>
       </div>
     </div>
@@ -48,14 +48,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import Navigation from '~/components/posts/navigation'
-import TechStack from '~/components/global/techStack'
 
 export default {
-  components: {
-    Navigation,
-    TechStack
-  },
   head () {
     const meta = []
     let title = ''

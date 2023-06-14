@@ -27,7 +27,7 @@
       <h1>
         404 - Page not found
       </h1>
-      <Search />
+      <AlgoliaSearchNetlify />
       <a class="btn" href="/">Go back home</a>
     </div>
     <div v-else>
@@ -40,13 +40,8 @@
 </template>
 
 <script>
-import Search from '~/components/algolia-search-netlify/search'
-
 export default {
   name: 'NuxtError',
-  components: {
-    Search
-  },
   props: {
     error: {
       type: Object,

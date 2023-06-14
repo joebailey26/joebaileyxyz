@@ -4,7 +4,7 @@ import type { Hit } from '@algolia/client-search'
 
 import type { AlgoliaRecord } from './types'
 
-export const templates = {
+const templates = {
   poweredBy: ({ hostname }: { hostname: string }): VNode => {
     const escapedHostname = encodeURIComponent(hostname)
     return (
@@ -58,6 +58,8 @@ export const templates = {
     )
   }
 }
+
+export default templates
 
 /**
  * Transform a highlighted hierarchy object into an array of Highlighted elements.

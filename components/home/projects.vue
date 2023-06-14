@@ -5,21 +5,15 @@
         Projects
       </NuxtLink>
     </h2>
-    <Items :items="projects[0].slice(0, 6)" link-prefix="projects" />
-    <Git />
+    <HomeItems :items="projects[0].slice(0, 6)" link-prefix="projects" />
+    <HomeGit />
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import Git from '~/components/home/git'
-import Items from '~/components/home/items'
 
 export default {
-  components: {
-    Git,
-    Items
-  },
   computed: {
     ...mapState(['projects'])
   }

@@ -20,9 +20,11 @@
                   <article v-if="project && project.slug" :id="project.slug" :key="project.title" class="post-index__post">
                     <header class="post__header">
                       <h2 class="post__title">
-                        <NuxtLink :to="`/projects/${project.slug}/`" v-text="project.title" />
+                        <NuxtLink :to="`/projects/${project.slug}/`">
+                          {{ project.title }}
+                        </NuxtLink>
                       </h2>
-                      <TechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
+                      <LayoutTechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
                     </header>
                     <p class="post__content" v-text="project.excerpt.plain" />
                     <div class="post__buttons buttonsContainer">
@@ -34,7 +36,7 @@
                     </div>
                   </article>
                 </template>
-                <Pagination
+                <PostsPagination
                   :page-count="pageCount"
                   link-prefix="projects"
                 />
@@ -49,14 +51,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import Pagination from '~/components/posts/pagination'
-import TechStack from '~/components/global/techStack'
 
 export default {
-  components: {
-    Pagination,
-    TechStack
-  },
   data () {
     return {
       head: {

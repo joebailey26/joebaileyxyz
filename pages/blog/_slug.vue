@@ -41,7 +41,7 @@
     <div class="container ml-auto mr-auto">
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
-          <Navigation post-type="blog" next-post-text="Next Blog Post" previous-post-text="Previous Blog Post" :show-post-name="true" />
+          <PostsNavigation post-type="blog" next-post-text="Next Blog Post" previous-post-text="Previous Blog Post" :show-post-name="true" />
         </div>
       </div>
     </div>
@@ -50,12 +50,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import Navigation from '~/components/posts/navigation'
 
 export default {
-  components: {
-    Navigation
-  },
   head () {
     const meta = []
     let title = ''

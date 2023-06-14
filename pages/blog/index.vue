@@ -18,10 +18,12 @@
               <div v-if="paginatedPosts" class="post-index__loop">
                 <template v-for="post in paginatedPosts">
                   <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post post-index__post--with-date">
-                    <Date class="post__date" :date="post.date" />
+                    <PostsDate class="post__date" :date="post.date" />
                     <header class="post__header">
                       <h2 class="post__title">
-                        <NuxtLink :to="`/blog/${post.slug}/`" v-text="post.title" />
+                        <NuxtLink :to="`/blog/${post.slug}/`">
+                          {{ post.title }}
+                        </NuxtLink>
                       </h2>
                       <span class="post__read-time">{{ post.readingTime }} minute read</span>
                     </header>
@@ -33,7 +35,7 @@
                     </div>
                   </article>
                 </template>
-                <Pagination
+                <PostsPagination
                   :page-count="pageCount"
                   link-prefix="blog"
                 />
@@ -48,14 +50,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import Pagination from '~/components/posts/pagination'
-import Date from '~/components/posts/date'
 
 export default {
-  components: {
-    Pagination,
-    Date
-  },
   data () {
     return {
       head: {

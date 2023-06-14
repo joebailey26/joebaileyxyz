@@ -1,4 +1,4 @@
-import { AutocompleteWrapper } from './AutocompleteWrapper'
+import AutocompleteWrapper from './AutocompleteWrapper'
 import type { Options } from './types'
 
 const defaultOptions: Omit<

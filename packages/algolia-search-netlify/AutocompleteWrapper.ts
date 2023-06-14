@@ -9,10 +9,10 @@ import type { HighlightedHit } from '@algolia/autocomplete-preset-algolia'
 import algoliasearch from 'algoliasearch/lite'
 import type { SearchClient } from 'algoliasearch/lite'
 
-import { templates } from './templates'
+import templates from './templates'
 import type { Options, AlgoliaRecord } from './types'
 
-class AutocompleteWrapper {
+export default class AutocompleteWrapper {
   private options;
   private indexName;
   private client;
@@ -160,5 +160,3 @@ function addCss (
     $usedSibling.nextSibling
   )
 }
-
-export { AutocompleteWrapper }
