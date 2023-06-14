@@ -11,7 +11,7 @@
   ],
   "parserOptions": {
     "requireConfigFile": false,
-    "parser": "@babel/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "ecmaVersion": 8,
     "sourceType": "module"
   },

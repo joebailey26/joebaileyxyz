@@ -1,5 +1,5 @@
 <style lang="scss">
-@import 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css';
+@import '~assets/scss/algoliasearchNetlify';
 @import '~assets/scss/mixins';
 #search {
   max-width: 600px;
@@ -31,6 +31,7 @@
   padding-bottom: var(--aa-spacing-half)
 }
 .aa-Panel {
+  min-width: 0;
   background-color: transparent
 }
 .aa-Item .aa-ItemDescription {
@@ -76,27 +77,19 @@
 </template>
 
 <script>
+import algoliasearchNetlify from './AlgoliasearchNetlify'
 
 export default {
   mounted () {
-    this.loadScript('https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js', () => {
-      // eslint-disable-next-line no-undef
-      algoliasearchNetlify({
-        appId: 'UFETFF29BD',
-        apiKey: 'fbc7e9ba54d66ee5d9808ddd17416c78',
-        siteId: '0f6be2d7-6002-4d40-870b-9f3ad6ba7c49',
-        branch: 'master',
-        selector: 'div#search'
-      })
+    algoliasearchNetlify({
+      appId: 'UFETFF29BD',
+      apiKey: 'fbc7e9ba54d66ee5d9808ddd17416c78',
+      siteId: '0f6be2d7-6002-4d40-870b-9f3ad6ba7c49',
+      branch: 'master',
+      selector: 'div#search',
+      detached: false,
+      openOnFocus: true
     })
-  },
-  methods: {
-    loadScript (url, callback) {
-      const script = document.createElement('script')
-      script.src = url
-      script.onload = callback
-      document.head.appendChild(script)
-    }
   }
 }
 </script>
