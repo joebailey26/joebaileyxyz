@@ -57,18 +57,7 @@ export default {
   },
   head () {
     return {
-      title: this.message,
-      script: [
-        {
-          src: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js'
-        }
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css'
-        }
-      ]
+      title: this.message
     }
   },
   computed: {
@@ -76,7 +65,7 @@ export default {
       return (this.error && this.error.statusCode) || 500
     },
     message () {
-      return this.error.message
+      return this.error.message || 'Error'
     }
   }
 }
