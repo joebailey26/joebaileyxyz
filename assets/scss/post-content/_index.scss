@@ -12,8 +12,10 @@
     display: inline-flex;
     gap: .2em;
     align-items: center;
+    font-weight: bold;
     picture {
-      display: inline-flex
+      display: inline-flex;
+      background: var(--dark-grey)
     }
   }
   > h1,
@@ -45,7 +47,13 @@
   > ol {
     padding-left: 1.2em
   }
-
+  > p code {
+    padding: .1rem .25rem;
+    color: var(--grey);
+    font-size: .9em;
+    background-color: #E1E1E1;
+    border-radius: 5px
+  }
 }
 .post__buttons:has(+ .share) {
   margin-bottom: 2rem
@@ -79,5 +87,9 @@
         color: var(--light-green)
       }
     }
+  }
+  .post__content > p code {
+    color: white;
+    background-color: #777777
   }
 }
