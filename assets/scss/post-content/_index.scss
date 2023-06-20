@@ -47,7 +47,7 @@
   > ol {
     padding-left: 1.2em
   }
-  > p code {
+  > *:not(pre) code {
     padding: .1rem .25rem;
     color: var(--grey);
     font-size: .9em;
