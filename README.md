@@ -1,8 +1,7 @@
-<h1 align="center">Welcome to the Joe Bailey Website repo</h1>
-<p align="center">This website showcases Joe Bailey's work.</p>
-<p align="center"><a href="https://joebailey.xyz">Live Site</a> <a href="https://github.com/joebailey26/joebaileyxyz">GitHub Repo</a></p>
-<p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-2-blue.svg?cacheSeconds=2592000" />
+<h1 style="text-align: center">Welcome to the Joe Bailey Website repo</h1>
+<p style="text-align: center">This website showcases Joe Bailey's work.</p>
+<p style="text-align: center"><a href="https://joebailey.xyz">Live Site</a></p>
+<p style="text-align: center">
   <a href="https://app.netlify.com/sites/heuristic-bell-6e94b3/deploys">
     <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status">
   </a>
