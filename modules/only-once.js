@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import he from 'he'
+import { load } from 'cheerio'
 import prepareWordPressContent from './prepare-wordpress-content'
 
 function getDay (date) {
@@ -30,9 +31,16 @@ function getYear (date) {
   return date.getFullYear().toString().substring(2)
 }
 
-function getReadingTime (content) {
+function getReadingTime (content, isHtml = false) {
   const avgWordsPerMin = 200
-  const count = content.match(/\w+/g).length
+  let contentToProcess = content
+  if (isHtml) {
+    const $ = load(contentToProcess, null, false)
+    $('pre').remove()
+    contentToProcess = $.html()
+    contentToProcess = stripTags(contentToProcess)
+  }
+  const count = contentToProcess.match(/\w+/g).length
   return Math.ceil(count / avgWordsPerMin)
 }
 
@@ -61,7 +69,7 @@ function getRequiredInfoFromPosts (posts) {
         day: getDay(date)
       },
       content: content.rendered.trim(),
-      readingTime: getReadingTime(content.rendered),
+      readingTime: getReadingTime(content.rendered, true),
       acf,
       featured_media
     }
