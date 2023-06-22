@@ -35,7 +35,7 @@
     "fs": "^0.0.2",
     "he": "^1.2.0",
     "netlify-plugin-cache": "^1.0.3",
-    "nuxt": "^2.16.2",
+    "nuxt": "^3.4.3",
     "nuxt-component-image": "https://github.com/Galexia-Agency/nuxt-component-image",
     "nuxt-component-share": "https://github.com/Galexia-Agency/nuxt-component-share",
     "path": "^0.12.7",
