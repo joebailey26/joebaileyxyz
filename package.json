@@ -40,7 +40,7 @@
     "nuxt-component-share": "https://github.com/Galexia-Agency/nuxt-component-share",
     "path": "^0.12.7",
     "responsive-loader": "^2.3.0",
-    "sass": "^1.62.1",
+    "sass": "^1.63.2",
     "sass-loader": "^10.1.1",
     "sharp": "^0.32.1"
   },
