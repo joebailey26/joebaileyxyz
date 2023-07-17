@@ -124,6 +124,7 @@
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
 
+
 "@algolia/client-search@4.18.0":
   version "4.18.0"
   resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.18.0.tgz#83b37aacbe254fd7892154fe7a8f0395bd01c682"
@@ -133,14 +134,14 @@
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
 
-"@algolia/client-search@^4.17.2":
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.17.2.tgz#beaef04daf8e04f171f61500ea5083a2c628161f"
-  integrity sha512-FUjIs+gRe0upJC++uVs4sdxMw15JxfkT86Gr/kqVwi9kcqaZhXntSbW/Fw959bIYXczjmeVQsilYvBWW4YvSZA==
+"@algolia/client-search@^4.18.0":
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.18.0.tgz#83b37aacbe254fd7892154fe7a8f0395bd01c682"
+  integrity sha512-F9xzQXTjm6UuZtnsLIew6KSraXQ0AzS/Ee+OD+mQbtcA/K1sg89tqb8TkwjtiYZ0oij13u3EapB3gPZwm+1Y6g==
   dependencies:
-    "@algolia/client-common" "4.17.2"
-    "@algolia/requester-common" "4.17.2"
-    "@algolia/transporter" "4.17.2"
+    "@algolia/client-common" "4.18.0"
+    "@algolia/requester-common" "4.18.0"
+    "@algolia/transporter" "4.18.0"
 
 "@algolia/logger-common@4.17.2":
   version "4.17.2"
