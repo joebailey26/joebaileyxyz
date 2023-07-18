@@ -11,12 +11,14 @@
 
 ```sh
 yarn install
+npx netlify login
+npx netlify link
 ```
 
 ## Development
 
 ```sh
-yarn start
+yarn dev
 ```
 
 ## Build

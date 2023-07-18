@@ -63,7 +63,7 @@ export default class HandleExternalImage {
     if (!(fs.existsSync(this.fullOutputPath))) {
     // Use fetch to download image
       await fetch(this.externalImgUrl)
-        .then((response) => response.buffer())
+        .then((response) => response.arrayBuffer())
         .then((buffer) => fs.promises.writeFile(this.fullOutputPath, buffer))
     }
     this.fullOutputPath = await this.resizeImage(this.fullOutputPath)

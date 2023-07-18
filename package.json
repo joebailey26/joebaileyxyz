@@ -5,6 +5,7 @@
   "author": "Joe Bailey",
   "private": true,
   "scripts": {
+    "dev": "netlify dev",
     "start": "nuxt",
     "generate": "nuxt generate --modern --quiet --fail-on-error",
     "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
@@ -15,8 +16,8 @@
   "dependencies": {
     "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@algolia/autocomplete-js": "^1.9.4",
-    "@algolia/autocomplete-theme-classic": "^1.9.4",
     "@algolia/autocomplete-preset-algolia": "^1.9.4",
+    "@algolia/autocomplete-theme-classic": "^1.9.4",
     "@algolia/client-search": "^4.18.0",
     "@algolia/netlify-plugin-crawler": "^1.0.15",
     "@fontsource/rammetto-one": "^4.5.11",
@@ -42,7 +43,8 @@
     "responsive-loader": "^2.3.0",
     "sass": "^1.63.2",
     "sass-loader": "^10.1.1",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "striptags": "^3.2.0"
   },
   "devDependencies": {
     "@netlify/plugin-sitemap": "^0.8.1",
@@ -54,6 +56,7 @@
     "consola": "^3.1.0",
     "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^4.0.0",
+    "netlify-cli": "^15.9.0",
     "netlify-plugin-checklinks": "^4.1.1",
     "netlify-plugin-submit-sitemap": "^0.4.0",
     "postcss": "^8.4.19",

@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import he from 'he'
 import { load } from 'cheerio'
+import striptags from 'striptags'
 import prepareWordPressContent from './prepare-wordpress-content'
 
 function getDay (date) {
@@ -38,14 +39,10 @@ function getReadingTime (content, isHtml = false) {
     const $ = load(contentToProcess, null, false)
     $('pre').remove()
     contentToProcess = $.html()
-    contentToProcess = stripTags(contentToProcess)
+    contentToProcess = striptags(contentToProcess)
   }
   const count = contentToProcess.match(/\w+/g).length
   return Math.ceil(count / avgWordsPerMin)
-}
-
-function stripTags (html) {
-  return html.replace(/<[^>]+>/g, '')
 }
 
 function getRequiredInfoFromPosts (posts) {
@@ -59,7 +56,7 @@ function getRequiredInfoFromPosts (posts) {
       title: he.decode(title.rendered),
       excerpt: {
         raw: convertedExcerpt,
-        plain: he.decode(stripTags(convertedExcerpt))
+        plain: he.decode(striptags(convertedExcerpt))
       },
       slug,
       date: {
