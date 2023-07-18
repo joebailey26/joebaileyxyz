@@ -64,7 +64,7 @@ export default class HandleExternalImage {
     // Use fetch to download image
       await fetch(this.externalImgUrl)
         .then((response) => response.arrayBuffer())
-        .then((buffer) => fs.promises.writeFile(this.fullOutputPath, buffer))
+        .then((buffer) => fs.promises.writeFile(this.fullOutputPath, buffer[0]))
     }
     this.fullOutputPath = await this.resizeImage(this.fullOutputPath)
   }
