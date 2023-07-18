@@ -33,7 +33,7 @@ export default async function downloadAndReplaceImages (postContent) {
         // Use fetch to download video and return promise
         return fetch(videoUrl)
           .then((response) => response.buffer())
-          .then((buffer) => fs.promises.writeFile(localAbsolutePath, buffer[0]))
+          .then((buffer) => fs.promises.writeFile(localAbsolutePath, buffer))
       }
       // Return a resolved promise if video already exists
       return Promise.resolve()
