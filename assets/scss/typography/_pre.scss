@@ -46,11 +46,11 @@ pre {
     position: relative;
     display: flex;
     flex-flow: column;
+    width: 100%;
     min-height: 6rem;
     padding: 1rem 3rem 1rem 1rem;
     overflow-y: auto;
     white-space: inherit;
-    width: 100%;
 
     @media (orientation: landscape) {
       max-height: 50vh
