@@ -32,7 +32,7 @@ export default async function downloadAndReplaceImages (postContent) {
       if (!(fs.existsSync(localAbsolutePath))) {
         // Use fetch to download video and return promise
         return fetch(videoUrl)
-          .then((response) => response.arrayBuffer())
+          .then((response) => response.buffer())
           .then((buffer) => fs.promises.writeFile(localAbsolutePath, buffer[0]))
       }
       // Return a resolved promise if video already exists
