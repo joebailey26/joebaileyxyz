@@ -57,6 +57,12 @@ export default {
             var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
             g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
           })();`
+      },
+      {
+        hid: 'cloudflare-analytics',
+        src: 'https://static.cloudflareinsights.com/beacon.min.js',
+        defer: true,
+        'data-cf-beacon': '{\'token\': \'268be12f4eae49b18b94508272cb34e4\'}'
       }
     ]
   },
