@@ -92,6 +92,11 @@ dist
 # Local Netlify folder
 .netlify
 
-.yarn
-
-.yarnrc
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
