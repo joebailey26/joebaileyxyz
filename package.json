@@ -43,7 +43,7 @@
     "responsive-loader": "^2.3.0",
     "sass": "^1.64.0",
     "sass-loader": "^10.1.1",
-    "sharp": "^0.32.2",
+    "sharp": "^0.32.5",
     "striptags": "^3.2.0"
   },
   "devDependencies": {
