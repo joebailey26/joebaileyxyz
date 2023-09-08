@@ -84,7 +84,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-theme-classic@npm:^1.9.4":
+"@algolia/autocomplete-theme-classic@npm:^1.11.0":
   version: 1.11.0
   resolution: "@algolia/autocomplete-theme-classic@npm:1.11.0"
   checksum: 8ad3d80c160d8d240cd1be552432d5144d25938c974231dbcbe55c37950aa2c3d3d9a0ae4fc1d2426bb369ebf9d10e8a8f17f73b2f349e373ae8e3c12466c458
@@ -14570,7 +14570,7 @@ __metadata:
     "@aceforth/nuxt-optimized-images": ^1.4.0
     "@algolia/autocomplete-js": ^1.11.0
     "@algolia/autocomplete-preset-algolia": ^1.11.0
-    "@algolia/autocomplete-theme-classic": ^1.9.4
+    "@algolia/autocomplete-theme-classic": ^1.11.0
     "@algolia/client-search": ^4.19.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
     "@fontsource/rammetto-one": ^4.5.11
