@@ -62,7 +62,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-preset-algolia@npm:1.11.1":
+"@algolia/autocomplete-preset-algolia@npm:1.11.1, @algolia/autocomplete-preset-algolia@npm:^1.11.1":
   version: 1.11.1
   resolution: "@algolia/autocomplete-preset-algolia@npm:1.11.1"
   dependencies:
@@ -71,28 +71,6 @@ __metadata:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
   checksum: 3df2580a17879abbce0255f7285ced945d96e2e247cf878a200d8a7a1ab5cf26fb3fb4852c3e7e95ed03645a762744f22d7d34d0ad881ca85363df5f873a25ec
-  languageName: node
-  linkType: hard
-
-"@algolia/autocomplete-preset-algolia@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "@algolia/autocomplete-preset-algolia@npm:1.11.0"
-  dependencies:
-    "@algolia/autocomplete-shared": 1.11.0
-  peerDependencies:
-    "@algolia/client-search": ">= 4.9.1 < 6"
-    algoliasearch: ">= 4.9.1 < 6"
-  checksum: 2fbae29efab40fc1b483529134bf4dc176b3e171e963294fbcc22bfc16252fcb239791043044a220daeef10477469966e4ee2bc285597b445c13eef7f64eeabb
-  languageName: node
-  linkType: hard
-
-"@algolia/autocomplete-shared@npm:1.11.0":
-  version: 1.11.0
-  resolution: "@algolia/autocomplete-shared@npm:1.11.0"
-  peerDependencies:
-    "@algolia/client-search": ">= 4.9.1 < 6"
-    algoliasearch: ">= 4.9.1 < 6"
-  checksum: b455d278fa0703a51e1227e5950c58966893ae526198698b5015e341ee42927f206453ca10a3dd5aa6377739d40a2deaca799b1124468bca3bf901cfebe88e86
   languageName: node
   linkType: hard
 
@@ -14591,7 +14569,7 @@ __metadata:
   dependencies:
     "@aceforth/nuxt-optimized-images": ^1.4.0
     "@algolia/autocomplete-js": ^1.11.1
-    "@algolia/autocomplete-preset-algolia": ^1.11.0
+    "@algolia/autocomplete-preset-algolia": ^1.11.1
     "@algolia/autocomplete-theme-classic": ^1.11.0
     "@algolia/client-search": ^4.20.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
@@ -14633,7 +14611,7 @@ __metadata:
     postcss-scss: ^4.0.6
     preact: ^10.15.1
     responsive-loader: ^2.3.0
-    sass: ^1.67.0
+    sass: ^1.69.0
     sass-loader: ^10.1.1
     search-insights: ^2.6.0
     sharp: ^0.32.6
@@ -21180,16 +21158,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.67.0":
-  version: 1.68.0
-  resolution: "sass@npm:1.68.0"
+"sass@npm:^1.69.0":
+  version: 1.69.5
+  resolution: "sass@npm:1.69.5"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 65ccede83c96768beeb8dcaf67957b7c76b12ff1276bfd2849d7be151d46ba1400048a67717e6e5e4969bc75e87348e5530f5f272833f2e60a891c21a33d8ab0
+  checksum: c66f4f02882e7aa7aa49703824dadbb5a174dcd05e3cd96f17f73687889aab6027d078b518e2c04b594dfd89b2f574824bf935c7aee46c770aa6be9aafcc49f2
   languageName: node
   linkType: hard
 
