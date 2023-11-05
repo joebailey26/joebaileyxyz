@@ -62,7 +62,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-preset-algolia@npm:1.11.0, @algolia/autocomplete-preset-algolia@npm:^1.11.0":
+"@algolia/autocomplete-preset-algolia@npm:1.11.0":
   version: 1.11.0
   resolution: "@algolia/autocomplete-preset-algolia@npm:1.11.0"
   dependencies:
@@ -74,6 +74,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@algolia/autocomplete-preset-algolia@npm:^1.11.1":
+  version: 1.11.1
+  resolution: "@algolia/autocomplete-preset-algolia@npm:1.11.1"
+  dependencies:
+    "@algolia/autocomplete-shared": 1.11.1
+  peerDependencies:
+    "@algolia/client-search": ">= 4.9.1 < 6"
+    algoliasearch: ">= 4.9.1 < 6"
+  checksum: 3df2580a17879abbce0255f7285ced945d96e2e247cf878a200d8a7a1ab5cf26fb3fb4852c3e7e95ed03645a762744f22d7d34d0ad881ca85363df5f873a25ec
+  languageName: node
+  linkType: hard
+
 "@algolia/autocomplete-shared@npm:1.11.0":
   version: 1.11.0
   resolution: "@algolia/autocomplete-shared@npm:1.11.0"
@@ -81,6 +93,16 @@ __metadata:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
   checksum: b455d278fa0703a51e1227e5950c58966893ae526198698b5015e341ee42927f206453ca10a3dd5aa6377739d40a2deaca799b1124468bca3bf901cfebe88e86
+  languageName: node
+  linkType: hard
+
+"@algolia/autocomplete-shared@npm:1.11.1":
+  version: 1.11.1
+  resolution: "@algolia/autocomplete-shared@npm:1.11.1"
+  peerDependencies:
+    "@algolia/client-search": ">= 4.9.1 < 6"
+    algoliasearch: ">= 4.9.1 < 6"
+  checksum: 932ddb24b9e64a3e4405d8ba4b07a7b23be2a7098d8d50340dc42b594c8222634738e18369e1ca142133d1a292dc25aa484efdadc9ed758702a229e1c467f57e
   languageName: node
   linkType: hard
 
@@ -14569,7 +14591,7 @@ __metadata:
   dependencies:
     "@aceforth/nuxt-optimized-images": ^1.4.0
     "@algolia/autocomplete-js": ^1.11.0
-    "@algolia/autocomplete-preset-algolia": ^1.11.0
+    "@algolia/autocomplete-preset-algolia": ^1.11.1
     "@algolia/autocomplete-theme-classic": ^1.11.0
     "@algolia/client-search": ^4.20.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
