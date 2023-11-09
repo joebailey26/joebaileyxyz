@@ -10735,6 +10735,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-galexia@github:Galexia-Agency/eslint-config":
+  version: 1.0.3
+  resolution: "eslint-config-galexia@https://github.com/Galexia-Agency/eslint-config.git#commit=ce9188389f04351a7f4d6d06f65e1ff91a8b177a"
+  peerDependencies:
+    "@babel/eslint-parser": ^7.22.11
+    "@nuxtjs/eslint-config": ^6.0.1
+    eslint: ^7.29.0
+    eslint-plugin-nuxt: ^4.0.0
+  checksum: 6e03e22c7039ff0ef65849daaf8d97d107a36dc8324adc1f39d80167df0a74feb83cd2ff8b3bd53b0117a36d7ed5047c5aef3bc58c2cb2f5be6c596aa2924f94
+  languageName: node
+  linkType: hard
+
 "eslint-config-standard@npm:^16.0.3":
   version: 16.0.3
   resolution: "eslint-config-standard@npm:16.0.3"
@@ -14731,6 +14743,7 @@ __metadata:
     cheerio: ^1.0.0-rc.12
     consola: ^3.1.0
     eslint: ^7.29.0
+    eslint-config-galexia: "github:Galexia-Agency/eslint-config"
     eslint-plugin-nuxt: ^4.0.0
     ffmpeg-static: ^5.1.0
     fs: ^0.0.2
