@@ -17,8 +17,9 @@
             <div class="col-md-8 ml-auto mr-auto">
               <div v-if="paginatedPosts" class="post-index__loop">
                 <template v-for="post in paginatedPosts">
-                  <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post post-index__post--with-date">
+                  <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post" :class="{'post-index__post--with-date': shouldShowDates}">
                     <GalexiaDate
+                      v-if="shouldShowDates"
                       class="post__date"
                       :date="post.date"
                       day-text-color="#ffffff"
@@ -94,6 +95,13 @@ export default {
     },
     paginatedPosts () {
       return this.blog[this.currentPage - 1]
+    },
+    shouldShowDates () {
+      const latestPostDate = this.blog[0][0].date
+      const currentDate = new Date()
+      const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6))
+
+      return latestPostDate >= sixMonthsAgo || latestPostDate > currentDate
     }
   },
   created () {
