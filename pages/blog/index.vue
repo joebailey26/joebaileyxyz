@@ -18,7 +18,14 @@
               <div v-if="paginatedPosts" class="post-index__loop">
                 <template v-for="post in paginatedPosts">
                   <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post post-index__post--with-date">
-                    <PostsDate class="post__date" :date="post.date" />
+                    <GalexiaDate
+                      class="post__date"
+                      :date="post.date"
+                      day-text-color="#ffffff"
+                      day-background-color="var(--green)"
+                      month-year-text-color="#ffffff"
+                      month-year-background-color="var(--grey)"
+                    />
                     <header class="post__header">
                       <h2 class="post__title">
                         <NuxtLink :to="`/blog/${post.slug}/`">

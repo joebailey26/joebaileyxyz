@@ -4,33 +4,6 @@ import { load } from 'cheerio'
 import striptags from 'striptags'
 import prepareWordPressContent from './prepare-wordpress-content'
 
-function getDay (date) {
-  date = new Date(date.substring(0, date.indexOf('T')))
-  return date.getDate()
-}
-
-function getMonth (date) {
-  date = new Date(date.substring(0, date.indexOf('T')))
-  const monthArr = []
-  monthArr[0] = 'Jan'
-  monthArr[1] = 'Feb'
-  monthArr[2] = 'Mar'
-  monthArr[3] = 'Apr'
-  monthArr[4] = 'May'
-  monthArr[5] = 'Jun'
-  monthArr[6] = 'Jul'
-  monthArr[7] = 'Aug'
-  monthArr[8] = 'Sep'
-  monthArr[9] = 'Oct'
-  monthArr[10] = 'Nov'
-  monthArr[11] = 'Dec'
-  return monthArr[date.getMonth()]
-}
-
-function getYear (date) {
-  date = new Date(date.substring(0, date.indexOf('T')))
-  return date.getFullYear().toString().substring(2)
-}
 
 function getReadingTime (content, isHtml = false) {
   const avgWordsPerMin = 200
@@ -51,6 +24,7 @@ function getRequiredInfoFromPosts (posts) {
   }
   // eslint-disable-next-line camelcase
   return posts.map(({ title, excerpt, slug, date, content, acf, featured_media }) => {
+    console.log(date)
     const convertedExcerpt = excerpt.rendered.replace(/(<p class="link-more">.*<\/p>)/g, '').replace(' &hellip; ', '&hellip;').trim()
     return {
       title: he.decode(title.rendered),
@@ -59,12 +33,8 @@ function getRequiredInfoFromPosts (posts) {
         plain: he.decode(striptags(convertedExcerpt))
       },
       slug,
-      date: {
-        fullDate: new Date(date.substring(0, date.indexOf('T'))),
-        year: getYear(date),
-        month: getMonth(date),
-        day: getDay(date)
-      },
+      rawDate: date,
+      date: new Date(date.substring(0, date.indexOf('T'))),
       content: content.rendered.trim(),
       readingTime: getReadingTime(content.rendered, true),
       acf,

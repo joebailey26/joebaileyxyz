@@ -85,6 +85,7 @@ export default {
     '~plugins/fontAwesome',
     '~plugins/galexia/components/image.js',
     '~plugins/galexia/components/share.js',
+    '~plugins/galexia/components/date.js',
     '~plugins/mixins/copyToClipboard'
   ],
   /*
