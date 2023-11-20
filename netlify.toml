@@ -5,7 +5,6 @@
 [build.environment]
   NODE_VERSION = "18"
   CI = "1"
-  SENTRY_DSN = "https://948402ee16679cb029717d8dfe2653db@o4506195931627520.ingest.sentry.io/4506195933462528"
 
 [[redirects]]
   from = "https://joebailey.netlify.app/*"
