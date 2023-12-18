@@ -13,9 +13,8 @@
     grid-auto-flow: column;
     grid-column: 1;
     gap: 5px;
-    align-items: center;
+    place-items: center;
     justify-content: center;
-    justify-items: center;
     width: auto;
     margin: -60px auto auto
   }

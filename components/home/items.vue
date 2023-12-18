@@ -7,10 +7,9 @@
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem 2rem;
     padding-right: 15px;
     padding-left: 15px;
-    column-gap: 2rem;
-    row-gap: 3rem;
     @media (max-width: 1024px) {
       grid-template-columns: 1fr 1fr
     }
