@@ -10728,14 +10728,14 @@ __metadata:
 
 "eslint-config-galexia@https://github.com/Galexia-Agency/eslint-config":
   version: 1.0.7
-  resolution: "eslint-config-galexia@https://github.com/Galexia-Agency/eslint-config.git#commit=72933e04f149d787864e16dbbb247a22317f7d47"
+  resolution: "eslint-config-galexia@https://github.com/Galexia-Agency/eslint-config.git#commit=4c0881d5338f6102706cd2402f99cdedaf73fbe2"
   dependencies:
     "@babel/eslint-parser": ^7.22.15
     "@nuxtjs/eslint-config": ^6.0.1
     eslint-plugin-nuxt: ^4.0.0
   peerDependencies:
     eslint: ^7.29.0
-  checksum: 26212b4b1bb30ad9462d4a92fa6055adcea0b2a7a7eaa9eb992701fb10759ec2f98bc8037e6798408ca7ea5bea0f1fd72e703d11ea8548c6454f66255374e4a3
+  checksum: 8f6b5a84b2939646d14a31a23bcb72b739b2e86dce7039dc1b5a3a92359c8f8a40acc223439dbd920235cd8dc9fdc79fe1f7e3890d778adf1fd0ce4c34b7db96
   languageName: node
   linkType: hard
 
