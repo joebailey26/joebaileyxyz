@@ -14728,6 +14728,7 @@ __metadata:
     nuxt: ^2.17.1
     nuxt-component-date: "https://github.com/Galexia-Agency/nuxt-component-date"
     nuxt-component-image: "https://github.com/Galexia-Agency/nuxt-component-image"
+    nuxt-component-pagination: "https://github.com/Galexia-Agency/nuxt-component-pagination"
     nuxt-component-share: "https://github.com/Galexia-Agency/nuxt-component-share"
     path: ^0.12.7
     postcss: ^8.4.19
@@ -17353,6 +17354,13 @@ __metadata:
     responsive-loader: ^2.3.0
     sharp: ^0.32.1
   checksum: c2d0d372268a3c418a9d2ef6122a18180c6455ad20c4c52b8f495670e2a0a7ad5f261e57c28bb02971f705483e156c6dec62f44452af71977817d95e4e8b8687
+  languageName: node
+  linkType: hard
+
+"nuxt-component-pagination@https://github.com/Galexia-Agency/nuxt-component-pagination":
+  version: 1.0.0
+  resolution: "nuxt-component-pagination@https://github.com/Galexia-Agency/nuxt-component-pagination.git#commit=c787687643b35d1cc8a65133928ded784634250c"
+  checksum: 336912513d12fb07acaf674e3046eba7f47ac97e14dcbbfde13eb0a4b978c38b925f2b9e090e329e2112148fb1086a5c35b7d24846158ff16dc15b2b3a4932f9
   languageName: node
   linkType: hard
 

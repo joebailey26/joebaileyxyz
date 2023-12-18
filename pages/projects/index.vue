@@ -36,9 +36,10 @@
                     </div>
                   </article>
                 </template>
-                <PostsPagination
+                <GalexiaPagination
                   :page-count="pageCount"
-                  link-prefix="projects"
+                  :current-page="currentPage"
+                  :go-to-page="goToPage"
                 />
               </div>
             </div>
@@ -84,18 +85,22 @@ export default {
       return this.projects.length
     },
     currentPage () {
-      return parseInt(this.$route.params.page) || 1
+      const p = this.$route.query.p
+      const page = Array.isArray(p) ? p[0] : p
+      return page ? parseInt(page) : 1
     },
     paginatedPosts () {
       return this.projects[this.currentPage - 1]
     }
   },
   created () {
-    if (parseInt(this.$route.params.page) === 1) {
-      this.$router.push('/projects/')
-    }
     if (!this.currentPage || this.currentPage < 1 || this.currentPage > this.pageCount) {
       this.$nuxt.context.error({ statusCode: 404, message: 'Page not found' })
+    }
+  },
+  methods: {
+    goToPage (page) {
+      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, p: page.toString() } })
     }
   }
 }

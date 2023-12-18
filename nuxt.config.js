@@ -86,6 +86,7 @@ export default {
     '~plugins/galexia/components/image.js',
     '~plugins/galexia/components/share.js',
     '~plugins/galexia/components/date.js',
+    '~plugins/galexia/components/pagination.js',
     '~plugins/mixins/copyToClipboard'
   ],
   /*

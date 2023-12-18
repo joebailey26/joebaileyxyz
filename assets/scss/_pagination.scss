@@ -1,0 +1,20 @@
+@import '~assets/scss/mixins';
+.pagination__button,
+.pagination__break-view {
+  color: var(--green);
+  font-size: 1rem
+}
+.pagination__button:hover {
+  color: var(--light-green)
+}
+.pagination__button:disabled,
+.pagination__break-view {
+  color: var(--dark-grey)
+}
+
+@include dark-theme {
+  .pagination__button:disabled,
+  .pagination__break-view {
+    color: white
+  }
+}

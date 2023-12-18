@@ -9,6 +9,7 @@
 @use 'page-header';
 @use 'post-index';
 @use 'post-content';
+@use 'pagination';
 @import 'mixins';
 :root {
   scroll-behavior: smooth
