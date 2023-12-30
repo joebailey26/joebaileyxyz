@@ -62,7 +62,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-preset-algolia@npm:1.13.0":
+"@algolia/autocomplete-preset-algolia@npm:1.13.0, @algolia/autocomplete-preset-algolia@npm:^1.12.2":
   version: 1.13.0
   resolution: "@algolia/autocomplete-preset-algolia@npm:1.13.0"
   dependencies:
@@ -71,28 +71,6 @@ __metadata:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
   checksum: b879d6b70a69668062f1341234f6da26ad94204b018ffbdee7d9719c00b1cf5105c93236fd3f52c0830124e0417e8b00837ca84068d583fc46ba72857e18ebb5
-  languageName: node
-  linkType: hard
-
-"@algolia/autocomplete-preset-algolia@npm:^1.11.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-preset-algolia@npm:1.12.1"
-  dependencies:
-    "@algolia/autocomplete-shared": 1.12.1
-  peerDependencies:
-    "@algolia/client-search": ">= 4.9.1 < 6"
-    algoliasearch: ">= 4.9.1 < 6"
-  checksum: e43715c10b84e58237cc40696d2a198818ebbc3945efc3eeed8466a698907f9d1b231d2b27d7571889fddc553193f6987cb3717fd1f68eb1af862eb2e70573cb
-  languageName: node
-  linkType: hard
-
-"@algolia/autocomplete-shared@npm:1.12.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-shared@npm:1.12.1"
-  peerDependencies:
-    "@algolia/client-search": ">= 4.9.1 < 6"
-    algoliasearch: ">= 4.9.1 < 6"
-  checksum: 937055678f320dd4b97c662bb267eaab1375a502fbe04b752b4c51058f72e0884eab94c9e929d520cad40ad7245e116e096d0c93766b176ff833184368dd4213
   languageName: node
   linkType: hard
 
@@ -14919,7 +14897,7 @@ __metadata:
   dependencies:
     "@aceforth/nuxt-optimized-images": ^1.4.0
     "@algolia/autocomplete-js": ^1.12.2
-    "@algolia/autocomplete-preset-algolia": ^1.11.1
+    "@algolia/autocomplete-preset-algolia": ^1.12.2
     "@algolia/autocomplete-theme-classic": ^1.11.1
     "@algolia/client-search": ^4.20.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
