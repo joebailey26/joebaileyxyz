@@ -25,62 +25,62 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-core@npm:1.12.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-core@npm:1.12.1"
+"@algolia/autocomplete-core@npm:1.13.0":
+  version: 1.13.0
+  resolution: "@algolia/autocomplete-core@npm:1.13.0"
   dependencies:
-    "@algolia/autocomplete-plugin-algolia-insights": 1.12.1
-    "@algolia/autocomplete-shared": 1.12.1
-  checksum: 106d9ad1bd602307759e37efc0dac18bfac22808f916541b00ef55a525f66ec93ccb8350e710e7babbc6e0de139f26afa561d7e4e807ef581bc3c13a2e04b1d5
+    "@algolia/autocomplete-plugin-algolia-insights": 1.13.0
+    "@algolia/autocomplete-shared": 1.13.0
+  checksum: 1e2d7fbb7a1a84655367962e87448471a60d6fbe6ccddbeb5058012618f73b6289a1707092e5d4e8b5751551f79670d2ee4c6a9f69f5ade42dcd9f41ae561f29
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-js@npm:^1.11.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-js@npm:1.12.1"
+"@algolia/autocomplete-js@npm:^1.12.2":
+  version: 1.13.0
+  resolution: "@algolia/autocomplete-js@npm:1.13.0"
   dependencies:
-    "@algolia/autocomplete-core": 1.12.1
-    "@algolia/autocomplete-preset-algolia": 1.12.1
-    "@algolia/autocomplete-shared": 1.12.1
+    "@algolia/autocomplete-core": 1.13.0
+    "@algolia/autocomplete-preset-algolia": 1.13.0
+    "@algolia/autocomplete-shared": 1.13.0
     htm: ^3.1.1
     preact: ^10.13.2
   peerDependencies:
     "@algolia/client-search": ">= 4.5.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
-  checksum: 6b9a1a26b2e59c47c3106ca8d4feccc96181463d936f01bf7214163767b9c9cde5ab4ff07ccaa493984b41a75d43b77b8f471414f366dd32713693000aaed4e8
+  checksum: a6e4bb4facb06d7ee6d74a00ec8f5858202516447a7a861443c58ceb77e0147d686b8eaa2b3176f0f6661623bfbd82cbc0a1a64bbe9d63da191c3e9beb99acc1
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-plugin-algolia-insights@npm:1.12.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-plugin-algolia-insights@npm:1.12.1"
+"@algolia/autocomplete-plugin-algolia-insights@npm:1.13.0":
+  version: 1.13.0
+  resolution: "@algolia/autocomplete-plugin-algolia-insights@npm:1.13.0"
   dependencies:
-    "@algolia/autocomplete-shared": 1.12.1
+    "@algolia/autocomplete-shared": 1.13.0
   peerDependencies:
     search-insights: ">= 1 < 3"
-  checksum: bebf58962ee52d37109d269351ffcf31b208330c681f09437f47e9f7c5828126e37e4a025691febc1e15b6beead86d14810bda8af1b9c69314ee4d7bf4c68fe6
+  checksum: 60da47fb7ac51516af9622399dadff3ad4a9a8c07adc98705fdad7811387dc71f38e30984c925be181b45da7606cab3e278ab88de2a3f6647812327eb1e36b36
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-preset-algolia@npm:1.12.1, @algolia/autocomplete-preset-algolia@npm:^1.11.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-preset-algolia@npm:1.12.1"
+"@algolia/autocomplete-preset-algolia@npm:1.13.0, @algolia/autocomplete-preset-algolia@npm:^1.12.2":
+  version: 1.13.0
+  resolution: "@algolia/autocomplete-preset-algolia@npm:1.13.0"
   dependencies:
-    "@algolia/autocomplete-shared": 1.12.1
+    "@algolia/autocomplete-shared": 1.13.0
   peerDependencies:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
-  checksum: e43715c10b84e58237cc40696d2a198818ebbc3945efc3eeed8466a698907f9d1b231d2b27d7571889fddc553193f6987cb3717fd1f68eb1af862eb2e70573cb
+  checksum: b879d6b70a69668062f1341234f6da26ad94204b018ffbdee7d9719c00b1cf5105c93236fd3f52c0830124e0417e8b00837ca84068d583fc46ba72857e18ebb5
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-shared@npm:1.12.1":
-  version: 1.12.1
-  resolution: "@algolia/autocomplete-shared@npm:1.12.1"
+"@algolia/autocomplete-shared@npm:1.13.0":
+  version: 1.13.0
+  resolution: "@algolia/autocomplete-shared@npm:1.13.0"
   peerDependencies:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
-  checksum: 937055678f320dd4b97c662bb267eaab1375a502fbe04b752b4c51058f72e0884eab94c9e929d520cad40ad7245e116e096d0c93766b176ff833184368dd4213
+  checksum: e404d1022ba5cb5d28747611a8be9d6bf7f5b23a649c0b780a79025892c266e6ebbd613fb930fc1efb948732bbc91c4be06d461ac7f5a0775270456fed7563be
   languageName: node
   linkType: hard
 
@@ -2236,6 +2236,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emnapi/runtime@npm:^0.44.0":
+  version: 0.44.0
+  resolution: "@emnapi/runtime@npm:0.44.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: e07235d6347bfb7cececb6b06e91177e73ec57fdeb2ec371725a7feec684699b739d9e295be8c58a5b2a3cb2db2351c0a2a3b212dd1f400e0455c73445f199d3
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm64@npm:0.19.5":
   version: 0.19.5
   resolution: "@esbuild/android-arm64@npm:0.19.5"
@@ -2522,12 +2531,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.5.1":
+  version: 6.5.1
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.5.1"
+  checksum: c597062de8903aae591b652aa03b9b7aaa66e8c71e5950dc34a8b2812851a7f4ad743fba7396bab87d787c5359bb121496769a165bd3399d039dc214434f6f0c
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-svg-core@npm:^6.4.2":
   version: 6.4.2
   resolution: "@fortawesome/fontawesome-svg-core@npm:6.4.2"
   dependencies:
     "@fortawesome/fontawesome-common-types": 6.4.2
   checksum: 0c0ecd9058883b128127e2b281c983ba6272be38a17577aaa2293ada58e9b1538357fe44430ded508d49ae3f5cc55aa720a0448d2b9d99689bb912d786f034e5
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.5.0":
+  version: 6.5.1
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.5.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.5.1
+  checksum: e17f995abe215d288163b2cd009f935c7f96bc896ab4ea7a75de72789d52a1275bd112eeb60cadd63bb20017a05ed765232157079bfb7efda7347a5614e04ce1
   languageName: node
   linkType: hard
 
@@ -2540,12 +2565,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/free-regular-svg-icons@npm:^6.4.2":
-  version: 6.4.2
-  resolution: "@fortawesome/free-regular-svg-icons@npm:6.4.2"
+"@fortawesome/free-brands-svg-icons@npm:^6.5.0":
+  version: 6.5.1
+  resolution: "@fortawesome/free-brands-svg-icons@npm:6.5.1"
   dependencies:
-    "@fortawesome/fontawesome-common-types": 6.4.2
-  checksum: fdb78fced6087f83b45fc1d73de874c69956aa07e7376b8f79b3b0b76e9f800d06c4586b5431acea4e8b5ebc40866f2c4e87fc02986cae7b066c1ea9d150d7e1
+    "@fortawesome/fontawesome-common-types": 6.5.1
+  checksum: c29f8a9ad9886c0733d3616b5ea05b08b4943c1b5231c73f31a07e7df36c337e5a51cfe7cc610e623cb2b4a0607e3f82a8a3f46107c4347aa653784489672314
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-regular-svg-icons@npm:^6.5.0":
+  version: 6.5.1
+  resolution: "@fortawesome/free-regular-svg-icons@npm:6.5.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.5.1
+  checksum: c1809fae5f3bffff2f06d414f552e38acf385f79bb1b1a8e34b6b9c1138e9e6be7f8ed1503da0f72e225079138b8377f95f279d0079bb04ba8d3bfb3025ec512
   languageName: node
   linkType: hard
 
@@ -2555,6 +2589,15 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-common-types": 6.4.2
   checksum: 4a365004990d5b1c970fb30c11b284b0b807903d0ecb193eb9b5a5e41ea7c0b8fff5c60480c580a1e44535cf23c5d9c90cb698189741e40ea3e10ac66290709c
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-solid-svg-icons@npm:^6.5.0":
+  version: 6.5.1
+  resolution: "@fortawesome/free-solid-svg-icons@npm:6.5.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.5.1
+  checksum: c544b8389bab4ab375d172feeb334d4a591bd7c594acdcc546b5197f2bcc80be22be119a03994dbe7f13d133c11b41c471b62c92dd318fbe0378202c43c09d7d
   languageName: node
   linkType: hard
 
@@ -2682,6 +2725,181 @@ __metadata:
   version: 1.2.1
   resolution: "@humanwhocodes/object-schema@npm:1.2.1"
   checksum: a824a1ec31591231e4bad5787641f59e9633827d0a2eaae131a288d33c9ef0290bd16fda8da6f7c0fcb014147865d12118df10db57f27f41e20da92369fcb3f1
+  languageName: node
+  linkType: hard
+
+"@img/sharp-darwin-arm64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-darwin-arm64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-darwin-arm64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-darwin-arm64":
+      optional: true
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@img/sharp-darwin-x64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-darwin-x64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-darwin-x64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-darwin-x64":
+      optional: true
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-darwin-arm64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-darwin-arm64@npm:1.0.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-darwin-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-darwin-x64@npm:1.0.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linux-arm64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linux-arm64@npm:1.0.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linux-arm@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linux-arm@npm:1.0.0"
+  conditions: os=linux & cpu=arm & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linux-s390x@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linux-s390x@npm:1.0.0"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linux-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linux-x64@npm:1.0.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linuxmusl-arm64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linuxmusl-arm64@npm:1.0.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@img/sharp-libvips-linuxmusl-x64@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@img/sharp-libvips-linuxmusl-x64@npm:1.0.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linux-arm64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linux-arm64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linux-arm64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linux-arm64":
+      optional: true
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linux-arm@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linux-arm@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linux-arm": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linux-arm":
+      optional: true
+  conditions: os=linux & cpu=arm & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linux-s390x@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linux-s390x@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linux-s390x": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linux-s390x":
+      optional: true
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linux-x64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linux-x64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linux-x64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linux-x64":
+      optional: true
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linuxmusl-arm64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linuxmusl-arm64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linuxmusl-arm64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linuxmusl-arm64":
+      optional: true
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@img/sharp-linuxmusl-x64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-linuxmusl-x64@npm:0.33.1"
+  dependencies:
+    "@img/sharp-libvips-linuxmusl-x64": 1.0.0
+  dependenciesMeta:
+    "@img/sharp-libvips-linuxmusl-x64":
+      optional: true
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@img/sharp-wasm32@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-wasm32@npm:0.33.1"
+  dependencies:
+    "@emnapi/runtime": ^0.44.0
+  conditions: cpu=wasm32
+  languageName: node
+  linkType: hard
+
+"@img/sharp-win32-ia32@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-win32-ia32@npm:0.33.1"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@img/sharp-win32-x64@npm:0.33.1":
+  version: 0.33.1
+  resolution: "@img/sharp-win32-x64@npm:0.33.1"
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -11303,13 +11521,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expand-template@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "expand-template@npm:2.0.3"
-  checksum: 588c19847216421ed92befb521767b7018dc88f88b0576df98cb242f20961425e96a92cbece525ef28cc5becceae5d544ae0f5b9b5e2aa05acb13716ca5b3099
-  languageName: node
-  linkType: hard
-
 "exponential-backoff@npm:^3.1.1":
   version: 3.1.1
   resolution: "exponential-backoff@npm:3.1.1"
@@ -12653,13 +12864,6 @@ __metadata:
   dependencies:
     ini: ^1.3.2
   checksum: 4b4b44d992a6abf2900eec8cfe960dc36e0d3c2467d20ec69e0a0f13b6b7645b926daa004df42f94c34ad28a58529cf2522fa0bf261e4e7b95958fb451dcedda
-  languageName: node
-  linkType: hard
-
-"github-from-package@npm:0.0.0":
-  version: 0.0.0
-  resolution: "github-from-package@npm:0.0.0"
-  checksum: 14e448192a35c1e42efee94c9d01a10f42fe790375891a24b25261246ce9336ab9df5d274585aedd4568f7922246c2a78b8a8cd2571bfe99c693a9718e7dd0e3
   languageName: node
   linkType: hard
 
@@ -14692,8 +14896,8 @@ __metadata:
   resolution: "joebaileyxyz@workspace:."
   dependencies:
     "@aceforth/nuxt-optimized-images": ^1.4.0
-    "@algolia/autocomplete-js": ^1.11.1
-    "@algolia/autocomplete-preset-algolia": ^1.11.1
+    "@algolia/autocomplete-js": ^1.12.2
+    "@algolia/autocomplete-preset-algolia": ^1.12.2
     "@algolia/autocomplete-theme-classic": ^1.12.2
     "@algolia/client-search": ^4.20.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
@@ -14701,10 +14905,10 @@ __metadata:
     "@fontsource/recursive": ^4.5.13
     "@fontsource/roboto": ^4.5.8
     "@fontsource/roboto-slab": ^4.5.11
-    "@fortawesome/fontawesome-svg-core": ^6.4.2
-    "@fortawesome/free-brands-svg-icons": ^6.4.2
-    "@fortawesome/free-regular-svg-icons": ^6.4.2
-    "@fortawesome/free-solid-svg-icons": ^6.4.2
+    "@fortawesome/fontawesome-svg-core": ^6.5.0
+    "@fortawesome/free-brands-svg-icons": ^6.5.0
+    "@fortawesome/free-regular-svg-icons": ^6.5.0
+    "@fortawesome/free-solid-svg-icons": ^6.5.0
     "@fortawesome/vue-fontawesome": ^2.0.6
     "@netlify/plugin-sitemap": ^0.8.1
     "@nuxt/types": ^2.17.0
@@ -14739,7 +14943,7 @@ __metadata:
     sass: ^1.69.0
     sass-loader: ^10.1.1
     search-insights: ^2.6.0
-    sharp: ^0.32.6
+    sharp: ^0.33.0
     striptags: ^3.2.0
     stylelint: ^15.3.0
     stylelint-config-galexia: "https://github.com/Galexia-Agency/stylelint-config"
@@ -16361,7 +16565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:1.2.8, minimist@npm:^1.1.0, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
+"minimist@npm:1.2.8, minimist@npm:^1.1.0, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -16487,13 +16691,6 @@ __metadata:
     for-in: ^1.0.2
     is-extendable: ^1.0.1
   checksum: 820d5a51fcb7479f2926b97f2c3bb223546bc915e6b3a3eb5d906dda871bba569863595424a76682f2b15718252954644f3891437cb7e3f220949bed54b1750d
-  languageName: node
-  linkType: hard
-
-"mkdirp-classic@npm:^0.5.2, mkdirp-classic@npm:^0.5.3":
-  version: 0.5.3
-  resolution: "mkdirp-classic@npm:0.5.3"
-  checksum: 3f4e088208270bbcc148d53b73e9a5bd9eef05ad2cbf3b3d0ff8795278d50dd1d11a8ef1875ff5aea3fa888931f95bfcb2ad5b7c1061cfefd6284d199e6776ac
   languageName: node
   linkType: hard
 
@@ -16672,13 +16869,6 @@ __metadata:
     snapdragon: ^0.8.1
     to-regex: ^3.0.1
   checksum: 54d4166d6ef08db41252eb4e96d4109ebcb8029f0374f9db873bd91a1f896c32ec780d2a2ea65c0b2d7caf1f28d5e1ea33746a470f32146ac8bba821d80d38d8
-  languageName: node
-  linkType: hard
-
-"napi-build-utils@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "napi-build-utils@npm:1.0.2"
-  checksum: 06c14271ee966e108d55ae109f340976a9556c8603e888037145d6522726aebe89dd0c861b4b83947feaf6d39e79e08817559e8693deedc2c94e82c5cbd090c7
   languageName: node
   linkType: hard
 
@@ -16935,24 +17125,6 @@ __metadata:
     lower-case: ^2.0.2
     tslib: ^2.0.3
   checksum: 0b2ebc113dfcf737d48dde49cfebf3ad2d82a8c3188e7100c6f375e30eafbef9e9124aadc3becef237b042fd5eb0aad2fd78669c20972d045bbe7fea8ba0be5c
-  languageName: node
-  linkType: hard
-
-"node-abi@npm:^3.3.0":
-  version: 3.51.0
-  resolution: "node-abi@npm:3.51.0"
-  dependencies:
-    semver: ^7.3.5
-  checksum: 3fabc9d58f0478767157560249f79c4a9e95082b96700cd8cc470f517bd566dbab82a37c862db3f78d3187be9f19f5cd9822b6f1b7ac7a3254fa70c3e3b38a83
-  languageName: node
-  linkType: hard
-
-"node-addon-api@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "node-addon-api@npm:6.1.0"
-  dependencies:
-    node-gyp: latest
-  checksum: 3a539510e677cfa3a833aca5397300e36141aca064cdc487554f2017110709a03a95da937e98c2a14ec3c626af7b2d1b6dabe629a481f9883143d0d5bff07bf2
   languageName: node
   linkType: hard
 
@@ -19788,28 +19960,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prebuild-install@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "prebuild-install@npm:7.1.1"
-  dependencies:
-    detect-libc: ^2.0.0
-    expand-template: ^2.0.3
-    github-from-package: 0.0.0
-    minimist: ^1.2.3
-    mkdirp-classic: ^0.5.3
-    napi-build-utils: ^1.0.1
-    node-abi: ^3.3.0
-    pump: ^3.0.0
-    rc: ^1.2.7
-    simple-get: ^4.0.0
-    tar-fs: ^2.0.0
-    tunnel-agent: ^0.6.0
-  bin:
-    prebuild-install: bin.js
-  checksum: dbf96d0146b6b5827fc8f67f72074d2e19c69628b9a7a0a17d0fad1bf37e9f06922896972e074197fc00a52eae912993e6ef5a0d471652f561df5cb516f3f467
-  languageName: node
-  linkType: hard
-
 "precinct@npm:^11.0.0":
   version: 11.0.5
   resolution: "precinct@npm:11.0.5"
@@ -20323,7 +20473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc@npm:1.2.8, rc@npm:^1.2.7":
+"rc@npm:1.2.8":
   version: 1.2.8
   resolution: "rc@npm:1.2.8"
   dependencies:
@@ -21579,20 +21729,72 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.32.6":
-  version: 0.32.6
-  resolution: "sharp@npm:0.32.6"
+"sharp@npm:^0.33.0":
+  version: 0.33.1
+  resolution: "sharp@npm:0.33.1"
   dependencies:
+    "@img/sharp-darwin-arm64": 0.33.1
+    "@img/sharp-darwin-x64": 0.33.1
+    "@img/sharp-libvips-darwin-arm64": 1.0.0
+    "@img/sharp-libvips-darwin-x64": 1.0.0
+    "@img/sharp-libvips-linux-arm": 1.0.0
+    "@img/sharp-libvips-linux-arm64": 1.0.0
+    "@img/sharp-libvips-linux-s390x": 1.0.0
+    "@img/sharp-libvips-linux-x64": 1.0.0
+    "@img/sharp-libvips-linuxmusl-arm64": 1.0.0
+    "@img/sharp-libvips-linuxmusl-x64": 1.0.0
+    "@img/sharp-linux-arm": 0.33.1
+    "@img/sharp-linux-arm64": 0.33.1
+    "@img/sharp-linux-s390x": 0.33.1
+    "@img/sharp-linux-x64": 0.33.1
+    "@img/sharp-linuxmusl-arm64": 0.33.1
+    "@img/sharp-linuxmusl-x64": 0.33.1
+    "@img/sharp-wasm32": 0.33.1
+    "@img/sharp-win32-ia32": 0.33.1
+    "@img/sharp-win32-x64": 0.33.1
     color: ^4.2.3
     detect-libc: ^2.0.2
-    node-addon-api: ^6.1.0
-    node-gyp: latest
-    prebuild-install: ^7.1.1
     semver: ^7.5.4
-    simple-get: ^4.0.1
-    tar-fs: ^3.0.4
-    tunnel-agent: ^0.6.0
-  checksum: 0cca1d16b1920800c0e22d27bc6305f4c67c9ebe44f67daceb30bf645ae39e7fb7dfbd7f5d6cd9f9eebfddd87ac3f7e2695f4eb906d19b7a775286238e6a29fc
+  dependenciesMeta:
+    "@img/sharp-darwin-arm64":
+      optional: true
+    "@img/sharp-darwin-x64":
+      optional: true
+    "@img/sharp-libvips-darwin-arm64":
+      optional: true
+    "@img/sharp-libvips-darwin-x64":
+      optional: true
+    "@img/sharp-libvips-linux-arm":
+      optional: true
+    "@img/sharp-libvips-linux-arm64":
+      optional: true
+    "@img/sharp-libvips-linux-s390x":
+      optional: true
+    "@img/sharp-libvips-linux-x64":
+      optional: true
+    "@img/sharp-libvips-linuxmusl-arm64":
+      optional: true
+    "@img/sharp-libvips-linuxmusl-x64":
+      optional: true
+    "@img/sharp-linux-arm":
+      optional: true
+    "@img/sharp-linux-arm64":
+      optional: true
+    "@img/sharp-linux-s390x":
+      optional: true
+    "@img/sharp-linux-x64":
+      optional: true
+    "@img/sharp-linuxmusl-arm64":
+      optional: true
+    "@img/sharp-linuxmusl-x64":
+      optional: true
+    "@img/sharp-wasm32":
+      optional: true
+    "@img/sharp-win32-ia32":
+      optional: true
+    "@img/sharp-win32-x64":
+      optional: true
+  checksum: 51eeeb5431f096e2d87878e9f8cfbee4c755c2b68dc3005f96ed0be7a54c3f18303b4ce04f79aea27480d37c515a486ee143ff9ca16364cfeecf7ba787c0fb31
   languageName: node
   linkType: hard
 
@@ -21655,24 +21857,6 @@ __metadata:
   version: 4.1.0
   resolution: "signal-exit@npm:4.1.0"
   checksum: 64c757b498cb8629ffa5f75485340594d2f8189e9b08700e69199069c8e3070fb3e255f7ab873c05dc0b3cec412aea7402e10a5990cb6a050bd33ba062a6c549
-  languageName: node
-  linkType: hard
-
-"simple-concat@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "simple-concat@npm:1.0.1"
-  checksum: 4d211042cc3d73a718c21ac6c4e7d7a0363e184be6a5ad25c8a1502e49df6d0a0253979e3d50dbdd3f60ef6c6c58d756b5d66ac1e05cda9cacd2e9fc59e3876a
-  languageName: node
-  linkType: hard
-
-"simple-get@npm:^4.0.0, simple-get@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "simple-get@npm:4.0.1"
-  dependencies:
-    decompress-response: ^6.0.0
-    once: ^1.3.1
-    simple-concat: ^1.0.0
-  checksum: e4132fd27cf7af230d853fa45c1b8ce900cb430dd0a3c6d3829649fe4f2b26574c803698076c4006450efb0fad2ba8c5455fbb5755d4b0a5ec42d4f12b31d27e
   languageName: node
   linkType: hard
 
@@ -23057,30 +23241,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar-fs@npm:^2.0.0":
-  version: 2.1.1
-  resolution: "tar-fs@npm:2.1.1"
-  dependencies:
-    chownr: ^1.1.1
-    mkdirp-classic: ^0.5.2
-    pump: ^3.0.0
-    tar-stream: ^2.1.4
-  checksum: f5b9a70059f5b2969e65f037b4e4da2daf0fa762d3d232ffd96e819e3f94665dbbbe62f76f084f1acb4dbdcce16c6e4dac08d12ffc6d24b8d76720f4d9cf032d
-  languageName: node
-  linkType: hard
-
-"tar-fs@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "tar-fs@npm:3.0.4"
-  dependencies:
-    mkdirp-classic: ^0.5.2
-    pump: ^3.0.0
-    tar-stream: ^3.1.5
-  checksum: dcf4054f9e92ca0efe61c2b3f612914fb259a47900aa908a63106513a6d006c899b426ada53eb88d9dbbf089b5724c8e90b96a2c4ca6171845fa14203d734e30
-  languageName: node
-  linkType: hard
-
-"tar-stream@npm:^2.1.4, tar-stream@npm:^2.2.0":
+"tar-stream@npm:^2.2.0":
   version: 2.2.0
   resolution: "tar-stream@npm:2.2.0"
   dependencies:
@@ -23093,7 +23254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar-stream@npm:^3.0.0, tar-stream@npm:^3.1.4, tar-stream@npm:^3.1.5":
+"tar-stream@npm:^3.0.0, tar-stream@npm:^3.1.4":
   version: 3.1.6
   resolution: "tar-stream@npm:3.1.6"
   dependencies:
@@ -23660,7 +23821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3, tslib@npm:^2.3.1":
+"tslib@npm:^2.0.3, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
