@@ -30,7 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.0",
     "@fortawesome/vue-fontawesome": "^2.0.6",
     "@torchlight-api/client": "^0.0.4",
-    "algoliasearch": "^4.20.0",
+    "algoliasearch": "^4.21.0",
     "cheerio": "^1.0.0-rc.12",
     "ffmpeg-static": "^5.1.0",
     "fs": "^0.0.2",
