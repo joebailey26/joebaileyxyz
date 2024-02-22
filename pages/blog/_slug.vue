@@ -12,7 +12,7 @@
             </div>
             <h1 class="page-header__title" v-text="post.title" />
             <p class="page-header__description">
-              <span>Published </span><time :datetime="post.date.fullDate" v-text="`${post.date.day} ${post.date.month} '${post.date.year}`" />
+              <span>Published </span><time :datetime="post.date" v-text="`${getDay(post.date)} ${getMonth(post.date)} '${getYear(post.date)}`" />
             </p>
           </div>
         </div>
@@ -93,6 +93,30 @@ export default {
   },
   mounted () {
     this.registerCopyToClipboardContainers()
+  },
+  methods: {
+    getDay (date) {
+      return date.getDate()
+    },
+    getMonth (date) {
+      const monthArr = []
+      monthArr[0] = 'Jan'
+      monthArr[1] = 'Feb'
+      monthArr[2] = 'Mar'
+      monthArr[3] = 'Apr'
+      monthArr[4] = 'May'
+      monthArr[5] = 'Jun'
+      monthArr[6] = 'Jul'
+      monthArr[7] = 'Aug'
+      monthArr[8] = 'Sep'
+      monthArr[9] = 'Oct'
+      monthArr[10] = 'Nov'
+      monthArr[11] = 'Dec'
+      return monthArr[date.getMonth()]
+    },
+    getYear (date) {
+      return date.getFullYear().toString().substring(2)
+    }
   }
 }
 </script>
