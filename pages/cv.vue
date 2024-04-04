@@ -3,11 +3,13 @@
   .cv {
     position: relative;
     box-sizing: border-box; /* Ensures padding is included in the total width/height */
-    width: 210mm; /* A4 width in millimeters */
+    max-width: 210mm; /* A4 width in millimeters */
+    width: 100%;
     margin: 0 auto; /* Optional: centers the page horizontally */
     padding: 15mm 20mm; /* Optional: adds some padding inside the A4 page */
     background: white; /* Optional: sets a white background */
     border: 1px solid lightgray; /* Optional: adds a border around the A4 page */
+    color: var(--grey);
   }
 }
 * {
