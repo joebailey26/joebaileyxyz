@@ -1,24 +1,11 @@
 <style scoped lang="scss">
-@media screen {
-  .cv {
-    position: relative;
-    box-sizing: border-box; /* Ensures padding is included in the total width/height */
-    max-width: 210mm; /* A4 width in millimeters */
-    width: 100%;
-    margin: 0 auto; /* Optional: centers the page horizontally */
-    padding: 15mm 20mm; /* Optional: adds some padding inside the A4 page */
-    background: white; /* Optional: sets a white background */
-    border: 1px solid lightgray; /* Optional: adds a border around the A4 page */
-    color: var(--grey);
-  }
-}
 * {
   margin: 0
 }
 .header__title {
   text-align: center
 }
-.header__description {
+p.header__description {
   margin-top: 1rem;
   font-size: 1.2rem;
   text-align: center
@@ -61,9 +48,6 @@ p, li {
   letter-spacing: -.05px
 }
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -86,10 +70,54 @@ footer {
     content: '|'
   }
 }
-
+@media screen {
+  .cv {
+    position: relative;
+    box-sizing: border-box; /* Ensures padding is included in the total width/height */
+    width: 100%;
+    max-width: 210mm; /* A4 width in millimeters */
+    margin: 0 auto; /* Optional: centers the page horizontally */
+    padding: 15mm 20mm; /* Optional: adds some padding inside the A4 page */
+    color: var(--grey);
+    background: white; /* Optional: sets a white background */
+    border: 1px solid lightgray; /* Optional: adds a border around the A4 page */
+  }
+  footer {
+    width: calc(100% + 40mm);
+    margin-bottom: -15mm;
+    margin-left: -20mm
+  }
+  @media (max-width: 210mm) {
+    .cv {
+      padding: 1rem
+    }
+    footer {
+      width: calc(100% + 2rem);
+      margin-bottom: -1rem;
+      margin-left: -1rem
+    }
+  }
+  @media (max-width: 150mm) {
+    .block {
+      grid-template-columns: 1fr
+    }
+    p {
+      text-align: left
+    }
+    footer {
+      flex-wrap: wrap;
+      gap: .5rem;
+      p:not(:last-child):after {
+        content: none
+      }
+    }
+  }
+}
 @media print {
   footer {
     position: fixed;
+    bottom: 0;
+    left: 0;
     padding-right: 0;
     padding-left: 0;
     background: none;
