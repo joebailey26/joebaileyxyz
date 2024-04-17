@@ -100,13 +100,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/cache-common@npm:4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/cache-common@npm:4.23.0"
-  checksum: 97d3a4524daf1288cd06b3f52c1838646d1dc188a6725eb1deac97beddf46d0757734bfb6068ccb1f5196c363fa4abaca125bd5391ca35c24421ad70cd07c29a
-  languageName: node
-  linkType: hard
-
 "@algolia/cache-common@npm:4.23.3":
   version: 4.23.3
   resolution: "@algolia/cache-common@npm:4.23.3"
@@ -146,16 +139,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/client-common@npm:4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/client-common@npm:4.23.0"
-  dependencies:
-    "@algolia/requester-common": 4.23.0
-    "@algolia/transporter": 4.23.0
-  checksum: 40ef76d46012fe53545fd38c5f6b6261ef2a13334c4ce50158aeef657520f3f97c3b72d0f22373d58dc59f8a5eb31c8f06862bdf56941f64ac4ad9d455689c1d
-  languageName: node
-  linkType: hard
-
 "@algolia/client-common@npm:4.23.3":
   version: 4.23.3
   resolution: "@algolia/client-common@npm:4.23.3"
@@ -177,7 +160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/client-search@npm:4.23.3":
+"@algolia/client-search@npm:4.23.3, @algolia/client-search@npm:^4.23.1":
   version: 4.23.3
   resolution: "@algolia/client-search@npm:4.23.3"
   dependencies:
@@ -185,24 +168,6 @@ __metadata:
     "@algolia/requester-common": 4.23.3
     "@algolia/transporter": 4.23.3
   checksum: 0249aeeaffa94608948f047dabd25a1c452c52cfbf5ce3abaad4f41134e87344d55733f03b512f64ffd23d43ff78d4339a8abfb83887ea23ede1d2d6567bf421
-  languageName: node
-  linkType: hard
-
-"@algolia/client-search@npm:^4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/client-search@npm:4.23.0"
-  dependencies:
-    "@algolia/client-common": 4.23.0
-    "@algolia/requester-common": 4.23.0
-    "@algolia/transporter": 4.23.0
-  checksum: bb2240a466cd8e402b46a6bf5f5e851eb0b4b5a915d1ea7f802b1257270545bd25952a4d1ba36a9db6cf8eea18dce33cb995f93ed8cab2ef5dde2354e69d46ae
-  languageName: node
-  linkType: hard
-
-"@algolia/logger-common@npm:4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/logger-common@npm:4.23.0"
-  checksum: a7efb00330c59e3f0a5f51eed72de01198b0aca225cc6132fa96877761ddd6a8b426a93db2fce65231cafb5f7243a17e9a1df35b059bbb000bc4ccc3c2c5192f
   languageName: node
   linkType: hard
 
@@ -259,13 +224,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/requester-common@npm:4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/requester-common@npm:4.23.0"
-  checksum: 6c3fa2e820ab8004f05f88eb196bf8525627ee222e4d57f7a0b3a3ff121b8d8535acf6dbe72e097f544102b27dde7088c846c97f2c841721fe0f01fbe98d9b09
-  languageName: node
-  linkType: hard
-
 "@algolia/requester-common@npm:4.23.3":
   version: 4.23.3
   resolution: "@algolia/requester-common@npm:4.23.3"
@@ -279,17 +237,6 @@ __metadata:
   dependencies:
     "@algolia/requester-common": 4.23.3
   checksum: 3d751c063e0f96e41a61d87a3428b2cb13b30aaa9e0ba3e70a3b92ad642afbb26c5095405dd1ed6dd16755d47faece0f42c5677f30673898658461ad51ec2235
-  languageName: node
-  linkType: hard
-
-"@algolia/transporter@npm:4.23.0":
-  version: 4.23.0
-  resolution: "@algolia/transporter@npm:4.23.0"
-  dependencies:
-    "@algolia/cache-common": 4.23.0
-    "@algolia/logger-common": 4.23.0
-    "@algolia/requester-common": 4.23.0
-  checksum: 037b0e7b8b978dc3d5c9e8dd43edb6519af9f045267811d232bce7aaf211b0d8bda535f9c99b714b9b4f22adc00cd6f8f791a5ed140cdf885358115be571d108
   languageName: node
   linkType: hard
 
@@ -11761,7 +11708,7 @@ __metadata:
 
 "fsevents@patch:fsevents@^1.2.7#~builtin<compat/fsevents>":
   version: 1.2.13
-  resolution: "fsevents@patch:fsevents@npm%3A1.2.13#~builtin<compat/fsevents>::version=1.2.13&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A1.2.13#~builtin<compat/fsevents>::version=1.2.13&hash=d11327"
   dependencies:
     bindings: ^1.5.0
     nan: ^2.12.1
@@ -11771,7 +11718,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -13986,7 +13933,7 @@ __metadata:
     "@algolia/autocomplete-js": ^1.17.0
     "@algolia/autocomplete-preset-algolia": ^1.17.0
     "@algolia/autocomplete-theme-classic": ^1.17.0
-    "@algolia/client-search": ^4.23.0
+    "@algolia/client-search": ^4.23.1
     "@algolia/netlify-plugin-crawler": ^1.0.15
     "@fontsource/rammetto-one": ^5.0.19
     "@fontsource/recursive": ^5.0.17
@@ -19914,7 +19861,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
   version: 1.22.8
-  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -19927,7 +19874,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.1#~builtin<compat/resolve>":
   version: 2.0.0-next.5
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=c3c19d"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -22690,17 +22637,17 @@ __metadata:
 
 "typescript@patch:typescript@^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=701156"
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 07106822b4305de3f22835cbba949a2b35451cad50888759b6818421290ff95d522b38ef7919e70fb381c5fe9c1c643d7dea22c8b31652a717ddbd57b7f4d554
+  checksum: 0f4da2f15e6f1245e49db15801dbee52f2bbfb267e1c39225afdab5afee1a72839cd86000e65ee9d7e4dfaff12239d28beaf5ee431357fcced15fb08583d72ca
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^5.4.3#~builtin<compat/typescript>":
   version: 5.4.3
-  resolution: "typescript@patch:typescript@npm%3A5.4.3#~builtin<compat/typescript>::version=5.4.3&hash=701156"
+  resolution: "typescript@patch:typescript@npm%3A5.4.3#~builtin<compat/typescript>::version=5.4.3&hash=f3b441"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
