@@ -62,7 +62,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/autocomplete-preset-algolia@npm:1.17.2, @algolia/autocomplete-preset-algolia@npm:^1.17.1":
+"@algolia/autocomplete-preset-algolia@npm:1.17.2":
   version: 1.17.2
   resolution: "@algolia/autocomplete-preset-algolia@npm:1.17.2"
   dependencies:
@@ -74,6 +74,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@algolia/autocomplete-preset-algolia@npm:^1.17.3":
+  version: 1.17.4
+  resolution: "@algolia/autocomplete-preset-algolia@npm:1.17.4"
+  dependencies:
+    "@algolia/autocomplete-shared": 1.17.4
+  peerDependencies:
+    "@algolia/client-search": ">= 4.9.1 < 6"
+    algoliasearch: ">= 4.9.1 < 6"
+  checksum: da74b5fa461de61e4d75f34fbc9c8dda7e10155beb0494dcaf560934cdfc45081e513cef7c40c7395b6e2d373c7aace5f328dfe679b398d4836a900fe09555fe
+  languageName: node
+  linkType: hard
+
 "@algolia/autocomplete-shared@npm:1.17.2":
   version: 1.17.2
   resolution: "@algolia/autocomplete-shared@npm:1.17.2"
@@ -81,6 +93,16 @@ __metadata:
     "@algolia/client-search": ">= 4.9.1 < 6"
     algoliasearch: ">= 4.9.1 < 6"
   checksum: a3d93118832d9ca8f8ceaabefcd07a3ea86181955cf4b6c8e107357147ab619e9beb435da1b7bbf9e999d5fbed9df902b9021ab3c59d1f751f3ce31f7747efbe
+  languageName: node
+  linkType: hard
+
+"@algolia/autocomplete-shared@npm:1.17.4":
+  version: 1.17.4
+  resolution: "@algolia/autocomplete-shared@npm:1.17.4"
+  peerDependencies:
+    "@algolia/client-search": ">= 4.9.1 < 6"
+    algoliasearch: ">= 4.9.1 < 6"
+  checksum: a53b45f83a14e8412e05391388fd599628dd6debf2f65ab080f8f8284d1edfb4791da1d10596a258cb75fc53660646f6a41b10df32e3e2c0a991d9b396bae123
   languageName: node
   linkType: hard
 
@@ -11742,7 +11764,7 @@ __metadata:
 
 "fsevents@patch:fsevents@^1.2.7#~builtin<compat/fsevents>":
   version: 1.2.13
-  resolution: "fsevents@patch:fsevents@npm%3A1.2.13#~builtin<compat/fsevents>::version=1.2.13&hash=d11327"
+  resolution: "fsevents@patch:fsevents@npm%3A1.2.13#~builtin<compat/fsevents>::version=1.2.13&hash=18f3a7"
   dependencies:
     bindings: ^1.5.0
     nan: ^2.12.1
@@ -11752,7 +11774,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -13965,7 +13987,7 @@ __metadata:
   dependencies:
     "@aceforth/nuxt-optimized-images": ^1.4.0
     "@algolia/autocomplete-js": ^1.17.1
-    "@algolia/autocomplete-preset-algolia": ^1.17.1
+    "@algolia/autocomplete-preset-algolia": ^1.17.3
     "@algolia/autocomplete-theme-classic": ^1.17.1
     "@algolia/client-search": ^4.24.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
@@ -19895,7 +19917,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.4#~builtin<compat/resolve>":
   version: 1.22.8
-  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=07638b"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -19908,7 +19930,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.1#~builtin<compat/resolve>":
   version: 2.0.0-next.5
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.5#~builtin<compat/resolve>::version=2.0.0-next.5&hash=07638b"
   dependencies:
     is-core-module: ^2.13.0
     path-parse: ^1.0.7
@@ -22671,17 +22693,17 @@ __metadata:
 
 "typescript@patch:typescript@^5.0.0#~builtin<compat/typescript>, typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
   version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 0f4da2f15e6f1245e49db15801dbee52f2bbfb267e1c39225afdab5afee1a72839cd86000e65ee9d7e4dfaff12239d28beaf5ee431357fcced15fb08583d72ca
+  checksum: 07106822b4305de3f22835cbba949a2b35451cad50888759b6818421290ff95d522b38ef7919e70fb381c5fe9c1c643d7dea22c8b31652a717ddbd57b7f4d554
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^5.4.3#~builtin<compat/typescript>":
   version: 5.4.3
-  resolution: "typescript@patch:typescript@npm%3A5.4.3#~builtin<compat/typescript>::version=5.4.3&hash=f3b441"
+  resolution: "typescript@patch:typescript@npm%3A5.4.3#~builtin<compat/typescript>::version=5.4.3&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
