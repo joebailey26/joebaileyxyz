@@ -22,7 +22,7 @@
     "@algolia/netlify-plugin-crawler": "^1.0.15",
     "@fontsource/rammetto-one": "^5.0.21",
     "@fontsource/recursive": "^5.0.17",
-    "@fontsource/roboto": "^5.0.12",
+    "@fontsource/roboto": "^5.0.14",
     "@fontsource/roboto-slab": "^5.0.20",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
