@@ -2799,10 +2799,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/rammetto-one@npm:^5.0.21":
-  version: 5.0.21
-  resolution: "@fontsource/rammetto-one@npm:5.0.21"
-  checksum: 6352c531a5e847c3860d4a3cff1d93feda3e820be457b51f8de5a0d7a49c9b635712a2104e2ae83825d9b6868920629a88843e33d39d1db8af8be601f76f8c0b
+"@fontsource/rammetto-one@npm:^5.0.22":
+  version: 5.1.0
+  resolution: "@fontsource/rammetto-one@npm:5.1.0"
+  checksum: 507c504697714cae78ea209ec99749f5217fb8ff95e38d62a15a63b3f552d7e2e9f989277dc02567bd48461edadaf0f4ba9ff563c3c61efd13a8c2739792a140
   languageName: node
   linkType: hard
 
@@ -14004,7 +14004,7 @@ __metadata:
     "@algolia/autocomplete-theme-classic": ^1.17.3
     "@algolia/client-search": ^4.24.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
-    "@fontsource/rammetto-one": ^5.0.21
+    "@fontsource/rammetto-one": ^5.0.22
     "@fontsource/recursive": ^5.0.19
     "@fontsource/roboto": ^5.0.15
     "@fontsource/roboto-slab": ^5.0.21
