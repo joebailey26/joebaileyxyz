@@ -2813,10 +2813,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/roboto-slab@npm:^5.0.21":
-  version: 5.0.22
-  resolution: "@fontsource/roboto-slab@npm:5.0.22"
-  checksum: 5de078a944e3625bd91922695ec58910e02dccf8cf6d8392d264b4d51e9704d4021b7bffffeae59423609f110d3690d272fc3d5db683685b4bd865bcb452255b
+"@fontsource/roboto-slab@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@fontsource/roboto-slab@npm:5.1.0"
+  checksum: bae517f3dcdb4d4efe321a33aed531dbdaaa3fc4a9c1db97b58f349131010b73764c887b36586ff2dbfda1ed42da42a47314cb82eb934f3bcea9479ada5ffbea
   languageName: node
   linkType: hard
 
@@ -14007,7 +14007,7 @@ __metadata:
     "@fontsource/rammetto-one": ^5.0.22
     "@fontsource/recursive": ^5.1.0
     "@fontsource/roboto": ^5.0.15
-    "@fontsource/roboto-slab": ^5.0.21
+    "@fontsource/roboto-slab": ^5.1.0
     "@fortawesome/fontawesome-svg-core": ^6.6.0
     "@fortawesome/free-brands-svg-icons": ^6.6.0
     "@fortawesome/free-regular-svg-icons": ^6.6.0
