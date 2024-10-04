@@ -2806,10 +2806,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/recursive@npm:^5.0.19":
-  version: 5.0.20
-  resolution: "@fontsource/recursive@npm:5.0.20"
-  checksum: 0c9a40ea582f8ae48e5db6787f4c1477d4aea89e8f6b90deb65ac17181a7e4ca1be338feea6cb71bd20d1db4265b27957119f9b60670728909d8376f0993db5e
+"@fontsource/recursive@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@fontsource/recursive@npm:5.1.0"
+  checksum: f2dc2285076852b262b068efff21422a1b8fa76157bdf8cee8e334bf712ed252ddc1581bc4040370f231a962b172b60581571ca88a1bf41e935374337c702389
   languageName: node
   linkType: hard
 
@@ -14005,7 +14005,7 @@ __metadata:
     "@algolia/client-search": ^4.24.0
     "@algolia/netlify-plugin-crawler": ^1.0.15
     "@fontsource/rammetto-one": ^5.0.22
-    "@fontsource/recursive": ^5.0.19
+    "@fontsource/recursive": ^5.1.0
     "@fontsource/roboto": ^5.0.15
     "@fontsource/roboto-slab": ^5.1.0
     "@fortawesome/fontawesome-svg-core": ^6.6.0
