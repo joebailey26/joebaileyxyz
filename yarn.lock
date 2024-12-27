@@ -2884,12 +2884,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/free-regular-svg-icons@npm:^6.6.0":
-  version: 6.6.0
-  resolution: "@fortawesome/free-regular-svg-icons@npm:6.6.0"
+"@fortawesome/free-regular-svg-icons@npm:^6.7.1":
+  version: 6.7.2
+  resolution: "@fortawesome/free-regular-svg-icons@npm:6.7.2"
   dependencies:
-    "@fortawesome/fontawesome-common-types": 6.6.0
-  checksum: abacdf53ecba25c7288c523cf0141e4afd23e7ea4eece5554c381281fee767d71c52709270db0c70ac454e4cf1820ff646435d9ff7f2e96efb3ea6be493e2ea1
+    "@fortawesome/fontawesome-common-types": 6.7.2
+  checksum: 1a2be177dbb2c0186b3f10157a70c494f9e3c12c022cc8fb926c37b78a61e256a98c2739774671106454cb1a7f2336c6f49443e6bef44f33e67dd4e186f126cc
   languageName: node
   linkType: hard
 
@@ -14017,7 +14017,7 @@ __metadata:
     "@fontsource/roboto-slab": ^5.1.0
     "@fortawesome/fontawesome-svg-core": ^6.7.1
     "@fortawesome/free-brands-svg-icons": ^6.6.0
-    "@fortawesome/free-regular-svg-icons": ^6.6.0
+    "@fortawesome/free-regular-svg-icons": ^6.7.1
     "@fortawesome/free-solid-svg-icons": ^6.6.0
     "@fortawesome/vue-fontawesome": ^2.0.10
     "@netlify/plugin-sitemap": ^0.8.1
