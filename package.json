@@ -21,7 +21,7 @@
     "@algolia/client-search": "^4.24.0",
     "@algolia/netlify-plugin-crawler": "^1.0.15",
     "@fontsource/rammetto-one": "^5.0.22",
-    "@fontsource/recursive": "^5.1.0",
+    "@fontsource/recursive": "^5.1.1",
     "@fontsource/roboto": "^5.0.15",
     "@fontsource/roboto-slab": "^5.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
