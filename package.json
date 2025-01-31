@@ -17,7 +17,7 @@
     "@aceforth/nuxt-optimized-images": "^1.4.0",
     "@algolia/autocomplete-js": "^1.17.9",
     "@algolia/autocomplete-preset-algolia": "^1.17.9",
-    "@algolia/autocomplete-theme-classic": "^1.17.8",
+    "@algolia/autocomplete-theme-classic": "^1.17.9",
     "@algolia/client-search": "^4.24.0",
     "@algolia/netlify-plugin-crawler": "^1.0.15",
     "@fontsource/rammetto-one": "^5.1.1",
