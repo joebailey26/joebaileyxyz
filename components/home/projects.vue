@@ -5,7 +5,7 @@
         Projects
       </NuxtLink>
     </h2>
-    <HomeItems :items="projects[0].slice(0, 6)" link-prefix="projects" />
+    <HomeItems :items="projects[0]?.slice(0, 6)" link-prefix="projects" />
     <HomeGit />
   </section>
 </template>
