@@ -5,7 +5,7 @@
         Blog
       </NuxtLink>
     </h2>
-    <HomeItems :items="blog[0].slice(0, 6)" link-prefix="blog" :show-tech-stack="false" />
+    <HomeItems :items="blog[0]?.slice(0, 6)" link-prefix="blog" :show-tech-stack="false" />
   </section>
 </template>
 

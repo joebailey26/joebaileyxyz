@@ -85,10 +85,19 @@ async function fetchPosts (categoryId) {
   return posts
 }
 
+async function safeFetchPosts (categoryId, label) {
+  try {
+    return await fetchPosts(categoryId)
+  } catch (error) {
+    console.error(`[only-once] Failed to fetch ${label} posts:`, error)
+    return []
+  }
+}
+
 export default async function () {
   const state = {
-    projects: await fetchPosts(96),
-    blog: await fetchPosts(39)
+    projects: await safeFetchPosts(96, 'project'),
+    blog: await safeFetchPosts(39, 'blog')
   }
 
   this.nuxt.hook('vue-renderer:ssr:prepareContext', (ssrContext) => {
