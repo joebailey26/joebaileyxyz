@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { environment } from './helpers.mjs';
 import { CHUNK_SIZE, sha256, validateManifest } from '../src/shared.mjs';
 import { SignJWT, exportJWK, generateKeyPair } from 'jose';
+import { handleBuildRequest } from '../src/build-worker.mjs';
 
 async function fixture(t) {
   const app = environment();
@@ -27,6 +28,31 @@ async function fixture(t) {
   const commit = revision => app.request(`/api/editor/snapshots/${revision}/commit`, { method: 'POST', lease, body: {} });
   return { ...app, lease, database, manifest, post, start, upload, commit };
 }
+
+test('the separate build host exposes no editor or runtime routes', async t => {
+  const f = await fixture(t);
+  for (const path of ['/', '/editor.js', '/api/editor/status', '/api/editor/lease']) {
+    const response = await handleBuildRequest(new Request(`https://build.example${path}`, { headers: { Authorization: `Bearer ${f.env.CMS_BUILD_TOKEN}` } }), f.env, { waitUntil() {} });
+    assert.equal(response.status, 404);
+  }
+  const response = await handleBuildRequest(new Request('https://build.example/api/content/manifest'), f.env, { waitUntil() {} });
+  assert.equal(response.status, 401);
+});
+
+test('the separate build feed keeps revisions and routes media through the build host', async t => {
+  const f = await fixture(t);
+  const media = `https://cms.example/media/${'a'.repeat(64)}/image.png`;
+  f.post.featured_media_url = media;
+  f.post.content.rendered = `<img src="${media}">`;
+  const revision = await f.start();
+  await f.upload(revision);
+  assert.equal((await f.commit(revision)).status, 200);
+  const response = await handleBuildRequest(new Request(`https://build.example/api/content/posts?revision=${revision}&section=blog`, { headers: { Authorization: `Bearer ${f.env.CMS_BUILD_TOKEN}` } }), { ...f.env, EDITOR_ORIGIN: 'https://cms.example' }, { waitUntil() {} });
+  const feed = await response.json();
+  assert.equal(feed.revision, revision);
+  assert.equal(feed.items[0].featured_media_url, media.replace('cms.example', 'build.example'));
+  assert(feed.items[0].content.rendered.includes('https://build.example/media/'));
+});
 
 test('a complete checkpoint restores bytes and exposes a revision-pinned, private feed', async t => {
   const f = await fixture(t);

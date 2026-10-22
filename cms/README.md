@@ -1,6 +1,6 @@
 # Browser WordPress CMS
 
-WordPress executes locally in the editor's browser. The Worker authenticates the editor, stores complete SQLite snapshots in D1, stores user-owned files in R2, and exposes a private, revision-pinned feed to the existing Nuxt/Netlify build. No PHP server runs in Cloudflare.
+WordPress executes locally in the editor's browser. The editor Worker authenticates users, stores complete SQLite snapshots in D1 and stores user-owned files in R2. A separate read-only Worker exposes a token-protected, revision-pinned feed to the existing Nuxt/Netlify build. No PHP server runs in Cloudflare.
 
 ## Local setup
 
@@ -25,9 +25,9 @@ The upstream artifact includes WordPress 7.0.7, PHP 8.3, its bundled SQLite inte
 
 1. Create a D1 database named `joebailey-cms` and an R2 bucket named `joebailey-cms-files`. Set the resulting database ID in `wrangler.jsonc`; the checked-in placeholder intentionally cannot deploy as a working database.
 2. Create a Cloudflare Access self-hosted application for `cms.joebailey.xyz`. Allow `joe@joebailey.xyz` and `billybidley26@gmail.com`. Use the account's standard email PIN provider, not a connection belonging to an older Pages application. The existing Google provider is also enabled for these same email addresses. Set `ACCESS_TEAM_DOMAIN` and the application audience in Wrangler. Require Access for the editor, runtime and `/api/editor/*`. Exclude `/media/*` and `/api/content/*` from Access's interactive login: media is publicly readable; the Worker independently enforces the build token on the feed. Test these exclusions before cutover.
-3. Set Worker secrets using `npx --no-install wrangler secret put CMS_BUILD_TOKEN` and `npx --no-install wrangler secret put NETLIFY_BUILD_HOOK` from `cms/`. The latter must be a Netlify hook URL for the intended branch. Keep hooks pointed at a staging/preview branch until migration is accepted.
+3. Set Worker secrets using `npx --no-install wrangler secret put CMS_BUILD_TOKEN` and `npx --no-install wrangler secret put NETLIFY_BUILD_HOOK` from `cms/`. Set the same build token on the feed Worker using `npx --no-install wrangler secret put CMS_BUILD_TOKEN --config wrangler-feed.jsonc`. The hook must be a Netlify hook URL for the intended branch. Keep hooks pointed at a staging/preview branch until migration is accepted.
 4. Run `npm --prefix cms run db:remote`, then `npm --prefix cms run build`, then `npm --prefix cms run runtime:upload`. The last command uploads runtime assets larger than Workers' static-file limit to R2; use `-- --local` for local R2 instead. `CMS_R2_BUCKET` overrides the upload script's default bucket name.
-5. Run `npm --prefix cms run deploy`. This attaches the Worker to `cms.joebailey.xyz`; `workers.dev` and preview URLs are disabled. Do not set `LOCAL_DEV` in production.
+5. Run `npm --prefix cms run deploy`. This attaches the editor to `cms.joebailey.xyz` and deploys the read-only feed at `https://joebailey-cms-feed.joebailey.workers.dev`. The editor's `workers.dev` and preview URLs are disabled. Do not set `LOCAL_DEV` in production. The feed Worker has no editor, synchronization or runtime routes. Its media responses use the same R2 objects, while feed responses rewrite media URLs to its own hostname. This avoids the existing domain's interactive bot challenges blocking Netlify build servers; the editor domain's security settings remain in place.
 
 The Worker validates Access signatures, issuer, audience and expiration. The build token has no editor/snapshot access. Mutations require a same-origin request and, for synchronization, an unexpired editing lease.
 
@@ -63,11 +63,11 @@ Set server-side Netlify build environment variables:
 
 ```text
 CONTENT_SOURCE=cms
-CMS_API_URL=https://cms.joebailey.xyz
+CMS_API_URL=https://joebailey-cms-feed.joebailey.workers.dev
 CMS_BUILD_TOKEN=<same secret configured on the Worker>
 ```
 
-The default remains `CONTENT_SOURCE=wordpress`, using the existing `WP_API_URL`, `WP_USER`, and `WP_PASS`. Keep these for rollback. Do not expose either credential set through Nuxt public runtime configuration. First apply the new variables to a preview context and compare generated routes/content before changing production. Restore `CONTENT_SOURCE=wordpress` and redeploy to roll back.
+The default remains `CONTENT_SOURCE=wordpress`, using the existing `WP_API_URL`, `WP_USER`, and `WP_PASS`. Keep these for rollback. Do not expose either credential set through Nuxt public runtime configuration. First apply the new variables to a preview context and compare generated routes/content before changing production. Restore `CONTENT_SOURCE=wordpress` and redeploy to roll back. The current Netlify plan requires environment variables to use all supported server scopes; the CMS credentials are still consumed only by build-time code.
 
 Every CMS build fetches `/api/content/manifest` once, then loads `/api/content/posts` with that revision, section, and page. Feed authentication, pagination, missing data, expired revisions and legacy WordPress fetch errors fail the build rather than publish empty sections. A revision pruned while a long build is running returns HTTP 410; restart that build against the latest revision.
 
@@ -102,6 +102,6 @@ The tests cover incomplete uploads, checksum failures, transaction rollback on l
 
 For initial cloud promotion, run `node --experimental-wasm-jspi cms/scripts/prepare-promotion.mjs cms/migration/verified-staging-snapshot.zip https://cms.joebailey.xyz http://127.0.0.1:8788/scope:joebailey-cms`, then `node cms/scripts/seed-cloud.mjs cms/migration/cloud-snapshot.zip`. The first command relocates the snapshot through pinned WordPress APIs. The second uses account-admin Cloudflare authentication, refuses an initialized database or open editor, uploads checksum-verified files/database chunks, verifies the stored chunks and atomically activates the initial revision. Subsequent changes must use the authenticated editor. It does not trigger a build or change Netlify ingestion.
 
-Verified on 22 October 2026: 15 automated tests; full pinned PHP/SQLite restore; real browser import and fresh-profile restore of all 55 posts and 46 attachments; all 54 published routes and five blog pagination pages generated from the live cloud feed; all seven published featured images served successfully from R2. The editor login was confirmed by the permitted user after correcting the identity provider. Nuxt's build cache excludes `cms/**` to avoid reading the separate runtime and dependency tree. Netlify uses Node 24.12 to match the existing root package engine.
+Verified on 22 October 2026: 17 automated tests; full pinned PHP/SQLite restore; real browser import and fresh-profile restore of all 55 posts and 46 attachments; all 54 published routes and five blog pagination pages generated from the live cloud feed; all seven published featured images served successfully from R2. The editor login was confirmed by the permitted user after correcting the identity provider. Nuxt's build cache excludes `cms/**` to avoid reading the separate runtime and dependency tree. Netlify uses Node 24.12 to match the existing root package engine.
 
 References: [Playground self-hosting](https://developer.wordpress.org/playground/developers/architecture/host-your-own-playground/), [D1 limits](https://developers.cloudflare.com/d1/platform/limits/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/), [Netlify build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/).

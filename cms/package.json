@@ -15,7 +15,8 @@
     "check": "node --check src/worker.mjs && node --check web/editor.js",
     "db:local": "wrangler d1 migrations apply DB --local",
     "db:remote": "wrangler d1 migrations apply DB --remote",
-    "deploy": "node scripts/build.mjs --production && wrangler deploy"
+    "deploy": "node scripts/build.mjs --production && wrangler deploy && wrangler deploy --config wrangler-feed.jsonc",
+    "deploy:feed": "wrangler deploy --config wrangler-feed.jsonc"
   },
   "dependencies": {
     "@wp-playground/blueprints": "3.1.60",
