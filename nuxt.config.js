@@ -111,7 +111,8 @@ export default {
     optimizeImagesInDev: true
   },
   generate: {
-    fallback: true
+    fallback: true,
+    cache: { ignore: ['cms/**'] }
   },
   router: {
     trailingSlash: true,

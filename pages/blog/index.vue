@@ -80,7 +80,7 @@ export default {
         { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
       ],
       link: [
-        { hid: 'canonical', rel: 'canonical', href: 'https://joebailey.xyz/blog/' }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.params.page ? `page/${this.$route.params.page}/` : ''}` }
       ]
     }
   },
@@ -92,7 +92,7 @@ export default {
       return this.blog.length
     },
     currentPage () {
-      const p = this.$route.query.p
+      const p = this.$route.params.page
       const page = Array.isArray(p) ? p[0] : p
       return page ? parseInt(page) : 1
     },
@@ -100,7 +100,10 @@ export default {
       return this.blog[this.currentPage - 1]
     },
     shouldShowDates () {
-      const latestPostDate = this.blog[0][0].date
+      const latestPostDate = this.blog[0]?.[0]?.date
+      if (!latestPostDate) {
+        return false
+      }
       const currentDate = new Date()
       const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6))
 
@@ -114,7 +117,8 @@ export default {
   },
   methods: {
     goToPage (page) {
-      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, p: page.toString() } })
+      const path = page > 1 ? `/blog/page/${page}/` : '/blog/'
+      this.$router.push({ path })
     }
   }
 }

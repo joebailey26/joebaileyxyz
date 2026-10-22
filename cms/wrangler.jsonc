@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joebailey-cms",
+  "account_id": "8259f9bfa45a74a587d6a90822de442d",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-22",
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "routes": [{ "pattern": "cms.joebailey.xyz", "custom_domain": true }],
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "joebailey-cms",
+    "database_id": "d44d3f1e-5613-4729-9ced-48f0ad6ae097",
+    "migrations_dir": "migrations"
+  }],
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "joebailey-cms-files" }],
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "galexia.cloudflareaccess.com",
+    "ACCESS_AUD": "21a71f109f6250625cf12effeb8d5ee76c4d14d9e0407d5ba341b7e56c8767d8",
+    "BLOG_CATEGORY": "blog",
+    "PROJECTS_CATEGORY": "projects"
+  },
+  "triggers": { "crons": ["*/5 * * * *"] }
+}

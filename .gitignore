@@ -100,3 +100,11 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Browser WordPress runtime, migration data and local CMS state
+cms/runtime/
+cms/runtime-source/
+cms/.cache/
+cms/.wrangler/
+cms/.dev.vars
+cms/migration/

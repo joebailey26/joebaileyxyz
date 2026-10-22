@@ -2,3 +2,6 @@
 #*
 !*.scss
 !*.vue
+cms/runtime/**
+cms/dist/**
+cms/.cache/**

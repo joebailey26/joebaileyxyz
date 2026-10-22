@@ -1,0 +1,11 @@
+{
+  "name": "Joe Bailey CMS editors",
+  "decision": "allow",
+  "include": [
+    { "email": { "email": "joe@joebailey.xyz" } },
+    { "email": { "email": "billybidley26@gmail.com" } }
+  ],
+  "require": [],
+  "exclude": [],
+  "session_duration": "24h"
+}

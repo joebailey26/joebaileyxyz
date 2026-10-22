@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joebailey-cms-feed",
+  "account_id": "8259f9bfa45a74a587d6a90822de442d",
+  "main": "src/build-worker.mjs",
+  "compatibility_date": "2026-10-22",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "joebailey-cms",
+    "database_id": "d44d3f1e-5613-4729-9ced-48f0ad6ae097"
+  }],
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "joebailey-cms-files" }],
+  "vars": { "EDITOR_ORIGIN": "https://cms.joebailey.xyz" }
+}

@@ -11,19 +11,20 @@ p.header__description {
   text-align: center
 }
 p {
-  text-align: justify
+  margin-bottom: .66em
 }
 section {
   margin-top: 2rem;
-  page-break-after: always
+
+  // page-break-after: always
 }
 .block {
   display: grid;
-  grid-template-columns: .66fr 1fr;
   gap: .5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  page-break-inside: avoid;
+
+  // page-break-inside: avoid;
   border-top: 1.5px solid var(--grey)
 }
 h1 {
@@ -98,12 +99,6 @@ footer {
     }
   }
   @media (max-width: 150mm) {
-    .block {
-      grid-template-columns: 1fr
-    }
-    p {
-      text-align: left
-    }
     footer {
       flex-wrap: wrap;
       gap: .5rem;
@@ -114,10 +109,14 @@ footer {
   }
 }
 @media print {
+  @page {
+    margin-bottom: 0
+  }
   footer {
     position: fixed;
     bottom: 0;
     left: 0;
+    margin-top: 15mm;
     padding-right: 0;
     padding-left: 0;
     background: none;
@@ -145,116 +144,61 @@ footer {
       <h2>Work History</h2>
       <div class="block">
         <div class="block__info">
-          <h3>Software Engineer</h3>
-          <h4>Full-time</h4>
-          <h4>Priority Digital Health Ltd</h4>
-          <h4>July 2023 - Present</h4>
+          <h3>Software Engineer at Priority Digital Health Ltd</h3>
+          <h4>Remote, Full-time, July 2023 - Present</h4>
         </div>
         <div class="block__description">
-          <p>I had another steep learning curve to transition fully to backend development using Symfony. 6 months on and a team re-shuffle meant I could go back to being a full-stack developer. I now help build both our front-end (React) and back-end platforms. Having software that caters to thousands of users means code must be robust and thoroughly tested, quite a change from the small websites I was working on before. As part of our efforts to reduce bugs, I'm constantly suggesting improvements to our workflows both from a DevOps and business perspective.</p>
+          <p>PDH provides a patient management system for councils and charities, built with Symfony 6.4 and deployed to AWS ECS, alongside multiple React / TypeScript front-ends hosted on S3 via CloudFormation.</p>
+          <p>I joined as a Backend Engineer, designing and building new APIs and core platform features. Within three months, I progressed to leading feature delivery end-to-end, working directly from client specifications through technical breakdown, development, testing, and deployment.</p>
+          <p>After nine months, I transitioned into a Full-Stack Engineer, contributing extensively to the React front-end applications. At the twelve-month mark, I also took ownership of DevOps responsibilities, collaborating with our cloud partner to optimise deployment workflows, improve system stability under high concurrent load, and introduce proactive monitoring and bug-tracking capabilities.</p>
+          <p>Over the past year, I have led multiple projects ranging from delivering new functionality (such as mailing list features) to optimising platform performance, including integrating Symfony Messenger to offload communication processing and significantly improve API response times.</p>
         </div>
       </div>
       <div class="block">
         <div class="block__info">
-          <h3>Web Developer</h3>
-          <h4>Full-time</h4>
-          <h4>Rareloop Ltd</h4>
-          <h4>April 2022 - July 2023</h4>
+          <h3>Web Developer at Rareloop Ltd</h3>
+          <h4>Hybrid, Full-time, April 2022 - July 2023</h4>
         </div>
         <div class="block__description">
-          <p>Starting at Rareloop, I had a steep learning curve to bring myself up to speed on OOP PHP and Laravel. I quickly got to grips and started building MVC WordPress sites with ACF, Lumberjack and Rareloop’s bespoke page builder. With each site, I continuously iterated on company processes, improving things for future developers. I am proud to have worked at a B-Corps company, helping to make the web a better place for all.</p>
+          <p>Rareloop is a WordPress agency in Southampton supporting a small roster of impactful clients, mainly charities.</p>
+          <p>When I joined, I quickly ramped up on OOP PHP and Laravel, applying these principles to build and maintain MVC-based WordPress sites using ACF, Lumberjack, and Rareloop’s bespoke page builder.</p>
+          <p>I contributed to the delivery of multiple client projects while continuously improving internal development processes, including iterating on the shared Canopy theme to improve maintainability and development efficiency.</p>
+          <p>I valued working at a B Corp–certified company, focused on building high-quality, sustainable digital products and improving standards across the web.</p>
         </div>
       </div>
       <div class="block">
         <div class="block__info">
-          <h3>Development Liaison</h3>
-          <h4>Part-time</h4>
-          <h4>Toolkit Websites Ltd</h4>
-          <h4>October 2021 – March 2022</h4>
+          <h3>Development Liaison at Toolkit Websites Ltd</h3>
+          <h4>Part-time, October 2021 – March 2022</h4>
         </div>
         <div class="block__description">
-          <p>Transitioning to a part-time role, I managed more high-level projects whilst continuing with my previous responsibilities:</p>
-          <ul>
-            <li>Come up with new ideas and brief up tasks for back-end developers to implement into our internal CRM and CMS</li>
-            <li>Manage the migration of 1400 domains’ DNS from eNom to Cloudflare in response to a service provider outage</li>
-            <li>Assess staff needs and provide technical solutions to everyday burdens</li>
-            <li>Assist with migration of server stack from Rackspace to Azure</li>
-            <li>Thorough testing of all internal systems</li>
-          </ul>
+          <p>In a part-time capacity, I focused on higher-level technical initiatives while continuing my core responsibilities. I led the definition and technical breakdown of new features for internal CRM and CMS platforms, briefing backend developers and overseeing delivery.</p>
+          <br />
+          <br />
+          <p>I managed critical infrastructure projects, including the migration of 1,400 domains from eNom to Cloudflare in response to a third-party outage, and supported the migration of the server stack from Rackspace to Azure.</p>
+          <p>Alongside project delivery, I assessed team needs and implemented technical solutions to reduce operational friction, while ensuring thorough testing and stability across all internal systems.</p>
         </div>
       </div>
       <div class="block">
         <div class="block__info">
-          <h3>Development Liaison</h3>
-          <h4>Full-time</h4>
-          <h4>Toolkit Websites Ltd</h4>
-          <h4>June 2021 – October 2021</h4>
+          <h3>Development Liaison at Toolkit Websites Ltd</h3>
+          <h4>Full-time, June 2021 – October 2021</h4>
         </div>
         <div class="block__description">
-          <p>As my role within Toolkit Websites grew, so did my responsibilities:</p>
-          <ul>
-            <li>Train new staff members</li>
-            <li>Create coding documentation for new staff members</li>
-            <li>Create an intricate learning program for new staff members</li>
-            <li>Manage code snippets</li>
-            <li>Create a coding style guide</li>
-            <li>Review coding procedures and best practises</li>
-            <li>Quality assure newly published websites</li>
-            <li>Perform code reviews</li>
-            <li>Manage a redesign of Toolkit’s support and main website</li>
-            <li>Perform email migrations for clients</li>
-            <li>Manage clients domain names, transfers, DNS, etc.</li>
-          </ul>
+          <p>As my role at Toolkit Websites expanded, I took ownership of engineering standards, onboarding, and platform quality. I trained and onboarded new developers, creating comprehensive technical documentation, coding standards, and structured learning programmes to accelerate ramp-up time and ensure consistency across the codebase.</p>
+          <p>I managed shared code snippets and style guides, reviewed development procedures and best practices, and performed regular code reviews and quality assurance across newly launched websites.</p>
+          <p>In addition, I led the redesign of Toolkit’s main and support websites, carried out email migrations for clients, and managed client domain portfolios, including transfers and DNS configuration.</p>
         </div>
       </div>
       <div class="block">
         <div class="block__info">
-          <h3>Web Developer</h3>
-          <h4>Full-time</h4>
-          <h4>Toolkit Websites Ltd</h4>
-          <h4>October 2020 – June 2021</h4>
+          <h3>Web Developer at Toolkit Websites Ltd</h3>
+          <h4>Full-time, October 2020 – June 2021</h4>
         </div>
         <div class="block__description">
-          <p>Working at Toolkit Websites, I had many varying responsibilities:</p>
-          <ul>
-            <li>Design logos</li>
-            <li>Design websites</li>
-            <li>Develop custom solutions for client requests on websites</li>
-            <li>Add content to websites using Toolkit’s bespoke Content Management System</li>
-            <li>Support clients via email with a 1 hour SLA</li>
-            <li>Support clients via phone</li>
-          </ul>
-        </div>
-      </div>
-      <div class="block">
-        <div class="block__info">
-          <h3>Senior Engineer</h3>
-          <h4>Part-time</h4>
-          <h4>Train In Blocks Ltd</h4>
-          <h4>September 2020 – August 2022</h4>
-        </div>
-        <div class="block__description">
-          <p>Train In Blocks developed an app for Personal Trainers to manage their clients more efficiently. I managed a team to develop and promote the app. My responsibilities included:</p>
-          <ul>
-            <li>Code reviewing other staff members work</li>
-            <li>Testing the application for speed, use, and accessibility, among other things</li>
-            <li>Managing the hosting of the application and website via Netlify</li>
-            <li>Managing background functions needed to make the application work</li>
-            <li>Managing the PHP API and adding new features and tables as and when needed</li>
-            <li>Integrating the Stripe API with the application for payment processing for both us and our clients</li>
-            <li>Managing the authentication flow of users via Okta</li>
-            <li>Implementing new features within the VueJS application</li>
-            <li>Responding to any bugs within the application</li>
-            <li>Hiring staff members for our Marketing strategy</li>
-            <li>Reviewing staff members performance</li>
-            <li>Assigning tasks to marketing and development staff</li>
-            <li>Analysing analytics to better serve our users</li>
-            <li>Creating advertising campaigns to promote the application</li>
-            <li>Planning marketing activities to promote the application</li>
-            <li>Facilitating the necessary collaboration tools needed for staff members such as Jira, Discord, Google Drive</li>
-            <li>Managing 3rd party suppliers of marketing services</li>
-            <li>Writing technical dossiers for new staff members</li>
-          </ul>
+          <p>Toolkit Websites is a small Chichester agency supporting over 2,000 clients, emphasizing HTML5, CSS, and JavaScript to deliver responsive builds that stay easy to maintain.</p>
+          <p>I worked across design, development, and client support, gaining hands-on experience in the full website delivery lifecycle. I designed logos and websites, built custom functionality to meet client requirements, and managed content using Toolkit’s bespoke CMS.</p>
+          <p>Alongside delivery work, I provided direct client support via email and phone, consistently meeting a one-hour SLA, which helped build strong communication skills and an understanding of client needs.</p>
         </div>
       </div>
     </section>
@@ -262,17 +206,9 @@ footer {
       <h2>Education</h2>
       <div class="block">
         <div class="block__info">
-          <h3>Solent University</h3>
-          <h4>Bsc with First Class Honours</h4>
-          <h4>Web Design and Development</h4>
+          <h3>Digital Design and Development Bsc with First Class Honours</h3>
+          <h4>Southampton Solent University</h4>
           <h4>September 2018 – June 2022</h4>
-        </div>
-        <div class="block__description">
-          <p>Graduating Solent University with a First Class Honours took 4 years of hard work and dedication. My university experience as a whole helped build a strong foundation for my current development career.</p>
-          <br>
-          <p>Travelling to Denmark, I took part in a week long project working with students from around Europe to design a website for a real client. This gave me great independence, whilst also teaching me how to work as part of a team.</p>
-          <br>
-          <p>The Dynamo Challenge hosted at The University of Bournemouth and sponsored by Enterprise and IBM was a one-day event for students from different universities around the South of England. I teamed up with like-minded students to solve real-world problems that IBM were facing. This was a great day to network, problem-solve, and pitch ideas.</p>
         </div>
       </div>
     </section>
