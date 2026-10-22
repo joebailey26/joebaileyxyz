@@ -5,7 +5,10 @@ async function fetchCmsContent ({ baseUrl, token, fetchImpl, perPage = 10 }) {
   if (root.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(root.hostname)) { throw new Error('CMS_API_URL must use HTTPS') }
   const get = async (path) => {
     const response = await fetchImpl(new URL(path, root), { headers: { Authorization: `Bearer ${token}` }, redirect: 'error', signal: AbortSignal.timeout(60000) })
-    if (!response.ok) { throw new Error(`CMS content request failed: HTTP ${response.status}`) }
+    if (!response.ok) {
+      const challenge = response.headers?.get('cf-mitigated') === 'challenge' ? ' (Cloudflare blocked the build with an interactive challenge)' : ''
+      throw new Error(`CMS content request failed: HTTP ${response.status}${challenge}`)
+    }
     return response.json()
   }
   const manifest = await get('/api/content/manifest')
