@@ -51,7 +51,7 @@ test('the separate build feed keeps revisions and routes media through the build
   const feed = await response.json();
   assert.equal(feed.revision, revision);
   assert.equal(feed.items[0].featured_media_url, media.replace('cms.example', 'build.example'));
-  assert(feed.items[0].content.rendered.includes('https://build.example/media/'));
+  assert.equal(feed.items[0].content.rendered, `<img src="${media.replace('cms.example', 'build.example')}">`);
 });
 
 test('a complete checkpoint restores bytes and exposes a revision-pinned, private feed', async t => {

@@ -94,6 +94,8 @@ npm --prefix cms run build
 $env:PLAYWRIGHT_BROWSERS_PATH = "$PWD/cms/.cache/ms-playwright"
 node cms/node_modules/playwright/cli.js install chromium
 npm --prefix cms run test:browser
+# Read-only inspection of a generated Netlify preview:
+node cms/scripts/preview-smoke.mjs https://deploy-preview-149--joebailey.netlify.app
 ```
 
 The tests cover incomplete uploads, checksum failures, transaction rollback on lease loss, stale sessions, file privacy, auth boundaries, feed pagination, build retries, snapshot retention and MySQL/PHP metadata parsing. The PHP smoke check boots the pinned WordPress runtime twice and verifies restoration of drafts, settings, users, rendered content and project fields, plus HTTP login to the restored admin. The browser test requires the root Nuxt dependencies too (it uses the existing `sharp` image processor).
@@ -103,5 +105,7 @@ The tests cover incomplete uploads, checksum failures, transaction rollback on l
 For initial cloud promotion, run `node --experimental-wasm-jspi cms/scripts/prepare-promotion.mjs cms/migration/verified-staging-snapshot.zip https://cms.joebailey.xyz http://127.0.0.1:8788/scope:joebailey-cms`, then `node cms/scripts/seed-cloud.mjs cms/migration/cloud-snapshot.zip`. The first command relocates the snapshot through pinned WordPress APIs. The second uses account-admin Cloudflare authentication, refuses an initialized database or open editor, uploads checksum-verified files/database chunks, verifies the stored chunks and atomically activates the initial revision. Subsequent changes must use the authenticated editor. It does not trigger a build or change Netlify ingestion.
 
 Verified on 22 October 2026: 17 automated tests; full pinned PHP/SQLite restore; real browser import and fresh-profile restore of all 55 posts and 46 attachments; all 54 published routes and five blog pagination pages generated from the live cloud feed; all seven published featured images served successfully from R2. The editor login was confirmed by the permitted user after correcting the identity provider. Nuxt's build cache excludes `cms/**` to avoid reading the separate runtime and dependency tree. Netlify uses Node 24.12 to match the existing root package engine.
+
+The hosted Netlify preview also passed generation, sitemap and link checks. Browser inspection verified 11 representative pages, including all five blog pages, projects, syntax highlighting, galleries and video, plus 30 referenced media URLs. The preview hook returned HTTP 200. Production cutover uses the same three CMS variables in the production context and a hook targeting `master`, after the implementation is merged. Keep the old WordPress variables and the prior Netlify deployment for rollback; restoring an existing Netlify deployment works even if the legacy WordPress API is unavailable.
 
 References: [Playground self-hosting](https://developer.wordpress.org/playground/developers/architecture/host-your-own-playground/), [D1 limits](https://developers.cloudflare.com/d1/platform/limits/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/validating-json/), [Netlify build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/).
