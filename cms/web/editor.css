@@ -1,0 +1,16 @@
+:root { color-scheme: light dark; font: 14px system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #f0f0f1; color: #1d2327; display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
+header { display: flex; flex-shrink: 0; align-items: center; flex-wrap: wrap; gap: 12px; padding: 12px 18px; background: #23282d; color: white; }
+header strong { margin-right: auto; }
+button { font: inherit; padding: 8px 12px; border: 1px solid #a7aaad; border-radius: 4px; background: white; color: #1d2327; cursor: pointer; }
+button:disabled { opacity: .55; cursor: wait; }
+.import-label { font-size: 12px; max-width: 200px; }
+.import-label input { max-width: 195px; }
+button:focus-visible { outline: 3px solid #72aee6; outline-offset: 2px; }
+#last-synced { font-size: 12px; color: #dcdcde; }
+#notice, #recovery { flex-shrink: 0; margin: 18px; padding: 18px; border-left: 4px solid #b32d2e; background: white; }
+#recovery button { margin: 6px; }
+iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: white; }
+body.busy iframe { pointer-events: none; opacity: .7; }
+[hidden] { display: none !important; }

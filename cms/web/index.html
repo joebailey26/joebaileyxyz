@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Joe Bailey — WordPress editor</title>
+  <link rel="stylesheet" href="/editor.css">
+</head>
+<body>
+  <header>
+    <strong>Joe Bailey · WordPress</strong>
+    <span id="status" role="status" aria-live="polite">Opening editor…</span>
+    <span id="last-synced"></span>
+    <button id="sync" disabled>Sync now</button>
+    <button id="backup" disabled>Download backup</button>
+    <label id="cloud-backups" hidden>Saved versions <select id="versions" aria-label="Saved cloud version"></select></label>
+    <button id="download-version" hidden>Download saved version</button>
+    <label class="import-label">Import migration/backup <input id="import" type="file" accept=".zip" disabled></label>
+    <button id="retry" hidden>Retry website rebuild</button>
+    <button id="close" disabled>Close editor</button>
+  </header>
+  <aside id="notice" hidden role="alert"></aside>
+  <section id="recovery" hidden>
+    <h1>Unsynced work is saved on this device</h1>
+    <p>Download a backup before discarding it. Restoring it is allowed only when the cloud revision has not changed.</p>
+    <button id="recover">Restore local work</button>
+    <button id="download-recovery">Download local backup</button>
+    <button id="discard-recovery">Discard local work and load cloud version</button>
+  </section>
+  <iframe id="wordpress" title="WordPress administration" hidden></iframe>
+  <script type="module" src="/editor.js"></script>
+</body>
+</html>

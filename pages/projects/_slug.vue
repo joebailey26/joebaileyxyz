@@ -72,7 +72,7 @@ export default {
       title,
       meta,
       link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.params.slug}/` }
+        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/projects/${this.$route.params.slug}/` }
       ]
     }
   },

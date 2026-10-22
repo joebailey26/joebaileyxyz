@@ -100,7 +100,10 @@ export default {
       return this.blog[this.currentPage - 1]
     },
     shouldShowDates () {
-      const latestPostDate = this.blog[0][0].date
+      const latestPostDate = this.blog[0]?.[0]?.date
+      if (!latestPostDate) {
+        return false
+      }
       const currentDate = new Date()
       const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6))
 

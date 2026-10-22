@@ -1,0 +1,5 @@
+# Local development only. Worker rejects this bypass on deployed hostnames.
+LOCAL_DEV=true
+CMS_BUILD_TOKEN=replace-with-at-least-32-random-characters
+# Optional locally; required for production automatic publishing.
+NETLIFY_BUILD_HOOK=

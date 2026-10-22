@@ -17,6 +17,8 @@ npx netlify link
 
 ## Development
 
+The optional browser-based WordPress CMS, Cloudflare setup, migration and Netlify feed integration are documented in [cms/README.md](cms/README.md).
+
 ```sh
 yarn dev
 ```
