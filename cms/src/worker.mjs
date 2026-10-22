@@ -110,8 +110,12 @@ async function editorRoute(request, env, ctx, owner, path) {
     return json({ revision: current.active_revision, snapshot: snapshot && { ...snapshot, manifest: JSON.parse(snapshot.manifest) }, locked: current.lease_expires > now(), owner: current.lease_expires > now() ? current.lease_owner : null, config: { blogCategory: env.BLOG_CATEGORY, projectsCategory: env.PROJECTS_CATEGORY } });
   }
   if (path === '/api/editor/lease' && request.method === 'POST') {
+    const resume = request.headers.get('X-CMS-Lease');
     const token = crypto.randomUUID();
-    const acquired = await statement(env, 'UPDATE cms_state SET lease_token = ?, lease_owner = ?, lease_expires = ? WHERE id = 1 AND lease_expires <= ? RETURNING active_revision', token, owner, now() + 120, now()).first();
+    // A tab retains its secret across reloads. Rotate it atomically on resumption so
+    // requests from the previous document can neither write nor release the new lease.
+    const acquired = await statement(env, `UPDATE cms_state SET lease_token = ?, lease_owner = ?, lease_expires = ?
+      WHERE id = 1 AND (lease_expires <= ? OR (lease_token = ? AND lease_owner = ?)) RETURNING active_revision`, token, owner, now() + 120, now(), resume, owner).first();
     assert(acquired, 'Another editing session is open. Close it or wait two minutes for its lease to expire.', 409);
     return json({ token, revision: acquired.active_revision, expires: now() + 120 });
   }

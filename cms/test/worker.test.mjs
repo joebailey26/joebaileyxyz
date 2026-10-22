@@ -97,6 +97,33 @@ test('an editing lease excludes other sessions and rejects stale writes', async 
   assert.equal((await f.request('/api/editor/lease', { method: 'PATCH', lease: f.lease })).status, 409);
 });
 
+test('refresh resumes the same owner lease immediately and invalidates the old document', async t => {
+  const f = await fixture(t);
+  const staging = await f.start();
+  const response = await f.request('/api/editor/lease', { method: 'POST', lease: f.lease, body: {} });
+  assert.equal(response.status, 200);
+  const resumed = await response.json();
+  assert.notEqual(resumed.token, f.lease);
+  assert.equal(resumed.revision, null);
+  assert.equal((await f.request('/api/editor/lease', { method: 'PATCH', lease: resumed.token })).status, 200);
+  for (const method of ['PATCH', 'DELETE']) {
+    assert.equal((await f.request('/api/editor/lease', { method, lease: f.lease })).status, 409);
+  }
+  assert.equal((await f.commit(staging)).status, 409);
+  assert.equal((await f.request('/api/editor/lease', { method: 'POST', body: {} })).status, 409);
+  assert.equal((await f.request('/api/editor/lease', { method: 'POST', lease: f.lease, body: {} })).status, 409);
+  f.sqlite.prepare('UPDATE cms_state SET lease_owner = ?').run('another-editor');
+  assert.equal((await f.request('/api/editor/lease', { method: 'POST', lease: resumed.token, body: {} })).status, 409);
+});
+
+test('a released lease can be reopened even with a stale tab token', async t => {
+  const f = await fixture(t);
+  assert.equal((await f.request('/api/editor/lease', { method: 'DELETE', lease: f.lease })).status, 200);
+  const response = await f.request('/api/editor/lease', { method: 'POST', lease: 'stale-tab-token', body: {} });
+  assert.equal(response.status, 200);
+  assert.notEqual((await response.json()).token, f.lease);
+});
+
 test('lease expiry during commit rolls back the snapshot and active pointer atomically', async t => {
   const f = await fixture(t);
   const revision = await f.start(); await f.upload(revision);

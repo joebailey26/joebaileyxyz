@@ -21,7 +21,7 @@ const assets = resolve(root, metadata.path);
 const core = (await readdir(join(assets, 'assets'))).find(name => name === runtime.coreFile.slice('assets/'.length));
 let php;
 await bootWordPressAndRequestHandler({
-  createPhpRuntime: () => loadNodeRuntime('8.3', { emscriptenOptions: { processId: process.pid } }), phpVersion: '8.3',
+  createPhpRuntime: () => loadNodeRuntime('8.5', { emscriptenOptions: { processId: process.pid } }), phpVersion: '8.5',
   siteUrl: `${origin}/scope:joebailey-cms/`, documentRoot: '/wordpress', maxPhpInstances: 1,
   wordPressZip: new File([await readFile(join(assets, 'assets', core))], 'wordpress.tar.zst'),
   sqliteIntegrationPluginZip: new File([await readFile(join(root, 'node_modules/@wp-playground/cli/sqlite-database-integration.zip'))], 'sqlite.zip'),

@@ -14,10 +14,18 @@ const coreFile = new File([await readFile(join(assets, 'assets', core))], 'wordp
 const sqliteFile = new File([await readFile(join(root, 'node_modules/@wp-playground/cli/sqlite-database-integration.zip'))], 'sqlite.zip');
 const bridge = await readFile(join(root, 'wordpress/joebailey-cms.php'), 'utf8');
 const migration = await readFile(join(root, 'wordpress/migration.php'), 'utf8');
+async function installHeadlessTheme(site) {
+  site.php.mkdir('/wordpress/wp-content/themes/joebailey-headless');
+  for (const name of ['style.css', 'functions.php', 'index.php']) {
+    site.php.writeFile(`/wordpress/wp-content/themes/joebailey-headless/${name}`, await readFile(join(root, 'wordpress/themes/joebailey-headless', name)));
+  }
+  await site.run("wp_clean_themes_cache(); switch_theme('joebailey-headless');");
+  site.php.rmdir('/wordpress/wp-content/themes/twentytwentyfive', { recursive: true });
+}
 async function boot() {
   let php;
   const handler = await bootWordPressAndRequestHandler({
-    createPhpRuntime: () => loadNodeRuntime('8.3', { emscriptenOptions: { processId: process.pid } }), phpVersion: '8.3',
+    createPhpRuntime: () => loadNodeRuntime('8.5', { emscriptenOptions: { processId: process.pid } }), phpVersion: '8.5',
     siteUrl: 'https://cms.example.test/scope:joebailey-cms/', documentRoot: '/wordpress',
     wordPressZip: coreFile, sqliteIntegrationPluginZip: sqliteFile, maxPhpInstances: 1,
     constants: { DISABLE_WP_CRON: true },
@@ -52,6 +60,13 @@ try {
   assert.equal(captured.records.length, 2);
   assert.equal(captured.records.some(post => post.title.rendered === 'Draft fixture'), false);
   assert.deepEqual(captured.records.find(post => post.section === 'projects').acf.icons, ['PHP', 'Vue']);
+  await installHeadlessTheme(first);
+  const headless = JSON.parse(await first.run("echo wp_json_encode(array('theme' => get_stylesheet(), 'thumbnails' => current_theme_supports('post-thumbnails'), 'wide' => current_theme_supports('align-wide'), 'capture' => joebailey_cms_capture(array('blogCategory' => 'blog', 'projectsCategory' => 'projects'))), JSON_THROW_ON_ERROR);"));
+  assert.equal(headless.theme, 'joebailey-headless');
+  assert.equal(headless.thumbnails, true);
+  assert.equal(headless.wide, true);
+  assert.deepEqual(headless.capture.records, captured.records, 'Switching themes must preserve rendered published output and project fields');
+  assert.deepEqual(headless.capture.files.filter(file => file.path.startsWith('themes/')).map(file => file.path).sort(), ['themes/joebailey-headless/functions.php', 'themes/joebailey-headless/index.php', 'themes/joebailey-headless/style.css']);
   const backup = first.php.readFileAsBuffer('/tmp/joebailey-cms.sqlite');
   assert.equal(new TextDecoder().decode(backup.subarray(0, 16)), 'SQLite format 3\0');
 
@@ -59,6 +74,7 @@ try {
   console.log('Restoring the checkpoint into a fresh WordPress runtime…');
   const second = await boot();
   try {
+    await installHeadlessTheme(second);
     const target = (await second.run('echo joebailey_cms_database_path();')).trim();
     second.php.writeFile(target, backup);
     for (const suffix of ['-wal', '-shm']) if (second.php.fileExists(target + suffix)) second.php.unlink(target + suffix);
@@ -67,6 +83,7 @@ try {
     assert.equal(restored.setting, 'restored-setting');
     assert.equal(restored.admins, 1);
     assert.equal(restored.records.length, 2);
+    assert.equal((await second.run('echo get_stylesheet();')).trim(), 'joebailey-headless');
     second.php.writeFile('/tmp/joebailey-cms-login', 'one-time-login');
     const login = await second.handler.request({ url: '/?joebailey_cms_login=one-time-login' });
     assert.equal(login.httpStatusCode, 200);
@@ -98,6 +115,7 @@ try {
     const duplicateCount = await second.run("echo count(get_posts(array('name' => 'imported-901')));");
     assert.equal(duplicateCount.trim(), '1');
     console.log('PASS: full database restore preserves drafts, settings, users, rendered posts and project fields; restored WordPress admin login works.');
+    console.log('PASS: minimal three-file theme preserves rendered content, featured-image support and wide blocks after snapshot restoration.');
     console.log('PASS: migration preserves dates, drafts, serialized and repeated custom fields, attachment mappings and media URLs; reimport is idempotent.');
   } finally { second.php.exit(); }
 } finally { first.php.exit(); }

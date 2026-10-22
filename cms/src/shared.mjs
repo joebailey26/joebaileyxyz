@@ -23,7 +23,7 @@ export function safePath(path) {
 
 export function validateManifest(manifest) {
   assert(manifest && manifest.version === 1, 'Unsupported snapshot version');
-  assert(manifest.runtime === '3.1.60' && manifest.php === '8.3', 'Unsupported runtime');
+  assert(manifest.runtime === '3.1.60' && ['8.3', '8.5'].includes(manifest.php), 'Unsupported runtime');
   assert(typeof manifest.wordpress === 'string' && /^\d+\.\d+(\.\d+)?$/.test(manifest.wordpress), 'Missing WordPress version');
   assert(Number.isSafeInteger(manifest.databaseSize) && manifest.databaseSize > 0 && manifest.databaseSize <= MAX_DATABASE_SIZE, 'Database exceeds 128 MiB limit');
   assert(HASH.test(manifest.databaseHash), 'Invalid database checksum');

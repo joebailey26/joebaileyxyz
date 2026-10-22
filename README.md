@@ -17,7 +17,7 @@ npx netlify link
 
 ## Development
 
-The optional browser-based WordPress CMS, Cloudflare setup, migration and Netlify feed integration are documented in [cms/README.md](cms/README.md).
+The browser-based WordPress CMS integration is documented in [cms/README.md](cms/README.md).
 
 ```sh
 yarn dev
@@ -122,21 +122,21 @@ Colors should use names where possible rather than hex values
 
 * chore: Regular code maintenance.
 
-2. Separate the subject from the body with a blank line
+1. Separate the subject from the body with a blank line
 
-3. Your commit message should not contain any whitespace errors
+2. Your commit message should not contain any whitespace errors
 
-4. Remove unnecessary punctuation marks
+3. Remove unnecessary punctuation marks
 
-5. Do not end the subject line with a period
+4. Do not end the subject line with a period
 
-6. Capitalize the subject line and each paragraph
+5. Capitalize the subject line and each paragraph
 
-7. Use the body to explain what changes you have made and why you made them.
+6. Use the body to explain what changes you have made and why you made them.
 
-8. Do not assume the reviewer understands what the original problem was, ensure you add it.
+7. Do not assume the reviewer understands what the original problem was, ensure you add it.
 
-9. Do not think your code is self-explanatory
+8. Do not think your code is self-explanatory
 
 #### Command Line
 

@@ -19,7 +19,17 @@ The runtime command downloads the official Playground artifact identified in `ru
 
 Open the localhost address printed by Wrangler. `.dev.vars` enables a localhost-only authentication bypass. It cannot bypass Access on a deployed hostname. Use a local build token of at least 32 random characters. Never put production secrets in tracked files.
 
-The upstream artifact includes WordPress 7.0.7, PHP 8.3, its bundled SQLite integration, and Playground 3.1.60. These versions are restored together; changing WordPress or the SQLite driver requires a tested snapshot upgrade, rather than silently loading a newer runtime.
+The upstream artifact includes WordPress 7.0.7, PHP 8.5 (older 8.3 snapshots restore unchanged; the database is PHP-version independent), its bundled SQLite integration, and Playground 3.1.60. These versions are restored together; changing WordPress or the SQLite driver requires a tested snapshot upgrade, rather than silently loading a newer runtime.
+
+The CMS uses the bundled **Joe Bailey Headless** theme: three files, 523 bytes, with featured-image, wide-block and responsive-embed support. It loads no fonts, patterns, scripts or stylesheets and serves no WordPress frontend; Nuxt remains the public website. Opening an older snapshot skips Twenty Twenty-Five's 235 theme files (8.6 MB), installs the minimal theme and marks the migration pending for the next two-minute or manual sync. The existing 390-file snapshot becomes 158 files after synchronization. The pinned upstream core archive is unchanged; these savings apply to snapshot-file restoration.
+
+Historical snapshots and downloadable backups remain complete, including their original theme files. Editing or importing a backup migrates the retired theme locally; the previous committed revision stays available until the new checkpoint succeeds. Posts, settings, media, project fields and theme-specific options remain in the database.
+
+The build adapts the pinned, bundled service worker to a classic script and changes its registration to match. Chrome omits cookies on module service-worker script requests, causing Access to redirect them to login; classic script requests include the cookie. This compatibility step keeps all runtime assets behind Access. The build fails if the expected upstream registration changes, so runtime upgrades require reviewing this adaptation.
+
+During startup the editor shows the current stage, runtime download progress, database chunks, file counts and elapsed time. The progress bar describes the current stage, rather than an estimated overall completion percentage. After 30 seconds without progress it offers a reload. Startup registration failures and runtime timeouts appear as errors and release the lease. Files download six at a time; restore creates all required directories in one PHP call before writing the verified files.
+
+The service worker bypasses Playground's offline cache for CMS APIs, the editor shell, media and Access routes. Activation removes any such responses cached by older builds. Runtime assets retain their offline cache. Startup activates the current service worker before reading status or acquiring a lease, so refreshing after a checkpoint compares current revisions. IndexedDB recovery data is unaffected.
 
 ## Cloudflare deployment
 
@@ -73,10 +83,10 @@ Every CMS build fetches `/api/content/manifest` once, then loads `/api/content/p
 
 ## Synchronization and recovery
 
-- Database changes are detected through WordPress's query filter and checkpointed after a short delay. During capture the bridge briefly rejects other WordPress requests with a retryable 503, so database/file copies correspond to a consistent editor state. Each checkpoint stores the full SQLite DB in 256 KiB D1 chunks with SHA-256 checksums; restore verifies the complete database hash.
+- Automatic synchronization checks for pending changes every two minutes while the editor is open. Individual WordPress actions do not trigger a cloud sync; **Sync now** and **Close editor** still sync immediately. The pending status and navigation warning cover changes waiting for the next sync. During capture the bridge briefly rejects other WordPress requests with a retryable 503, so database/file copies correspond to a consistent editor state. Each checkpoint stores the full SQLite DB in 256 KiB D1 chunks with SHA-256 checksums; restore verifies the complete database hash.
 - Files are addressed by SHA-256 in R2. Uploads have stable public media URLs; plugins/themes have authenticated file endpoints. Executable/unsupported upload formats download as attachments with a restrictive CSP. The existing Nuxt image/video processing remains in place.
 - A local IndexedDB recovery checkpoint is persisted before upload. A failed upload never activates partial data. Cloud activation is a guarded D1 transaction that requires the current lease and expected base revision. Losing the lease pauses editing; recovery cannot overwrite a newer cloud revision.
-- One browser session holds a two-minute lease, renewed every 30 seconds. **Close editor** syncs and releases it. After an abrupt close, wait for expiry before opening another device. Last synced refers to Cloudflare persistence, not a completed Netlify deployment. Pending edits before a recovery checkpoint finishes are still browser-local; use **Sync now** and wait for success before leaving.
+- One browser session holds a two-minute lease, renewed every 30 seconds. The tab stores its lease secret in sessionStorage, so refreshing resumes immediately and rotates the secret to reject requests from the old document. A browser Web Lock prevents duplicated tabs from resuming the same secret concurrently. **Close editor** syncs and releases it. After an abrupt close, wait for expiry before opening another device. Last synced refers to Cloudflare persistence, not a completed Netlify deployment. Pending edits before a recovery checkpoint finishes are still browser-local; use **Sync now** and wait for success before leaving.
 - Keep the latest three completed database snapshots. **Saved versions → Download saved version** downloads any retained revision; **Download backup** captures current local work. Failed staging uploads are cleaned after one day once their lease is no longer current. R2 objects are retained so older deployed pages and recovery backups do not lose media; budget/clean them separately once deployments and backups no longer reference them.
 - A hash of published output controls builds. Draft-only saves do not request a new build. Publishing, modifying, deleting or unpublishing visible content queues the secret Netlify hook after commit. Failures remain retryable through the editor and a five-minute Worker cron; that cron retries builds and cleans snapshots, and does not run WordPress.
 - Scheduled WordPress publishing while the editor is closed is unsupported. WordPress cron is disabled. Publish manually. This is a single-editor CMS, without collaborative merging.
@@ -94,11 +104,15 @@ npm --prefix cms run build
 $env:PLAYWRIGHT_BROWSERS_PATH = "$PWD/cms/.cache/ms-playwright"
 node cms/node_modules/playwright/cli.js install chromium
 npm --prefix cms run test:browser
+# With the migrated staging snapshot and emulator running on port 8788:
+node cms/scripts/loading-browser.mjs
 # Read-only inspection of a generated Netlify preview:
 node cms/scripts/preview-smoke.mjs https://deploy-preview-149--joebailey.netlify.app
 ```
 
 The tests cover incomplete uploads, checksum failures, transaction rollback on lease loss, stale sessions, file privacy, auth boundaries, feed pagination, build retries, snapshot retention and MySQL/PHP metadata parsing. The PHP smoke check boots the pinned WordPress runtime twice and verifies restoration of drafts, settings, users, rendered content and project fields, plus HTTP login to the restored admin. The browser test requires the root Nuxt dependencies too (it uses the existing `sharp` image processor).
+
+`scripts/loading-browser.mjs` places a local cookie-gated proxy in front of the real emulator. It verifies that service-worker requests carry the authentication cookie, restore progress is visible, file downloads use bounded concurrency, refresh immediately resumes, duplicated tabs and other browser profiles remain excluded, old lease tokens cannot release the resumed session, and an authentication redirect releases a failed startup's lease and allows retrying. Screenshots and measured timings are written under the ignored `.cache` directory.
 
 `scripts/migration-browser.mjs` validates the real migration against an isolated local Worker at port 8788, compares source IDs/slugs/statuses, verifies every attachment and retained image size, restores into a second browser profile, and downloads `migration/verified-staging-snapshot.zip`. `--restore-only` verifies an existing local revision without importing again.
 

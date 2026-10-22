@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { zstdDecompressSync } from 'node:zlib';
 import { tarEntries } from './tar.mjs';
+import { prepareAccessCompatibleRuntime } from './runtime-compat.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'dist');
@@ -14,7 +15,7 @@ await cp(join(root, 'web/index.html'), join(output, 'index.html'));
 await cp(join(root, 'web/editor.css'), join(output, 'editor.css'));
 await cp(join(root, 'wordpress/joebailey-cms.php'), join(output, 'joebailey-cms.php'));
 await cp(join(root, 'wordpress/migration.php'), join(output, 'migration.php'));
-await build({ entryPoints: [join(root, 'web/editor.js')], outfile: join(output, 'editor.js'), bundle: true, format: 'esm', target: 'es2022', minify: false });
+await build({ entryPoints: [join(root, 'web/editor.js')], outfile: join(output, 'editor.js'), bundle: true, format: 'esm', target: 'es2022', minify: false, loader: { '.css': 'text', '.php': 'text' } });
 const metadata = await readFile(join(root, '.cache/runtime-path.json'), 'utf8').then(JSON.parse).catch(() => null);
 if (!metadata) {
   if (process.argv.includes('--production')) throw new Error('Pinned Playground runtime is missing. Run npm run runtime first.');
@@ -51,6 +52,7 @@ async function copyAssets(directory, prefix = '') {
   }
 }
 if (!reuseRuntime) await copyAssets(assets);
+await prepareAccessCompatibleRuntime(assets, output);
 await writeFile(join(output, 'runtime-objects.json'), JSON.stringify(objects));
 await writeFile(join(root, '.cache/runtime-objects.json'), JSON.stringify(objects, null, 2));
 const wordpress = lock.wordpressMajor;
@@ -60,5 +62,5 @@ const core = tarEntries(zstdDecompressSync(await readFile(join(assets, 'assets',
 const versionFile = [...core.entries()].find(([path]) => path.endsWith('wp-includes/version.php'))?.[1];
 const exactVersion = new TextDecoder().decode(versionFile).match(/\$wp_version\s*=\s*'([^']+)'/)?.[1];
 if (!exactVersion) throw new Error('Could not identify the pinned WordPress version');
-await writeFile(join(output, 'runtime.json'), JSON.stringify({ playground: lock.playground, wordpress: exactVersion, php: '8.3', coreFile: `assets/${coreFile}`, artifactSha256: lock.artifactSha256 }));
+await writeFile(join(output, 'runtime.json'), JSON.stringify({ playground: lock.playground, wordpress: exactVersion, php: '8.5', coreFile: `assets/${coreFile}`, artifactSha256: lock.artifactSha256 }));
 console.log(`CMS built with pinned Playground ${lock.playground}, WordPress ${wordpress}. ${Object.keys(objects).length} large runtime files require R2 upload.`);

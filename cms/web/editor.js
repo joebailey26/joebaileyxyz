@@ -1,17 +1,23 @@
 import { startPlaygroundWeb } from '@wp-playground/client';
+import { ProgressTracker } from '@php-wasm/progress';
 import { zipSync, unzipSync, strToU8, strFromU8 } from 'fflate';
 import { CHUNK_SIZE, sha256, validateManifest, safePath, rewriteRecords } from '../src/shared.mjs';
 import { recovery } from './recovery.js';
+import { HEADLESS_THEME, headlessThemeFiles, isRetiredThemeFile } from './headless-theme.js';
 
 const $ = id => document.getElementById(id);
 let client, lease, revision = null, config, busy = false, lostLease = false;
-let dirtyToken = '', checkpointTimer, renewTimer, pollTimer, pending;
+let dirtyToken = '', syncTimer, renewTimer, pollTimer, pending;
+let unsyncedChanges = false;
+let themeMigrationPending = false;
 let autoSyncPaused = false;
 let savedVersions = [];
+const leaseKey = 'joebailey-cms-lease';
+let releaseTab, loadingTimer, loadingStarted, lastProgress, loadingActive = false;
 const api = async (path, options = {}) => {
   const headers = new Headers(options.headers);
   if (lease) headers.set('X-CMS-Lease', lease);
-  const response = await fetch(path, { ...options, headers, cache: 'no-store', redirect: 'error' });
+  const response = await fetch(path, { signal: AbortSignal.timeout(60000), ...options, headers, cache: 'no-store', redirect: 'error' });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
     const error = Object.assign(new Error(body.error || `Request failed (${response.status})`), { status: response.status });
@@ -24,9 +30,73 @@ const send = async (path, body, method = 'POST') => (await api(path, { method, h
 const setStatus = message => { $('status').textContent = message; };
 const notice = message => { $('notice').textContent = message; $('notice').hidden = !message; };
 
+function showProgress(stage, detail = '', value) {
+  if (!loadingActive) return;
+  const changed = $('loading-stage').textContent !== stage || $('loading-detail').textContent !== detail || $('loading-progress').value !== value;
+  if (changed) lastProgress = Date.now();
+  $('loading-stage').textContent = stage;
+  $('loading-detail').textContent = detail;
+  if (Number.isFinite(value)) $('loading-progress').value = value;
+  else $('loading-progress').removeAttribute('value');
+}
+
+function startLoading() {
+  loadingActive = true;
+  loadingStarted = lastProgress = Date.now();
+  $('loading').hidden = false;
+  loadingTimer = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - loadingStarted) / 1000);
+    const idle = Math.floor((Date.now() - lastProgress) / 1000);
+    $('loading-time').textContent = `${elapsed}s elapsed · last progress ${idle}s ago`;
+    if (idle >= 30) {
+      $('loading-help').textContent = 'No progress for 30 seconds. Check your connection; if this continues, reload to resume your editing session.';
+      $('reload').hidden = false;
+    } else {
+      $('loading-help').textContent = 'The first visit downloads WordPress and PHP. Keep this tab open while your saved content is restored.';
+      $('reload').hidden = true;
+    }
+  }, 1000);
+}
+
+async function startupStep(promise, message, timeout = 120000) {
+  let timer;
+  try {
+    return await Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(message)), timeout); })]);
+  } finally { clearTimeout(timer); }
+}
+
+async function openingFailed(error) {
+  clearInterval(loadingTimer); clearInterval(renewTimer); clearInterval(pollTimer);
+  clearInterval(syncTimer);
+  loadingActive = false;
+  $('wordpress').hidden = true;
+  $('wordpress').src = 'about:blank';
+  for (const id of ['sync', 'backup', 'import', 'close']) $(id).disabled = true;
+  // Do not leave a failed boot renewing a lease indefinitely.
+  if (lease && !lostLease) await api('/api/editor/lease', { method: 'DELETE', allowConflict: true }).catch(() => {});
+  lease = null;
+  releaseTab?.();
+  $('loading').hidden = false;
+  $('loading-stage').textContent = 'Editor could not open';
+  $('loading-progress').hidden = true;
+  $('reload').hidden = false;
+  setStatus('Editor could not open');
+  notice(error.message);
+}
+
+async function claimTab() {
+  if (!navigator.locks) throw new Error('This browser does not support editing-session protection. Use a current version of Chrome, Edge, Firefox or Safari.');
+  await new Promise((resolve, reject) => {
+    navigator.locks.request('joebailey-cms-editor', { ifAvailable: true }, lock => {
+      if (!lock) { reject(new Error('The editor is already open in another tab. Close that tab and reload this one.')); return; }
+      return new Promise(release => { releaseTab = release; resolve(); });
+    }).catch(reject);
+  });
+}
+
 function freeze(message) {
   lostLease = true;
-  clearTimeout(checkpointTimer);
+  clearInterval(syncTimer);
   clearInterval(renewTimer);
   $('sync').disabled = true;
   document.body.classList.add('busy');
@@ -67,7 +137,7 @@ async function captureLocked() {
   const records = rewriteRecords(exported, files, location.origin);
   const chunks = [];
   for (let position = 0; position < database.length; position += CHUNK_SIZE) chunks.push(await sha256(database.subarray(position, position + CHUNK_SIZE)));
-  const manifest = validateManifest({ version: 1, runtime: '3.1.60', php: '8.3', wordpress: exported.wordpress, databaseSize: database.length, databaseHash: await sha256(database), chunks, files: files.map(file => ({ path: file.path, hash: file.hash, size: file.size, kind: file.kind, type: file.type })), blogCategory: config.blogCategory, projectsCategory: config.projectsCategory, counts: Object.fromEntries(['blog', 'projects'].map(section => [section, records.filter(post => post.section === section).length])) });
+  const manifest = validateManifest({ version: 1, runtime: '3.1.60', php: '8.5', wordpress: exported.wordpress, databaseSize: database.length, databaseHash: await sha256(database), chunks, files: files.map(file => ({ path: file.path, hash: file.hash, size: file.size, kind: file.kind, type: file.type })), blogCategory: config.blogCategory, projectsCategory: config.projectsCategory, counts: Object.fromEntries(['blog', 'projects'].map(section => [section, records.filter(post => post.section === section).length])) });
   return { manifest, database, files, records, baseRevision: revision, dirtyToken: exported.dirtyToken };
 }
 
@@ -104,6 +174,8 @@ async function checkpoint() {
     const committed = await send(`${base}/commit`, {});
     revision = committed.revision;
     dirtyToken = pending.dirtyToken;
+    unsyncedChanges = false;
+    themeMigrationPending = false;
     await recovery('delete');
     pending = null;
     notice('');
@@ -120,41 +192,92 @@ async function checkpoint() {
   }
 }
 
+async function prepareHeadlessTheme(manifest) {
+  const directory = `/wordpress/wp-content/themes/${HEADLESS_THEME}`;
+  await client.mkdir(directory).catch(() => {});
+  let changedFiles = false;
+  for (const [name, contents] of Object.entries(headlessThemeFiles)) {
+    const bytes = strToU8(contents);
+    const saved = manifest?.files.find(file => file.path === `themes/${HEADLESS_THEME}/${name}`);
+    if (manifest && saved?.hash !== await sha256(bytes)) changedFiles = true;
+    await client.writeFile(`${directory}/${name}`, bytes);
+  }
+  const switched = await php(`wp_clean_themes_cache();
+    if (get_stylesheet() !== ${phpString(HEADLESS_THEME)} || get_template() !== ${phpString(HEADLESS_THEME)}) {
+      switch_theme(${phpString(HEADLESS_THEME)}); echo 'switched';
+    }`);
+  // WordPress's core bundle includes this default theme on every boot. Its files
+  // are disposable here; historical snapshots and backups remain unchanged.
+  const retired = '/wordpress/wp-content/themes/twentytwentyfive';
+  if (await client.isDir(retired)) await client.rmdir(retired, { recursive: true });
+  if (switched.trim() === 'switched' || changedFiles || manifest?.files.some(file => isRetiredThemeFile(file.path))) {
+    themeMigrationPending = true;
+    unsyncedChanges = true;
+    await client.writeFile('/tmp/joebailey-cms-dirty', crypto.randomUUID());
+  }
+}
+
 async function restore(checkpoint) {
+  showProgress('Restoring WordPress files', 'Verifying the saved database…');
   validateManifest(checkpoint.manifest);
   if (checkpoint.database.length !== checkpoint.manifest.databaseSize) throw new Error('Database backup size mismatch');
   if (await sha256(checkpoint.database) !== checkpoint.manifest.databaseHash) throw new Error('Database backup checksum mismatch');
   const target = (await php('echo joebailey_cms_database_path();')).trim();
   // The snapshot is authoritative for user-owned files. Runtime-owned MU plugins remain pinned.
-  const keep = checkpoint.manifest.files.map(file => file.path);
+  const files = checkpoint.files.filter(file => !isRetiredThemeFile(file.path));
+  const keep = files.map(file => file.path);
   await php(`$keep = array_flip(json_decode(${phpString(JSON.stringify(keep))}, true)); foreach (array('uploads', 'plugins', 'themes', 'languages') as $dir) { $root = WP_CONTENT_DIR . '/' . $dir; if (!is_dir($root)) continue; $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST); foreach ($it as $file) { if ($file->isFile() && !isset($keep[substr($file->getPathname(), strlen(WP_CONTENT_DIR) + 1)])) unlink($file->getPathname()); } }`);
-  for (const file of checkpoint.files) {
+  const directories = [...new Set(files.map(file => {
+    if (!safePath(file.path)) throw new Error(`Invalid backup file: ${file.path}`);
+    return `/wordpress/wp-content/${file.path.slice(0, file.path.lastIndexOf('/'))}`;
+  }))];
+  const created = await client.run({ code: `<?php foreach (json_decode(${phpString(JSON.stringify(directories))}, true) as $dir) { if (!is_dir($dir) && !mkdir($dir, 0777, true)) throw new RuntimeException('Could not create backup directory'); }` });
+  if (created.exitCode !== 0) throw new Error('Could not prepare WordPress file directories');
+  let restored = 0;
+  for (const file of files) {
     if (!safePath(file.path) || file.bytes.length !== file.size || await sha256(file.bytes) !== file.hash) throw new Error(`Invalid backup file: ${file.path}`);
     const path = `/wordpress/wp-content/${file.path}`;
-    await client.mkdir(path.slice(0, path.lastIndexOf('/'))).catch(() => {});
-    // mkdirTree via PHP handles nested directories consistently across Playground versions.
-    await client.run({ code: `<?php if (!is_dir(${phpString(path.slice(0, path.lastIndexOf('/')))})) mkdir(${phpString(path.slice(0, path.lastIndexOf('/')))}, 0777, true);` });
     await client.writeFile(path, file.bytes);
+    showProgress('Restoring WordPress files', `${++restored}/${files.length} files · ${file.path}`, restored / files.length * 100);
   }
+  showProgress('Restoring the database', 'Applying the verified SQLite snapshot…');
   // Each PHP run closes its PDO connection. Replace the DB only between requests.
   await client.writeFile(target, checkpoint.database);
   for (const suffix of ['-wal', '-shm']) if (await client.fileExists(target + suffix)) await client.unlink(target + suffix);
+  await prepareHeadlessTheme(checkpoint.manifest);
   await php("wp_cache_flush(); wp_set_current_user(get_users(array('role' => 'administrator', 'number' => 1))[0]->ID);");
 }
 
-async function cloudCheckpoint(snapshot) {
+async function cloudCheckpoint(snapshot, progress = () => {}, { editing = false } = {}) {
   const manifest = validateManifest(snapshot.manifest);
   const database = new Uint8Array(manifest.databaseSize);
   for (let index = 0; index < manifest.chunks.length; index++) {
+    progress('Downloading the database', `Chunk ${index + 1}/${manifest.chunks.length}`, index / manifest.chunks.length * 100);
     const chunk = new Uint8Array(await (await api(`/api/editor/snapshots/${snapshot.id}/chunks/${index}`)).arrayBuffer());
     if (await sha256(chunk) !== manifest.chunks[index]) throw new Error('Cloud database chunk checksum mismatch');
     database.set(chunk, index * CHUNK_SIZE);
   }
-  const files = [];
-  for (const item of manifest.files) {
-    const bytes = new Uint8Array(await (await api(`/api/editor/files/${item.hash}`)).arrayBuffer());
-    files.push({ ...item, bytes });
-  }
+  // Backups fetch the complete historical revision. Editing upgrades only the
+  // retired default theme, avoiding its 235 individual R2 downloads.
+  const entries = editing ? manifest.files.filter(file => !isRetiredThemeFile(file.path)) : manifest.files;
+  const files = new Array(entries.length);
+  let next = 0, completed = 0, failed = false;
+  progress('Downloading saved files', `0/${files.length} files`, 0);
+  const downloadFiles = async () => {
+    try {
+      while (!failed && next < entries.length) {
+        const index = next++;
+        const item = entries[index];
+        const bytes = new Uint8Array(await (await api(`/api/editor/files/${item.hash}`)).arrayBuffer());
+        if (bytes.length !== item.size || await sha256(bytes) !== item.hash) throw new Error(`Cloud file checksum or size mismatch: ${item.path}`);
+        files[index] = { ...item, bytes };
+        progress('Downloading saved files', `${++completed}/${files.length} files · ${item.path}`, completed / files.length * 100);
+      }
+    } catch (error) { failed = true; throw error; }
+  };
+  const downloads = await Promise.allSettled(Array.from({ length: Math.min(6, files.length) }, downloadFiles));
+  const failure = downloads.find(result => result.status === 'rejected');
+  if (failure) throw failure.reason;
   return { manifest, database, files, baseRevision: snapshot.id };
 }
 
@@ -184,28 +307,64 @@ async function refreshBuild() {
   if (status.snapshot?.build_error) notice(`Content is synced. Website rebuild: ${status.snapshot.build_error}`);
 }
 
+async function prepareBrowserRuntime() {
+  showProgress('Checking browser support', 'Registering the WordPress service worker…');
+  if (!navigator.serviceWorker) throw new Error('WordPress requires service-worker support and a secure browser connection.');
+  try {
+    await startupStep((async () => {
+      const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/', type: 'classic', updateViaCache: 'none' });
+      // register() can return an existing registration even when its update fails.
+      // Await update explicitly so an authentication redirect is always visible.
+      await registration.update();
+      const worker = registration.installing || registration.waiting || registration.active;
+      if (worker && worker.state !== 'activated') {
+        await new Promise((resolve, reject) => {
+          worker.addEventListener('statechange', () => {
+            if (worker.state === 'activated') resolve();
+            if (worker.state === 'redundant') reject(new Error('The WordPress service worker could not activate'));
+          });
+        });
+      }
+    })(), 'The WordPress service-worker request timed out. Reload to retry.', 30000);
+  } catch (error) {
+    throw new Error(`WordPress could not start its service worker: ${error.message}. If the request was redirected, reopen the CMS login and try again.`);
+  }
+}
+
 async function boot(snapshot, local) {
+  if (!loadingActive) startLoading();
   setStatus('Loading WordPress…');
   if (snapshot?.committed_at) $('last-synced').textContent = `Last synced ${new Date(snapshot.committed_at * 1000).toLocaleString('en-GB')}`;
   const runtime = await (await api('/runtime.json')).json();
   if (snapshot && snapshot.manifest.wordpress !== runtime.wordpress) throw new Error('The saved database requires a different WordPress runtime. Restore the matching pinned runtime before editing.');
-  client = await startPlaygroundWeb({
+  const progressTracker = new ProgressTracker();
+  progressTracker.addEventListener('progress', event => showProgress('Starting WordPress', event.detail.caption || 'Downloading PHP and preparing WordPress…', event.detail.progress));
+  showProgress('Starting WordPress', 'Downloading PHP and preparing WordPress…');
+  client = await startupStep(startPlaygroundWeb({
     iframe: $('wordpress'), remoteUrl: `${location.origin}/remote.html`, scope: 'joebailey-cms',
-    blueprint: { landingPage: '/', preferredVersions: { php: '8.3', wp: runtime.wordpress.split('.').slice(0, 2).join('.') }, login: false, features: { networking: false }, constants: { DISABLE_WP_CRON: true, WP_AUTO_UPDATE_CORE: false } }
-  });
+    progressTracker, detailedProgressCaptions: true,
+    blueprint: { landingPage: '/', preferredVersions: { php: '8.5', wp: runtime.wordpress.split('.').slice(0, 2).join('.') }, login: false, features: { networking: false }, constants: { DISABLE_WP_CRON: true, WP_AUTO_UPDATE_CORE: false } }
+  }), 'WordPress startup did not finish within two minutes. Reload to retry; your committed cloud snapshot is safe.');
+  showProgress('Preparing saved content', 'Installing the CMS bridge…');
   await client.mkdir('/wordpress/wp-content/mu-plugins').catch(() => {});
   await client.writeFile('/wordpress/wp-content/mu-plugins/joebailey-cms.php', await (await api('/joebailey-cms.php')).text());
-  if (snapshot) await restore(local || await cloudCheckpoint(snapshot));
+  if (snapshot) await restore(local || await cloudCheckpoint(snapshot, showProgress, { editing: true }));
   else {
     await php(`foreach (array(${phpString(config.blogCategory)}, ${phpString(config.projectsCategory)}) as $slug) { if (!get_term_by('slug', $slug, 'category')) wp_insert_term(ucfirst($slug), 'category', array('slug' => $slug)); }`);
+    await prepareHeadlessTheme();
   }
   // Existing installs may have a different administrator username; authenticate locally.
+  showProgress('Opening WordPress admin', 'Signing in to your restored site…');
   await php("$users = get_users(array('role' => 'administrator', 'number' => 1)); if (!$users) throw new RuntimeException('No WordPress administrator in backup'); wp_set_auth_cookie($users[0]->ID, true);");
   const loginToken = crypto.randomUUID();
   await client.writeFile('/tmp/joebailey-cms-login', loginToken);
   const loggedIn = await client.request({ url: `/?joebailey_cms_login=${loginToken}` });
   if (loggedIn.httpStatusCode !== 200) throw new Error('Could not authenticate to restored WordPress');
   await client.goTo('/wp-admin/edit.php');
+  if (lostLease) throw new Error('The editing lease was lost during startup. Reload to retry.');
+  loadingActive = false;
+  clearInterval(loadingTimer);
+  $('loading').hidden = true;
   $('wordpress').hidden = false;
   $('backup').disabled = false;
   $('close').disabled = false;
@@ -213,22 +372,44 @@ async function boot(snapshot, local) {
   $('sync').disabled = false;
   setStatus(local ? 'Local changes restored — sync to save to Cloudflare' : 'Ready');
   dirtyToken = (await client.fileExists('/tmp/joebailey-cms-dirty')) ? await client.readFileAsText('/tmp/joebailey-cms-dirty') : '';
-  if (local) dirtyToken = '';
+  if (local || themeMigrationPending) dirtyToken = '';
+  unsyncedChanges = Boolean(local) || themeMigrationPending;
+  const detectChanges = async () => {
+    const token = await client.fileExists('/tmp/joebailey-cms-dirty') ? await client.readFileAsText('/tmp/joebailey-cms-dirty') : '';
+    unsyncedChanges = token !== dirtyToken || Boolean(pending);
+    return unsyncedChanges;
+  };
   pollTimer = setInterval(async () => {
     if (busy || lostLease || autoSyncPaused) return;
     try {
-      const token = await client.fileExists('/tmp/joebailey-cms-dirty') ? await client.readFileAsText('/tmp/joebailey-cms-dirty') : '';
-      if (token !== dirtyToken) { clearTimeout(checkpointTimer); checkpointTimer = setTimeout(checkpoint, 1500); }
+      if (await detectChanges() && !pending) setStatus('Changes pending · automatic sync every 2 minutes');
     } catch (error) { notice(error.message); }
   }, 3000);
+  syncTimer = setInterval(async () => {
+    if (busy || lostLease || autoSyncPaused) return;
+    try { if (await detectChanges()) await checkpoint(); }
+    catch (error) { notice(error.message); }
+  }, 120000);
   await refreshBuild();
 }
 
 async function openEditor() {
+  await claimTab();
+  // If runtime validation fails during refresh, release this tab's previous
+  // lease too. The tab lock prevents a duplicate tab from releasing it.
+  lease = sessionStorage.getItem(leaseKey);
+  startLoading();
+  // Activate the current cache policy before any status/lease request. Older
+  // Playground versions may have cached the CMS shell and API responses.
+  await prepareBrowserRuntime();
   let status = await (await api('/api/editor/status')).json();
   config = status.config;
-  const acquired = await send('/api/editor/lease', {});
+  // sessionStorage belongs to this tab and survives refresh. A Web Lock prevents
+  // duplicated tabs (which can inherit sessionStorage) from resuming concurrently.
+  const previousLease = lease;
+  const acquired = await (await api('/api/editor/lease', { method: 'POST', headers: previousLease ? { 'X-CMS-Lease': previousLease } : {}, body: '{}', allowConflict: true })).json();
   lease = acquired.token;
+  sessionStorage.setItem(leaseKey, lease);
   revision = acquired.revision;
   status = await (await api('/api/editor/status')).json();
   if (status.revision !== revision) throw new Error('Cloud revision changed while opening the editor. Reload to retry.');
@@ -238,13 +419,16 @@ async function openEditor() {
   }, 30000);
   const local = await recovery('get');
   if (local) {
+    loadingActive = false;
+    clearInterval(loadingTimer);
+    $('loading').hidden = true;
     pending = local;
     $('recovery').hidden = false;
     $('recover').disabled = local.baseRevision !== revision;
     setStatus('Local recovery available');
-    $('recover').onclick = async () => { $('recovery').hidden = true; await boot({ manifest: local.manifest }, local); };
+    $('recover').onclick = async () => { $('recovery').hidden = true; await boot({ manifest: local.manifest }, local).catch(openingFailed); };
     $('download-recovery').onclick = () => download(local);
-    $('discard-recovery').onclick = async () => { await recovery('delete'); pending = null; $('recovery').hidden = true; await boot(status.snapshot); };
+    $('discard-recovery').onclick = async () => { await recovery('delete'); pending = null; $('recovery').hidden = true; await boot(status.snapshot).catch(openingFailed); };
   } else await boot(status.snapshot);
 }
 
@@ -306,14 +490,23 @@ $('close').onclick = async () => {
   if (busy) return;
   await checkpoint();
   if (pending || lostLease) return;
-  clearInterval(pollTimer); clearInterval(renewTimer);
+  clearInterval(pollTimer); clearInterval(renewTimer); clearInterval(syncTimer);
   await api('/api/editor/lease', { method: 'DELETE' });
+  sessionStorage.removeItem(leaseKey);
+  lease = null;
+  releaseTab?.();
   $('wordpress').hidden = true;
   $('close').disabled = true; $('sync').disabled = true; $('backup').disabled = true;
   setStatus('Editor closed. Reload to open again.');
 };
 window.addEventListener('beforeunload', event => {
-  if (busy || pending) { event.preventDefault(); event.returnValue = ''; }
+  if (busy || pending || unsyncedChanges) { event.preventDefault(); event.returnValue = ''; }
 });
 
-openEditor().catch(error => { setStatus('Editor could not open'); notice(error.message); });
+$('reload').onclick = () => location.reload();
+window.addEventListener('pagehide', () => {
+  clearInterval(renewTimer); clearInterval(pollTimer); clearInterval(syncTimer);
+  releaseTab?.();
+});
+window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });
+openEditor().catch(openingFailed);

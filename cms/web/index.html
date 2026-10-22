@@ -20,6 +20,14 @@
     <button id="close" disabled>Close editor</button>
   </header>
   <aside id="notice" hidden role="alert"></aside>
+  <section id="loading" aria-labelledby="loading-stage">
+    <h1 id="loading-stage">Opening editor…</h1>
+    <progress id="loading-progress" aria-labelledby="loading-stage" max="100"></progress>
+    <p id="loading-detail"></p>
+    <p id="loading-time" aria-live="off"></p>
+    <p id="loading-help">The first visit downloads WordPress and PHP. Keep this tab open while your saved content is restored.</p>
+    <button id="reload" hidden>Reload editor</button>
+  </section>
   <section id="recovery" hidden>
     <h1>Unsynced work is saved on this device</h1>
     <p>Download a backup before discarding it. Restoring it is allowed only when the cloud revision has not changed.</p>

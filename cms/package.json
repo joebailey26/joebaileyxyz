@@ -19,6 +19,7 @@
     "deploy:feed": "wrangler deploy --config wrangler-feed.jsonc"
   },
   "dependencies": {
+    "@php-wasm/progress": "3.1.60",
     "@wp-playground/blueprints": "3.1.60",
     "@wp-playground/client": "3.1.60",
     "cheerio": "1.1.2",

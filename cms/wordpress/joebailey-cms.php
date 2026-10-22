@@ -172,3 +172,12 @@ function joebailey_cms_capture($config) {
         'dirtyToken' => file_exists('/tmp/joebailey-cms-dirty') ? file_get_contents('/tmp/joebailey-cms-dirty') : ''
     );
 }
+
+// Site Health: drop checks that cannot apply to WordPress running in a browser tab with no web server,
+// outbound networking, WP-Cron, page cache or updater. Core and plugin updates are managed by pinned runtime upgrades.
+add_filter('site_status_tests', function ($tests) {
+    foreach (array('background_updates', 'loopback_requests', 'https_status', 'dotorg_communication', 'authorization_header', 'scheduled_events', 'persistent_object_cache', 'page_cache', 'available_updates_disk_space') as $test) {
+        unset($tests['direct'][$test], $tests['async'][$test]);
+    }
+    return $tests;
+});
