@@ -139,7 +139,7 @@
         </NuxtLink>
       </article>
     </div>
-    <HomeIcons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @iconClicked="iconScroll" />
+    <HomeIcons :items="items.length === 6 ? items.length + 1 : items.length" :current="current" @icon-clicked="iconScroll" />
   </div>
 </template>
 
