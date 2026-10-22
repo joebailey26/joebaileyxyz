@@ -173,8 +173,8 @@ footer {
         </div>
         <div class="block__description">
           <p>In a part-time capacity, I focused on higher-level technical initiatives while continuing my core responsibilities. I led the definition and technical breakdown of new features for internal CRM and CMS platforms, briefing backend developers and overseeing delivery.</p>
-          <br />
-          <br />
+          <br>
+          <br>
           <p>I managed critical infrastructure projects, including the migration of 1,400 domains from eNom to Cloudflare in response to a third-party outage, and supported the migration of the server stack from Rackspace to Azure.</p>
           <p>Alongside project delivery, I assessed team needs and implemented technical solutions to reduce operational friction, while ensuring thorough testing and stability across all internal systems.</p>
         </div>
