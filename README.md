@@ -19,11 +19,14 @@ yarn dev
 ## Build and deploy
 
 ```sh
-yarn generate   # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
-yarn deploy     # generate, then wrangler deploy
+yarn generate     # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
+yarn build        # generate, then update the Algolia search index
+yarn deploy       # build, then wrangler deploy
 ```
 
-Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch, with build command `yarn generate` and deploy command `npx wrangler deploy`. Set `CMS_API_URL=https://cms.joebailey.xyz` and `CMS_BUILD_TOKEN` as build variables/secrets. The site is served by the `joebailey` Worker ([wrangler.jsonc](wrangler.jsonc)) using static assets; `static/_headers` and `static/_redirects` carry headers and redirects, and `worker/index.mjs` handles `POST /api/contact` through Cloudflare Email Routing (`send_email` binding; enable Email Routing and verify `joe@joebailey.xyz` as a destination).
+Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch, with build command `yarn build` and deploy command `npx wrangler deploy`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `ALGOLIA_ADMIN_API_KEY` as build variables/secrets.
+
+`scripts/algolia-index.mjs` replaces the old Netlify crawler: it reads the generated pages in `dist` and replaces the records in the Algolia index the search box queries. It only writes when `WORKERS_CI_BRANCH` is `master` (or `ALGOLIA_INDEX=1`); `yarn search:index --dry-run` prints the records without contacting Algolia. The site is served by the `joebailey` Worker ([wrangler.jsonc](wrangler.jsonc)) using static assets; `static/_headers` and `static/_redirects` carry headers and redirects, and `worker/index.mjs` handles `POST /api/contact` through Cloudflare Email Routing (`send_email` binding; enable Email Routing and verify `joe@joebailey.xyz` as a destination).
 
 ## Visual Style Guide
 

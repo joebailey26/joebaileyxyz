@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nuxt",
     "start": "nuxt start",
-    "deploy": "yarn generate && wrangler deploy",
+    "search:index": "node scripts/algolia-index.mjs",
+    "build": "yarn generate && yarn search:index",
+    "deploy": "yarn build && wrangler deploy",
     "generate": "nuxt generate --modern --quiet --fail-on-error",
     "cms:dev": "npm --prefix cms run dev",
     "cms:test": "npm --prefix cms test",
