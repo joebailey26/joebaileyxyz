@@ -16,6 +16,7 @@
     "cms:build": "npm --prefix cms run build",
     "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "fix:scripts": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint:styles": "stylelint \"**/*.{vue,scss}\"",
     "fix:styles": "stylelint \"**/*.{vue,scss}\" --fix"
   },

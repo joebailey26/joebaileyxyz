@@ -7,13 +7,13 @@ export default class HandleExternalImage {
   constructor (externalImgUrl, outputDirectory, outputFileNameWithoutExtension = null, width = null, height = null, alt = '') {
     this.externalImgUrl = externalImgUrl
     this.outputDirectory = outputDirectory
-    this.outputFileName = encodeURIComponent(outputFileNameWithoutExtension ? outputFileNameWithoutExtension + '.png' : path.basename(externalImgUrl)).toLowerCase()
+    this.outputFileName = encodeURIComponent(outputFileNameWithoutExtension ? `${outputFileNameWithoutExtension}.png` : path.basename(externalImgUrl)).toLowerCase()
     this.outputFileExtension = path.extname(this.outputFileName)
     this.outputFileNameWithoutExtension = path.basename(this.outputFileName, this.outputFileExtension)
     this.pathToOutput = path.join(__dirname, '..', '..', '..', 'static', 'img', this.outputDirectory)
     this.fullOutputPath = path.join(this.pathToOutput, this.outputFileName)
-    this.fullOutputPathAvif = path.join(this.pathToOutput, this.outputFileNameWithoutExtension + '.avif')
-    this.fullOutputPathWebp = path.join(this.pathToOutput, this.outputFileNameWithoutExtension + '.webp')
+    this.fullOutputPathAvif = path.join(this.pathToOutput, `${this.outputFileNameWithoutExtension}.avif`)
+    this.fullOutputPathWebp = path.join(this.pathToOutput, `${this.outputFileNameWithoutExtension}.webp`)
     this.width = width
     this.height = height
     this.alt = alt
@@ -22,7 +22,7 @@ export default class HandleExternalImage {
   async resizeImage (input) {
     const fileExtension = path.extname(input)
     const fileNameWithoutExtension = encodeURIComponent(path.basename(input, fileExtension)).toLowerCase()
-    const resizedFilePath = path.join(this.pathToOutput, fileNameWithoutExtension + '_resized' + fileExtension)
+    const resizedFilePath = path.join(this.pathToOutput, `${fileNameWithoutExtension}_resized${fileExtension}`)
     if (!(fs.existsSync(resizedFilePath))) {
       if (this.width && this.height) {
         await sharp(input)

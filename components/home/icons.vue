@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     bubble (i) {
-      this.$emit('iconClicked', i)
+      this.$emit('icon-clicked', i)
     }
   }
 }

@@ -258,7 +258,7 @@ export default {
         this.form = {}
         this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
       } catch (e) {
-        this.submitted = e.toString() + ' Please try again.'
+        this.submitted = `${e.toString()} Please try again.`
       }
     }
   }
