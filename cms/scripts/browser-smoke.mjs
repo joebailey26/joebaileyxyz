@@ -110,6 +110,35 @@ try {
   assert.equal(restored.draft, 1);
   assert.equal(restored.setting, 'saved-from-first-browser');
   assert(restored.project);
+  console.log('Verifying saved uploads stay in R2 instead of downloading into the browser…');
+  const stored = await second.frame.evaluate(async () => {
+    const result = await window.playground.run({ code: `<?php define('JOEBAILEY_CMS_CHECKPOINT', true); require '/wordpress/wp-load.php';
+      $id = get_posts(array('post_type' => 'attachment', 'title' => 'Browser fixture', 'posts_per_page' => 1))[0]->ID; $file = get_attached_file($id);
+      echo wp_json_encode(array('onDisk' => file_exists($file), 'relative' => _wp_relative_upload_path($file), 'virtual' => array_keys(joebailey_cms_virtual()['files'])));` });
+    return JSON.parse(result.text);
+  });
+  assert.equal(stored.onDisk, false, 'Saved uploads must not be copied into the restored runtime');
+  assert(stored.virtual.includes(`uploads/${stored.relative}`));
+  const viaWordPress = await second.page.evaluate(async url => {
+    const response = await fetch(url);
+    return { ok: response.ok, redirected: response.redirected, type: response.headers.get('content-type'), bytes: Array.from(new Uint8Array(await response.arrayBuffer())) };
+  }, `${origin}/scope:joebailey-cms/wp-content/uploads/${stored.relative}`);
+  assert(viaWordPress.ok && viaWordPress.type === 'image/png', 'WordPress upload URLs must redirect to the R2 media endpoint');
+  assert.deepEqual(Buffer.from(viaWordPress.bytes), image);
+  console.log('Verifying an image edit downloads the original on demand…');
+  const requested = await second.frame.evaluate(async () => {
+    const result = await window.playground.run({ code: `<?php define('JOEBAILEY_CMS_CHECKPOINT', true); require '/wordpress/wp-load.php';
+      $id = get_posts(array('post_type' => 'attachment', 'title' => 'Browser fixture', 'posts_per_page' => 1))[0]->ID; echo joebailey_cms_require_media($id) ? 'ready' : 'missing';` });
+    return result.text;
+  });
+  assert.equal(requested, 'missing');
+  await second.page.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Original image ready'), null, { timeout: 20000 });
+  const materialized = await second.frame.evaluate(async () => {
+    const result = await window.playground.run({ code: `<?php define('JOEBAILEY_CMS_CHECKPOINT', true); require '/wordpress/wp-load.php';
+      $id = get_posts(array('post_type' => 'attachment', 'title' => 'Browser fixture', 'posts_per_page' => 1))[0]->ID; echo wp_json_encode(array(file_exists(get_attached_file($id)), joebailey_cms_require_media($id), count(joebailey_cms_virtual()['files'])));` });
+    return JSON.parse(result.text);
+  });
+  assert.deepEqual(materialized, [true, true, 0]);
   console.log('Verifying Sync now saves immediately between automatic intervals…');
   await second.frame.evaluate(async () => {
     await window.playground.run({ code: "<?php require '/wordpress/wp-load.php'; update_option('browser_restore_fixture', 'saved-manually');" });
@@ -121,5 +150,7 @@ try {
   await second.page.waitForFunction(() => document.querySelector('#status').textContent === 'Synced to Cloudflare');
   assert(Date.now() - manualStarted < 45000, 'Manual sync must not wait for the automatic interval');
   await second.page.screenshot({ path: join(root, '.cache/editor-restored.png'), fullPage: true });
+  const afterManual = await (await context.request.get(`${origin}/api/editor/status`)).json();
+  assert(afterManual.snapshot.manifest.files.some(file => file.path === `uploads/${stored.relative}` && file.kind === 'media'), 'Unopened uploads must stay in later manifests');
   console.log('PASS: two-minute automatic sync, immediate manual sync, save-then-refresh, fresh-browser restore, private draft, settings and project persistence.');
 } finally { await closeContext(); await browser.close(); }

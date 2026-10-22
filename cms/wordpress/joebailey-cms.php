@@ -14,6 +14,114 @@ if (file_exists('/tmp/joebailey-cms-lock') && !defined('JOEBAILEY_CMS_CHECKPOINT
     exit('Saving a consistent checkpoint. Retry this request in a moment.');
 }
 
+// Saved uploads are not copied into the browser on startup. The editor lists them in a map outside wp-content
+// (path => hash/size) and they remain in R2. The map never reaches a snapshot, but the manifest keeps its entries.
+define('JOEBAILEY_CMS_VIRTUAL', '/tmp/joebailey-cms-virtual.json');
+define('JOEBAILEY_CMS_WANTED', '/tmp/joebailey-cms-wanted');
+
+function joebailey_cms_virtual() {
+    $data = file_exists(JOEBAILEY_CMS_VIRTUAL) ? json_decode(file_get_contents(JOEBAILEY_CMS_VIRTUAL), true) : null;
+    return is_array($data) && is_array($data['files'] ?? null) ? array('origin' => (string) ($data['origin'] ?? ''), 'files' => $data['files']) : array('origin' => '', 'files' => array());
+}
+
+function joebailey_cms_media_url($origin, $hash, $name) {
+    return $origin . '/media/' . $hash . '/' . substr($hash, 0, 16) . '-' . rawurlencode($name);
+}
+
+// A missing upload falls through the static-file server into WordPress. Send the browser to the public,
+// content-addressed R2 endpoint, so editor screens, post content and srcset values need no URL rewriting.
+if (in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', array('GET', 'HEAD'), true) && !defined('JOEBAILEY_CMS_CHECKPOINT')) {
+    $joebailey_path = (string) parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    $joebailey_marker = strpos($joebailey_path, '/wp-content/uploads/');
+    if ($joebailey_marker !== false) {
+        $joebailey_relative = rawurldecode(substr($joebailey_path, $joebailey_marker + strlen('/wp-content/uploads/')));
+        $joebailey_virtual = joebailey_cms_virtual();
+        $joebailey_item = $joebailey_virtual['files']['uploads/' . $joebailey_relative] ?? null;
+        if ($joebailey_item && $joebailey_virtual['origin'] !== '' && preg_match('/^[a-f0-9]{64}$/', (string) ($joebailey_item['hash'] ?? '')) && !file_exists(WP_CONTENT_DIR . '/uploads/' . $joebailey_relative)) {
+            header('Location: ' . joebailey_cms_media_url($joebailey_virtual['origin'], $joebailey_item['hash'], basename($joebailey_relative)), true, 302);
+            exit;
+        }
+    }
+}
+
+// Deleted attachments must leave the manifest. Unlinking a virtual file is a no-op, so drop its map entry here.
+add_filter('wp_delete_file', function ($file) {
+    $uploads = trailingslashit(wp_get_upload_dir()['basedir']);
+    if (strpos($file, $uploads) === 0) {
+        $virtual = joebailey_cms_virtual();
+        $key = 'uploads/' . substr($file, strlen($uploads));
+        if (isset($virtual['files'][$key])) {
+            unset($virtual['files'][$key]);
+            file_put_contents(JOEBAILEY_CMS_VIRTUAL, json_encode($virtual));
+        }
+    }
+    return $file;
+});
+
+// Every upload file that belongs to an attachment, relative to wp-content.
+function joebailey_cms_attachment_paths($id) {
+    $uploads = trailingslashit(wp_get_upload_dir()['basedir']);
+    $relative = array();
+    foreach (array(get_attached_file($id, true), function_exists('wp_get_original_image_path') ? wp_get_original_image_path($id, true) : '') as $path) {
+        if ($path && strpos($path, $uploads) === 0) {
+            $relative[] = substr($path, strlen($uploads));
+        }
+    }
+    $meta = wp_get_attachment_metadata($id, true);
+    $directory = !empty($meta['file']) ? dirname($meta['file']) : '';
+    $names = array();
+    foreach ((array) ($meta['sizes'] ?? array()) as $size) {
+        $names[] = $size['file'] ?? '';
+    }
+    foreach ((array) get_post_meta($id, '_wp_attachment_backup_sizes', true) as $size) {
+        $names[] = is_array($size) ? ($size['file'] ?? '') : '';
+    }
+    $names[] = $meta['original_image'] ?? '';
+    foreach ($names as $name) {
+        if ($name !== '') {
+            $relative[] = ($directory !== '' && $directory !== '.' ? $directory . '/' : '') . $name;
+        }
+    }
+    return array_values(array_unique($relative));
+}
+
+// Image editing needs original pixels in the browser. PHP cannot fetch them, so request them from the editor,
+// which downloads the checksum-verified files and asks the user to retry.
+function joebailey_cms_require_media($id) {
+    $virtual = joebailey_cms_virtual();
+    $needed = array();
+    foreach (joebailey_cms_attachment_paths($id) as $relative) {
+        if (isset($virtual['files']['uploads/' . $relative])) {
+            $needed[] = 'uploads/' . $relative;
+        }
+    }
+    if (!$needed) {
+        return true;
+    }
+    file_put_contents(JOEBAILEY_CMS_WANTED, json_encode($needed));
+    return false;
+}
+
+const JOEBAILEY_CMS_DOWNLOADING = 'The original image is being downloaded from storage. Close the editor and open it again in a few seconds.';
+
+add_action('admin_init', function () {
+    if (!wp_doing_ajax()) {
+        return;
+    }
+    $action = $_REQUEST['action'] ?? '';
+    $id = (int) ($_REQUEST['postid'] ?? ($action === 'crop-image' ? ($_REQUEST['id'] ?? 0) : 0));
+    if ($id && in_array($action, array('image-editor', 'imgedit-preview', 'crop-image'), true) && !joebailey_cms_require_media($id)) {
+        wp_die(esc_html(JOEBAILEY_CMS_DOWNLOADING));
+    }
+});
+
+add_filter('rest_request_before_callbacks', function ($response, $handler, $request) {
+    if (preg_match('#^/wp/v2/media/(\d+)/edit$#', $request->get_route(), $match) && !joebailey_cms_require_media((int) $match[1])) {
+        return new WP_Error('joebailey_media_downloading', JOEBAILEY_CMS_DOWNLOADING, array('status' => 409));
+    }
+    return $response;
+}, 10, 3);
+
 add_action('init', function () {
     if (!isset($_GET['joebailey_cms_login'])) {
         return;
@@ -168,6 +276,7 @@ function joebailey_cms_capture($config) {
         'records' => $records,
         'uploadBase' => $uploads['baseurl'],
         'siteUrl' => site_url(),
+        'virtual' => joebailey_cms_virtual()['files'],
         'links' => $links,
         'dirtyToken' => file_exists('/tmp/joebailey-cms-dirty') ? file_get_contents('/tmp/joebailey-cms-dirty') : ''
     );
