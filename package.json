@@ -5,8 +5,9 @@
   "author": "Joe Bailey",
   "private": true,
   "scripts": {
-    "dev": "netlify dev",
-    "start": "nuxt",
+    "dev": "nuxt",
+    "start": "nuxt start",
+    "deploy": "yarn generate && wrangler deploy",
     "generate": "nuxt generate --modern --quiet --fail-on-error",
     "cms:dev": "npm --prefix cms run dev",
     "cms:test": "npm --prefix cms test",
@@ -22,7 +23,6 @@
     "@algolia/autocomplete-preset-algolia": "^1.19.4",
     "@algolia/autocomplete-theme-classic": "^1.19.4",
     "@algolia/client-search": "^4.25.3",
-    "@algolia/netlify-plugin-crawler": "^1.0.15",
     "@fontsource/rammetto-one": "^5.2.7",
     "@fontsource/recursive": "^5.2.8",
     "@fontsource/roboto": "^5.2.9",
@@ -38,7 +38,6 @@
     "ffmpeg-static": "^5.3.0",
     "fs": "^0.0.2",
     "he": "^1.2.0",
-    "netlify-plugin-cache": "^1.0.3",
     "node-gyp": "^10.3.1",
     "nuxt": "^2.17.3",
     "nuxt-component-date": "https://github.com/Galexia-Agency/nuxt-component-date.git#commit=21ef623712edf203291198a29e08d70a34b9cd03",
@@ -53,23 +52,20 @@
     "striptags": "^3.2.0"
   },
   "devDependencies": {
-    "@netlify/plugin-sitemap": "^0.8.1",
     "@nuxt/typescript-build": "^3.0.2",
     "@nuxtjs/eslint-module": "^3.1.0",
     "@nuxtjs/stylelint-module": "^4.2.2",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.0",
     "eslint-config-galexia": "https://github.com/Galexia-Agency/eslint-config.git#commit=a23a23534644dce9c1b2b97a41f1917e885aa532",
-    "netlify-cli": "^23.13.1",
-    "netlify-plugin-checklinks": "^4.1.1",
-    "netlify-plugin-submit-sitemap": "^0.4.0",
     "postcss": "^8.5.6",
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "preact": "^10.28.1",
     "stylelint": "^15.11.0",
     "stylelint-config-galexia": "https://github.com/Galexia-Agency/stylelint-config.git#commit=861ee9c7f547f05547658dd78de8519e80c9a23f",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "wrangler": "4.151.3"
   },
   "browserslist": [
     "last 5 versions and not ie <= 11 and > 0.2% and not dead and not op_mini all"

@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joebailey",
+  "account_id": "8259f9bfa45a74a587d6a90822de442d",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-10-22",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "routes": [
+    { "pattern": "joebailey.xyz", "custom_domain": true },
+    { "pattern": "www.joebailey.xyz", "custom_domain": true }
+  ],
+  "send_email": [{ "name": "CONTACT_EMAIL", "destination_address": "joe@joebailey.xyz" }],
+  "vars": { "CONTACT_FROM": "contact@joebailey.xyz" }
+}
