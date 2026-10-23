@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-@import '~assets/scss/mixins';
+@import '~/assets/scss/mixins';
 .items {
   @media (max-width: 768px) {
     margin-bottom: 50px

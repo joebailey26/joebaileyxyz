@@ -1,5 +1,5 @@
 <style lang="scss">
-@import '~assets/scss/mixins';
+@import '~/assets/scss/mixins';
 .contact-methods {
   text-align: center;
   :any-link,

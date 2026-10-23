@@ -1,5 +1,5 @@
 <style lang="scss">
-@import '~assets/scss/mixins';
+@import '~/assets/scss/mixins';
 footer {
   padding-top: 30px;
   padding-bottom: 15px

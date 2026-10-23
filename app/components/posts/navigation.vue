@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-@import '~assets/scss/mixins';
+@import '~/assets/scss/mixins';
 .navigation-wrapper {
   display: flex;
   flex-wrap: wrap;
