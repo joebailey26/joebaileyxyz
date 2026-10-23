@@ -3,8 +3,8 @@ import { load } from 'cheerio'
 import striptags from 'striptags'
 import type { CmsContent, CmsFeedPost, CmsSection } from '../../shared/types/cms'
 import cmsContent from '../cms-content.cjs'
-import prepareWordPressContent from './prepare-wordpress-content'
-import type { UnpreparedPost } from './prepare-wordpress-content'
+import prepareWordPressContent from './prepare-wordpress-content/index.ts'
+import type { UnpreparedPost } from './prepare-wordpress-content/index.ts'
 
 function getReadingTime (content: string, isHtml = false): number {
   const avgWordsPerMin = 200

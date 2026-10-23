@@ -1,7 +1,7 @@
 import { load } from 'cheerio'
 import path from 'node:path'
 import he from 'he'
-import { cacheDirectory } from './utils/cache-directory'
+import { cacheDirectory } from './utils/cache-directory.ts'
 import { makeConfig, Block, torchlight, FileCache } from '@torchlight-api/client'
 
 let initialised: Promise<void> | undefined

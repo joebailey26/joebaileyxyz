@@ -3,8 +3,8 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
-import FetchFavicon from './utils/fetch-favicon'
-import { cacheDirectory } from './utils/cache-directory'
+import FetchFavicon from './utils/fetch-favicon.ts'
+import { cacheDirectory } from './utils/cache-directory.ts'
 
 const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
 const faviconCacheDirectory = path.join(cacheDirectory, 'favicons')

@@ -1,6 +1,6 @@
 import { addTypeTemplate, defineNuxtModule } from '@nuxt/kit'
 import type { CmsContent } from '../../shared/types/cms'
-import { loadCmsContent } from './load-content'
+import { loadCmsContent } from './load-content.ts'
 
 // Loads the CMS content once per build and hands it to the Nitro routes in server/routes/_content,
 // which the pages read through useAsyncData. Prerendering stores the result in each page's payload.

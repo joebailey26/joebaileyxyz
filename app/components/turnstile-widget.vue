@@ -45,80 +45,70 @@ function loadTurnstile (): Promise<Turnstile> {
   }
   return loading
 }
-</script>
 
-<script setup lang="ts">
-const props = withDefaults(defineProps<{
-  siteKey?: string
-}>(), {
-  siteKey: ''
-})
-
-const emit = defineEmits<{
-  token: [token: string]
-}>()
-
-const widget = useTemplateRef<HTMLElement>('widget')
-const widgetId = ref<string | null>(null)
-const error = ref('')
-let disposed = false
-
-async function renderWidget () {
-  if (!props.siteKey) {
-    error.value = 'Contact form is temporarily unavailable. Please email joe@joebailey.xyz.'
-    return
-  }
-  try {
-    const turnstile = await loadTurnstile()
-    if (disposed || !widget.value) {
-      return
+// Written with the options API, as worker/test/contact-ui.test.mjs loads this script on its own.
+export default defineComponent({
+  props: {
+    siteKey: { type: String, default: '' }
+  },
+  emits: ['token'],
+  data () {
+    return { widgetId: null as string | null, error: '', disposed: false }
+  },
+  mounted () {
+    this.renderWidget()
+  },
+  beforeUnmount () {
+    this.disposed = true
+    if (this.widgetId !== null && window.turnstile) {
+      window.turnstile.remove(this.widgetId)
     }
-    widgetId.value = turnstile.render(widget.value, {
-      sitekey: props.siteKey,
-      action: 'contact',
-      size: 'flexible',
-      callback: (token) => {
-        error.value = ''
-        emit('token', token)
-      },
-      'expired-callback': () => reset(),
-      'timeout-callback': () => reset(),
-      'error-callback': () => {
-        emit('token', '')
-        error.value = 'Spam check could not complete. Please retry.'
+  },
+  methods: {
+    async renderWidget () {
+      if (!this.siteKey) {
+        this.error = 'Contact form is temporarily unavailable. Please email joe@joebailey.xyz.'
+        return
       }
-    })
-  } catch {
-    if (!disposed) {
-      error.value = 'Spam check could not load. Please retry or email joe@joebailey.xyz.'
+      try {
+        const turnstile = await loadTurnstile()
+        if (this.disposed) {
+          return
+        }
+        this.widgetId = turnstile.render(this.$refs.widget as HTMLElement, {
+          sitekey: this.siteKey,
+          action: 'contact',
+          size: 'flexible',
+          callback: (token) => {
+            this.error = ''
+            this.$emit('token', token)
+          },
+          'expired-callback': () => this.reset(),
+          'timeout-callback': () => this.reset(),
+          'error-callback': () => {
+            this.$emit('token', '')
+            this.error = 'Spam check could not complete. Please retry.'
+          }
+        })
+      } catch {
+        if (!this.disposed) {
+          this.error = 'Spam check could not load. Please retry or email joe@joebailey.xyz.'
+        }
+      }
+    },
+    reset () {
+      this.$emit('token', '')
+      this.error = ''
+      if (this.widgetId !== null && window.turnstile) {
+        window.turnstile.reset(this.widgetId)
+      }
+    },
+    retry () {
+      this.reset()
+      if (this.widgetId === null) {
+        this.renderWidget()
+      }
     }
   }
-}
-
-function reset () {
-  emit('token', '')
-  error.value = ''
-  if (widgetId.value !== null && window.turnstile) {
-    window.turnstile.reset(widgetId.value)
-  }
-}
-
-function retry () {
-  reset()
-  if (widgetId.value === null) {
-    renderWidget()
-  }
-}
-
-onMounted(renderWidget)
-
-onBeforeUnmount(() => {
-  disposed = true
-  if (widgetId.value !== null && window.turnstile) {
-    window.turnstile.remove(widgetId.value)
-  }
 })
-
-// The contact form resets the check after each submission.
-defineExpose({ reset })
 </script>

@@ -212,69 +212,82 @@
   </section>
 </template>
 
-<script setup lang="ts">
-const submitted = ref<string | false>(false)
-const sending = ref(false)
-const turnstileToken = ref('')
-const form = ref({
-  name: '',
-  email: '',
-  message: ''
-})
-
-const contactForm = useTemplateRef<HTMLFormElement>('contactForm')
-const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
-
-const canSubmit = computed(() => !sending.value && !!turnstileToken.value &&
-  !!form.value.name.trim() && !!form.value.email.trim() && !!form.value.message.trim())
-
-watch(form, (value) => {
-  try {
-    localStorage.setItem('contactForm', JSON.stringify(value))
-  } catch {
-    // Storage can be unavailable; the draft is then not kept
-  }
-}, { deep: true })
-
-onMounted(() => {
-  try {
-    const saved: Partial<Record<keyof typeof form.value, unknown>> | null = JSON.parse(localStorage.getItem('contactForm') ?? 'null')
-    for (const key of Object.keys(form.value) as (keyof typeof form.value)[]) {
-      const value = saved?.[key]
-      if (typeof value === 'string') {
-        form.value[key] = value
+<script lang="ts">
+// Written with the options API, as worker/test/contact-ui.test.mjs loads this script on its own.
+export default defineComponent({
+  data () {
+    return {
+      submitted: false as string | false,
+      sending: false,
+      turnstileToken: '',
+      form: {
+        name: '',
+        email: '',
+        message: ''
       }
     }
-  } catch {
-    // Storage can be unavailable or hold an invalid draft
+  },
+  computed: {
+    canSubmit () {
+      return !this.sending && !!this.turnstileToken &&
+        !!this.form.name.trim() && !!this.form.email.trim() && !!this.form.message.trim()
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler (form) {
+        try {
+          localStorage.setItem('contactForm', JSON.stringify(form))
+        } catch {
+          // Storage can be unavailable; the draft is then not kept
+        }
+      }
+    }
+  },
+  mounted () {
+    try {
+      const saved: Partial<Record<keyof typeof this.form, unknown>> | null = JSON.parse(localStorage.getItem('contactForm') ?? 'null')
+      for (const key of Object.keys(this.form) as (keyof typeof this.form)[]) {
+        const value = saved?.[key]
+        if (typeof value === 'string') {
+          this.form[key] = value
+        }
+      }
+    } catch {
+      // Storage can be unavailable or hold an invalid draft
+    }
+  },
+  methods: {
+    async submit () {
+      const contactForm = this.$refs.contactForm as HTMLFormElement
+      const turnstile = this.$refs.turnstile as { reset: () => void }
+      if (!this.canSubmit || !contactForm.reportValidity()) {
+        return
+      }
+      this.sending = true
+      this.submitted = false
+      try {
+        const body = new FormData(contactForm)
+        body.set('cf-turnstile-response', this.turnstileToken)
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body
+        })
+        if (!response.ok) {
+          const payload: { error?: string } = await response.json().catch(() => ({}))
+          throw new Error(payload.error || `HTTP ${response.status}`)
+        }
+        this.form = { name: '', email: '', message: '' }
+        this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
+      } catch (e) {
+        this.submitted = `${String(e)} Please try again.`
+      } finally {
+        this.sending = false
+        // Tokens are single-use, including when email delivery fails after verification.
+        turnstile.reset()
+      }
+    }
   }
 })
-
-async function submit () {
-  if (!canSubmit.value || !contactForm.value?.reportValidity()) {
-    return
-  }
-  sending.value = true
-  submitted.value = false
-  try {
-    const body = new FormData(contactForm.value)
-    body.set('cf-turnstile-response', turnstileToken.value)
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      body
-    })
-    if (!response.ok) {
-      const payload: { error?: string } = await response.json().catch(() => ({}))
-      throw new Error(payload.error || `HTTP ${response.status}`)
-    }
-    form.value = { name: '', email: '', message: '' }
-    submitted.value = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
-  } catch (e) {
-    submitted.value = `${String(e)} Please try again.`
-  } finally {
-    sending.value = false
-    // Tokens are single-use, including when email delivery fails after verification.
-    turnstile.value?.reset()
-  }
-}
 </script>
