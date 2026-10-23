@@ -1,9 +1,8 @@
-import fetch from 'node-fetch'
 import he from 'he'
 import { load } from 'cheerio'
 import striptags from 'striptags'
-import prepareWordPressContent from './prepare-wordpress-content'
-import cmsContent from './cms-content.cjs'
+import cmsContent from '../cms-content.cjs'
+import prepareWordPressContent from './prepare-wordpress-content/index.js'
 
 function getReadingTime (content, isHtml = false) {
   const avgWordsPerMin = 200
@@ -15,6 +14,7 @@ function getReadingTime (content, isHtml = false) {
     contentToProcess = striptags(contentToProcess)
   }
   const count = (contentToProcess.match(/\w+/g) || []).length
+
   return Math.ceil(count / avgWordsPerMin)
 }
 
@@ -22,8 +22,10 @@ function getRequiredInfoFromPosts (posts) {
   if (!posts.length) {
     return []
   }
+
   return posts.map(({ title, excerpt, slug, date, content, acf, featured_media: featuredMedia, featured_media_url: featuredMediaUrl }) => {
     const convertedExcerpt = excerpt.rendered.replace(/(<p class="link-more">.*<\/p>)/g, '').replace(' &hellip; ', '&hellip;').trim()
+
     return {
       title: he.decode(title.rendered),
       excerpt: {
@@ -32,7 +34,8 @@ function getRequiredInfoFromPosts (posts) {
       },
       slug,
       rawDate: date,
-      date: new Date(date.substring(0, date.indexOf('T'))),
+      // Serialised as an ISO string; the app turns it back into a Date.
+      date: new Date(date.substring(0, date.indexOf('T'))).toISOString(),
       content: content.rendered.trim(),
       readingTime: getReadingTime(content.rendered, true),
       acf,
@@ -41,9 +44,10 @@ function getRequiredInfoFromPosts (posts) {
   })
 }
 
-const postsPerPage = 10
+export const postsPerPage = 10
 
-export default async function () {
+// Fetches both sections from the CMS feed, paginated as the site shows them, and prepares post content.
+export async function loadCmsContent () {
   const sections = await cmsContent.fetchCmsContent({ baseUrl: process.env.CMS_API_URL, token: process.env.CMS_BUILD_TOKEN, fetchImpl: fetch, perPage: postsPerPage })
   const state = {}
   for (const section of ['blog', 'projects']) {
@@ -53,18 +57,5 @@ export default async function () {
     }
   }
 
-  this.nuxt.hook('generate:extendRoutes', (routes) => {
-    for (let page = 2; page <= state.blog.length; page++) {
-      routes.push({ route: `/blog/page/${page}/` })
-    }
-    for (const section of ['blog', 'projects']) {
-      for (const post of state[section].flat()) {
-        routes.push({ route: `/${section}/${post.slug}/` })
-      }
-    }
-  })
-
-  this.nuxt.hook('vue-renderer:ssr:prepareContext', (ssrContext) => {
-    ssrContext.$state = state
-  })
+  return state
 }

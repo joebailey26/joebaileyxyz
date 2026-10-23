@@ -70,47 +70,31 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    postType: {
-      type: String,
-      required: true
-    },
-    nextPostText: {
-      type: String,
-      required: true
-    },
-    previousPostText: {
-      type: String,
-      required: true
-    },
-    showPostName: {
-      type: Boolean,
-      default: false
-    }
+<script setup>
+const props = defineProps({
+  postType: {
+    type: String,
+    required: true
   },
-  computed: {
-    flattenedPosts () {
-      return this.$store.state[this.postType].flat()
-    },
-    postIndex () {
-      return this.flattenedPosts.findIndex((item) => item.slug === this.$route.params.slug)
-    },
-    previousPage () {
-      const previous = this.flattenedPosts[this.postIndex - 1]
-      if (!previous) {
-        return false
-      }
-      return previous
-    },
-    nextPage () {
-      const next = this.flattenedPosts[this.postIndex + 1]
-      if (!next) {
-        return false
-      }
-      return next
-    }
+  nextPostText: {
+    type: String,
+    required: true
+  },
+  previousPostText: {
+    type: String,
+    required: true
+  },
+  showPostName: {
+    type: Boolean,
+    default: false
   }
-}
+})
+
+const route = useRoute()
+const { data: posts } = await useCmsIndex(props.postType)
+
+const flattenedPosts = computed(() => posts.value.flat())
+const postIndex = computed(() => flattenedPosts.value.findIndex((item) => item.slug === route.params.slug))
+const previousPage = computed(() => flattenedPosts.value[postIndex.value - 1] || false)
+const nextPage = computed(() => flattenedPosts.value[postIndex.value + 1] || false)
 </script>

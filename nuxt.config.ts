@@ -1,6 +1,5 @@
 import { fileURLToPath } from 'node:url'
-
-const titleSuffix = 'Joe Bailey | Software Engineer | Cambridge, UK'
+import { titleSuffix } from './app/utils/site.js'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-22',

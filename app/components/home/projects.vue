@@ -10,12 +10,6 @@
   </section>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-
-export default {
-  computed: {
-    ...mapState(['projects'])
-  }
-}
+<script setup>
+const { data: projects } = await useCmsIndex('projects')
 </script>

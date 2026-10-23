@@ -28,7 +28,7 @@
                   <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
                 </div>
                 <ClientOnly>
-                  <GalexiaShare :title="$nuxt.$options.head.titleTemplate.replace('%s', project.title)" :description="project.excerpt.plain" />
+                  <GalexiaShare :title="fullTitle(project.title)" :description="project.excerpt.plain" />
                 </ClientOnly>
               </article>
             </div>
@@ -46,51 +46,15 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+const route = useRoute()
+const project = await useCmsPost('projects', route.params.slug)
 
-export default {
-  head () {
-    const meta = []
-    let title = ''
-    if (this.project) {
-      if (this.project.title) {
-        title = this.project.title
-        meta.push({ hid: 'og:title', property: 'og:title', content: this.project.title })
-        meta.push({ hid: 'twitter:title', name: 'twitter:title', content: this.project.title })
-      }
-      if (this.project.excerpt.plain) {
-        meta.push({ hid: 'description', name: 'description', content: this.project.excerpt.plain })
-        meta.push({ hid: 'og:description', property: 'og:description', content: this.project.excerpt.plain })
-        meta.push({ hid: 'twitter:description', name: 'twitter:description', content: this.project.excerpt.plain })
-      }
-      if (this.project.featured_media) {
-        meta.push({ hid: 'og:image', property: 'og:image', content: this.project.featured_media })
-      }
-    }
-    return {
-      title,
-      meta,
-      link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/projects/${this.$route.params.slug}/` }
-      ]
-    }
-  },
-  computed: {
-    ...mapState([
-      'projects'
-    ]),
-    project () {
-      return this.projects.flat().find((item) => item.slug === this.$route.params.slug)
-    }
-  },
-  created () {
-    if (!this.project) {
-      this.$nuxt.context.error({ statusCode: 404, message: 'Project not found' })
-    }
-  },
-  mounted () {
-    this.registerCopyToClipboardContainers()
-  }
-}
+usePageMeta({
+  title: () => project.value.title,
+  description: () => project.value.excerpt.plain || undefined,
+  image: () => project.value.featured_media || undefined,
+  canonical: `https://joebailey.xyz/projects/${route.params.slug}/`
+})
+useCopyToClipboard()
 </script>

@@ -221,24 +221,12 @@ footer {
   </div>
 </template>
 
-<script>
-export default {
-  layout: 'empty',
-  data () {
-    return {
-      head: {
-        title: 'CV'
-      }
-    }
-  },
-  head () {
-    return {
-      title: this.head.title,
-      meta: [
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title }
-      ]
-    }
-  }
-}
+<script setup>
+definePageMeta({
+  layout: 'empty'
+})
+
+usePageMeta({
+  title: 'CV'
+})
 </script>

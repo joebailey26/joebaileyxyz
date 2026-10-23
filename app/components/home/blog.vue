@@ -9,14 +9,6 @@
   </section>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-
-export default {
-  computed: {
-    ...mapState([
-      'blog'
-    ])
-  }
-}
+<script setup>
+const { data: blog } = await useCmsIndex('blog')
 </script>

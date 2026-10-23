@@ -16,8 +16,8 @@
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <div v-if="paginatedPosts" class="post-index__loop">
-                <template v-for="post in paginatedPosts">
-                  <article v-if="post && post.slug" :id="post.slug" :key="post.title" class="post-index__post" :class="{'post-index__post--with-date': shouldShowDates}">
+                <template v-for="post in paginatedPosts" :key="post.title">
+                  <article v-if="post && post.slug" :id="post.slug" class="post-index__post" :class="{'post-index__post--with-date': shouldShowDates}">
                     <GalexiaDate
                       v-if="shouldShowDates"
                       class="post__date"
@@ -57,69 +57,47 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+const head = {
+  title: 'Blog',
+  description: 'Some of my ramblings on tech, websites, and self-development.'
+}
 
-export default {
-  data () {
-    return {
-      head: {
-        title: 'Blog',
-        description: 'Some of my ramblings on tech, websites, and self-development.'
-      }
-    }
-  },
-  head () {
-    return {
-      title: this.head.title,
-      meta: [
-        { hid: 'description', name: 'description', content: this.head.description },
-        { hid: 'og:title', property: 'og:title', content: this.head.title },
-        { hid: 'og:description', property: 'og:description', content: this.head.description },
-        { hid: 'twitter:title', name: 'twitter:title', content: this.head.title },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.head.description }
-      ],
-      link: [
-        { hid: 'canonical', rel: 'canonical', href: `https://joebailey.xyz/blog/${this.$route.params.page ? `page/${this.$route.params.page}/` : ''}` }
-      ]
-    }
-  },
-  computed: {
-    ...mapState([
-      'blog'
-    ]),
-    pageCount () {
-      return this.blog.length
-    },
-    currentPage () {
-      const p = this.$route.params.page
-      const page = Array.isArray(p) ? p[0] : p
-      return page ? parseInt(page) : 1
-    },
-    paginatedPosts () {
-      return this.blog[this.currentPage - 1]
-    },
-    shouldShowDates () {
-      const latestPostDate = this.blog[0]?.[0]?.date
-      if (!latestPostDate) {
-        return false
-      }
-      const currentDate = new Date()
-      const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6))
+const route = useRoute()
+const router = useRouter()
+const { data: blog } = await useCmsIndex('blog')
 
-      return latestPostDate >= sixMonthsAgo || latestPostDate > currentDate
-    }
-  },
-  created () {
-    if (this.currentPage < 1 || this.currentPage > this.pageCount) {
-      this.$nuxt.context.error({ statusCode: 404, message: 'Page not found' })
-    }
-  },
-  methods: {
-    goToPage (page) {
-      const path = page > 1 ? `/blog/page/${page}/` : '/blog/'
-      this.$router.push({ path })
-    }
+const pageCount = computed(() => blog.value.length)
+const currentPage = computed(() => {
+  const p = route.params.page
+  const page = Array.isArray(p) ? p[0] : p
+
+  return page ? parseInt(page) : 1
+})
+const paginatedPosts = computed(() => blog.value[currentPage.value - 1])
+const shouldShowDates = computed(() => {
+  const latestPostDate = blog.value[0]?.[0]?.date
+  if (!latestPostDate) {
+    return false
   }
+  const currentDate = new Date()
+  const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6))
+
+  return latestPostDate >= sixMonthsAgo || latestPostDate > currentDate
+})
+
+if (currentPage.value < 1 || currentPage.value > pageCount.value) {
+  throw createError({ status: 404, message: 'Page not found', fatal: true })
+}
+
+usePageMeta({
+  title: head.title,
+  description: head.description,
+  canonical: `https://joebailey.xyz/blog/${route.params.page ? `page/${route.params.page}/` : ''}`
+})
+
+function goToPage (page) {
+  const path = page > 1 ? `/blog/page/${page}/` : '/blog/'
+  router.push({ path })
 }
 </script>
