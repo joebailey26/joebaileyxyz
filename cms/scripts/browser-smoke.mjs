@@ -132,7 +132,9 @@ try {
     return result.text;
   });
   assert.equal(requested, 'missing');
-  await second.page.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Original image ready'), null, { timeout: 20000 });
+  // Change detection can replace the transient status in the same polling tick.
+  // Verify the downloaded file itself before checking its WordPress metadata.
+  await second.frame.waitForFunction(async path => window.playground.fileExists(path), `/wordpress/wp-content/uploads/${stored.relative}`, { timeout: 20000 });
   const materialized = await second.frame.evaluate(async () => {
     const result = await window.playground.run({ code: `<?php define('JOEBAILEY_CMS_CHECKPOINT', true); require '/wordpress/wp-load.php';
       $id = get_posts(array('post_type' => 'attachment', 'title' => 'Browser fixture', 'posts_per_page' => 1))[0]->ID; echo wp_json_encode(array(file_exists(get_attached_file($id)), joebailey_cms_require_media($id), count(joebailey_cms_virtual()['files'])));` });
