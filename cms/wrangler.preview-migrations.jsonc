@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "joebailey-cms-preview-migrations",
+  "account_id": "8259f9bfa45a74a587d6a90822de442d",
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "joebailey-cms-preview",
+    "database_id": "1d12eb8a-f1b8-436c-b98a-fac609b026c0",
+    "migrations_dir": "migrations"
+  }]
+}

@@ -92,6 +92,7 @@ async function buildTriggerId(env) {
 }
 
 export async function triggerBuild(env, revision) {
+  if (env.CMS_TRIGGER_BUILDS === 'false') return;
   const claim = crypto.randomUUID();
   const claimed = await statement(env, `UPDATE snapshots SET build_claim = ?, build_claim_expires = ?, build_attempts = build_attempts + 1
     WHERE id = ? AND status = 'complete' AND build_status IN ('pending', 'failed') AND build_claim_expires < ? RETURNING id`, claim, now() + 120, revision, now()).first();
@@ -242,18 +243,19 @@ async function editorRoute(request, env, ctx, owner, path) {
     const hash = await feedHash(rows.map(row => JSON.parse(row.payload)));
     const previous = snapshot.base_revision ? await statement(env, 'SELECT feed_hash, build_status, build_error FROM snapshots WHERE id = ?', snapshot.base_revision).first() : null;
     const changed = previous?.feed_hash !== hash;
-    const buildStatus = changed ? 'pending' : ['pending', 'failed'].includes(previous?.build_status) ? previous.build_status : 'none';
+    const buildStatus = env.CMS_TRIGGER_BUILDS === 'false' ? 'none' : changed ? 'pending' : ['pending', 'failed'].includes(previous?.build_status) ? previous.build_status : 'none';
     await guardedBatch(env, token, snapshot.base_revision, [
       statement(env, "UPDATE snapshots SET build_status = 'superseded' WHERE status = 'complete' AND build_status IN ('pending', 'failed')"),
       statement(env, "UPDATE snapshots SET status = 'complete', committed_at = ?, feed_hash = ?, build_status = ?, build_error = ? WHERE id = ? AND status = 'staging'", now(), hash, buildStatus, changed ? null : previous?.build_error || null, revision),
       statement(env, 'UPDATE cms_state SET active_revision = ? WHERE id = 1', revision)
     ]);
-    ctx.waitUntil((async () => { if (changed) await triggerBuild(env, revision); await cleanup(env); })());
+    ctx.waitUntil((async () => { if (changed && env.CMS_TRIGGER_BUILDS !== 'false') await triggerBuild(env, revision); await cleanup(env); })());
     return json({ revision, committedAt: now(), buildStatus });
   }
   const retryMatch = path.match(/^\/api\/editor\/snapshots\/([^/]+)\/retry-build$/);
   if (retryMatch && request.method === 'POST') {
     assert(REVISION.test(retryMatch[1]), 'Invalid revision');
+    if (env.CMS_TRIGGER_BUILDS === 'false') return json({ queued: false });
     ctx.waitUntil(triggerBuild(env, retryMatch[1]));
     return json({ queued: true });
   }

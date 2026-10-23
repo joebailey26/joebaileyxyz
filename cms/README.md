@@ -15,7 +15,9 @@ pnpm --dir cms run db:local
 pnpm --dir cms run dev
 ```
 
-The runtime command downloads the official Playground artifact identified in `runtime.lock.json`, verifies its SHA-256, and extracts it. It requires an authenticated GitHub CLI. An already downloaded, matching ZIP can be supplied with `pnpm --dir cms run runtime C:/path/playground.zip`. Keep a copy: GitHub workflow artifacts expire. The artifact itself is approximately 685 MiB and is excluded from Git.
+The runtime command streams the official Playground archive from the permanent GitHub release URL pinned in `runtime.lock.json`, verifies its SHA-256, and extracts it. It needs neither GitHub CLI nor a GitHub token. The release contains the unchanged upstream artifact; its repository, commit and artifact ID remain in the lock as provenance. An already downloaded, matching ZIP can be supplied with `pnpm --dir cms run runtime C:/path/playground.zip`. The archive is approximately 685 MiB and is excluded from Git. Failed downloads leave no reusable partial archive. ZIP extraction uses Node on Windows and Linux; the enclosed gzip tarball uses the system `tar` command.
+
+Prepared runtime reuse checks its pinned checksum and file inventory. Missing or truncated files cause preparation to run again from the verified archive. Every asset build reconstructs `dist` so stale or incomplete build output cannot be deployed.
 
 Open the localhost address printed by Wrangler. `.dev.vars` enables a localhost-only authentication bypass. It cannot bypass Access on a deployed hostname. Use a local build token of at least 32 random characters. Never put production secrets in tracked files.
 
@@ -33,11 +35,25 @@ The service worker bypasses Playground's offline cache for CMS APIs, the editor 
 
 ## Cloudflare deployment
 
-1. Create a D1 database named `joebailey-cms` and an R2 bucket named `joebailey-cms-files`. Set the resulting database ID in `wrangler.jsonc`; the checked-in placeholder intentionally cannot deploy as a working database.
+1. Production uses the existing D1 database `joebailey-cms` and R2 bucket `joebailey-cms-files`; their IDs are checked into `wrangler.jsonc`. Preview storage is separate: `joebailey-cms-preview` and `joebailey-cms-preview-files`.
 2. Create a Cloudflare Access self-hosted application for `cms.joebailey.xyz`. Allow `joe@joebailey.xyz` and `billybidley26@gmail.com`. Use the account's standard email PIN provider, not a connection belonging to an older Pages application. The existing Google provider is also enabled for these same email addresses. Set `ACCESS_TEAM_DOMAIN` and the application audience in Wrangler. Require Access for the editor, runtime and `/api/editor/*`. Exclude `/media/*` and `/api/content/*` from Access's interactive login: media is publicly readable; the Worker independently enforces the build token on the feed. Test these exclusions before cutover.
 3. Create a user-scoped API token with **Workers Builds Configuration: Edit** (the CMS Worker lists the site Worker's Workers Builds triggers itself, using `CF_WORKER_TAG` in `wrangler.jsonc`; set `CF_BUILD_TRIGGER_ID` only to override). Set Worker secrets from `cms/`: `pnpm exec wrangler secret put CMS_BUILD_TOKEN` and `pnpm exec wrangler secret put CF_BUILD_API_TOKEN`. Set the same `CMS_API_URL` and `CMS_BUILD_TOKEN` as build variables on the site's Workers Builds configuration.
-4. Run `pnpm --dir cms run db:remote`, then `pnpm --dir cms run build`, then `pnpm --dir cms run runtime:upload`. The last command uploads runtime assets larger than Workers' static-file limit to R2; use `--local` for local R2 instead. `CMS_R2_BUCKET` overrides the upload script's default bucket name.
-5. Run `pnpm --dir cms run deploy`. This attaches the editor to `cms.joebailey.xyz`. The editor's `workers.dev` and preview URLs are disabled. Do not set `LOCAL_DEV` in production. Workers Builds runs on Cloudflare, so the site build reads `/api/content/*` (build-token authenticated) directly from the editor hostname, and rendered content references `cms.joebailey.xyz/media/*` directly. If a zone security rule challenges the build, add a skip rule for `/api/content/*` and `/media/*`.
+4. Run `pnpm --dir cms run build:ci`, then `pnpm --dir cms run deploy:production`. Deployment applies production migrations, uploads oversized runtime assets to the production bucket, and deploys the Worker, in that order. Any failed step stops deployment. `pnpm --dir cms run deploy` remains available to rebuild prepared assets before running the same deployment sequence.
+5. This attaches the editor to `cms.joebailey.xyz`. Production `workers.dev` is disabled; branch Preview URLs are enabled and Access protected. Do not set `LOCAL_DEV` in production or previews. Workers Builds runs on Cloudflare, so the site build reads `/api/content/*` (build-token authenticated) directly from the editor hostname, and rendered content references `cms.joebailey.xyz/media/*` directly. If a zone security rule challenges the build, add a skip rule for `/api/content/*` and `/media/*`.
+
+### Automatic builds and feature previews
+
+Configure the CMS Worker in Cloudflare Workers Builds with root `/cms`, production branch `master`, build command `pnpm run build:ci`, production deploy command `pnpm run deploy:production`, and Preview command `pnpm run deploy:preview`. Keep Node `24.18.0`, pnpm `10.11.1` and automatic dependency installation enabled; do not add another install command. Watch paths are `cms/**` and `.nvmrc` relative to the repository root.
+
+The CMS uses Worker Previews rather than legacy version previews. For an existing legacy connection, prepare the Preview bindings and secrets, then complete Cloudflare's one-time **Set up Worker Previews** switch. This switch cannot be reversed. Configure the custom Preview command after switching.
+
+`previews` explicitly binds the staging database and bucket. `wrangler.preview-migrations.jsonc` must match that database; the deployment script refuses mismatches or production storage. `runtime:upload --preview` selects the staging bucket. Plain `runtime:upload --local` remains available for local R2. A conflicting `CMS_R2_BUCKET` fails instead of redirecting a deployment to another bucket.
+
+Protect the CMS's Preview `workers.dev` hostnames with Cloudflare Access using the existing two-editor allowlist. Set the Preview application's audience in `previews.vars.ACCESS_AUD`, and set a separate `CMS_BUILD_TOKEN` secret in Previews Base. Do not copy production website-build API credentials to previews.
+
+All branch previews share staging content and the single-editor lease; they do not have independent datasets. Start with test content in the preview editor. Preview syncs preserve complete database snapshots and files, but `CMS_TRIGGER_BUILDS=false` prevents pending website builds, outbound requests and retries. Production defaults to enabled when this variable is absent. Cron triggers apply only to production.
+
+To upgrade the runtime, obtain a reviewed official archive, record its commit/artifact provenance, verify its checksum and publish it under a new dedicated release tag. Update the locked URL and checksum together. Never replace bytes behind an existing pinned release URL. Run the Windows/Linux runtime CI jobs, WordPress restore checks and an Access-protected preview before merging.
 
 The Worker validates Access signatures, issuer, audience and expiration. The build token has no editor/snapshot access. Mutations require a same-origin request and, for synchronization, an unexpired editing lease.
 
