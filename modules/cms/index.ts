@@ -13,9 +13,9 @@ export default defineNuxtModule({
   meta: { name: 'cms' },
   async setup (_options, nuxt) {
     // `nuxt prepare` (postinstall, typecheck) only generates types, so it needs no content or CMS credentials.
-    const content: Sections = nuxt.options._prepare ? { blog: [[]], projects: [[]] } : await loadCmsContent()
+    const content: Sections = nuxt.options._prepare ? { blog: [[]], projects: [[]] } : await loadCmsContent() as Sections
 
-    const routes = []
+    const routes: string[] = []
     for (let page = 2; page <= content.blog.length; page++) {
       routes.push(`/blog/page/${page}/`)
     }
