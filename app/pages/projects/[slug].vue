@@ -53,7 +53,7 @@ const project = await useCmsPost('projects', route.params.slug)
 usePageMeta({
   title: () => project.value.title,
   description: () => project.value.excerpt.plain || undefined,
-  image: () => project.value.featured_media || undefined,
+  image: () => project.value.featuredMedia || undefined,
   canonical: `https://joebailey.xyz/projects/${route.params.slug}/`
 })
 useCopyToClipboard()

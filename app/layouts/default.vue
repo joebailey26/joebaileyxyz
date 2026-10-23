@@ -28,7 +28,7 @@
               </svg>
               Contact
             </a>
-            <LayoutDarkmodeToggle :model-value="darkmode" @update:model-value="handleDarkmodeChange" />
+            <LayoutDarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
           </div>
         </div>
       </div>
@@ -52,7 +52,11 @@ export default {
     handleDarkmodeChange ($event) {
       this.darkmode = $event
       const bodyClasses = document.body.classList
-      this.darkmode ? bodyClasses.add('darkTheme') : bodyClasses.remove('darkTheme')
+      if (this.darkmode) {
+        bodyClasses.add('darkTheme')
+      } else {
+        bodyClasses.remove('darkTheme')
+      }
       window.localStorage.setItem('darkmode', $event)
     }
   }

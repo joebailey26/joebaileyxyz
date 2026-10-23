@@ -1,3 +1,4 @@
+import { createError, getRouterParam } from 'h3'
 import content from '#cms-content'
 
 export function getSection (event) {

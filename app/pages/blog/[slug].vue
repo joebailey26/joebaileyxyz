@@ -57,7 +57,7 @@ const post = await useCmsPost('blog', route.params.slug)
 usePageMeta({
   title: () => post.value.title,
   description: () => post.value.excerpt.plain || undefined,
-  image: () => post.value.featured_media || undefined,
+  image: () => post.value.featuredMedia || undefined,
   canonical: `https://joebailey.xyz/blog/${route.params.slug}/`
 })
 useCopyToClipboard()

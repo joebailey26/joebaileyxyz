@@ -76,11 +76,11 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   props: {
-    modelValue: {
+    model: {
       type: Boolean
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['input'],
   data () {
     return {
       sunIcon: this.getSvgForCSS(faSun),
@@ -90,10 +90,10 @@ export default {
   computed: {
     inputVal: {
       get () {
-        return this.modelValue
+        return this.model
       },
       set (val) {
-        this.$emit('update:modelValue', val)
+        this.$emit('input', val)
       }
     }
   },

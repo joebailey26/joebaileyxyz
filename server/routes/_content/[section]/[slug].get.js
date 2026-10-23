@@ -1,3 +1,6 @@
+import { createError, defineEventHandler, getRouterParam } from 'h3'
+import { getSection } from '../../../utils/cms.js'
+
 export default defineEventHandler((event) => {
   const slug = getRouterParam(event, 'slug')
   const post = getSection(event).flat().find((item) => item.slug === slug)

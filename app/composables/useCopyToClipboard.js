@@ -1,3 +1,5 @@
+import { onMounted } from '#imports'
+
 class CopyToClipboard {
   constructor (container) {
     this.container = container

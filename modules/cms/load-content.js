@@ -39,7 +39,7 @@ function getRequiredInfoFromPosts (posts) {
       content: content.rendered.trim(),
       readingTime: getReadingTime(content.rendered, true),
       acf,
-      featured_media: featuredMediaUrl || featuredMedia
+      featuredMedia: featuredMediaUrl || featuredMedia
     }
   })
 }

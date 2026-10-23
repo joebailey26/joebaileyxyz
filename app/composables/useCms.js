@@ -1,3 +1,5 @@
+import { createError, useAsyncData } from '#imports'
+
 // CMS content is loaded at build time by modules/cms and served by server/routes/_content.
 // Prerendering stores each result in the page payload, so the static site never calls those routes.
 

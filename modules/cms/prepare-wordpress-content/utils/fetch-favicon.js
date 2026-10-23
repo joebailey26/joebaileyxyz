@@ -8,8 +8,9 @@ export default class FetchFavicon {
   isFullUrl (url) {
     try {
       const parsedUrl = new URL(url)
+
       return parsedUrl
-    } catch (e) {
+    } catch {
       // invalid url OR local path
       return false
     }
@@ -24,6 +25,7 @@ export default class FetchFavicon {
     this.body = body
 
     this.$ = load(body)
+
     return Promise.resolve()
   }
 
@@ -34,6 +36,7 @@ export default class FetchFavicon {
       actualUrl = canonical[0].attribs.href
     }
     const u = new URL(path, actualUrl)
+
     return u.href
   }
 
@@ -80,7 +83,7 @@ export default class FetchFavicon {
   async getFavicon () {
     try {
       await this.fetch()
-    } catch (e) {
+    } catch {
       return null
     }
     const appleTouchIconHref = this.findAppleTouchIcon()
@@ -92,6 +95,7 @@ export default class FetchFavicon {
     if (relIcons.length) {
       return relIcons[0].href
     }
+
     return null
   }
 }

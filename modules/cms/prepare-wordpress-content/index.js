@@ -6,7 +6,7 @@ import getFeaturedImageUrl from './featured-image.js'
 
 export default async function prepareWordPressContent (post) {
   // The order matters here
-  post.featured_media = getFeaturedImageUrl(post.featured_media)
+  post.featuredMedia = getFeaturedImageUrl(post.featuredMedia)
   post.content = removeLinksAroundImages(post.content)
   post.content = prepareImages(post.content)
   post.content = prepareVideos(post.content)

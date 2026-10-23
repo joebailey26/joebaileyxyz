@@ -11,7 +11,9 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   const branch = process.env.WORKERS_CI_BRANCH
   if (!process.env.TORCHLIGHT_TOKEN && branch && branch !== 'master') {
     // Workers Builds keeps a separate variable set for preview builds, which may lack the secret.
+    // eslint-disable-next-line no-console
     console.warn('TORCHLIGHT_TOKEN is not set; skipping syntax highlighting for this preview build')
+
     return postContent
   }
   const $ = load(postContent, null, false)
@@ -67,6 +69,7 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
     <span class="torchlight-copy-target js-copy-to-clipboard-target" style="display: none">${he.encode(highlightedBlock.code)}</span>
     `).appendTo($code.parent())
   })
+
   // Return the blog post html
   return $.html()
 }

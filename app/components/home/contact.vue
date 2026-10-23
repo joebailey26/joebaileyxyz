@@ -238,7 +238,9 @@ export default {
       handler (form) {
         try {
           localStorage.setItem('contactForm', JSON.stringify(form))
-        } catch {}
+        } catch {
+          // Storage can be unavailable; the draft is then not kept
+        }
       }
     }
   },
@@ -250,7 +252,9 @@ export default {
           this.form[key] = saved[key]
         }
       }
-    } catch {}
+    } catch {
+      // Storage can be unavailable or hold an invalid draft
+    }
   },
   methods: {
     async submit () {

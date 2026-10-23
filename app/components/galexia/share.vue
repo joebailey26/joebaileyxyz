@@ -2,8 +2,7 @@
 .share-button-group {
   display: flex;
   flex-wrap: wrap;
-  column-gap: .5rem;
-  row-gap: 1rem
+  gap: 1rem .5rem
 }
 </style>
 

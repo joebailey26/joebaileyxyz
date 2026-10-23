@@ -88,6 +88,10 @@ export default defineNuxtConfig({
     '@fontsource/roboto/700-italic.css',
     '~/assets/scss/style.scss'
   ],
+  build: {
+    // Bundled into the server build so it shares the plugin's icon library instead of loading a second copy.
+    transpile: ['@fortawesome/vue-fontawesome']
+  },
   hooks: {
     'pages:extend' (pages) {
       // Paginated indexes reuse the index pages, which read the page number from the route.
