@@ -86,6 +86,8 @@ dist
 
 # Local Wrangler state
 .wrangler
+.dev.vars
+.dev.vars.*
 
 # Local Netlify state and build caches
 .netlify/

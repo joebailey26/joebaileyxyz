@@ -29,6 +29,39 @@ pnpm deploy       # build, then wrangler deploy
 
 Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch. Its production build command is `pnpm build` and its deploy command is `pnpm exec wrangler deploy`. Preview builds use `pnpm build` and `pnpm exec wrangler preview`. Both build triggers set `NODE_VERSION=24.18.0`. These commands and build variables are stored in the Cloudflare Workers Builds settings, separately from `wrangler.jsonc`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `TORCHLIGHT_TOKEN` as build variables/secrets.
 
+## Contact form spam protection
+
+The contact form requires a Cloudflare Turnstile widget. Create a **Managed** widget
+for `joebailey.xyz` in the Cloudflare dashboard. Add any preview hostnames you intend
+to test as well.
+
+- Set `TURNSTILE_SITE_KEY` as a Workers Builds **build variable** before generating
+  the static site. Nuxt publishes this public key in its runtime config.
+- Set `TURNSTILE_SECRET_KEY` as a **Worker runtime secret** (`pnpm exec wrangler secret put
+  TURNSTILE_SECRET_KEY`). Never put the secret in Nuxt config or a committed file.
+- Configure the matching keys for preview deployments too. The Worker checks both
+  the token's `contact` action and its hostname against the request hostname.
+
+Rebuild the static site after changing the public key. Missing keys disable sending;
+verification failures never send email. Visitors can still use the email link.
+
+For local testing, set the build variable `TURNSTILE_SITE_KEY` to Cloudflare's public
+test key `1x00000000000000000000AA` and put the matching test secret
+`TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA` in the ignored root
+`.dev.vars` file. These keys let you exercise the widget; dummy validation metadata
+may fail the Worker's strict action/hostname checks. For a complete submission test,
+use a dedicated development widget/key pair that allows your local hostname. Use
+`pnpm exec wrangler dev` to serve the generated site and API together. Nuxt's development
+server alone does not serve `/api/contact`. Use dummy keys only locally. Preview
+emails use the configured contact inbox, so use the automated tests for mail-free
+verification.
+
+Run `pnpm test:contact` to test the API and widget lifecycle without sending email
+or calling Cloudflare. Implementation references:
+[client rendering](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/),
+[server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/),
+and [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/).
+
 ## Visual Style Guide
 
 ![Style Guide](docs/img/StyleGuide.jpg)

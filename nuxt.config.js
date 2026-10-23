@@ -1,5 +1,8 @@
 export default {
   target: 'static',
+  publicRuntimeConfig: {
+    turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || ''
+  },
   components: true,
   /*
    ** Headers of the page

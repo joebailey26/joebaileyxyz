@@ -13,6 +13,25 @@ export async function handleContact(request, env) {
   if (!data) return json({ error: 'Invalid form' }, 400);
   const name = header(data.get('name')), email = header(data.get('email')), message = clean(data.get('message')).slice(0, 5000);
   if (!name || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || !message) return json({ error: 'Name, a valid email and a message are required' }, 400);
+  const token = data.get('cf-turnstile-response');
+  if (typeof token !== 'string' || !token.trim() || token.length > 2048) return json({ error: 'Please complete the spam check and try again' }, 400);
+  if (!env.TURNSTILE_SECRET_KEY) return json({ error: 'Contact form is temporarily unavailable. Please email joe@joebailey.xyz' }, 503);
+  try {
+    const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token }),
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!verification.ok) throw new Error('Turnstile unavailable');
+    const result = await verification.json();
+    if (!result || typeof result.success !== 'boolean') throw new Error('Invalid Turnstile response');
+    if (!result.success || result.action !== 'contact' || result.hostname !== new URL(request.url).hostname) {
+      return json({ error: 'Spam check failed or expired. Please try again' }, 403);
+    }
+  } catch {
+    return json({ error: 'Spam check is temporarily unavailable. Please try again' }, 503);
+  }
   const destination = 'joe@joebailey.xyz';
   const raw = [
     `From: Website <${env.CONTACT_FROM}>`,
