@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 function policy(caches = {}) {
   const listeners = new Map();
   runInNewContext(readFileSync(new URL('../scripts/service-worker-policy.js', import.meta.url), 'utf8'), {
-    URL, caches,
+    URL, caches, fetch: (url, init) => ({ url, init }),
     self: { location: new URL('https://cms.example/sw.js'), addEventListener(type, listener) { listeners.set(type, listener); } }
   });
   return listeners;
@@ -38,4 +38,15 @@ test('activation removes old cached CMS responses while retaining immutable runt
   listeners.get('activate')({ waitUntil(promise) { activation = promise; } });
   await activation;
   assert.deepEqual(removed, entries.slice(0, 4).map(request => request.url));
+});
+
+test('media redirected into the Playground scope is served from the public media endpoint', () => {
+  const listeners = policy();
+  let stopped = false, response;
+  const headers = new Map([['range', 'bytes=0-9']]);
+  listeners.get('fetch')({ request: { url: 'https://cms.example/scope:joebailey-cms/media/abc/abc-photo.jpg?x=1', headers }, stopImmediatePropagation() { stopped = true; }, respondWith(value) { response = value; } });
+  assert.equal(stopped, true);
+  assert.equal(response.url, 'https://cms.example/media/abc/abc-photo.jpg?x=1');
+  assert.equal(response.init.headers, headers);
+  listeners.get('fetch')({ request: { url: 'https://cms.example/scope:joebailey-cms/wp-content/uploads/a.jpg' }, stopImmediatePropagation() { assert.fail('uploads belong to WordPress'); }, respondWith() { assert.fail('uploads belong to WordPress'); } });
 });

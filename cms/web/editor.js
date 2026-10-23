@@ -134,6 +134,13 @@ async function captureLocked() {
     const file = { path: item.path, hash, size: bytes.length, kind: item.path.startsWith('uploads/') ? 'media' : 'private', type: mediaType(item.path), bytes };
     files.push(file);
   }
+  // Saved uploads that were never opened locally stay in R2. They have no bytes here, but remain in the manifest.
+  const virtual = Array.isArray(exported.virtual) ? {} : exported.virtual;
+  for (const [path, item] of Object.entries(virtual)) {
+    if (!safePath(path) || files.some(file => file.path === path)) continue;
+    files.push({ path, hash: item.hash, size: item.size, kind: 'media', type: mediaType(path) });
+  }
+  files.sort((a, b) => a.path.localeCompare(b.path));
   const records = rewriteRecords(exported, files, location.origin);
   const chunks = [];
   for (let position = 0; position < database.length; position += CHUNK_SIZE) chunks.push(await sha256(database.subarray(position, position + CHUNK_SIZE)));
@@ -227,25 +234,64 @@ async function restore(checkpoint) {
   const files = checkpoint.files.filter(file => !isRetiredThemeFile(file.path));
   const keep = files.map(file => file.path);
   await php(`$keep = array_flip(json_decode(${phpString(JSON.stringify(keep))}, true)); foreach (array('uploads', 'plugins', 'themes', 'languages') as $dir) { $root = WP_CONTENT_DIR . '/' . $dir; if (!is_dir($root)) continue; $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST); foreach ($it as $file) { if ($file->isFile() && !isset($keep[substr($file->getPathname(), strlen(WP_CONTENT_DIR) + 1)])) unlink($file->getPathname()); } }`);
-  const directories = [...new Set(files.map(file => {
+  // Files without bytes are saved uploads served from R2 on demand.
+  const stored = files.filter(file => !file.bytes);
+  const directories = [...new Set(files.filter(file => file.bytes).map(file => {
     if (!safePath(file.path)) throw new Error(`Invalid backup file: ${file.path}`);
     return `/wordpress/wp-content/${file.path.slice(0, file.path.lastIndexOf('/'))}`;
   }))];
   const created = await client.run({ code: `<?php foreach (json_decode(${phpString(JSON.stringify(directories))}, true) as $dir) { if (!is_dir($dir) && !mkdir($dir, 0777, true)) throw new RuntimeException('Could not create backup directory'); }` });
   if (created.exitCode !== 0) throw new Error('Could not prepare WordPress file directories');
+  const local = files.filter(file => file.bytes);
   let restored = 0;
-  for (const file of files) {
+  for (const file of local) {
     if (!safePath(file.path) || file.bytes.length !== file.size || await sha256(file.bytes) !== file.hash) throw new Error(`Invalid backup file: ${file.path}`);
     const path = `/wordpress/wp-content/${file.path}`;
     await client.writeFile(path, file.bytes);
-    showProgress('Restoring WordPress files', `${++restored}/${files.length} files · ${file.path}`, restored / files.length * 100);
+    showProgress('Restoring WordPress files', `${++restored}/${local.length} files · ${file.path}`, restored / local.length * 100);
   }
+  for (const file of stored) if (!safePath(file.path) || file.kind !== 'media') throw new Error(`Invalid stored file: ${file.path}`);
+  await publishVirtual(Object.fromEntries(stored.map(file => [file.path, { hash: file.hash, size: file.size }])));
   showProgress('Restoring the database', 'Applying the verified SQLite snapshot…');
   // Each PHP run closes its PDO connection. Replace the DB only between requests.
   await client.writeFile(target, checkpoint.database);
   for (const suffix of ['-wal', '-shm']) if (await client.fileExists(target + suffix)) await client.unlink(target + suffix);
   await prepareHeadlessTheme(checkpoint.manifest);
   await php("wp_cache_flush(); wp_set_current_user(get_users(array('role' => 'administrator', 'number' => 1))[0]->ID);");
+}
+
+async function fetchStored(item) {
+  const bytes = new Uint8Array(await (await api(`/api/editor/files/${item.hash}`)).arrayBuffer());
+  if (bytes.length !== item.size || await sha256(bytes) !== item.hash) throw new Error(`Cloud file checksum or size mismatch: ${item.path}`);
+  return bytes;
+}
+
+// The bridge serves these from R2 and reports which attachment files an image edit needs.
+async function publishVirtual(files) {
+  await client.writeFile('/tmp/joebailey-cms-virtual.json', JSON.stringify({ origin: location.origin, files }));
+}
+
+async function materializeWanted() {
+  const wanted = JSON.parse(await client.readFileAsText('/tmp/joebailey-cms-wanted'));
+  await client.unlink('/tmp/joebailey-cms-wanted');
+  const virtual = JSON.parse(await client.readFileAsText('/tmp/joebailey-cms-virtual.json'));
+  const paths = wanted.filter(path => safePath(path) && virtual.files[path]);
+  if (!paths.length) return;
+  setStatus('Downloading the original image…');
+  for (const path of paths) {
+    const bytes = await fetchStored({ path, ...virtual.files[path] });
+    await client.mkdir(`/wordpress/wp-content/${path.slice(0, path.lastIndexOf('/'))}`).catch(() => {});
+    await client.writeFile(`/wordpress/wp-content/${path}`, bytes);
+  }
+  // Re-read the map: another request may have deleted an attachment meanwhile.
+  const current = JSON.parse(await client.readFileAsText('/tmp/joebailey-cms-virtual.json'));
+  for (const path of paths) delete current.files[path];
+  await publishVirtual(current.files);
+  setStatus('Original image ready · open the editor again');
+}
+
+async function hydrate(files) {
+  for (const file of files) if (!file.bytes) file.bytes = await fetchStored(file);
 }
 
 async function cloudCheckpoint(snapshot, progress = () => {}, { editing = false } = {}) {
@@ -260,30 +306,31 @@ async function cloudCheckpoint(snapshot, progress = () => {}, { editing = false 
   // Backups fetch the complete historical revision. Editing upgrades only the
   // retired default theme, avoiding its 235 individual R2 downloads.
   const entries = editing ? manifest.files.filter(file => !isRetiredThemeFile(file.path)) : manifest.files;
-  const files = new Array(entries.length);
+  const files = entries.map(item => ({ ...item }));
+  // Editing leaves uploads in R2. WordPress reaches them through /media and fetches originals only for image edits.
+  const wanted = files.map((item, index) => editing && item.kind === 'media' ? -1 : index).filter(index => index >= 0);
   let next = 0, completed = 0, failed = false;
-  progress('Downloading saved files', `0/${files.length} files`, 0);
+  progress('Downloading saved files', `0/${wanted.length} files`, 0);
   const downloadFiles = async () => {
     try {
-      while (!failed && next < entries.length) {
-        const index = next++;
-        const item = entries[index];
-        const bytes = new Uint8Array(await (await api(`/api/editor/files/${item.hash}`)).arrayBuffer());
-        if (bytes.length !== item.size || await sha256(bytes) !== item.hash) throw new Error(`Cloud file checksum or size mismatch: ${item.path}`);
-        files[index] = { ...item, bytes };
-        progress('Downloading saved files', `${++completed}/${files.length} files · ${item.path}`, completed / files.length * 100);
+      while (!failed && next < wanted.length) {
+        const item = files[wanted[next++]];
+        item.bytes = await fetchStored(item);
+        progress('Downloading saved files', `${++completed}/${wanted.length} files · ${item.path}`, completed / wanted.length * 100);
       }
     } catch (error) { failed = true; throw error; }
   };
-  const downloads = await Promise.allSettled(Array.from({ length: Math.min(6, files.length) }, downloadFiles));
+  const downloads = await Promise.allSettled(Array.from({ length: Math.min(6, wanted.length) }, downloadFiles));
   const failure = downloads.find(result => result.status === 'rejected');
   if (failure) throw failure.reason;
   return { manifest, database, files, baseRevision: snapshot.id };
 }
 
-function download(checkpoint) {
+async function download(checkpoint) {
+  const files = checkpoint.files.map(file => ({ ...file }));
+  await hydrate(files);
   const entries = { 'manifest.json': strToU8(JSON.stringify(checkpoint.manifest, null, 2)), 'database.sqlite': checkpoint.database };
-  for (const file of checkpoint.files) entries[`wp-content/${file.path}`] = file.bytes;
+  for (const file of files) entries[`wp-content/${file.path}`] = file.bytes;
   const blob = new Blob([zipSync(entries, { level: 1 })], { type: 'application/zip' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -380,7 +427,10 @@ async function boot(snapshot, local) {
     return unsyncedChanges;
   };
   pollTimer = setInterval(async () => {
-    if (busy || lostLease || autoSyncPaused) return;
+    if (busy || lostLease) return;
+    try { if (await client.fileExists('/tmp/joebailey-cms-wanted')) await materializeWanted(); }
+    catch (error) { notice(`Could not download the original image: ${error.message}`); }
+    if (autoSyncPaused) return;
     try {
       if (await detectChanges() && !pending) setStatus('Changes pending · automatic sync every 2 minutes');
     } catch (error) { notice(error.message); }
@@ -427,18 +477,18 @@ async function openEditor() {
     $('recover').disabled = local.baseRevision !== revision;
     setStatus('Local recovery available');
     $('recover').onclick = async () => { $('recovery').hidden = true; await boot({ manifest: local.manifest }, local).catch(openingFailed); };
-    $('download-recovery').onclick = () => download(local);
+    $('download-recovery').onclick = () => download(local).catch(error => notice(`Could not download backup: ${error.message}`));
     $('discard-recovery').onclick = async () => { await recovery('delete'); pending = null; $('recovery').hidden = true; await boot(status.snapshot).catch(openingFailed); };
   } else await boot(status.snapshot);
 }
 
 $('sync').onclick = () => { autoSyncPaused = false; return checkpoint(); };
-$('backup').onclick = async () => { try { download(busy ? pending : await capture()); } catch (error) { notice(error.message); } };
+$('backup').onclick = async () => { try { await download(busy ? pending : await capture()); } catch (error) { notice(error.message); } };
 $('download-version').onclick = async () => {
   $('download-version').disabled = true;
   try {
     const snapshot = savedVersions.find(snapshot => snapshot.id === $('versions').value);
-    if (snapshot) download(await cloudCheckpoint(snapshot));
+    if (snapshot) await download(await cloudCheckpoint(snapshot));
   } catch (error) { notice(`Could not download saved version: ${error.message}`); }
   finally { $('download-version').disabled = false; }
 };
