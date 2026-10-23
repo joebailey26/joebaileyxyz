@@ -184,3 +184,28 @@ test('256 KiB chunking is deterministic at boundary sizes', async () => {
   assert.equal(Math.ceil(bytes.length / CHUNK_SIZE), 2);
   assert.notEqual(await sha256(bytes.subarray(0, CHUNK_SIZE)), await sha256(bytes.subarray(CHUNK_SIZE)));
 });
+
+test('preview checkpoints restore but never queue, request or retry website builds', async t => {
+  const f = await fixture(t);
+  Object.assign(f.env, { CMS_TRIGGER_BUILDS: 'false', CF_ACCOUNT_ID: 'account', CF_WORKER_TAG: 'tag', CF_BUILD_API_TOKEN: 'token' });
+  const originalFetch = globalThis.fetch;
+  let requests = 0;
+  globalThis.fetch = async () => { requests++; throw new Error('Preview must not request website builds'); };
+  t.after(() => { globalThis.fetch = originalFetch; });
+  const revision = await f.start();
+  await f.upload(revision);
+  const committed = await f.commit(revision);
+  assert.equal(committed.status, 200);
+  assert.equal((await committed.json()).buildStatus, 'none');
+  await f.drain();
+  assert.deepEqual(new Uint8Array(await (await f.request(`/api/editor/snapshots/${revision}/chunks/0`)).arrayBuffer()), f.database);
+  assert.equal((await (await f.request(`/api/editor/snapshots/${revision}/retry-build`, { method: 'POST', body: {} })).json()).queued, false);
+  // Old failed rows cannot start builds after disabling the integration either.
+  f.sqlite.prepare("UPDATE snapshots SET build_status = 'failed' WHERE id = ?").run(revision);
+  const { default: worker } = await import('../src/worker.mjs');
+  const tasks = [];
+  await worker.scheduled({}, f.env, { waitUntil(task) { tasks.push(task); } });
+  await Promise.all(tasks);
+  await f.drain();
+  assert.equal(requests, 0);
+});

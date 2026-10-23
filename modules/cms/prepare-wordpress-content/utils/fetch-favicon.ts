@@ -38,7 +38,7 @@ export default class FetchFavicon {
   }
 
   async fetch (): Promise<void> {
-    const response = await fetch(this.url, { signal: AbortSignal.timeout(30000) })
+    const response = await fetch(this.url, { signal: AbortSignal.timeout(10000) })
     if (!response.ok) {
       return Promise.reject(new Error('Could not fetch webpage'))
     }

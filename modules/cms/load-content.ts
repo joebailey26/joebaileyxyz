@@ -48,19 +48,33 @@ function getRequiredInfoFromPosts (posts: CmsFeedPost[]): UnpreparedPost[] {
 
 export const postsPerPage = 10
 
+const concurrency = 4
+
+// Runs `task` over every item with a few in flight at once, keeping the order; the first failure rejects.
+async function mapConcurrently<T, R> (items: T[], task: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = []
+  // The workers share one iterator, so each item is taken once.
+  const entries = items.entries()
+  const worker = async () => {
+    for (const [index, item] of entries) {
+      results[index] = await task(item)
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker))
+
+  return results
+}
+
 // Fetches both sections from the CMS feed, paginated as the site shows them, and prepares post content.
 export async function loadCmsContent (): Promise<CmsContent> {
   const sections = await cmsContent.fetchCmsContent({ baseUrl: process.env.CMS_API_URL, token: process.env.CMS_BUILD_TOKEN, fetchImpl: fetch, perPage: postsPerPage })
   const state: CmsContent = { blog: [], projects: [] }
   for (const section of ['blog', 'projects'] as CmsSection[]) {
-    state[section] = []
-    for (const page of sections[section]) {
-      const preparedPage = []
-      for (const post of getRequiredInfoFromPosts(page)) {
-        preparedPage.push(await prepareWordPressContent(post))
-      }
-      state[section].push(preparedPage)
-    }
+    const pages = sections[section].map(getRequiredInfoFromPosts)
+    const prepared = await mapConcurrently(pages.flat(), prepareWordPressContent)
+    // Back into the pages that the site paginates by.
+    let offset = 0
+    state[section] = pages.map((page) => prepared.slice(offset, offset += page.length))
   }
 
   return state
