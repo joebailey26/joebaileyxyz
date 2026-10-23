@@ -183,9 +183,9 @@
             </div>
             <div class="col-md-12">
               <div class="form-group">
-                <turnstile-widget
+                <TurnstileWidget
                   ref="turnstile"
-                  :site-key="$config.turnstileSiteKey"
+                  :site-key="$config.public.turnstileSiteKey"
                   @token="turnstileToken = $event"
                 />
               </div>
@@ -201,9 +201,9 @@
               <p v-show="!submitted">
               &nbsp;
               </p>
-              <transition name="fade">
+              <Transition name="fade">
                 <p v-show="submitted" class="message" role="status" v-text="submitted" />
-              </transition>
+              </Transition>
             </div>
           </div>
         </form>

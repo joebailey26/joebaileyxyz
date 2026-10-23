@@ -72,14 +72,15 @@
 
 <script>
 import { toHtml, icon } from '@fortawesome/fontawesome-svg-core'
-const { faSun, faMoon } = require('@fortawesome/free-solid-svg-icons')
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   props: {
-    model: {
+    modelValue: {
       type: Boolean
     }
   },
+  emits: ['update:modelValue'],
   data () {
     return {
       sunIcon: this.getSvgForCSS(faSun),
@@ -89,10 +90,10 @@ export default {
   computed: {
     inputVal: {
       get () {
-        return this.model
+        return this.modelValue
       },
       set (val) {
-        this.$emit('input', val)
+        this.$emit('update:modelValue', val)
       }
     }
   },
@@ -100,8 +101,9 @@ export default {
     getSvgForCSS (svg) {
       const { abstract } = icon(svg)
       const iconAsSVG = toHtml(abstract[0])
-      const iconAsBase64 = Buffer.from(iconAsSVG).toString('base64')
-      return `data:image/svg+xml;base64,${iconAsBase64}`
+
+      // The SVG markup is ASCII, so btoa encodes it the same on the server and in the browser.
+      return `data:image/svg+xml;base64,${btoa(iconAsSVG)}`
     }
   }
 }

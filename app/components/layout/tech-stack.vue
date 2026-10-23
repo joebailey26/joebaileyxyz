@@ -19,35 +19,35 @@
 
 <template>
   <div v-if="techStack" class="tech-stack">
-    <template v-for="techName, index in techStack">
-      <i v-if="techName === 'Firebase'" :key="techName + index + Math.random()" title="Firebase">
+    <template v-for="techName, index in techStack" :key="techName + index">
+      <i v-if="techName === 'Firebase'" title="Firebase">
         <font-awesome-icon :icon="['fa-brands', 'fa-google']" />
       </i>
-      <i v-if="techName === 'PHP'" :key="techName + index + Math.random()" title="PHP">
+      <i v-if="techName === 'PHP'" title="PHP">
         <font-awesome-icon :icon="['fa-brands', 'fa-php']" />
       </i>
-      <i v-if="techName === 'Vue'" :key="techName + index + Math.random()" title="Vue">
+      <i v-if="techName === 'Vue'" title="Vue">
         <font-awesome-icon :icon="['fa-brands', 'fa-vuejs']" />
       </i>
-      <i v-if="techName === 'React'" :key="techName + index + Math.random()" title="React">
+      <i v-if="techName === 'React'" title="React">
         <font-awesome-icon :icon="['fa-brands', 'fa-react']" />
       </i>
-      <i v-if="techName === 'WordPress'" :key="techName + index + Math.random()" title="WordPress">
+      <i v-if="techName === 'WordPress'" title="WordPress">
         <font-awesome-icon :icon="['fa-brands', 'fa-wordpress']" />
       </i>
-      <i v-if="techName === 'Figma'" :key="techName + index + Math.random()" title="Figma">
+      <i v-if="techName === 'Figma'" title="Figma">
         <font-awesome-icon :icon="['fa-brands', 'fa-figma']" />
       </i>
-      <i v-if="techName === 'Custom'" :key="techName + index + Math.random()" title="Custom Solution">
+      <i v-if="techName === 'Custom'" title="Custom Solution">
         <font-awesome-icon :icon="['fa-solid', 'fa-file-code']" />
       </i>
-      <i v-if="techName === 'Netlify'" :key="techName + index + Math.random()" title="Netlify">
+      <i v-if="techName === 'Netlify'" title="Netlify">
         <font-awesome-icon :icon="['fa-solid', 'fa-cloud']" />
       </i>
-      <i v-if="techName === 'XD'" :key="techName + index + Math.random()" title="Adobe XD">
+      <i v-if="techName === 'XD'" title="Adobe XD">
         <font-awesome-icon :icon="['fa-solid', 'fa-pen-nib']" />
       </i>
-      <i v-if="techName === 'InDesign'" :key="techName + index + Math.random()" title="Adobe InDesign">
+      <i v-if="techName === 'InDesign'" title="Adobe InDesign">
         <font-awesome-icon :icon="['fa-solid', 'fa-book']" />
       </i>
     </template>

@@ -19,43 +19,36 @@
 </style>
 
 <template>
-  <main class="error">
-    <div v-if="error.statusCode === 404" class="error-container">
-      <h1>
-        404 - Page not found
-      </h1>
-      <a class="btn" href="/">Go back home</a>
-    </div>
-    <div v-else>
-      <h1>
-        {{ error.statusCode }} - An error occurred
-      </h1>
-      <p>{{ message }}</p>
-    </div>
-  </main>
+  <NuxtLayout>
+    <main class="error">
+      <div v-if="statusCode === 404" class="error-container">
+        <h1>
+          404 - Page not found
+        </h1>
+        <a class="btn" href="/">Go back home</a>
+      </div>
+      <div v-else>
+        <h1>
+          {{ statusCode }} - An error occurred
+        </h1>
+        <p>{{ message }}</p>
+      </div>
+    </main>
+  </NuxtLayout>
 </template>
 
-<script>
-export default {
-  name: 'NuxtError',
-  props: {
-    error: {
-      type: Object,
-      default: null
-    }
-  },
-  head () {
-    return {
-      title: this.message
-    }
-  },
-  computed: {
-    statusCode () {
-      return (this.error && this.error.statusCode) || 500
-    },
-    message () {
-      return this.error.message || 'Error'
-    }
+<script setup>
+const props = defineProps({
+  error: {
+    type: Object,
+    default: null
   }
-}
+})
+
+const statusCode = computed(() => props.error?.status || props.error?.statusCode || 500)
+const message = computed(() => props.error?.message || 'Error')
+
+useHead({
+  title: message
+})
 </script>

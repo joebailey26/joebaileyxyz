@@ -42,8 +42,8 @@
 
 <template>
   <div v-if="items" class="icons">
-    <template v-for="item, index in items">
-      <div :key="item" class="icon" :class="{ 'current': index === current }" @click="bubble(index)" />
+    <template v-for="item, index in items" :key="item">
+      <div class="icon" :class="{ 'current': index === current }" @click="bubble(index)" />
     </template>
   </div>
 </template>
@@ -60,6 +60,7 @@ export default {
       required: true
     }
   },
+  emits: ['icon-clicked'],
   methods: {
     bubble (i) {
       this.$emit('icon-clicked', i)

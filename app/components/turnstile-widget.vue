@@ -50,13 +50,14 @@ export default {
   props: {
     siteKey: { type: String, default: '' }
   },
+  emits: ['token'],
   data () {
     return { widgetId: null, error: '', disposed: false }
   },
   mounted () {
     this.renderWidget()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.disposed = true
     if (this.widgetId !== null && window.turnstile) {
       window.turnstile.remove(this.widgetId)

@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { config, library } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import {
   faLinkedin,
   faGithub,
@@ -8,7 +8,10 @@ import {
   faVuejs,
   faReact,
   faWordpress,
-  faFigma
+  faFigma,
+  faFacebook,
+  faTwitter,
+  faWhatsapp
 } from '@fortawesome/free-brands-svg-icons'
 import {
   faFileCode,
@@ -17,10 +20,14 @@ import {
   faBook,
   faLongArrowAltLeft,
   faLongArrowAltRight,
-  faPlus
+  faPlus,
+  faShareAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { faHandPointLeft } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// The stylesheet is bundled above, so server-rendered icons are sized before hydration.
+config.autoAddCss = false
 
 library.add(
   faLinkedin,
@@ -31,6 +38,9 @@ library.add(
   faReact,
   faWordpress,
   faFigma,
+  faFacebook,
+  faTwitter,
+  faWhatsapp,
   faFileCode,
   faCloud,
   faPenNib,
@@ -38,7 +48,10 @@ library.add(
   faLongArrowAltLeft,
   faLongArrowAltRight,
   faHandPointLeft,
-  faPlus
+  faPlus,
+  faShareAlt
 )
 
-Vue.component('FontAwesomeIcon', FontAwesomeIcon)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon)
+})

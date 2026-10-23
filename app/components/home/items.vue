@@ -118,10 +118,9 @@
 <template>
   <div v-if="items" class="items">
     <div ref="container" class="row grid" @scroll="containerScroll">
-      <template v-for="item, index in items">
+      <template v-for="item, index in items" :key="`${item.title}${index}`">
         <HomeItem
           ref="item"
-          :key="`${item.title}${index}`"
           :item="item"
           :link-prefix="linkPrefix"
           :show-link="showLinks"
@@ -179,7 +178,7 @@ export default {
     this.dragScrollWatcher()
     window.addEventListener('resize', this.dragScrollWatcher)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.updateWidth)
     this.stopDragScroll()
     window.removeEventListener('resize', this.dragScrollWatcher)

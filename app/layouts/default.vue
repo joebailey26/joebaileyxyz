@@ -28,18 +28,17 @@
               </svg>
               Contact
             </a>
-            <LayoutDarkmodeToggle :model="darkmode" @input="handleDarkmodeChange" />
+            <LayoutDarkmodeToggle :model-value="darkmode" @update:model-value="handleDarkmodeChange" />
           </div>
         </div>
       </div>
     </nav>
-    <nuxt />
+    <slot />
     <LayoutFooter />
   </div>
 </template>
 
 <script>
-
 export default {
   data () {
     return {

@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 class CopyToClipboard {
   constructor (container) {
     this.container = container
@@ -16,14 +14,10 @@ class CopyToClipboard {
     })
   }
 }
-function registerCopyToClipboardContainers () {
-  document.querySelectorAll('.js-copy-to-clipboard-container').forEach((element) => {
-    return new CopyToClipboard(element)
+
+// Wires up the copy buttons that the build adds to highlighted code blocks in post content.
+export function useCopyToClipboard () {
+  onMounted(() => {
+    document.querySelectorAll('.js-copy-to-clipboard-container').forEach((element) => new CopyToClipboard(element))
   })
 }
-
-Vue.mixin({
-  methods: {
-    registerCopyToClipboardContainers
-  }
-})
