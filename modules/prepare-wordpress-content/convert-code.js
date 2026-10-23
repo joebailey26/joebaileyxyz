@@ -8,6 +8,12 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   if (!matches) {
     return postContent
   }
+  const branch = process.env.WORKERS_CI_BRANCH
+  if (!process.env.TORCHLIGHT_TOKEN && branch && branch !== 'master') {
+    // Workers Builds keeps a separate variable set for preview builds, which may lack the secret.
+    console.warn('TORCHLIGHT_TOKEN is not set; skipping syntax highlighting for this preview build')
+    return postContent
+  }
   const $ = load(postContent, null, false)
   $('pre').removeClass('wp-block-code')
 
