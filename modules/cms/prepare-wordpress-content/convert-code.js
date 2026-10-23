@@ -1,6 +1,26 @@
 import { load } from 'cheerio'
+import path from 'node:path'
 import he from 'he'
+import { cacheDirectory } from './utils/cache-directory.js'
 import { makeConfig, Block, torchlight, FileCache } from '@torchlight-api/client'
+
+let initialised
+
+// Posts are highlighted concurrently, so the shared client is configured once.
+function initTorchlight () {
+  initialised ||= makeConfig({
+    theme: 'dark-plus'
+  }).then((config) => {
+    torchlight.init(
+      config,
+      new FileCache({
+        directory: path.join(cacheDirectory, 'torchlight')
+      })
+    )
+  })
+
+  return initialised
+}
 
 export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   const regex = /<pre.*?>/g
@@ -19,14 +39,7 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   const $ = load(postContent, null, false)
   $('pre').removeClass('wp-block-code')
 
-  torchlight.init(
-    await makeConfig({
-      theme: 'dark-plus'
-    }),
-    new FileCache({
-      directory: './.torchlight-cache'
-    })
-  )
+  await initTorchlight()
   const torchlightBlocks = []
 
   // Highlight all code
