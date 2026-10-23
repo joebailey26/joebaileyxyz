@@ -27,7 +27,7 @@
     "BLOG_CATEGORY": "blog",
     "PROJECTS_CATEGORY": "projects",
     "CF_ACCOUNT_ID": "8259f9bfa45a74a587d6a90822de442d",
-    "CF_BUILD_TRIGGER_ID": "replace-with-workers-builds-trigger-uuid",
+    "CF_WORKER_TAG": "081e89f4489d43c18284408c4f2ded01",
     "SITE_BRANCH": "master"
   },
   "triggers": { "crons": ["*/5 * * * *"] }
