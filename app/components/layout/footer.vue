@@ -42,6 +42,7 @@ footer {
           <div class="copyright">
             &copy; {{ new Date().getFullYear() }} Joe Bailey. All rights
             reserved.
+            <a href="https://cms.joebailey.xyz" rel="noopener noreferrer" target="_blank">Login</a>
           </div>
           <div class="socials">
             <a
