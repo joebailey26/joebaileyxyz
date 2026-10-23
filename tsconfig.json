@@ -3,9 +3,8 @@
   "compilerOptions": {
     "lib": ["ES2020", "DOM"],
     "rootDir": "",
-    "outDir": "dist",
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "outDir": "dist"
   },
-  "include": ["packages/algolia-search-netlify/*"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".nuxt", "dist", "cms"]
 }
