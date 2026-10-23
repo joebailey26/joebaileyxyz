@@ -35,7 +35,7 @@ export default async function addFaviconToLinks (postContent) {
     // Update the link to open in a new tab if it is an external one
     $(elem).attr('target', '_blank')
     // Set the alt tag to the domain
-    const alt = parsedUrl.hostname + ' favicon'
+    const alt = `${parsedUrl.hostname} favicon`
     // Push into the promises to fetch the favicon
     promises.push(
       FaviconFetcher.getFavicon()

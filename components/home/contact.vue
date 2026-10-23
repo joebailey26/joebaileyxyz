@@ -139,14 +139,8 @@
           class="contact-form"
           method="post"
           name="contactForm"
-          netlify
           @submit.prevent="submit"
         >
-          <input
-            type="hidden"
-            name="form-name"
-            value="contactForm"
-          >
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -251,29 +245,20 @@ export default {
         document.querySelector('#formSubmit').disabled = !cansubmit
       }
     },
-    submit () {
+    async submit () {
       try {
-        const formData = new FormData()
-        formData.append('form-name', 'contactForm')
-        Object.keys(this.form).forEach((key) => {
-          formData.append(key, this.form[key])
-        })
-
-        const timestamp = Math.floor(Date.now() / 1000)
-
-        fetch(`/?t=${timestamp}`, {
+        const response = await fetch('/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams(formData)
+          body: new FormData(document.forms.contactForm)
         })
-
+        if (!response.ok) {
+          throw new Error((await response.json().catch(() => ({}))).error || `HTTP ${response.status}`)
+        }
         localStorage.setItem('contactForm', '')
         this.form = {}
         this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
       } catch (e) {
-        this.submitted = e.toString() + ' Please try again.'
+        this.submitted = `${e.toString()} Please try again.`
       }
     }
   }

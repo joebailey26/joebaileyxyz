@@ -25,7 +25,10 @@
     "ACCESS_TEAM_DOMAIN": "galexia.cloudflareaccess.com",
     "ACCESS_AUD": "21a71f109f6250625cf12effeb8d5ee76c4d14d9e0407d5ba341b7e56c8767d8",
     "BLOG_CATEGORY": "blog",
-    "PROJECTS_CATEGORY": "projects"
+    "PROJECTS_CATEGORY": "projects",
+    "CF_ACCOUNT_ID": "8259f9bfa45a74a587d6a90822de442d",
+    "CF_BUILD_TRIGGER_ID": "replace-with-workers-builds-trigger-uuid",
+    "SITE_BRANCH": "master"
   },
   "triggers": { "crons": ["*/5 * * * *"] }
 }

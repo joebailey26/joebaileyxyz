@@ -89,8 +89,8 @@ dist
 # Vim swap files
 *.swp
 
-# Local Netlify folder
-.netlify
+# Local Wrangler state
+.wrangler
 
 # Yarn
 .pnp.*

@@ -1,4 +1,3 @@
-
 /**
  * https://destroytoday.com/blog/100vw-and-the-horizontal-overflow-you-probably-didnt-know-about
  * "If you use width: 100vw on a website, there’s a good chance the horizontal scrollbar is visible for many users.

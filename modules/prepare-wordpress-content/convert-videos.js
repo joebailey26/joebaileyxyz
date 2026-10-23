@@ -24,7 +24,7 @@ export default async function downloadAndReplaceImages (postContent) {
     const fileExtension = path.extname(videoUrl)
     const fileName = encodeURIComponent(path.basename(videoUrl)).toLowerCase()
     const fileNameWithoutExtension = encodeURIComponent(path.basename(videoUrl, fileExtension)).toLowerCase()
-    const posterImageAbsolutePath = path.join(__dirname, '..', '..', 'static', 'img', 'wordpress', fileNameWithoutExtension + '.jpg')
+    const posterImageAbsolutePath = path.join(__dirname, '..', '..', 'static', 'img', 'wordpress', `${fileNameWithoutExtension}.jpg`)
     const localAbsolutePath = path.join(__dirname, '..', '..', 'static', 'video', 'wordpress', fileName)
 
     const loadVideo = () => {

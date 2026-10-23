@@ -9,9 +9,6 @@
   h1 {
     font-size: clamp(1.75rem, 1vw + 1rem, 3rem)
   }
-  #search {
-    margin-top: 2rem
-  }
   .btn {
     margin-top: 2rem;
     margin-right: auto;
@@ -27,7 +24,6 @@
       <h1>
         404 - Page not found
       </h1>
-      <AlgoliaSearchNetlify />
       <a class="btn" href="/">Go back home</a>
     </div>
     <div v-else>
