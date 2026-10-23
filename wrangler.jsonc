@@ -11,7 +11,8 @@
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]
+    // The Worker runs for every request so it can redirect www to the apex.
+    "run_worker_first": true
   },
   "routes": [
     { "pattern": "joebailey.xyz", "custom_domain": true },

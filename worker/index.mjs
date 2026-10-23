@@ -37,7 +37,12 @@ export async function handleContact(request, env) {
 
 export default {
   async fetch(request, env) {
-    if (new URL(request.url).pathname === '/api/contact') return handleContact(request, env);
+    const url = new URL(request.url);
+    if (url.hostname === 'www.joebailey.xyz') {
+      url.hostname = 'joebailey.xyz';
+      return Response.redirect(url.toString(), 301);
+    }
+    if (url.pathname === '/api/contact') return handleContact(request, env);
     return env.ASSETS.fetch(request);
   }
 };
