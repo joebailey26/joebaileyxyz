@@ -4,5 +4,7 @@
     "lib": ["ES2020", "DOM"],
     "rootDir": "",
     "outDir": "dist"
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".nuxt", "dist", "cms"]
 }

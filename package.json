@@ -13,6 +13,7 @@
     "cms:dev": "npm --prefix cms run dev",
     "cms:test": "npm --prefix cms test",
     "cms:build": "npm --prefix cms run build",
+    "typecheck": "node scripts/typecheck.mjs",
     "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "fix:scripts": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
     "lint:styles": "stylelint \"**/*.{vue,scss}\"",

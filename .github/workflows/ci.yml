@@ -20,6 +20,7 @@ jobs:
         check:
           - { name: ESLint, script: lint:scripts }
           - { name: Stylelint, script: lint:styles }
+          - { name: Typecheck, script: typecheck }
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
