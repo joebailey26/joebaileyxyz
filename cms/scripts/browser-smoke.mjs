@@ -132,12 +132,19 @@ try {
     return result.text;
   });
   assert.equal(requested, 'missing');
-  await second.page.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Original image ready'), null, { timeout: 20000 });
-  const materialized = await second.frame.evaluate(async () => {
+  // Dirty detection can immediately replace the download status. Poll the
+  // completed WordPress operation from Node instead of relying on that label.
+  const materializeDeadline = Date.now() + 20000;
+  let materialized;
+  do {
+    materialized = await second.frame.evaluate(async () => {
     const result = await window.playground.run({ code: `<?php define('JOEBAILEY_CMS_CHECKPOINT', true); require '/wordpress/wp-load.php';
       $id = get_posts(array('post_type' => 'attachment', 'title' => 'Browser fixture', 'posts_per_page' => 1))[0]->ID; echo wp_json_encode(array(file_exists(get_attached_file($id)), joebailey_cms_require_media($id), count(joebailey_cms_virtual()['files'])));` });
     return JSON.parse(result.text);
-  });
+    });
+    if (materialized[0] && materialized[1] && materialized[2] === 0) break;
+    await new Promise(resolve => setTimeout(resolve, 500));
+  } while (Date.now() < materializeDeadline);
   assert.deepEqual(materialized, [true, true, 0]);
   console.log('Verifying Sync now saves immediately between automatic intervals…');
   await second.frame.evaluate(async () => {

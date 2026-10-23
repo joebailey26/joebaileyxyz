@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/build.mjs && wrangler dev --host 127.0.0.1 --ip 127.0.0.1 --port 8787",
     "build": "node scripts/build.mjs",
+    "build:ci": "node scripts/prepare-runtime.mjs && node scripts/build.mjs --production",
     "runtime": "node scripts/prepare-runtime.mjs",
     "runtime:upload": "node scripts/upload-runtime.mjs",
     "migrate": "node scripts/migrate.mjs",
@@ -15,7 +16,9 @@
     "check": "node --check src/worker.mjs && node --check web/editor.js",
     "db:local": "wrangler d1 migrations apply DB --local",
     "db:remote": "wrangler d1 migrations apply DB --remote",
-    "deploy": "node scripts/build.mjs --production && wrangler deploy"
+    "deploy": "node scripts/build.mjs --production && node scripts/deploy.mjs",
+    "deploy:production": "node scripts/deploy.mjs",
+    "deploy:preview": "node scripts/deploy.mjs --preview"
   },
   "dependencies": {
     "@php-wasm/progress": "3.1.60",

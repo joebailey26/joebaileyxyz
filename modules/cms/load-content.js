@@ -46,15 +46,26 @@ function getRequiredInfoFromPosts (posts) {
 
 export const postsPerPage = 10
 
+const concurrency = 4
+
+// Runs `task` over every item with a few in flight at once; the first failure rejects.
+async function mapConcurrently (items, task) {
+  const queue = [...items]
+  const worker = async () => {
+    while (queue.length) {
+      await task(queue.shift())
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, queue.length) }, worker))
+}
+
 // Fetches both sections from the CMS feed, paginated as the site shows them, and prepares post content.
 export async function loadCmsContent () {
   const sections = await cmsContent.fetchCmsContent({ baseUrl: process.env.CMS_API_URL, token: process.env.CMS_BUILD_TOKEN, fetchImpl: fetch, perPage: postsPerPage })
   const state = {}
   for (const section of ['blog', 'projects']) {
     state[section] = sections[section].map(getRequiredInfoFromPosts)
-    for (const post of state[section].flat()) {
-      await prepareWordPressContent(post)
-    }
+    await mapConcurrently(state[section].flat(), prepareWordPressContent)
   }
 
   return state
