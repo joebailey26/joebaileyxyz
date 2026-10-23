@@ -104,6 +104,7 @@ export default {
    */
   modules: [
     '~/modules/only-once.js',
+    '~/modules/sitemap.js',
     '@aceforth/nuxt-optimized-images'
   ],
   optimizedImages: {
@@ -111,7 +112,7 @@ export default {
     optimizeImagesInDev: true
   },
   generate: {
-    fallback: true,
+    fallback: '404.html',
     cache: { ignore: ['cms/**'] }
   },
   router: {

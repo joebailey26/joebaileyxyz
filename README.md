@@ -1,18 +1,11 @@
 <h1 style="text-align: center">Welcome to the Joe Bailey Website repo</h1>
 <p style="text-align: center">This website showcases Joe Bailey's work.</p>
 <p style="text-align: center"><a href="https://joebailey.xyz">Live Site</a></p>
-<p style="text-align: center">
-  <a href="https://app.netlify.com/sites/heuristic-bell-6e94b3/deploys">
-    <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/0f6be2d7-6002-4d40-870b-9f3ad6ba7c49/deploy-status">
-  </a>
-</p>
-
 ## Install
 
 ```sh
 yarn install
-npx netlify login
-npx netlify link
+npx wrangler login
 ```
 
 ## Development
@@ -23,11 +16,17 @@ The browser-based WordPress CMS integration is documented in [cms/README.md](cms
 yarn dev
 ```
 
-## Build
+## Build and deploy
 
 ```sh
-yarn generate
+yarn generate     # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
+yarn build        # generate, then update the Algolia search index
+yarn deploy       # build, then wrangler deploy
 ```
+
+Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch, with build command `yarn build` and deploy command `npx wrangler deploy`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `ALGOLIA_ADMIN_API_KEY` as build variables/secrets.
+
+`scripts/algolia-index.mjs` replaces the old Netlify crawler: it reads the generated pages in `dist` and replaces the records in the Algolia index the search box queries. It only writes when `WORKERS_CI_BRANCH` is `master` (or `ALGOLIA_INDEX=1`); `yarn search:index --dry-run` prints the records without contacting Algolia. The site is served by the `joebailey` Worker ([wrangler.jsonc](wrangler.jsonc)) using static assets; `static/_headers` and `static/_redirects` carry headers and redirects, and `worker/index.mjs` handles `POST /api/contact` through Cloudflare Email Routing (`send_email` binding; enable Email Routing and verify `joe@joebailey.xyz` as a destination).
 
 ## Visual Style Guide
 
@@ -165,7 +164,7 @@ Further paragraphs come after blank lines.
 
 ### Branching Strategy
 
-Master branch is for tested code and is deployed directly to **Netlify**. Do not push anything to master. Always create pull requests and test code.
+Master branch is for tested code and is deployed directly to **Cloudflare**. Do not push anything to master. Always create pull requests and test code.
 
 Dev branch is for development work on the site. Should always contain close to production ready code requiring minimal commits to get to production status.
 

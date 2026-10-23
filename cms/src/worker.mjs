@@ -80,13 +80,14 @@ export async function triggerBuild(env, revision) {
     WHERE id = ? AND status = 'complete' AND build_status IN ('pending', 'failed') AND build_claim_expires < ? RETURNING id`, claim, now() + 120, revision, now()).first();
   if (!claimed) return;
   try {
-    assert(env.NETLIFY_BUILD_HOOK && /^https:\/\/api\.netlify\.com\/build_hooks\/[a-zA-Z0-9]+$/.test(env.NETLIFY_BUILD_HOOK), 'Netlify build hook is not configured', 503);
-    const response = await fetch(env.NETLIFY_BUILD_HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}', signal: AbortSignal.timeout(20000), redirect: 'error' });
-    assert(response.ok, `Netlify returned HTTP ${response.status}`, 502);
+    assert(env.CF_ACCOUNT_ID && env.CF_BUILD_TRIGGER_ID && env.CF_BUILD_API_TOKEN, 'Cloudflare build trigger is not configured', 503);
+    const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/triggers/${encodeURIComponent(env.CF_BUILD_TRIGGER_ID)}/builds`;
+    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.CF_BUILD_API_TOKEN}` }, body: JSON.stringify({ branch: env.SITE_BRANCH || 'master' }), signal: AbortSignal.timeout(20000), redirect: 'error' });
+    assert(response.ok, `Cloudflare returned HTTP ${response.status}`, 502);
     await statement(env, "UPDATE snapshots SET build_status = 'sent', build_error = NULL, build_claim_expires = 0 WHERE id = ? AND build_claim = ? AND build_status IN ('pending', 'failed')", revision, claim).run();
   } catch (error) {
-    // Never persist/log the secret hook URL from a network error.
-    const message = error.status ? error.message : 'Netlify request failed; retry is available';
+    // Never persist/log credentials from a network error.
+    const message = error.status ? error.message : 'Cloudflare build request failed; retry is available';
     await statement(env, "UPDATE snapshots SET build_status = 'failed', build_error = ?, build_claim_expires = 0 WHERE id = ? AND build_claim = ? AND build_status IN ('pending', 'failed')", message, revision, claim).run();
   }
 }

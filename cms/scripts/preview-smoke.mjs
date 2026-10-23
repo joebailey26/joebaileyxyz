@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 process.env.PLAYWRIGHT_BROWSERS_PATH ||= join(root, '.cache/ms-playwright');
 const { chromium } = await import('playwright');
-const origin = process.argv[2] || 'https://deploy-preview-149--joebailey.netlify.app';
+const origin = process.argv[2] || 'https://joebailey.xyz';
 const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const paths = ['/blog/', '/blog/page/2/', '/blog/page/3/', '/blog/page/4/', '/blog/page/5/', '/projects/', '/blog/how-to-download-a-google-sheet-on-a-cron/', '/blog/adding-syntax-highlighting-to-my-blog-with-torchlight/', '/blog/dragging-to-scroll-with-javascript/', '/blog/dark-mode/', '/projects/tv-shows/'];
