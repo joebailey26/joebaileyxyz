@@ -10,7 +10,24 @@ import { openArchive } from './zip-reader.mjs';
 export async function verifyArchive(path, checksum) {
   const hash = createHash('sha256');
   for await (const chunk of createReadStream(path)) hash.update(chunk);
-  if (hash.digest('hex') !== checksum) throw new Error('Runtime artifact checksum mismatch');
+  if (hash.digest('hex') !== checksum) throw Object.assign(new Error('Runtime artifact checksum mismatch'), { code: 'CMS_RUNTIME_CHECKSUM' });
+}
+
+export async function ensureArchive(url, destination, checksum, { local = false, fetchImpl = fetch } = {}) {
+  const existing = await stat(destination).catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  if (existing) {
+    try { await verifyArchive(destination, checksum); return; }
+    catch (error) {
+      // Cloudflare can restore only part of its build cache. A supplied source
+      // archive belongs to the user; only discard our generated cache copy.
+      if (local || error.code !== 'CMS_RUNTIME_CHECKSUM') throw error;
+      await rm(destination);
+    }
+  } else if (local) throw new Error(`Runtime ZIP not found: ${destination}`);
+  await downloadArchive(url, destination, checksum, { fetchImpl });
 }
 
 export async function downloadArchive(url, destination, checksum, { fetchImpl = fetch } = {}) {

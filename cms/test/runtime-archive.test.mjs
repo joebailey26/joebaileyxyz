@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { zipSync, strToU8 } from 'fflate';
-import { downloadArchive, extractZip, archivePath, preparedRuntime, runtimeInventory, extractTar } from '../scripts/runtime-archive.mjs';
+import { downloadArchive, ensureArchive, extractZip, archivePath, preparedRuntime, runtimeInventory, extractTar } from '../scripts/runtime-archive.mjs';
 
 const checksum = bytes => createHash('sha256').update(bytes).digest('hex');
 async function workspace(t) {
@@ -68,4 +68,24 @@ test('runtime reuse rejects missing and truncated files and mismatched pins', as
   await writeFile(join(assets, 'assets/core.wasm'), 'complete');
   await rm(join(assets, 'remote.html'));
   assert.equal(await preparedRuntime(root, metadata), null);
+});
+
+test('partial cache restores redownload the archive but never overwrite a bad supplied ZIP', async t => {
+  const root = await workspace(t);
+  const destination = join(root, 'runtime.zip');
+  const valid = 'complete pinned archive';
+  let downloads = 0;
+  const options = { fetchImpl: async () => { downloads++; return new Response(valid); } };
+  await writeFile(destination, 'partial build cache');
+  await ensureArchive('https://example.test/runtime.zip', destination, checksum(valid), options);
+  assert.equal(await readFile(destination, 'utf8'), valid);
+  assert.equal(downloads, 1);
+  await ensureArchive('https://example.test/runtime.zip', destination, checksum(valid), options);
+  assert.equal(downloads, 1, 'a verified cache needs no download');
+  await writeFile(destination, 'bad supplied source');
+  await assert.rejects(ensureArchive('https://example.test/runtime.zip', destination, checksum(valid), { ...options, local: true }), /checksum mismatch/);
+  assert.equal(await readFile(destination, 'utf8'), 'bad supplied source');
+  assert.equal(downloads, 1);
+  await assert.rejects(ensureArchive('https://example.test/runtime.zip', destination, checksum(valid), { fetchImpl: async () => new Response('missing', { status: 503 }) }), /HTTP 503/);
+  assert.deepEqual(await readdir(root), []);
 });

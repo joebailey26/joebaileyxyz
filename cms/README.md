@@ -17,7 +17,7 @@ pnpm --dir cms run dev
 
 The runtime command streams the official Playground archive from the permanent GitHub release URL pinned in `runtime.lock.json`, verifies its SHA-256, and extracts it. It needs neither GitHub CLI nor a GitHub token. The release contains the unchanged upstream artifact; its repository, commit and artifact ID remain in the lock as provenance. An already downloaded, matching ZIP can be supplied with `pnpm --dir cms run runtime C:/path/playground.zip`. The archive is approximately 685 MiB and is excluded from Git. Failed downloads leave no reusable partial archive. ZIP extraction uses Node on Windows and Linux; the enclosed gzip tarball uses the system `tar` command.
 
-Prepared runtime reuse checks its pinned checksum and file inventory. Missing or truncated files cause preparation to run again from the verified archive. Every asset build reconstructs `dist` so stale or incomplete build output cannot be deployed.
+Prepared runtime reuse checks its pinned checksum and file inventory. Missing or truncated files cause preparation to run again from the verified archive. If a partial Cloudflare cache restore corrupts the generated ZIP, preparation discards it and downloads a fresh, checksum-verified copy. A mismatched ZIP supplied explicitly by the user fails without being changed. Every asset build reconstructs `dist` so stale or incomplete build output cannot be deployed.
 
 Open the localhost address printed by Wrangler. `.dev.vars` enables a localhost-only authentication bypass. It cannot bypass Access on a deployed hostname. Use a local build token of at least 32 random characters. Never put production secrets in tracked files.
 

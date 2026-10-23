@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile, stat, readdir, rm } from 'node:fs/promises';
 import { dirname, resolve, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { downloadArchive, verifyArchive, extractZip, extractTar, preparedRuntime, runtimeInventory } from './runtime-archive.mjs';
+import { ensureArchive, extractZip, extractTar, preparedRuntime, runtimeInventory } from './runtime-archive.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const lock = JSON.parse(await readFile(join(root, 'runtime.lock.json'), 'utf8'));
@@ -12,11 +12,8 @@ if (!process.argv[2] && await preparedRuntime(root, lock)) {
   process.exit(0);
 }
 const archive = process.argv[2] ? resolve(process.argv[2]) : join(cache, `playground-${lock.playground}.zip`);
-if (!await stat(archive).catch(() => null)) {
-  if (process.argv[2]) throw new Error(`Runtime ZIP not found: ${archive}`);
-  console.log('Downloading the checksum-pinned Playground release (approximately 685 MiB)…');
-  await downloadArchive(lock.downloadUrl, archive, lock.artifactSha256);
-} else await verifyArchive(archive, lock.artifactSha256);
+console.log('Verifying the pinned archive; missing or corrupt generated caches download from the release (approximately 685 MiB)…');
+await ensureArchive(lock.downloadUrl, archive, lock.artifactSha256, { local: Boolean(process.argv[2]) });
 
 const destination = join(root, 'runtime');
 // Only this fixed, resolved directory contains disposable extracted runtime data.
