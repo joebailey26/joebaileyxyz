@@ -74,14 +74,28 @@ async function binaryBody(request, limit) {
   return bytes;
 }
 
+async function buildTriggerId(env) {
+  if (env.CF_BUILD_TRIGGER_ID) return env.CF_BUILD_TRIGGER_ID;
+  assert(env.CF_WORKER_TAG, 'Cloudflare build trigger is not configured', 503);
+  const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/workers/${encodeURIComponent(env.CF_WORKER_TAG)}/triggers`;
+  const response = await fetch(url, { headers: { Authorization: `Bearer ${env.CF_BUILD_API_TOKEN}` }, signal: AbortSignal.timeout(20000), redirect: 'error' });
+  assert(response.ok, `Cloudflare returned HTTP ${response.status} listing build triggers`, 502);
+  const { result } = await response.json();
+  const branch = env.SITE_BRANCH || 'master';
+  const triggers = Array.isArray(result) ? result : [];
+  const trigger = triggers.find(item => Array.isArray(item.branch_includes) && item.branch_includes.includes(branch)) || triggers[0];
+  assert(trigger?.trigger_uuid, 'No Workers Builds trigger found for the site Worker', 502);
+  return trigger.trigger_uuid;
+}
+
 export async function triggerBuild(env, revision) {
   const claim = crypto.randomUUID();
   const claimed = await statement(env, `UPDATE snapshots SET build_claim = ?, build_claim_expires = ?, build_attempts = build_attempts + 1
     WHERE id = ? AND status = 'complete' AND build_status IN ('pending', 'failed') AND build_claim_expires < ? RETURNING id`, claim, now() + 120, revision, now()).first();
   if (!claimed) return;
   try {
-    assert(env.CF_ACCOUNT_ID && env.CF_BUILD_TRIGGER_ID && env.CF_BUILD_API_TOKEN, 'Cloudflare build trigger is not configured', 503);
-    const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/triggers/${encodeURIComponent(env.CF_BUILD_TRIGGER_ID)}/builds`;
+    assert(env.CF_ACCOUNT_ID && env.CF_BUILD_API_TOKEN, 'Cloudflare build trigger is not configured', 503);
+    const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/triggers/${encodeURIComponent(await buildTriggerId(env))}/builds`;
     const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.CF_BUILD_API_TOKEN}` }, body: JSON.stringify({ branch: env.SITE_BRANCH || 'master' }), signal: AbortSignal.timeout(20000), redirect: 'error' });
     assert(response.ok, `Cloudflare returned HTTP ${response.status}`, 502);
     await statement(env, "UPDATE snapshots SET build_status = 'sent', build_error = NULL, build_claim_expires = 0 WHERE id = ? AND build_claim = ? AND build_status IN ('pending', 'failed')", revision, claim).run();
