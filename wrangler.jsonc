@@ -16,5 +16,10 @@
     { "pattern": "www.joebailey.xyz", "custom_domain": true }
   ],
   "send_email": [{ "name": "CONTACT_EMAIL", "destination_address": "joe@joebailey.xyz" }],
-  "vars": { "CONTACT_FROM": "contact@joebailey.xyz" }
+  "vars": { "CONTACT_FROM": "contact@joebailey.xyz" },
+  // Preview deployments of other branches. Test messages go to the same inbox as production.
+  "previews": {
+    "vars": { "CONTACT_FROM": "contact@joebailey.xyz" },
+    "send_email": [{ "name": "CONTACT_EMAIL", "destination_address": "joe@joebailey.xyz" }]
+  }
 }
