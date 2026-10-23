@@ -45,6 +45,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^4.4.1",
+    "@types/node": "^24.19.2",
     "eslint": "^10.13.0",
     "eslint-config-galexia": "git+https://github.com/Galexia-Agency/eslint-config.git#e94753a7ed8a94ae746f5f6ccf605ce288565ff2",
     "globals": "^17.0.0",
