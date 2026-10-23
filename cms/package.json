@@ -34,7 +34,15 @@
     "wrangler": "4.151.3"
   },
   "engines": {
-    "node": ">=24.18.0",
-    "npm": ">=11.16.0"
+    "node": "^24.18.0",
+    "pnpm": "^10.11.1"
+  },
+  "packageManager": "pnpm@10.11.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "fs-ext-extra-prebuilt",
+      "workerd"
+    ]
   }
 }

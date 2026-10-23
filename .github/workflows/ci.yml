@@ -27,9 +27,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: yarn
-      - run: yarn install --immutable
-      - run: yarn ${{ matrix.check.script }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run ${{ matrix.check.script }}
 
   cms-test:
     name: CMS tests
@@ -39,11 +39,12 @@ jobs:
         working-directory: cms
     steps:
       - uses: actions/checkout@v4
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: cms/package-lock.json
-      - run: npm ci
-      - run: npm run check
-      - run: npm test
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: cms/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check
+      - run: pnpm test

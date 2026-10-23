@@ -8,7 +8,7 @@ import { unserialize } from './php-serialization.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const flags = Object.fromEntries(process.argv.slice(2).reduce((pairs, arg, index, all) => arg.startsWith('--') ? [...pairs, [arg.slice(2), all[index + 1]]] : pairs, []));
-if (!flags.archive) throw new Error('Usage: npm run migrate:backup -- --archive backup.zip [--blog-category 39] [--projects-category 96]');
+if (!flags.archive) throw new Error('Usage: pnpm run migrate:backup --archive backup.zip [--blog-category 39] [--projects-category 96]');
 const { archive, data, contentPrefix } = await loadBackup(resolve(flags.archive));
 try {
   const categoryIds = { blog: Number(flags['blog-category'] || 39), projects: Number(flags['projects-category'] || 96) };

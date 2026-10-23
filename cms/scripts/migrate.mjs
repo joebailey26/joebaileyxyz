@@ -7,7 +7,7 @@ import { safePath } from '../src/shared.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const flags = Object.fromEntries(process.argv.slice(2).reduce((pairs, arg, index, all) => arg.startsWith('--') ? [...pairs, [arg.slice(2), all[index + 1]]] : pairs, []));
-if (!flags.wxr || !flags.content) throw new Error('Usage: npm run migrate -- --wxr export.xml --content /path/to/wp-content [--acf fields.json] [--output migration.zip]');
+if (!flags.wxr || !flags.content) throw new Error('Usage: pnpm run migrate --wxr export.xml --content /path/to/wp-content [--acf fields.json] [--output migration.zip]');
 const $ = load(await readFile(resolve(flags.wxr), 'utf8'), { xmlMode: true });
 const text = (element, selector) => element.children(selector).first().text();
 const entries = {};

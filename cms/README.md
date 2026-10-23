@@ -4,18 +4,18 @@ WordPress executes locally in the editor's browser. The editor Worker authentica
 
 ## Local setup
 
-Use Node **24.18+** and npm **11.16+**, as required by the pinned Playground packages. CMS dependencies are isolated from the root Yarn/Nuxt installation.
+Use Node **24.18.0**, shared with the site and pinned in the root `.nvmrc`, for the Playground packages and pnpm **10.11.1** (pinned in `package.json`). CMS dependencies use their own pnpm lockfile and installation, separate from the Nuxt site. Enable Corepack once with `corepack enable`.
 
 ```powershell
-npm ci --prefix cms
-npm --prefix cms run runtime
+pnpm --dir cms install --frozen-lockfile
+pnpm --dir cms run runtime
 Copy-Item cms/.dev.vars.example cms/.dev.vars
-npm --prefix cms run build
-npm --prefix cms run db:local
-npm --prefix cms run dev
+pnpm --dir cms run build
+pnpm --dir cms run db:local
+pnpm --dir cms run dev
 ```
 
-The runtime command downloads the official Playground artifact identified in `runtime.lock.json`, verifies its SHA-256, and extracts it. It requires an authenticated GitHub CLI. An already downloaded, matching ZIP can be supplied with `npm --prefix cms run runtime -- C:/path/playground.zip`. Keep a copy: GitHub workflow artifacts expire. The artifact itself is approximately 685 MiB and is excluded from Git.
+The runtime command downloads the official Playground artifact identified in `runtime.lock.json`, verifies its SHA-256, and extracts it. It requires an authenticated GitHub CLI. An already downloaded, matching ZIP can be supplied with `pnpm --dir cms run runtime C:/path/playground.zip`. Keep a copy: GitHub workflow artifacts expire. The artifact itself is approximately 685 MiB and is excluded from Git.
 
 Open the localhost address printed by Wrangler. `.dev.vars` enables a localhost-only authentication bypass. It cannot bypass Access on a deployed hostname. Use a local build token of at least 32 random characters. Never put production secrets in tracked files.
 
@@ -35,9 +35,9 @@ The service worker bypasses Playground's offline cache for CMS APIs, the editor 
 
 1. Create a D1 database named `joebailey-cms` and an R2 bucket named `joebailey-cms-files`. Set the resulting database ID in `wrangler.jsonc`; the checked-in placeholder intentionally cannot deploy as a working database.
 2. Create a Cloudflare Access self-hosted application for `cms.joebailey.xyz`. Allow `joe@joebailey.xyz` and `billybidley26@gmail.com`. Use the account's standard email PIN provider, not a connection belonging to an older Pages application. The existing Google provider is also enabled for these same email addresses. Set `ACCESS_TEAM_DOMAIN` and the application audience in Wrangler. Require Access for the editor, runtime and `/api/editor/*`. Exclude `/media/*` and `/api/content/*` from Access's interactive login: media is publicly readable; the Worker independently enforces the build token on the feed. Test these exclusions before cutover.
-3. Create a user-scoped API token with **Workers Builds Configuration: Edit** (the CMS Worker lists the site Worker's Workers Builds triggers itself, using `CF_WORKER_TAG` in `wrangler.jsonc`; set `CF_BUILD_TRIGGER_ID` only to override). Set Worker secrets from `cms/`: `npx --no-install wrangler secret put CMS_BUILD_TOKEN` and `npx --no-install wrangler secret put CF_BUILD_API_TOKEN`. Set the same `CMS_API_URL` and `CMS_BUILD_TOKEN` as build variables on the site's Workers Builds configuration.
-4. Run `npm --prefix cms run db:remote`, then `npm --prefix cms run build`, then `npm --prefix cms run runtime:upload`. The last command uploads runtime assets larger than Workers' static-file limit to R2; use `-- --local` for local R2 instead. `CMS_R2_BUCKET` overrides the upload script's default bucket name.
-5. Run `npm --prefix cms run deploy`. This attaches the editor to `cms.joebailey.xyz`. The editor's `workers.dev` and preview URLs are disabled. Do not set `LOCAL_DEV` in production. Workers Builds runs on Cloudflare, so the site build reads `/api/content/*` (build-token authenticated) directly from the editor hostname, and rendered content references `cms.joebailey.xyz/media/*` directly. If a zone security rule challenges the build, add a skip rule for `/api/content/*` and `/media/*`.
+3. Create a user-scoped API token with **Workers Builds Configuration: Edit** (the CMS Worker lists the site Worker's Workers Builds triggers itself, using `CF_WORKER_TAG` in `wrangler.jsonc`; set `CF_BUILD_TRIGGER_ID` only to override). Set Worker secrets from `cms/`: `pnpm exec wrangler secret put CMS_BUILD_TOKEN` and `pnpm exec wrangler secret put CF_BUILD_API_TOKEN`. Set the same `CMS_API_URL` and `CMS_BUILD_TOKEN` as build variables on the site's Workers Builds configuration.
+4. Run `pnpm --dir cms run db:remote`, then `pnpm --dir cms run build`, then `pnpm --dir cms run runtime:upload`. The last command uploads runtime assets larger than Workers' static-file limit to R2; use `--local` for local R2 instead. `CMS_R2_BUCKET` overrides the upload script's default bucket name.
+5. Run `pnpm --dir cms run deploy`. This attaches the editor to `cms.joebailey.xyz`. The editor's `workers.dev` and preview URLs are disabled. Do not set `LOCAL_DEV` in production. Workers Builds runs on Cloudflare, so the site build reads `/api/content/*` (build-token authenticated) directly from the editor hostname, and rendered content references `cms.joebailey.xyz/media/*` directly. If a zone security rule challenges the build, add a skip rule for `/api/content/*` and `/media/*`.
 
 The Worker validates Access signatures, issuer, audience and expiration. The build token has no editor/snapshot access. Mutations require a same-origin request and, for synchronization, an unexpired editing lease.
 
@@ -46,7 +46,7 @@ The Worker validates Access signatures, issuer, audience and expiration. The bui
 The supplied SQL/full-site backup can be converted without executing its SQL, PHP or installer:
 
 ```powershell
-npm --prefix cms run migrate:backup -- --archive "H:\Website Backups\joe-bailey-photography-blog.zip" --uploads "H:\Website Backups\DEC_2019\joeblog" --recovered cms/migration/recovered
+pnpm --dir cms run migrate:backup --archive "H:\Website Backups\joe-bailey-photography-blog.zip" --uploads "H:\Website Backups\DEC_2019\joeblog" --recovered cms/migration/recovered
 ```
 
 The `--uploads` directory supplements missing files using exact relative upload paths. `--recovered` is optional and reads the checksum-verified output from `scripts/recover-public-media.mjs`. Source category **39 (News)** maps to **blog**, and **96 (Projects)** maps to **projects**. This selects 55 editorial posts (50 published blog, four published projects, one draft), 46 attachments and 153 media files, excluding 165 unrelated posts. The older backup supplies all 14 previously missing originals. Missing generated image sizes are removed from attachment metadata during import; all original attachments must be present. Provenance and missing-size details are recorded in the ignored `migration/migration-report.json`.
@@ -56,7 +56,7 @@ The generated `migration/joebailey-content.zip`, all source content, browser bac
 From the source WordPress, export **Tools → Export → All content**, and obtain a complete `wp-content` directory, including original uploads, thumbnails, required plugins and themes. Export ACF field groups as JSON if used. Credentials and source exports are not committed here.
 
 ```powershell
-npm --prefix cms run migrate -- --wxr C:/backups/export.xml --content C:/backups/wp-content --acf C:/backups/acf-fields.json
+pnpm --dir cms run migrate --wxr C:/backups/export.xml --content C:/backups/wp-content --acf C:/backups/acf-fields.json
 ```
 
 Omit `--acf` when it is not needed. The tool writes the ignored `cms/migration/export.zip`. It rejects missing original attachments and symlinks. Import this ZIP using **Import migration/backup** in the staging editor. It imports through WordPress APIs, maps taxonomy slugs and attachment IDs, preserves publication dates, statuses, serialized post metadata and author names, and rewrites source upload/content links. Reimporting the same source IDs updates the same imported records.
@@ -96,14 +96,14 @@ Current request/storage guardrails are a 128 MiB database, 50 MiB per user-owned
 ## Verification
 
 ```powershell
-npm --prefix cms test
-npm --prefix cms run check
-npm --prefix cms run test:wordpress
-npm --prefix cms run build
+pnpm --dir cms test
+pnpm --dir cms run check
+pnpm --dir cms run test:wordpress
+pnpm --dir cms run build
 # With Wrangler running locally; install Playwright Chromium first:
 $env:PLAYWRIGHT_BROWSERS_PATH = "$PWD/cms/.cache/ms-playwright"
-node cms/node_modules/playwright/cli.js install chromium
-npm --prefix cms run test:browser
+pnpm --dir cms exec playwright install chromium
+pnpm --dir cms run test:browser
 # With the migrated staging snapshot and emulator running on port 8788:
 node cms/scripts/loading-browser.mjs
 # Read-only inspection of a generated preview:

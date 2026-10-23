@@ -18,8 +18,8 @@ await cp(join(root, 'wordpress/migration.php'), join(output, 'migration.php'));
 await build({ entryPoints: [join(root, 'web/editor.js')], outfile: join(output, 'editor.js'), bundle: true, format: 'esm', target: 'es2022', minify: false, loader: { '.css': 'text', '.php': 'text' } });
 const metadata = await readFile(join(root, '.cache/runtime-path.json'), 'utf8').then(JSON.parse).catch(() => null);
 if (!metadata) {
-  if (process.argv.includes('--production')) throw new Error('Pinned Playground runtime is missing. Run npm run runtime first.');
-  console.warn('Editor shell built. Run npm run runtime to install the pinned Playground runtime before opening WordPress.');
+  if (process.argv.includes('--production')) throw new Error('Pinned Playground runtime is missing. Run pnpm run runtime first.');
+  console.warn('Editor shell built. Run pnpm run runtime to install the pinned Playground runtime before opening WordPress.');
   process.exit(0);
 }
 const lock = JSON.parse(await readFile(join(root, 'runtime.lock.json'), 'utf8'));
