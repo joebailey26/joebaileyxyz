@@ -1,11 +1,11 @@
 import { fileURLToPath } from 'node:url'
-import { titleSuffix } from './app/utils/site.js'
+import { titleSuffix } from './app/utils/site'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-22',
   // Shared with the CMS package's tests, so it stays in modules/, but it is not a Nuxt module.
   // Everything else in modules/ (cms/, sitemap.ts) is registered automatically.
-  ignore: ['modules/cms-content.cjs'],
+  ignore: ['modules/cms-content.cjs', 'modules/cms-content.d.cts'],
   runtimeConfig: {
     public: {
       turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || ''

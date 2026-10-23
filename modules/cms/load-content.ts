@@ -1,10 +1,12 @@
 import he from 'he'
 import { load } from 'cheerio'
 import striptags from 'striptags'
+import type { CmsContent, CmsFeedPost, CmsSection } from '../../shared/types/cms'
 import cmsContent from '../cms-content.cjs'
-import prepareWordPressContent from './prepare-wordpress-content/index.js'
+import prepareWordPressContent from './prepare-wordpress-content'
+import type { UnpreparedPost } from './prepare-wordpress-content'
 
-function getReadingTime (content, isHtml = false) {
+function getReadingTime (content: string, isHtml = false): number {
   const avgWordsPerMin = 200
   let contentToProcess = content
   if (isHtml) {
@@ -18,7 +20,7 @@ function getReadingTime (content, isHtml = false) {
   return Math.ceil(count / avgWordsPerMin)
 }
 
-function getRequiredInfoFromPosts (posts) {
+function getRequiredInfoFromPosts (posts: CmsFeedPost[]): UnpreparedPost[] {
   if (!posts.length) {
     return []
   }
@@ -47,13 +49,17 @@ function getRequiredInfoFromPosts (posts) {
 export const postsPerPage = 10
 
 // Fetches both sections from the CMS feed, paginated as the site shows them, and prepares post content.
-export async function loadCmsContent () {
+export async function loadCmsContent (): Promise<CmsContent> {
   const sections = await cmsContent.fetchCmsContent({ baseUrl: process.env.CMS_API_URL, token: process.env.CMS_BUILD_TOKEN, fetchImpl: fetch, perPage: postsPerPage })
-  const state = {}
-  for (const section of ['blog', 'projects']) {
-    state[section] = sections[section].map(getRequiredInfoFromPosts)
-    for (const post of state[section].flat()) {
-      await prepareWordPressContent(post)
+  const state: CmsContent = { blog: [], projects: [] }
+  for (const section of ['blog', 'projects'] as CmsSection[]) {
+    state[section] = []
+    for (const page of sections[section]) {
+      const preparedPage = []
+      for (const post of getRequiredInfoFromPosts(page)) {
+        preparedPage.push(await prepareWordPressContent(post))
+      }
+      state[section].push(preparedPage)
     }
   }
 

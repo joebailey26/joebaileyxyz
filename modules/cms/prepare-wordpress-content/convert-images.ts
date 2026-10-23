@@ -1,6 +1,6 @@
 import { load } from 'cheerio'
 
-export function removeLinksAroundImages (postContent) {
+export function removeLinksAroundImages (postContent: string): string {
   const regex = /<img.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {
@@ -20,7 +20,7 @@ export function removeLinksAroundImages (postContent) {
 }
 
 // Images stay on the CMS media URLs (R2). They are only wrapped in the markup the post styles expect.
-export function prepareImages (postContent) {
+export function prepareImages (postContent: string): string {
   const regex = /<img.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {

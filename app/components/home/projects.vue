@@ -10,6 +10,6 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { data: projects } = await useCmsIndex('projects')
 </script>

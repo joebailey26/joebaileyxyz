@@ -1,7 +1,7 @@
 import { load } from 'cheerio'
 
 // Videos stay on the CMS media URLs (R2). preload="metadata" lets browsers show the first frame.
-export default function prepareVideos (postContent) {
+export default function prepareVideos (postContent: string): string {
   const regex = /<video.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {

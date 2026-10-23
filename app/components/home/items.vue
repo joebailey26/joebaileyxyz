@@ -120,7 +120,7 @@
     <div ref="container" class="row grid" @scroll="containerScroll">
       <template v-for="item, index in items" :key="`${item.title}${index}`">
         <HomeItem
-          ref="item"
+          ref="itemComponents"
           :item="item"
           :link-prefix="linkPrefix"
           :show-link="showLinks"
@@ -142,118 +142,123 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    items: {
-      type: Array,
-      required: true
-    },
-    linkPrefix: {
-      type: String,
-      required: true
-    },
-    showLinks: {
-      type: Boolean,
-      default: true
-    },
-    showTechStack: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data () {
-    return {
-      current: 0,
-      itemWidth: 0,
-      position: {
-        left: 0,
-        x: 0
-      }
-    }
-  },
-  mounted () {
-    this.updateWidth()
-    window.addEventListener('resize', this.updateWidth)
-    this.dragScrollWatcher()
-    window.addEventListener('resize', this.dragScrollWatcher)
-  },
-  beforeUnmount () {
-    window.removeEventListener('resize', this.updateWidth)
-    this.stopDragScroll()
-    window.removeEventListener('resize', this.dragScrollWatcher)
-  },
-  methods: {
-    dragScrollWatcher () {
-      if (!this.hasTouchScreen() && this.hasOverflowAuto()) {
-        this.startDragScroll()
-      } else {
-        this.stopDragScroll()
-      }
-    },
-    startDragScroll () {
-      this.$refs.container.addEventListener('mousedown', this.mouseDownHandler)
-      this.$refs.container.classList.add('drag-scroll--enabled')
-    },
-    stopDragScroll () {
-      this.$refs.container.removeEventListener('mousedown', this.mouseDownHandler)
-      this.$refs.container.classList.remove('drag-scroll--enabled')
-      // This clears up some event listeners and resets our classes
-      this.mouseUpHandler()
-    },
-    hasTouchScreen () {
-      return ('ontouchstart' in window)
-    },
-    hasOverflowAuto () {
-      /*
-        Rather than worrying about breakpoints here, we let CSS handle it, as they may be different for each component
-        If overflow-x: auto is not on the element, then it is not a scrolling element, so we don't need to run DragToScroll
-      */
-      return (getComputedStyle(this.$refs.container).getPropertyValue('overflow-x') === 'auto')
-    },
-    mouseDownHandler (e) {
-      this.$refs.container.classList.add('drag-scroll--scrolling')
+<script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 
-      this.position = {
-        // The current scroll
-        left: this.$refs.container.scrollLeft,
-        // Get the current mouse position
-        x: e.clientX
-      }
-      this.$refs.container.addEventListener('mousemove', this.mouseMoveHandler)
-      this.$refs.container.addEventListener('mouseup', this.mouseUpHandler)
-    },
-    mouseMoveHandler (e) {
-      // How far the mouse has been moved
-      const dx = e.clientX - this.position.x
+withDefaults(defineProps<{
+  items: Pick<PostSummary, 'title' | 'slug' | 'acf' | 'excerpt'>[] | undefined
+  linkPrefix: string
+  showLinks?: boolean
+  showTechStack?: boolean
+}>(), {
+  showLinks: true,
+  showTechStack: true
+})
 
-      // Scroll the element
-      this.$refs.container.scrollLeft = this.position.left - dx
-    },
-    mouseUpHandler () {
-      this.$refs.container.removeEventListener('mousemove', this.mouseMoveHandler)
-      this.$refs.container.removeEventListener('mouseup', this.mouseUpHandler)
+const container = useTemplateRef<HTMLElement>('container')
+const itemComponents = useTemplateRef<ComponentPublicInstance[]>('itemComponents')
 
-      this.$refs.container.classList.remove('drag-scroll--scrolling')
-    },
-    updateWidth () {
-      if (this.$refs.item[0]) {
-        this.itemWidth = this.$refs.item[0].$el.offsetWidth
-      } else if (this.$refs.item) {
-        this.itemWidth = this.$refs.item.$el.offsetWidth
-      } else {
-        this.itemWidth = 0
-      }
-    },
-    containerScroll () {
-      this.current = Math.round(this.$refs.container.scrollLeft / this.itemWidth)
-    },
-    iconScroll (i) {
-      this.$refs.container.scrollTo({
-        left: this.itemWidth * i,
-        behavior: 'smooth'
-      })
-    }
+const current = ref(0)
+const itemWidth = ref(0)
+let position = { left: 0, x: 0 }
+
+function hasTouchScreen () {
+  return ('ontouchstart' in window)
+}
+
+function hasOverflowAuto () {
+  /*
+    Rather than worrying about breakpoints here, we let CSS handle it, as they may be different for each component
+    If overflow-x: auto is not on the element, then it is not a scrolling element, so we don't need to run DragToScroll
+  */
+  return !!container.value && getComputedStyle(container.value).getPropertyValue('overflow-x') === 'auto'
+}
+
+function mouseDownHandler (e: MouseEvent) {
+  if (!container.value) {
+    return
+  }
+  container.value.classList.add('drag-scroll--scrolling')
+
+  position = {
+    // The current scroll
+    left: container.value.scrollLeft,
+    // Get the current mouse position
+    x: e.clientX
+  }
+  container.value.addEventListener('mousemove', mouseMoveHandler)
+  container.value.addEventListener('mouseup', mouseUpHandler)
+}
+
+function mouseMoveHandler (e: MouseEvent) {
+  if (!container.value) {
+    return
+  }
+  // How far the mouse has been moved
+  const dx = e.clientX - position.x
+
+  // Scroll the element
+  container.value.scrollLeft = position.left - dx
+}
+
+function mouseUpHandler () {
+  if (!container.value) {
+    return
+  }
+  container.value.removeEventListener('mousemove', mouseMoveHandler)
+  container.value.removeEventListener('mouseup', mouseUpHandler)
+
+  container.value.classList.remove('drag-scroll--scrolling')
+}
+
+function startDragScroll () {
+  container.value?.addEventListener('mousedown', mouseDownHandler)
+  container.value?.classList.add('drag-scroll--enabled')
+}
+
+function stopDragScroll () {
+  container.value?.removeEventListener('mousedown', mouseDownHandler)
+  container.value?.classList.remove('drag-scroll--enabled')
+  // This clears up some event listeners and resets our classes
+  mouseUpHandler()
+}
+
+function dragScrollWatcher () {
+  if (!hasTouchScreen() && hasOverflowAuto()) {
+    startDragScroll()
+  } else {
+    stopDragScroll()
   }
 }
+
+function updateWidth () {
+  const firstItem = itemComponents.value?.[0]?.$el
+  itemWidth.value = firstItem instanceof HTMLElement ? firstItem.offsetWidth : 0
+}
+
+function containerScroll () {
+  if (container.value) {
+    current.value = Math.round(container.value.scrollLeft / itemWidth.value)
+  }
+}
+
+function iconScroll (i: number) {
+  container.value?.scrollTo({
+    left: itemWidth.value * i,
+    behavior: 'smooth'
+  })
+}
+
+onMounted(() => {
+  updateWidth()
+  window.addEventListener('resize', updateWidth)
+  dragScrollWatcher()
+  window.addEventListener('resize', dragScrollWatcher)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateWidth)
+  stopDragScroll()
+  window.removeEventListener('resize', dragScrollWatcher)
+})
 </script>

@@ -212,77 +212,69 @@
   </section>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      submitted: false,
-      sending: false,
-      turnstileToken: '',
-      form: {
-        name: '',
-        email: '',
-        message: ''
+<script setup lang="ts">
+const submitted = ref<string | false>(false)
+const sending = ref(false)
+const turnstileToken = ref('')
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const contactForm = useTemplateRef<HTMLFormElement>('contactForm')
+const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
+
+const canSubmit = computed(() => !sending.value && !!turnstileToken.value &&
+  !!form.value.name.trim() && !!form.value.email.trim() && !!form.value.message.trim())
+
+watch(form, (value) => {
+  try {
+    localStorage.setItem('contactForm', JSON.stringify(value))
+  } catch {
+    // Storage can be unavailable; the draft is then not kept
+  }
+}, { deep: true })
+
+onMounted(() => {
+  try {
+    const saved: Partial<Record<keyof typeof form.value, unknown>> | null = JSON.parse(localStorage.getItem('contactForm') ?? 'null')
+    for (const key of Object.keys(form.value) as (keyof typeof form.value)[]) {
+      const value = saved?.[key]
+      if (typeof value === 'string') {
+        form.value[key] = value
       }
     }
-  },
-  computed: {
-    canSubmit () {
-      return !this.sending && !!this.turnstileToken &&
-        !!this.form.name.trim() && !!this.form.email.trim() && !!this.form.message.trim()
+  } catch {
+    // Storage can be unavailable or hold an invalid draft
+  }
+})
+
+async function submit () {
+  if (!canSubmit.value || !contactForm.value?.reportValidity()) {
+    return
+  }
+  sending.value = true
+  submitted.value = false
+  try {
+    const body = new FormData(contactForm.value)
+    body.set('cf-turnstile-response', turnstileToken.value)
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      body
+    })
+    if (!response.ok) {
+      const payload: { error?: string } = await response.json().catch(() => ({}))
+      throw new Error(payload.error || `HTTP ${response.status}`)
     }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler (form) {
-        try {
-          localStorage.setItem('contactForm', JSON.stringify(form))
-        } catch {
-          // Storage can be unavailable; the draft is then not kept
-        }
-      }
-    }
-  },
-  mounted () {
-    try {
-      const saved = JSON.parse(localStorage.getItem('contactForm'))
-      for (const key of Object.keys(this.form)) {
-        if (saved && typeof saved[key] === 'string') {
-          this.form[key] = saved[key]
-        }
-      }
-    } catch {
-      // Storage can be unavailable or hold an invalid draft
-    }
-  },
-  methods: {
-    async submit () {
-      if (!this.canSubmit || !this.$refs.contactForm.reportValidity()) {
-        return
-      }
-      this.sending = true
-      this.submitted = false
-      try {
-        const body = new FormData(this.$refs.contactForm)
-        body.set('cf-turnstile-response', this.turnstileToken)
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          body
-        })
-        if (!response.ok) {
-          throw new Error((await response.json().catch(() => ({}))).error || `HTTP ${response.status}`)
-        }
-        this.form = { name: '', email: '', message: '' }
-        this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
-      } catch (e) {
-        this.submitted = `${e.toString()} Please try again.`
-      } finally {
-        this.sending = false
-        // Tokens are single-use, including when email delivery fails after verification.
-        this.$refs.turnstile.reset()
-      }
-    }
+    form.value = { name: '', email: '', message: '' }
+    submitted.value = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
+  } catch (e) {
+    submitted.value = `${String(e)} Please try again.`
+  } finally {
+    sending.value = false
+    // Tokens are single-use, including when email delivery fails after verification.
+    turnstile.value?.reset()
   }
 }
 </script>

@@ -37,13 +37,12 @@
   </NuxtLayout>
 </template>
 
-<script setup>
-const props = defineProps({
-  error: {
-    type: Object,
-    default: null
-  }
-})
+<script setup lang="ts">
+import type { NuxtError } from '#app'
+
+const props = defineProps<{
+  error?: NuxtError | null
+}>()
 
 const statusCode = computed(() => props.error?.status || props.error?.statusCode || 500)
 const message = computed(() => props.error?.message || 'Error')

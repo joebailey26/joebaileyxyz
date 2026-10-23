@@ -3,12 +3,12 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
-import FetchFavicon from './utils/fetch-favicon.js'
+import FetchFavicon from './utils/fetch-favicon'
 
 const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
 
 // Favicons come from third-party sites, so they are copied into the build rather than hotlinked.
-async function saveFavicon (faviconUrl, hostname) {
+async function saveFavicon (faviconUrl: string, hostname: string): Promise<string> {
   const extension = path.extname(new URL(faviconUrl).pathname).toLowerCase() || '.png'
   const fileName = encodeURIComponent(`${hostname}${extension}`).toLowerCase()
   const filePath = path.join(faviconDirectory, fileName)
@@ -24,7 +24,7 @@ async function saveFavicon (faviconUrl, hostname) {
   return `/img/favicons/${fileName}`
 }
 
-export default async function addFaviconToLinks (postContent) {
+export default async function addFaviconToLinks (postContent: string): Promise<string> {
   const regex = /<a.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {
@@ -32,7 +32,7 @@ export default async function addFaviconToLinks (postContent) {
   }
   const $ = load(postContent, null, false)
 
-  const promises = []
+  const promises: Promise<void>[] = []
   // Loop through all links
   $('a').each((i, elem) => {
     // Work out the url

@@ -2,7 +2,7 @@ import { load } from 'cheerio'
 import he from 'he'
 import { makeConfig, Block, torchlight, FileCache } from '@torchlight-api/client'
 
-export default async function syntaxHighlightCodeWithTorchlight (postContent) {
+export default async function syntaxHighlightCodeWithTorchlight (postContent: string): Promise<string> {
   const regex = /<pre.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {
@@ -27,19 +27,19 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
       directory: './.torchlight-cache'
     })
   )
-  const torchlightBlocks = []
+  const torchlightBlocks: Block[] = []
 
   // Highlight all code
   $('pre code').each((i, code) => {
     const $code = $(code)
-    let language = $code.parent().attr('class').split(' ').find((className) => className.startsWith('language-')) || null
+    let language = $code.parent().attr('class')?.split(' ').find((className) => className.startsWith('language-')) || null
     // Code block has a class starting with "language-"
     if (language) {
       language = language.replace('language-', '')
       $code.parent().attr('data-language', language)
     }
     const torchlightBlock = new Block({
-      code: he.decode($code.html()),
+      code: he.decode($code.html() ?? ''),
       language
     })
     torchlightBlocks.push(torchlightBlock)
@@ -52,9 +52,9 @@ export default async function syntaxHighlightCodeWithTorchlight (postContent) {
   highlightedBlocks.forEach((highlightedBlock) => {
     const $code = $(`pre code[data-torchlight-id="${highlightedBlock.id}"]`)
 
-    $code.parent().addClass(highlightedBlock.classes)
+    $code.parent().addClass(highlightedBlock.classes ?? '')
 
-    $code.html(highlightedBlock.highlighted)
+    $code.html(highlightedBlock.highlighted ?? '')
 
     $(`
     <div class="copy-button__container js-copy-to-clipboard-container">

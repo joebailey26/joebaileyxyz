@@ -57,7 +57,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const head = {
   title: 'Blog',
   description: 'Some of my ramblings on tech, websites, and self-development.'
@@ -96,7 +96,7 @@ usePageMeta({
   canonical: `https://joebailey.xyz/blog/${route.params.page ? `page/${route.params.page}/` : ''}`
 })
 
-function goToPage (page) {
+function goToPage (page: number) {
   const path = page > 1 ? `/blog/page/${page}/` : '/blog/'
   router.push({ path })
 }
