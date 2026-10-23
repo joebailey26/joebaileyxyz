@@ -61,30 +61,16 @@ article {
   </article>
 </template>
 
-<script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true
-    },
-    linkPrefix: {
-      type: String,
-      required: true
-    },
-    showLink: {
-      type: Boolean,
-      default: true
-    },
-    showTechStack: {
-      type: Boolean,
-      default: true
-    }
-  },
-  computed: {
-    link () {
-      return `/${this.linkPrefix}/${this.item.slug}/`
-    }
-  }
-}
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  item: Pick<PostSummary, 'title' | 'slug' | 'acf' | 'excerpt'>
+  linkPrefix: string
+  showLink?: boolean
+  showTechStack?: boolean
+}>(), {
+  showLink: true,
+  showTechStack: true
+})
+
+const link = computed(() => `/${props.linkPrefix}/${props.item.slug}/`)
 </script>

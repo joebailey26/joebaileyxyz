@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const head = {
   title: 'Projects',
   description: 'Some loose notes on tech demonstrations and projects that I have created.'
@@ -79,7 +79,7 @@ usePageMeta({
   canonical: 'https://joebailey.xyz/projects/'
 })
 
-function goToPage (page) {
+function goToPage (page: number) {
   router.push({ path: route.path, query: { ...route.query, p: page.toString() } })
 }
 </script>

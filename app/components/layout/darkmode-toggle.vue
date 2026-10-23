@@ -70,41 +70,32 @@
   </label>
 </template>
 
-<script>
+<script setup lang="ts">
 import { toHtml, icon } from '@fortawesome/fontawesome-svg-core'
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
-export default {
-  props: {
-    model: {
-      type: Boolean
-    }
-  },
-  emits: ['input'],
-  data () {
-    return {
-      sunIcon: this.getSvgForCSS(faSun),
-      moonIcon: this.getSvgForCSS(faMoon)
-    }
-  },
-  computed: {
-    inputVal: {
-      get () {
-        return this.model
-      },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  },
-  methods: {
-    getSvgForCSS (svg) {
-      const { abstract } = icon(svg)
-      const iconAsSVG = toHtml(abstract[0])
+const props = defineProps<{
+  model?: boolean
+}>()
 
-      // The SVG markup is ASCII, so btoa encodes it the same on the server and in the browser.
-      return `data:image/svg+xml;base64,${btoa(iconAsSVG)}`
-    }
-  }
+const emit = defineEmits<{
+  input: [value: boolean]
+}>()
+
+function getSvgForCSS (svg: IconDefinition) {
+  const { abstract } = icon(svg)
+  const iconAsSVG = toHtml(abstract[0])
+
+  // The SVG markup is ASCII, so btoa encodes it the same on the server and in the browser.
+  return `data:image/svg+xml;base64,${btoa(iconAsSVG)}`
 }
+
+const sunIcon = getSvgForCSS(faSun)
+const moonIcon = getSvgForCSS(faMoon)
+
+const inputVal = computed({
+  get: () => props.model ?? false,
+  set: (val) => emit('input', val)
+})
 </script>

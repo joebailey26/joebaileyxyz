@@ -1,11 +1,6 @@
-import { defineNuxtModule } from '@nuxt/kit'
-import { loadCmsContent } from './load-content.js'
-
-interface Post {
-  slug: string
-}
-
-type Sections = Record<'blog' | 'projects', Post[][]>
+import { addTypeTemplate, defineNuxtModule } from '@nuxt/kit'
+import type { CmsContent } from '../../shared/types/cms'
+import { loadCmsContent } from './load-content.ts'
 
 // Loads the CMS content once per build and hands it to the Nitro routes in server/routes/_content,
 // which the pages read through useAsyncData. Prerendering stores the result in each page's payload.
@@ -13,7 +8,7 @@ export default defineNuxtModule({
   meta: { name: 'cms' },
   async setup (_options, nuxt) {
     // `nuxt prepare` (postinstall, typecheck) only generates types, so it needs no content or CMS credentials.
-    const content: Sections = nuxt.options._prepare ? { blog: [[]], projects: [[]] } : await loadCmsContent() as Sections
+    const content: CmsContent = nuxt.options._prepare ? { blog: [[]], projects: [[]] } : await loadCmsContent()
 
     const routes: string[] = []
     for (let page = 2; page <= content.blog.length; page++) {
@@ -24,6 +19,18 @@ export default defineNuxtModule({
         routes.push(`/${section}/${post.slug}/`)
       }
     }
+
+    // The virtual module below only exists at build time, so its types are declared here.
+    addTypeTemplate({
+      filename: 'types/cms-content.d.ts',
+      // Generated into .nuxt/types, two levels below the project root.
+      getContents: () => `declare module '#cms-content' {
+  const content: import('../../shared/types/cms').CmsContent
+
+  export default content
+}
+`
+    }, { nuxt: true, nitro: true })
 
     nuxt.hook('nitro:config', (config) => {
       config.virtual = { ...config.virtual, '#cms-content': `export default ${JSON.stringify(content)}` }

@@ -1,10 +1,12 @@
 import he from 'he'
 import { load } from 'cheerio'
 import striptags from 'striptags'
+import type { CmsContent, CmsFeedPost, CmsSection } from '../../shared/types/cms'
 import cmsContent from '../cms-content.cjs'
-import prepareWordPressContent from './prepare-wordpress-content/index.js'
+import prepareWordPressContent from './prepare-wordpress-content/index.ts'
+import type { UnpreparedPost } from './prepare-wordpress-content/index.ts'
 
-function getReadingTime (content, isHtml = false) {
+function getReadingTime (content: string, isHtml = false): number {
   const avgWordsPerMin = 200
   let contentToProcess = content
   if (isHtml) {
@@ -18,7 +20,7 @@ function getReadingTime (content, isHtml = false) {
   return Math.ceil(count / avgWordsPerMin)
 }
 
-function getRequiredInfoFromPosts (posts) {
+function getRequiredInfoFromPosts (posts: CmsFeedPost[]): UnpreparedPost[] {
   if (!posts.length) {
     return []
   }
@@ -48,24 +50,31 @@ export const postsPerPage = 10
 
 const concurrency = 4
 
-// Runs `task` over every item with a few in flight at once; the first failure rejects.
-async function mapConcurrently (items, task) {
-  const queue = [...items]
+// Runs `task` over every item with a few in flight at once, keeping the order; the first failure rejects.
+async function mapConcurrently<T, R> (items: T[], task: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = []
+  // The workers share one iterator, so each item is taken once.
+  const entries = items.entries()
   const worker = async () => {
-    while (queue.length) {
-      await task(queue.shift())
+    for (const [index, item] of entries) {
+      results[index] = await task(item)
     }
   }
-  await Promise.all(Array.from({ length: Math.min(concurrency, queue.length) }, worker))
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, worker))
+
+  return results
 }
 
 // Fetches both sections from the CMS feed, paginated as the site shows them, and prepares post content.
-export async function loadCmsContent () {
+export async function loadCmsContent (): Promise<CmsContent> {
   const sections = await cmsContent.fetchCmsContent({ baseUrl: process.env.CMS_API_URL, token: process.env.CMS_BUILD_TOKEN, fetchImpl: fetch, perPage: postsPerPage })
-  const state = {}
-  for (const section of ['blog', 'projects']) {
-    state[section] = sections[section].map(getRequiredInfoFromPosts)
-    await mapConcurrently(state[section].flat(), prepareWordPressContent)
+  const state: CmsContent = { blog: [], projects: [] }
+  for (const section of ['blog', 'projects'] as CmsSection[]) {
+    const pages = sections[section].map(getRequiredInfoFromPosts)
+    const prepared = await mapConcurrently(pages.flat(), prepareWordPressContent)
+    // Back into the pages that the site paginates by.
+    let offset = 0
+    state[section] = pages.map((page) => prepared.slice(offset, offset += page.length))
   }
 
   return state

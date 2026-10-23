@@ -30,19 +30,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Stands in for nuxt-component-share, which only has a Vue 2 build (vue-social-sharing 3,
 // vue-fontawesome 2). Same markup, classes and networks, without the extra dependencies.
-const props = defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  }
-})
+const props = defineProps<{
+  title: string
+  description: string
+}>()
 
 const route = useRoute()
 const url = computed(() => (import.meta.client ? window.location.origin + route.fullPath : ''))
@@ -72,7 +66,7 @@ const networks = computed(() => {
   ]
 })
 
-function openPopup (href) {
+function openPopup (href: string) {
   const width = 626
   const height = 436
   const left = window.screenX + (window.outerWidth - width) / 2

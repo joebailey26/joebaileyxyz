@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
-import { prepareImages } from '../prepare-wordpress-content/convert-images.js';
-import getFeaturedImageUrl from '../prepare-wordpress-content/featured-image.js';
-import { cdnImageUrl, transformImageUrl } from '../prepare-wordpress-content/utils/image-transformations.js';
+import { prepareImages } from '../prepare-wordpress-content/convert-images.ts';
+import getFeaturedImageUrl from '../prepare-wordpress-content/featured-image.ts';
+import { cdnImageUrl, transformImageUrl } from '../prepare-wordpress-content/utils/image-transformations.ts';
 
 const media = 'https://cms.joebailey.xyz/media/abc/abc-photo.jpg';
 const saved = { ...process.env };

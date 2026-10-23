@@ -3,9 +3,9 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
-import FetchFavicon from './utils/fetch-favicon.js'
-import { cacheDirectory } from './utils/cache-directory.js'
-import { transformImageUrl } from './utils/image-transformations.js'
+import FetchFavicon from './utils/fetch-favicon.ts'
+import { cacheDirectory } from './utils/cache-directory.ts'
+import { transformImageUrl } from './utils/image-transformations.ts'
 
 const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
 const faviconCacheDirectory = path.join(cacheDirectory, 'favicons')
@@ -14,12 +14,15 @@ const fetchTimeout = 10000
 // Sites without a usable favicon are retried occasionally rather than on every build.
 const missingFaviconTtl = 7 * 24 * 60 * 60 * 1000
 
-// hostname -> Promise<string | null>, so each host is looked up once per build however many links point at it.
-const lookups = new Map()
-let manifestPromise
+// What is known about each hostname's favicon; `file` is null when the site has none.
+type Manifest = Record<string, { file: string | null, checkedAt: number }>
 
-function getManifest () {
-  manifestPromise ||= readFile(manifestPath, 'utf8').then(JSON.parse).catch(() => ({}))
+// hostname -> Promise<string | null>, so each host is looked up once per build however many links point at it.
+const lookups = new Map<string, Promise<string | null>>()
+let manifestPromise: Promise<Manifest> | undefined
+
+function getManifest (): Promise<Manifest> {
+  manifestPromise ||= readFile(manifestPath, 'utf8').then((contents): Manifest => JSON.parse(contents)).catch((): Manifest => ({}))
 
   return manifestPromise
 }
@@ -27,7 +30,7 @@ function getManifest () {
 // Writes are chained so concurrent lookups never interleave on the same file.
 let manifestWrite = Promise.resolve()
 
-function saveManifest (manifest) {
+function saveManifest (manifest: Manifest) {
   manifestWrite = manifestWrite.then(async () => {
     await mkdir(faviconCacheDirectory, { recursive: true })
     await writeFile(manifestPath, JSON.stringify(manifest))
@@ -37,7 +40,7 @@ function saveManifest (manifest) {
 }
 
 // Favicons come from third-party sites, so they are copied into the build rather than hotlinked.
-async function downloadFavicon (faviconUrl, hostname) {
+async function downloadFavicon (faviconUrl: string, hostname: string): Promise<string> {
   const extension = path.extname(new URL(faviconUrl).pathname).toLowerCase() || '.png'
   const fileName = encodeURIComponent(`${hostname}${extension}`).toLowerCase()
   const cachedPath = path.join(faviconCacheDirectory, fileName)
@@ -53,10 +56,10 @@ async function downloadFavicon (faviconUrl, hostname) {
   return fileName
 }
 
-async function resolveFavicon (url, hostname) {
+async function resolveFavicon (url: string, hostname: string): Promise<string | null> {
   const manifest = await getManifest()
   const entry = manifest[hostname]
-  let fileName
+  let fileName: string | null
   if (entry && (entry.file ? existsSync(path.join(faviconCacheDirectory, entry.file)) : Date.now() - entry.checkedAt < missingFaviconTtl)) {
     fileName = entry.file
   } else {
@@ -78,15 +81,15 @@ async function resolveFavicon (url, hostname) {
   return `/img/favicons/${fileName}`
 }
 
-function getFavicon (url, hostname) {
+function getFavicon (url: string, hostname: string): Promise<string | null> {
   if (!lookups.has(hostname)) {
     lookups.set(hostname, resolveFavicon(url, hostname).catch(() => null))
   }
 
-  return lookups.get(hostname)
+  return lookups.get(hostname) ?? Promise.resolve(null)
 }
 
-export default async function addFaviconToLinks (postContent) {
+export default async function addFaviconToLinks (postContent: string): Promise<string> {
   const regex = /<a.*?>/g
   const matches = postContent.match(regex)
   if (!matches) {
@@ -94,7 +97,7 @@ export default async function addFaviconToLinks (postContent) {
   }
   const $ = load(postContent, null, false)
 
-  const promises = []
+  const promises: Promise<void>[] = []
   // Loop through all links
   $('a').each((i, elem) => {
     // Work out the url

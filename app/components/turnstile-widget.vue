@@ -10,15 +10,15 @@
   </div>
 </template>
 
-<script>
-let loading
+<script lang="ts">
+let loading: Promise<Turnstile> | null
 
-function loadTurnstile () {
+function loadTurnstile (): Promise<Turnstile> {
   if (window.turnstile) {
     return Promise.resolve(window.turnstile)
   }
   if (!loading) {
-    loading = new Promise((resolve, reject) => {
+    loading = new Promise<Turnstile>((resolve, reject) => {
       const script = document.createElement('script')
       const fail = () => {
         clearTimeout(timeout)
@@ -46,13 +46,14 @@ function loadTurnstile () {
   return loading
 }
 
-export default {
+// Written with the options API, as worker/test/contact-ui.test.mjs loads this script on its own.
+export default defineComponent({
   props: {
     siteKey: { type: String, default: '' }
   },
   emits: ['token'],
   data () {
-    return { widgetId: null, error: '', disposed: false }
+    return { widgetId: null as string | null, error: '', disposed: false }
   },
   mounted () {
     this.renderWidget()
@@ -74,7 +75,7 @@ export default {
         if (this.disposed) {
           return
         }
-        this.widgetId = turnstile.render(this.$refs.widget, {
+        this.widgetId = turnstile.render(this.$refs.widget as HTMLElement, {
           sitekey: this.siteKey,
           action: 'contact',
           size: 'flexible',
@@ -109,5 +110,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

@@ -1,12 +1,15 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { stripTypeScriptTypes } from 'node:module';
 import { runInNewContext } from 'node:vm';
 import { test } from 'node:test';
 
 function component(path, globals = {}) {
   const source = readFileSync(new URL(path, import.meta.url), 'utf8');
-  const sandbox = { ...globals };
-  runInNewContext(source.match(/<script>([\s\S]*?)<\/script>/)[1].replace('export default', 'globalThis.component ='), sandbox);
+  // defineComponent is auto-imported in the app, and only returns its argument.
+  const sandbox = { defineComponent: (definition) => definition, ...globals };
+  const script = stripTypeScriptTypes(source.match(/<script lang="ts">([\s\S]*?)<\/script>/)[1]);
+  runInNewContext(script.replace('export default', 'globalThis.component ='), sandbox);
   const definition = sandbox.component;
   const instance = { ...definition.data(), ...globals.instance };
   for (const [key, method] of Object.entries(definition.methods)) instance[key] = method.bind(instance);

@@ -212,11 +212,12 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+// Written with the options API, as worker/test/contact-ui.test.mjs loads this script on its own.
+export default defineComponent({
   data () {
     return {
-      submitted: false,
+      submitted: false as string | false,
       sending: false,
       turnstileToken: '',
       form: {
@@ -246,10 +247,11 @@ export default {
   },
   mounted () {
     try {
-      const saved = JSON.parse(localStorage.getItem('contactForm'))
-      for (const key of Object.keys(this.form)) {
-        if (saved && typeof saved[key] === 'string') {
-          this.form[key] = saved[key]
+      const saved: Partial<Record<keyof typeof this.form, unknown>> | null = JSON.parse(localStorage.getItem('contactForm') ?? 'null')
+      for (const key of Object.keys(this.form) as (keyof typeof this.form)[]) {
+        const value = saved?.[key]
+        if (typeof value === 'string') {
+          this.form[key] = value
         }
       }
     } catch {
@@ -258,31 +260,34 @@ export default {
   },
   methods: {
     async submit () {
-      if (!this.canSubmit || !this.$refs.contactForm.reportValidity()) {
+      const contactForm = this.$refs.contactForm as HTMLFormElement
+      const turnstile = this.$refs.turnstile as { reset: () => void }
+      if (!this.canSubmit || !contactForm.reportValidity()) {
         return
       }
       this.sending = true
       this.submitted = false
       try {
-        const body = new FormData(this.$refs.contactForm)
+        const body = new FormData(contactForm)
         body.set('cf-turnstile-response', this.turnstileToken)
         const response = await fetch('/api/contact', {
           method: 'POST',
           body
         })
         if (!response.ok) {
-          throw new Error((await response.json().catch(() => ({}))).error || `HTTP ${response.status}`)
+          const payload: { error?: string } = await response.json().catch(() => ({}))
+          throw new Error(payload.error || `HTTP ${response.status}`)
         }
         this.form = { name: '', email: '', message: '' }
         this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
       } catch (e) {
-        this.submitted = `${e.toString()} Please try again.`
+        this.submitted = `${String(e)} Please try again.`
       } finally {
         this.sending = false
         // Tokens are single-use, including when email delivery fails after verification.
-        this.$refs.turnstile.reset()
+        turnstile.reset()
       }
     }
   }
-}
+})
 </script>

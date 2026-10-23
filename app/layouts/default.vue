@@ -45,27 +45,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      darkmode: false
-    }
-  },
-  beforeMount () {
-    this.darkmode = window.darkmode
-  },
-  methods: {
-    handleDarkmodeChange ($event) {
-      this.darkmode = $event
-      const bodyClasses = document.body.classList
-      if (this.darkmode) {
-        bodyClasses.add('darkTheme')
-      } else {
-        bodyClasses.remove('darkTheme')
-      }
-      window.localStorage.setItem('darkmode', $event)
-    }
+<script setup lang="ts">
+const darkmode = ref(false)
+
+onBeforeMount(() => {
+  darkmode.value = window.darkmode
+})
+
+function handleDarkmodeChange (value: boolean) {
+  darkmode.value = value
+  const bodyClasses = document.body.classList
+  if (value) {
+    bodyClasses.add('darkTheme')
+  } else {
+    bodyClasses.remove('darkTheme')
   }
+  window.localStorage.setItem('darkmode', String(value))
 }
 </script>

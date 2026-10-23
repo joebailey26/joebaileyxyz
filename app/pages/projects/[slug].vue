@@ -46,9 +46,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const route = useRoute()
-const project = await useCmsPost('projects', route.params.slug)
+const project = await useCmsPost('projects', String(route.params.slug))
 
 usePageMeta({
   title: () => project.value.title,

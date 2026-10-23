@@ -48,11 +48,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const route = useRoute()
-const post = await useCmsPost('blog', route.params.slug)
+const post = await useCmsPost('blog', String(route.params.slug))
 
 usePageMeta({
   title: () => post.value.title,
