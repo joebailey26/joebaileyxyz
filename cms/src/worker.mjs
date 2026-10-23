@@ -81,7 +81,7 @@ async function buildTriggerId(env) {
   if (env.CF_BUILD_TRIGGER_ID) return env.CF_BUILD_TRIGGER_ID;
   assert(env.CF_WORKER_TAG, 'Cloudflare build trigger is not configured', 503);
   const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/workers/${encodeURIComponent(env.CF_WORKER_TAG)}/triggers`;
-  const response = await fetch(url, { headers: { Authorization: `Bearer ${apiToken(env)}` }, signal: AbortSignal.timeout(20000), redirect: 'error' });
+  const response = await fetch(url, { headers: { Authorization: `Bearer ${apiToken(env)}` }, signal: AbortSignal.timeout(20000), redirect: 'manual' });
   assert(response.ok, `Cloudflare returned HTTP ${response.status} listing build triggers`, 502);
   const { result } = await response.json();
   const branch = env.SITE_BRANCH || 'master';
@@ -99,7 +99,7 @@ export async function triggerBuild(env, revision) {
   try {
     assert(env.CF_ACCOUNT_ID && env.CF_BUILD_API_TOKEN, 'Cloudflare build trigger is not configured', 503);
     const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(env.CF_ACCOUNT_ID)}/builds/triggers/${encodeURIComponent(await buildTriggerId(env))}/builds`;
-    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiToken(env)}` }, body: JSON.stringify({ branch: env.SITE_BRANCH || 'master' }), signal: AbortSignal.timeout(20000), redirect: 'error' });
+    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiToken(env)}` }, body: JSON.stringify({ branch: env.SITE_BRANCH || 'master' }), signal: AbortSignal.timeout(20000), redirect: 'manual' });
     assert(response.ok, `Cloudflare returned HTTP ${response.status}`, 502);
     await statement(env, "UPDATE snapshots SET build_status = 'sent', build_error = NULL, build_claim_expires = 0 WHERE id = ? AND build_claim = ? AND build_status IN ('pending', 'failed')", revision, claim).run();
   } catch (error) {
