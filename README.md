@@ -3,9 +3,12 @@
 <p style="text-align: center"><a href="https://joebailey.xyz">Live Site</a></p>
 ## Install
 
+Use pnpm **10.11.1**, pinned in `package.json`. Both the site and CMS use Node **24.18.0**, pinned in `.nvmrc`.
+
 ```sh
-yarn install
-npx wrangler login
+corepack enable
+pnpm install --frozen-lockfile
+pnpm exec wrangler login
 ```
 
 ## Development
@@ -13,18 +16,18 @@ npx wrangler login
 The browser-based WordPress CMS integration is documented in [cms/README.md](cms/README.md).
 
 ```sh
-yarn dev
+pnpm dev
 ```
 
 ## Build and deploy
 
 ```sh
-yarn generate     # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
-yarn build        # same as generate; the Workers Builds build command
-yarn deploy       # build, then wrangler deploy
+pnpm generate     # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
+pnpm build        # same as generate; the Workers Builds build command
+pnpm deploy       # build, then wrangler deploy
 ```
 
-Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch, with build command `yarn build` and deploy command `npx wrangler deploy`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `TORCHLIGHT_TOKEN` as build variables/secrets.
+Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch. Its production build command is `pnpm build` and its deploy command is `pnpm exec wrangler deploy`. Preview builds use `pnpm build` and `pnpm exec wrangler preview`. Both build triggers set `NODE_VERSION=24.18.0`. These commands and build variables are stored in the Cloudflare Workers Builds settings, separately from `wrangler.jsonc`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `TORCHLIGHT_TOKEN` as build variables/secrets.
 
 ## Visual Style Guide
 

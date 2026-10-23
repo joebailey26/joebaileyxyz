@@ -333,7 +333,7 @@ export async function handleRequest(request, env, ctx) {
       const objects = mapping.ok ? await mapping.json() : {};
       if (objects[path]) {
         const object = await env.FILES.get(`runtime/${objects[path].hash}`);
-        assert(object, 'Runtime assets are not uploaded. Run npm run runtime:upload.', 503);
+        assert(object, 'Runtime assets are not uploaded. Run pnpm run runtime:upload.', 503);
         response = new Response(request.method === 'HEAD' ? null : object.body, { headers: { 'Content-Type': objects[path].type } });
       }
     }
