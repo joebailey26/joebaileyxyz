@@ -92,6 +92,9 @@ dist
 # Local Wrangler state
 .wrangler
 
+# Local Netlify state and build caches
+.netlify/
+
 # Yarn
 .pnp.*
 .yarn/*
