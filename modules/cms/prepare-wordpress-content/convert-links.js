@@ -4,6 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
 import FetchFavicon from './utils/fetch-favicon.js'
+import { transformImageUrl } from './utils/image-transformations.js'
 
 const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
 
@@ -66,7 +67,8 @@ export default async function addFaviconToLinks (postContent) {
           return saveFavicon(faviconUrl, parsedUrl.hostname)
         })
         .then((src) => {
-          const img = $('<img decoding="async" loading="lazy" width="16" height="16">').attr('src', src).attr('alt', alt)
+          // Shown at 16px, so a single 32px transformation covers high-density screens
+          const img = $('<img decoding="async" loading="lazy" width="16" height="16">').attr('src', transformImageUrl(src, 32)).attr('alt', alt)
           $(elem).append($('<picture>').append(img))
         })
         .catch(() => {
