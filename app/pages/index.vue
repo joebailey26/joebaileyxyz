@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { cdnImageUrl } from '~~/modules/cms/prepare-wordpress-content/utils/image-transformations.js'
+import { cdnImageUrl } from '@joebailey26/nuxt-static-wordpress/images'
 
 // The 3:4 portrait is cropped to a square of up to 150px, so 200px wide covers it (400px for 2x screens).
 const portraitPath = '/img/joe-bailey-shuffleboard.jpg'

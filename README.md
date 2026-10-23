@@ -27,11 +27,11 @@ pnpm build        # same as generate; the Workers Builds build command
 pnpm deploy       # build, then wrangler deploy
 ```
 
-Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch. Its production build command is `pnpm build` and its deploy command is `pnpm exec wrangler deploy`. Preview builds use `pnpm build` and `pnpm exec wrangler preview`. Both build triggers set `NODE_VERSION=24.18.0`. These commands and build variables are stored in the Cloudflare Workers Builds settings, separately from `wrangler.jsonc`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN` and `TORCHLIGHT_TOKEN` as build variables/secrets.
+Production builds run in Cloudflare Workers Builds, connected to this repository's `master` branch. Its production build command is `pnpm build` and its deploy command is `pnpm exec wrangler deploy`. Preview builds use `pnpm build` and `pnpm exec wrangler preview`. Both build triggers set `NODE_VERSION=24.18.0`. These commands and build variables are stored in the Cloudflare Workers Builds settings, separately from `wrangler.jsonc`. Set `CMS_API_URL=https://cms.joebailey.xyz`, `CMS_BUILD_TOKEN`, `TORCHLIGHT_TOKEN` and `GITHUB_PACKAGES_TOKEN` (a token with `read:packages`, for the `@joebailey26` packages on GitHub Packages) as build variables/secrets.
 
 ### Image transformations
 
-Production builds point CMS images at Cloudflare Image Transformations (`/cdn-cgi/image/...`) with a small `srcset`. In the Cloudflare dashboard, enable Transformations for the `joebailey.xyz` zone (**Images > Transformations**) and confirm `cms.joebailey.xyz` is an allowed source. The rewrite is on only for the `master` Workers Builds build, because `/cdn-cgi/image` does not exist in `nuxt dev`, `wrangler dev` or workers.dev previews. Set `IMAGE_TRANSFORMATIONS=true` or `false` to override it (for example for a local `pnpm deploy`). `pnpm test:content` covers the rewrite.
+Production builds point CMS images at Cloudflare Image Transformations (`/cdn-cgi/image/...`) with a small `srcset`. In the Cloudflare dashboard, enable Transformations for the `joebailey.xyz` zone (**Images > Transformations**) and confirm `cms.joebailey.xyz` is an allowed source. The rewrite is on only for the `master` Workers Builds build, because `/cdn-cgi/image` does not exist in `nuxt dev`, `wrangler dev` or workers.dev previews. Set `IMAGE_TRANSFORMATIONS=true` or `false` to override it (for example for a local `pnpm deploy`). The rewrite and the CMS content loading come from [`@joebailey26/nuxt-static-wordpress`](https://github.com/joebailey26/static-wordpress/tree/master/packages/nuxt), configured under `cms` in `nuxt.config.ts`.
 
 ## Contact form spam protection
 

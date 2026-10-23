@@ -1,0 +1,19 @@
+{
+  "id": "joebailey",
+  "name": "Joe Bailey",
+  "siteUrl": "https://joebailey.xyz",
+  "sections": [
+    { "name": "blog", "category": "blog", "label": "Blog", "path": "/blog/" },
+    { "name": "projects", "category": "projects", "label": "Projects", "path": "/projects/" }
+  ],
+  "fieldGroups": [
+    {
+      "title": "Project details",
+      "fields": [
+        { "key": "project_url", "label": "Project URL", "type": "url" },
+        { "key": "github", "label": "Repository URL", "type": "url" },
+        { "key": "icons", "label": "Technology icons", "type": "checkboxes", "options": ["Firebase", "PHP", "Vue", "React", "WordPress", "Figma", "Netlify", "XD", "InDesign", "Custom"] }
+      ]
+    }
+  ]
+}

@@ -3,37 +3,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/build.mjs && wrangler dev --host 127.0.0.1 --ip 127.0.0.1 --port 8787",
-    "build": "node scripts/build.mjs",
-    "build:ci": "node scripts/prepare-runtime.mjs && node scripts/build.mjs --production",
-    "runtime": "node scripts/prepare-runtime.mjs",
-    "runtime:upload": "node scripts/upload-runtime.mjs",
-    "migrate": "node scripts/migrate.mjs",
-    "migrate:backup": "node scripts/migrate-backup.mjs",
-    "test": "node --test --test-isolation=none test/*.test.mjs",
-    "test:wordpress": "node --experimental-wasm-jspi scripts/wordpress-smoke.mjs",
-    "test:browser": "node scripts/browser-smoke.mjs",
-    "check": "node --check src/worker.mjs && node --check web/editor.js",
-    "db:local": "wrangler d1 migrations apply DB --local",
-    "db:remote": "wrangler d1 migrations apply DB --remote",
-    "deploy": "node scripts/build.mjs --production && node scripts/deploy.mjs",
-    "deploy:production": "node scripts/deploy.mjs",
-    "deploy:preview": "node scripts/deploy.mjs --preview"
+    "dev": "static-wordpress dev",
+    "build": "static-wordpress build",
+    "build:ci": "static-wordpress build:ci",
+    "runtime": "static-wordpress runtime",
+    "runtime:upload": "static-wordpress runtime:upload",
+    "db:local": "static-wordpress db:local",
+    "db:remote": "static-wordpress db:remote",
+    "deploy": "static-wordpress build --production && static-wordpress deploy",
+    "deploy:production": "static-wordpress deploy",
+    "deploy:preview": "static-wordpress deploy --preview",
+    "import": "static-wordpress import"
   },
   "dependencies": {
-    "@php-wasm/progress": "3.1.60",
-    "@wp-playground/blueprints": "3.1.60",
-    "@wp-playground/client": "3.1.60",
-    "cheerio": "1.1.2",
-    "fflate": "0.8.2",
-    "jose": "6.1.3",
-    "yauzl": "3.2.0"
+    "@joebailey26/static-wordpress": "file:../../static-wordpress/packages/cms"
   },
   "devDependencies": {
-    "@php-wasm/node": "3.1.60",
-    "@wp-playground/cli": "3.1.60",
-    "esbuild": "0.25.12",
-    "playwright": "1.64.1",
     "wrangler": "4.151.3"
   },
   "engines": {
@@ -44,7 +29,6 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
-      "fs-ext-extra-prebuilt",
       "workerd"
     ]
   }

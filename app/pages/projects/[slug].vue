@@ -48,7 +48,7 @@
 
 <script setup>
 const route = useRoute()
-const project = await useCmsPost('projects', route.params.slug)
+const project = await useCmsPost('projects', route.params.slug, { notFound: 'Project not found' })
 
 usePageMeta({
   title: () => project.value.title,
