@@ -10,6 +10,7 @@ export default {
       lang: 'en-GB'
     },
     meta: [
+      { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width,initial-scale=1' },
       { name: 'description', content: 'I deliver great websites, applications, and experiences. I’m passionate about a privacy-first internet where everyone can feel safe. By reducing page load times, not only do we improve user experience, but we also reduce our carbon footprint.' },
       { name: 'application-name', content: 'Joe Bailey' },
