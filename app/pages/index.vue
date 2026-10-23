@@ -34,8 +34,8 @@
 <script setup>
 import { cdnImageUrl } from '~~/modules/cms/prepare-wordpress-content/utils/image-transformations.js'
 
-// The 4:3 portrait is cropped to a square of up to 150px, so 200px wide covers its height (400px for 2x screens).
-const portraitPath = '/img/joe-bailey.jpg'
+// The 3:4 portrait is cropped to a square of up to 150px, so 200px wide covers it (400px for 2x screens).
+const portraitPath = '/img/joe-bailey-shuffleboard.jpg'
 const portrait = useRuntimeConfig().public.imageTransformations
   ? { src: cdnImageUrl(portraitPath, 200), srcset: `${cdnImageUrl(portraitPath, 200)} 1x, ${cdnImageUrl(portraitPath, 400)} 2x` }
   : { src: portraitPath, srcset: undefined }
@@ -55,7 +55,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         email: 'joe@joebailey.xyz',
-        image: 'https://joebailey.xyz/img/joe-bailey.jpg',
+        image: 'https://joebailey.xyz/img/joe-bailey-shuffleboard.jpg',
         jobTitle: 'Software Engineer',
         name: 'Joe Bailey',
         birthPlace: 'Cambridge, UK',
