@@ -1,5 +1,4 @@
-const fetch = require('node-fetch')
-const { load } = require('cheerio')
+import { load } from 'cheerio'
 
 export default class FetchFavicon {
   constructor (url) {
@@ -17,7 +16,7 @@ export default class FetchFavicon {
   }
 
   async fetch () {
-    const response = await fetch(this.url)
+    const response = await fetch(this.url, { signal: AbortSignal.timeout(30000) })
     if (!response.ok) {
       return Promise.reject(new Error('Could not fetch webpage'))
     }

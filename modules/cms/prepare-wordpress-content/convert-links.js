@@ -1,6 +1,28 @@
+import { existsSync } from 'node:fs'
+import { mkdir, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
-import FetchFavicon from './utils/fetch-favicon'
-import HandleExternalImage from './utils/handle-external-image'
+import FetchFavicon from './utils/fetch-favicon.js'
+
+const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
+
+// Favicons come from third-party sites, so they are copied into the build rather than hotlinked.
+async function saveFavicon (faviconUrl, hostname) {
+  const extension = path.extname(new URL(faviconUrl).pathname).toLowerCase() || '.png'
+  const fileName = encodeURIComponent(`${hostname}${extension}`).toLowerCase()
+  const filePath = path.join(faviconDirectory, fileName)
+  if (!existsSync(filePath)) {
+    const response = await fetch(faviconUrl, { signal: AbortSignal.timeout(30000) })
+    if (!response.ok) {
+      throw new Error('Could not fetch the favicon')
+    }
+    await mkdir(faviconDirectory, { recursive: true })
+    await writeFile(filePath, Buffer.from(await response.arrayBuffer()))
+  }
+
+  return `/img/favicons/${fileName}`
+}
 
 export default async function addFaviconToLinks (postContent) {
   const regex = /<a.*?>/g
@@ -19,9 +41,6 @@ export default async function addFaviconToLinks (postContent) {
     if (!url) {
       return
     }
-    const width = 16
-    const height = 16
-    const outputDirectory = 'favicons'
     const FaviconFetcher = new FetchFavicon(url)
     const parsedUrl = FaviconFetcher.isFullUrl(url)
     // If the URL is not a full URL, don't go any further
@@ -39,27 +58,25 @@ export default async function addFaviconToLinks (postContent) {
     // Push into the promises to fetch the favicon
     promises.push(
       FaviconFetcher.getFavicon()
-        .then((externalImgUrl) => {
-          if (externalImgUrl) {
-            const outputFileName = parsedUrl.hostname
-            return new HandleExternalImage(externalImgUrl, outputDirectory, outputFileName, width, height, alt)
-          } else {
+        .then((faviconUrl) => {
+          if (!faviconUrl) {
             return Promise.reject(new Error('Could not get the favicon'))
           }
+
+          return saveFavicon(faviconUrl, parsedUrl.hostname)
         })
-        .then((HandleExternalImage) => HandleExternalImage.generatePictureElement()
-          .then((pictureElement) => {
-            $(elem).append(pictureElement)
-          })
-        )
-        .catch((error) => {
-          // eslint-disable-next-line no-unused-vars
-          const err = error
+        .then((src) => {
+          const img = $('<img decoding="async" loading="lazy" width="16" height="16">').attr('src', src).attr('alt', alt)
+          $(elem).append($('<picture>').append(img))
+        })
+        .catch(() => {
+          // A link without a favicon is fine
         })
     )
   })
   // Load all links
   await Promise.all(promises)
+
   // Return the blog post html
   return $.html()
 }
