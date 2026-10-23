@@ -22,7 +22,7 @@ pnpm dev
 ## Build and deploy
 
 ```sh
-pnpm generate     # build ./dist (needs CMS_API_URL and CMS_BUILD_TOKEN)
+pnpm generate     # build ./.output/public (needs CMS_API_URL and CMS_BUILD_TOKEN)
 pnpm build        # same as generate; the Workers Builds build command
 pnpm deploy       # build, then wrangler deploy
 ```

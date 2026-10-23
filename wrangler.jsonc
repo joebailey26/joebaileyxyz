@@ -7,7 +7,7 @@
   "workers_dev": true,
   "preview_urls": true,
   "assets": {
-    "directory": "./dist",
+    "directory": "./.output/public",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",

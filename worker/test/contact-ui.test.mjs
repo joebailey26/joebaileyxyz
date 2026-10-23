@@ -20,7 +20,7 @@ function widget(t) {
     reset: t.mock.fn(),
     remove: t.mock.fn()
   };
-  const loaded = component('../../components/turnstile-widget.vue', {
+  const loaded = component('../../app/components/turnstile-widget.vue', {
     window: { turnstile: api },
     instance: { siteKey: 'public-test-key', $refs: { widget: {} }, $emit: (...args) => events.push(args) }
   });
@@ -43,14 +43,14 @@ test('widget issues tokens, clears expired tokens, retries, and cleans up on nav
   instance.retry();
   assert.equal(instance.error, '');
   assert.equal(api.reset.mock.callCount(), 2);
-  definition.beforeDestroy.call(instance);
+  definition.beforeUnmount.call(instance);
   assert.equal(api.remove.mock.calls[0].arguments[0], 'widget-1');
 });
 
 test('widget does not render after navigating away while the script loads', async (t) => {
   const { instance, definition, api } = widget(t);
   const pending = instance.renderWidget();
-  definition.beforeDestroy.call(instance);
+  definition.beforeUnmount.call(instance);
   await pending;
   assert.equal(api.render.mock.callCount(), 0);
 });
@@ -67,7 +67,7 @@ test('a blocked script can be retried successfully', async (t) => {
   const api = { render: t.mock.fn(() => 'widget-2'), ready: callback => callback() };
   const window = {};
   let attempts = 0;
-  const { instance } = component('../../components/turnstile-widget.vue', {
+  const { instance } = component('../../app/components/turnstile-widget.vue', {
     window, setTimeout, clearTimeout,
     document: {
       createElement: () => ({ remove() {} }),
@@ -91,7 +91,7 @@ test('a blocked script can be retried successfully', async (t) => {
 function contact(t, ok = true) {
   const fetch = t.mock.fn(async () => ({ ok, json: async () => ({ error: 'Please retry verification' }) }));
   const reset = t.mock.fn();
-  const { definition, instance } = component('../../components/home/contact.vue', {
+  const { definition, instance } = component('../../app/components/home/contact.vue', {
     fetch,
     FormData: class {
       constructor() { this.values = new Map(); }
