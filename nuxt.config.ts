@@ -108,6 +108,9 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
+    // Cloudflare's build environment makes Nitro pick a Workers preset. The site is fully static,
+    // and the worker lives in worker/, so always emit plain static output.
+    preset: 'static',
     prerender: {
       // Content routes and blog pagination are added by modules/cms.
       crawlLinks: true,
