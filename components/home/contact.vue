@@ -136,6 +136,7 @@
           </div>
         </div>
         <form
+          ref="contactForm"
           class="contact-form"
           method="post"
           name="contactForm"
@@ -181,12 +182,19 @@
               </div>
             </div>
             <div class="col-md-12">
+              <div class="form-group">
+                <turnstile-widget
+                  ref="turnstile"
+                  :site-key="$config.turnstileSiteKey"
+                  @token="turnstileToken = $event"
+                />
+              </div>
               <input
                 id="formSubmit"
                 class="btn"
                 value="Send Message"
                 type="submit"
-                disabled
+                :disabled="!canSubmit"
               >
             </div>
             <div class="col-md-12">
@@ -194,7 +202,7 @@
               &nbsp;
               </p>
               <transition name="fade">
-                <p v-show="submitted" class="message" v-text="submitted" />
+                <p v-show="submitted" class="message" role="status" v-text="submitted" />
               </transition>
             </div>
           </div>
@@ -209,6 +217,8 @@ export default {
   data () {
     return {
       submitted: false,
+      sending: false,
+      turnstileToken: '',
       form: {
         name: '',
         email: '',
@@ -216,49 +226,57 @@ export default {
       }
     }
   },
-  mounted () {
-    // eslint-disable-next-line
-    if (process.client) {
-      if (localStorage.getItem('contactForm')) {
-        this.form = JSON.parse(localStorage.getItem('contactForm'))
-      } else {
-        this.form = {}
+  computed: {
+    canSubmit () {
+      return !this.sending && !!this.turnstileToken &&
+        !!this.form.name.trim() && !!this.form.email.trim() && !!this.form.message.trim()
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler (form) {
+        try {
+          localStorage.setItem('contactForm', JSON.stringify(form))
+        } catch {}
       }
     }
   },
-  updated () {
-    this.checkform()
-  },
-  methods: {
-    checkform () {
-      localStorage.setItem('contactForm', JSON.stringify(this.form))
-      const f = document.forms.contactForm.elements
-      let cansubmit = true
-
-      for (let i = 1; i < f.length - 1; i++) {
-        if (f[i].required && (f[i].value.length === 0 || f[i].value === '')) {
-          cansubmit = false
+  mounted () {
+    try {
+      const saved = JSON.parse(localStorage.getItem('contactForm'))
+      for (const key of Object.keys(this.form)) {
+        if (saved && typeof saved[key] === 'string') {
+          this.form[key] = saved[key]
         }
       }
-
-      if (document.querySelector('#formSubmit')) {
-        document.querySelector('#formSubmit').disabled = !cansubmit
-      }
-    },
+    } catch {}
+  },
+  methods: {
     async submit () {
+      if (!this.canSubmit || !this.$refs.contactForm.reportValidity()) {
+        return
+      }
+      this.sending = true
+      this.submitted = false
       try {
+        const body = new FormData(this.$refs.contactForm)
+        body.set('cf-turnstile-response', this.turnstileToken)
         const response = await fetch('/api/contact', {
           method: 'POST',
-          body: new FormData(document.forms.contactForm)
+          body
         })
         if (!response.ok) {
           throw new Error((await response.json().catch(() => ({}))).error || `HTTP ${response.status}`)
         }
-        localStorage.setItem('contactForm', '')
-        this.form = {}
+        this.form = { name: '', email: '', message: '' }
         this.submitted = 'Message sent successfully! We\'ll be in touch within 2-3 working days'
       } catch (e) {
         this.submitted = `${e.toString()} Please try again.`
+      } finally {
+        this.sending = false
+        // Tokens are single-use, including when email delivery fails after verification.
+        this.$refs.turnstile.reset()
       }
     }
   }

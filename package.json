@@ -13,6 +13,7 @@
     "cms:dev": "pnpm --dir cms run dev",
     "cms:test": "pnpm --dir cms run test",
     "cms:build": "pnpm --dir cms run build",
+    "test:contact": "node --test --test-isolation=none worker/test/*.test.mjs",
     "typecheck": "node scripts/typecheck.mjs",
     "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "fix:scripts": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
