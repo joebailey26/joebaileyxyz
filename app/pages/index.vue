@@ -4,7 +4,8 @@
       <div class="container ml-auto mr-auto page-header__wrapper">
         <picture class="page-header__image">
           <img
-            src="/img/joe-bailey.jpg"
+            :src="portrait.src"
+            :srcset="portrait.srcset"
             decoding="async"
             loading="eager"
             fetchpriority="high"
@@ -31,13 +32,21 @@
 </template>
 
 <script setup lang="ts">
+import { cdnImageUrl } from '~~/modules/cms/prepare-wordpress-content/utils/image-transformations.ts'
+
+// The 4:3 portrait is cropped to a square of up to 150px, so 200px wide covers its height (400px for 2x screens).
+const portraitPath = '/img/joe-bailey.jpg'
+const portrait = useRuntimeConfig().public.imageTransformations
+  ? { src: cdnImageUrl(portraitPath, 200), srcset: `${cdnImageUrl(portraitPath, 200)} 1x, ${cdnImageUrl(portraitPath, 400)} 2x` }
+  : { src: portraitPath, srcset: undefined }
+
 usePageMeta({
   title: 'Home'
 })
 
 useHead({
   link: [
-    { rel: 'preload', as: 'image', href: '/img/joe-bailey.jpg' }
+    { rel: 'preload', as: 'image', href: portrait.src, imagesrcset: portrait.srcset }
   ],
   script: [
     {

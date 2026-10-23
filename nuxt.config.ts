@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { titleSuffix } from './app/utils/site'
+import { imageTransformationsEnabled } from './modules/cms/prepare-wordpress-content/utils/image-transformations.ts'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-22',
@@ -8,7 +9,9 @@ export default defineNuxtConfig({
   ignore: ['modules/cms-content.cjs', 'modules/cms-content.d.cts'],
   runtimeConfig: {
     public: {
-      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || ''
+      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || '',
+      // Decided at build time, like the CMS content, because /cdn-cgi/image only exists on the production zone.
+      imageTransformations: imageTransformationsEnabled()
     }
   },
   app: {

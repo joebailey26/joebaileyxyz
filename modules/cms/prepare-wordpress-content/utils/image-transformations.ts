@@ -1,9 +1,9 @@
-// Cloudflare Image Transformations (/cdn-cgi/image) for CMS media. Each width is a billed unique transformation, so keep this list short.
+// Cloudflare Image Transformations (/cdn-cgi/image) for CMS media and the site's own images. Each width is a billed unique transformation, so keep this list short.
 export const imageWidths = [480, 800, 1200, 1600]
 export const defaultImageWidth = 800
 const imageOptions = 'format=auto,quality=80,fit=scale-down'
-// SVG and GIF are served as they are (vector, or possibly animated).
-const untransformedExtensions = /\.(svg|gif)$/i
+// SVG and GIF are served as they are (vector, or possibly animated); ICO is not a supported input.
+const untransformedExtensions = /\.(svg|gif|ico)$/i
 
 // /cdn-cgi/image only exists on the production zone, not in `nuxt dev`, `wrangler dev` or workers.dev previews.
 // IMAGE_TRANSFORMATIONS=true/false overrides; otherwise only the Workers Builds master build opts in.
@@ -27,6 +27,10 @@ export function isTransformableImage (src: string | undefined, env: NodeJS.Proce
   if (!src) {
     return false
   }
+  // Root-relative paths are files in public/, on the same zone
+  if (src.startsWith('/') && !src.startsWith('//')) {
+    return !src.startsWith('/cdn-cgi/') && !untransformedExtensions.test(src.split(/[?#]/)[0] ?? '')
+  }
   let url: URL
   try {
     url = new URL(src)
@@ -43,7 +47,12 @@ export function transformImageUrl (src: string, width: number, { origin = '', en
     return src
   }
 
-  return `${origin}/cdn-cgi/image/${imageOptions},width=${width}/${src}`
+  return cdnImageUrl(src, width, origin)
+}
+
+// Builds the URL without checking the source or the build, for callers that have already decided (the Vue pages).
+export function cdnImageUrl (src: string, width: number, origin = ''): string {
+  return `${origin}/cdn-cgi/image/${imageOptions},width=${width}/${src.replace(/^\//, '')}`
 }
 
 // Widths above the image's own width would only return the original, so cap them at it when it is known.

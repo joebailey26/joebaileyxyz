@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { load } from 'cheerio'
 import FetchFavicon from './utils/fetch-favicon.ts'
 import { cacheDirectory } from './utils/cache-directory.ts'
+import { transformImageUrl } from './utils/image-transformations.ts'
 
 const faviconDirectory = fileURLToPath(new URL('../../../public/img/favicons/', import.meta.url))
 const faviconCacheDirectory = path.join(cacheDirectory, 'favicons')
@@ -123,7 +124,8 @@ export default async function addFaviconToLinks (postContent: string): Promise<s
       getFavicon(url, parsedUrl.hostname).then((src) => {
         // A link without a favicon is fine
         if (src) {
-          const img = $('<img decoding="async" loading="lazy" width="16" height="16">').attr('src', src).attr('alt', alt)
+          // Shown at 16px, so a single 32px transformation covers high-density screens
+          const img = $('<img decoding="async" loading="lazy" width="16" height="16">').attr('src', transformImageUrl(src, 32)).attr('alt', alt)
           $(elem).append($('<picture>').append(img))
         }
       })

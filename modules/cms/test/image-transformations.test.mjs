@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
 import { prepareImages } from '../prepare-wordpress-content/convert-images.ts';
 import getFeaturedImageUrl from '../prepare-wordpress-content/featured-image.ts';
+import { cdnImageUrl, transformImageUrl } from '../prepare-wordpress-content/utils/image-transformations.ts';
 
 const media = 'https://cms.joebailey.xyz/media/abc/abc-photo.jpg';
 const saved = { ...process.env };
@@ -59,4 +60,14 @@ test('IMAGE_TRANSFORMATIONS overrides the branch default', () => {
 test('featured images become absolute 1200px transformations', () => {
   production();
   assert.equal(getFeaturedImageUrl(media), `https://joebailey.xyz/cdn-cgi/image/format=auto,quality=80,fit=scale-down,width=1200/${media}`);
+});
+
+test('site images in public/ are transformed by path, except ICO and SVG favicons', () => {
+  production();
+  assert.equal(transformImageUrl('/img/favicons/github.com.png', 32), '/cdn-cgi/image/format=auto,quality=80,fit=scale-down,width=32/img/favicons/github.com.png');
+  assert.equal(transformImageUrl('/img/favicons/example.com.ico', 32), '/img/favicons/example.com.ico');
+  assert.equal(transformImageUrl('/img/favicons/example.com.svg', 32), '/img/favicons/example.com.svg');
+  assert.equal(cdnImageUrl('/img/joe-bailey.jpg', 200), '/cdn-cgi/image/format=auto,quality=80,fit=scale-down,width=200/img/joe-bailey.jpg');
+  process.env.WORKERS_CI_BRANCH = 'feature';
+  assert.equal(transformImageUrl('/img/favicons/github.com.png', 32), '/img/favicons/github.com.png');
 });
