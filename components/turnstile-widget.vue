@@ -28,17 +28,16 @@ function loadTurnstile () {
       }
       const timeout = setTimeout(fail, 15000)
       script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
-      script.async = true
-      script.defer = true
+      // Turnstile rejects ready() when the script has async/defer, and script
+      // elements created from JS are async by default, so opt out explicitly.
+      script.async = false
       script.onload = () => {
         if (!window.turnstile) {
           fail()
           return
         }
-        window.turnstile.ready(() => {
-          clearTimeout(timeout)
-          resolve(window.turnstile)
-        })
+        clearTimeout(timeout)
+        resolve(window.turnstile)
       }
       script.onerror = fail
       document.head.appendChild(script)
