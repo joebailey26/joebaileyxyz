@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@joebailey26/static-wordpress':
-        specifier: file:../../static-wordpress/packages/cms
-        version: file:../../static-wordpress/packages/cms(wrangler@4.151.3)
+        specifier: 0.1.0-next-6e41dc4
+        version: 0.1.0-next-6e41dc4(wrangler@4.151.3)
     devDependencies:
       wrangler:
         specifier: 4.151.3
@@ -526,8 +526,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@joebailey26/static-wordpress@file:../../static-wordpress/packages/cms':
-    resolution: {directory: ../../static-wordpress/packages/cms, type: directory}
+  '@joebailey26/static-wordpress@0.1.0-next-6e41dc4':
+    resolution: {integrity: sha512-XC2QeNLtaZhgpCz1nOD1M+RAJGWDKikRM7m1VSWvwIwRvVGkVp4Oqj/+3C9AY5nJp8T56tnoQ4LzYibHWIHA7Q==, tarball: https://npm.pkg.github.com/download/@joebailey26/static-wordpress/0.1.0-next-6e41dc4/f575700a174b2632a6bcd5bffa23e60fbcda1da3}
     engines: {node: ^24.18.0}
     hasBin: true
     peerDependencies:
@@ -1542,7 +1542,7 @@ snapshots:
   '@img/sharp-win32-x64@0.35.5':
     optional: true
 
-  '@joebailey26/static-wordpress@file:../../static-wordpress/packages/cms(wrangler@4.151.3)':
+  '@joebailey26/static-wordpress@0.1.0-next-6e41dc4(wrangler@4.151.3)':
     dependencies:
       '@php-wasm/progress': 3.1.60
       '@wp-playground/blueprints': 3.1.60
