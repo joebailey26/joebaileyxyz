@@ -19,6 +19,8 @@ The browser-based WordPress CMS integration is documented in [cms/README.md](cms
 pnpm dev
 ```
 
+CI runs `pnpm lint:scripts`, `pnpm lint:styles`, `pnpm typecheck` and `pnpm test:contact`. `pnpm typecheck` builds the Nuxt projects and the contact Worker (`worker/tsconfig.json`, Workers types) and its UI tests (`worker/test/tsconfig.json`, DOM types), which are referenced from the root `tsconfig.json`.
+
 ## Build and deploy
 
 ```sh

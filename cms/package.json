@@ -13,12 +13,15 @@
     "deploy": "static-wordpress build --production && static-wordpress deploy",
     "deploy:production": "static-wordpress deploy",
     "deploy:preview": "static-wordpress deploy --preview",
-    "import": "static-wordpress import"
+    "import": "static-wordpress import",
+    "typecheck": "tsc -p ."
   },
   "dependencies": {
-    "@joebailey26/static-wordpress": "0.1.0-next-6e41dc4"
+    "@joebailey26/static-wordpress": "0.1.0-next-4e36bd9"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261024.1",
+    "typescript": "^6.0.3",
     "wrangler": "4.151.3"
   },
   "engines": {

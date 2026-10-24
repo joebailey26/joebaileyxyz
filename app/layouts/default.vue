@@ -45,27 +45,22 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      darkmode: false
-    }
-  },
-  beforeMount () {
-    this.darkmode = window.darkmode
-  },
-  methods: {
-    handleDarkmodeChange ($event) {
-      this.darkmode = $event
-      const bodyClasses = document.body.classList
-      if (this.darkmode) {
-        bodyClasses.add('darkTheme')
-      } else {
-        bodyClasses.remove('darkTheme')
-      }
-      window.localStorage.setItem('darkmode', $event)
-    }
+<script setup lang="ts">
+const darkmode = ref(false)
+
+onBeforeMount(() => {
+  // Set by the inline head script in nuxt.config.ts before the page paints
+  darkmode.value = window.darkmode
+})
+
+function handleDarkmodeChange ($event: boolean) {
+  darkmode.value = $event
+  const bodyClasses = document.body.classList
+  if (darkmode.value) {
+    bodyClasses.add('darkTheme')
+  } else {
+    bodyClasses.remove('darkTheme')
   }
+  window.localStorage.setItem('darkmode', String($event))
 }
 </script>

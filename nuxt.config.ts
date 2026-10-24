@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { titleSuffix } from './app/utils/site.js'
+import { titleSuffix } from './app/utils/site'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-22',

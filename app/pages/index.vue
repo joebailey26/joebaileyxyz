@@ -31,7 +31,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { cdnImageUrl } from '@joebailey26/nuxt-static-wordpress/images'
 
 // The 3:4 portrait is cropped to a square of up to 150px, so 200px wide covers it (400px for 2x screens).

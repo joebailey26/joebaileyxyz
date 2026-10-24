@@ -26,8 +26,8 @@
               <article>
                 <div class="post__content" v-html="post.content" />
                 <div v-if="post.acf && (post.acf.project_url || post.acf.github)" class="post__buttons buttonsContainer">
-                  <a v-if="post.acf.project_url" class="btn" :href="post.acf.project_url">View project</a>
-                  <a v-if="post.acf.github" class="btn" :href="post.acf.github">View repo</a>
+                  <a v-if="post.acf.project_url" class="btn" :href="acfText(post.acf.project_url)">View project</a>
+                  <a v-if="post.acf.github" class="btn" :href="acfText(post.acf.github)">View repo</a>
                 </div>
                 <ClientOnly>
                   <GalexiaShare :title="fullTitle(post.title)" :description="post.excerpt.plain" />
@@ -48,11 +48,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const route = useRoute()
-const post = await useCmsPost('blog', route.params.slug)
+const post = await useCmsPost('blog', String(route.params.slug))
 
 usePageMeta({
   title: () => post.value.title,

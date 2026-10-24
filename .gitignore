@@ -106,3 +106,6 @@ cms/.cache/
 cms/.wrangler/
 cms/.dev.vars
 cms/migration/
+
+# TypeScript build-mode state (pnpm typecheck)
+*.tsbuildinfo

@@ -70,24 +70,14 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  postType: {
-    type: String,
-    required: true
-  },
-  nextPostText: {
-    type: String,
-    required: true
-  },
-  previousPostText: {
-    type: String,
-    required: true
-  },
-  showPostName: {
-    type: Boolean,
-    default: false
-  }
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  postType: string
+  nextPostText: string
+  previousPostText: string
+  showPostName?: boolean
+}>(), {
+  showPostName: false
 })
 
 const route = useRoute()

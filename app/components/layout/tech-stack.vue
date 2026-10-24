@@ -54,13 +54,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    techStack: {
-      type: Array,
-      required: true
-    }
-  }
-}
+<script setup lang="ts">
+defineProps<{
+  techStack: string[] | undefined
+}>()
 </script>

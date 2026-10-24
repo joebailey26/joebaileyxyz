@@ -9,12 +9,18 @@ importers:
   .:
     dependencies:
       '@joebailey26/static-wordpress':
-        specifier: 0.1.0-next-6e41dc4
-        version: 0.1.0-next-6e41dc4(wrangler@4.151.3)
+        specifier: 0.1.0-next-4e36bd9
+        version: 0.1.0-next-4e36bd9(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))
     devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^5.20261024.1
+        version: 5.20261024.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
       wrangler:
         specifier: 4.151.3
-        version: 4.151.3
+        version: 4.151.3(@cloudflare/workers-types@5.20261024.1)
 
 packages:
 
@@ -60,6 +66,9 @@ packages:
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
+
+  '@cloudflare/workers-types@5.20261024.1':
+    resolution: {integrity: sha512-sNhbgBsuVvmumSurgCcIrXShqACPfRt/XlYFstBeANu5BHEJhXW+e7PmHxDNYRXxKYZV57toUfkLwFp8/0SZKA==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -526,11 +535,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@joebailey26/static-wordpress@0.1.0-next-6e41dc4':
-    resolution: {integrity: sha512-XC2QeNLtaZhgpCz1nOD1M+RAJGWDKikRM7m1VSWvwIwRvVGkVp4Oqj/+3C9AY5nJp8T56tnoQ4LzYibHWIHA7Q==, tarball: https://npm.pkg.github.com/download/@joebailey26/static-wordpress/0.1.0-next-6e41dc4/f575700a174b2632a6bcd5bffa23e60fbcda1da3}
+  '@joebailey26/static-wordpress@0.1.0-next-4e36bd9':
+    resolution: {integrity: sha512-Fd0wHO7L9ryJ6qUD6ocCePbOeOJQY4PGxxTzFCGZCkvjqa8JlrN26UC0doEuc3AwRc3v43yts/REc0YkyXCAew==, tarball: https://npm.pkg.github.com/download/@joebailey26/static-wordpress/0.1.0-next-4e36bd9/dd6224e980bd4ca3593328d0885255760756d51d}
     engines: {node: ^24.18.0}
     hasBin: true
     peerDependencies:
+      '@cloudflare/workers-types': ^5.20261024.1
       wrangler: ^4.151.3
 
   '@jridgewell/resolve-uri@3.1.2':
@@ -1170,6 +1180,11 @@ packages:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
     engines: {node: '>= 0.4'}
 
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
@@ -1270,6 +1285,8 @@ snapshots:
 
   '@cloudflare/workerd-windows-64@1.20261019.1':
     optional: true
+
+  '@cloudflare/workers-types@5.20261024.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -1542,8 +1559,9 @@ snapshots:
   '@img/sharp-win32-x64@0.35.5':
     optional: true
 
-  '@joebailey26/static-wordpress@0.1.0-next-6e41dc4(wrangler@4.151.3)':
+  '@joebailey26/static-wordpress@0.1.0-next-4e36bd9(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))':
     dependencies:
+      '@cloudflare/workers-types': 5.20261024.1
       '@php-wasm/progress': 3.1.60
       '@wp-playground/blueprints': 3.1.60
       '@wp-playground/client': 3.1.60
@@ -1551,7 +1569,7 @@ snapshots:
       esbuild: 0.25.12
       fflate: 0.8.2
       jose: 6.1.3
-      wrangler: 4.151.3
+      wrangler: 4.151.3(@cloudflare/workers-types@5.20261024.1)
       yauzl: 3.2.0
 
   '@jridgewell/resolve-uri@3.1.2': {}
@@ -2353,6 +2371,8 @@ snapshots:
       es-errors: 1.3.0
       is-typed-array: 1.1.15
 
+  typescript@6.0.3: {}
+
   undici-types@8.9.0: {}
 
   undici@7.29.1: {}
@@ -2394,7 +2414,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261019.1
       '@cloudflare/workerd-windows-64': 1.20261019.1
 
-  wrangler@4.151.3:
+  wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261019.1)
@@ -2405,6 +2425,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20261019.1
     optionalDependencies:
+      '@cloudflare/workers-types': 5.20261024.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - '@types/node'

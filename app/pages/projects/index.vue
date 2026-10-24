@@ -24,15 +24,15 @@
                           {{ project.title }}
                         </NuxtLink>
                       </h2>
-                      <LayoutTechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="project.acf.icons" />
+                      <LayoutTechStack v-if="project.acf && project.acf.icons" class="post__tech-stack" :tech-stack="acfList(project.acf.icons)" />
                     </header>
                     <p class="post__content" v-text="project.excerpt.plain" />
                     <div class="post__buttons buttonsContainer">
                       <NuxtLink class="btn" :to="`/projects/${project.slug}/`">
                         Continue Reading
                       </NuxtLink>
-                      <a v-if="project.acf && project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
-                      <a v-if="project.acf && project.acf.github" class="btn" :href="project.acf.github">View repo</a>
+                      <a v-if="project.acf && project.acf.project_url" class="btn" :href="acfText(project.acf.project_url)">View project</a>
+                      <a v-if="project.acf && project.acf.github" class="btn" :href="acfText(project.acf.github)">View repo</a>
                     </div>
                   </article>
                 </template>
@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const head = {
   title: 'Projects',
   description: 'Some loose notes on tech demonstrations and projects that I have created.'
@@ -79,7 +79,7 @@ usePageMeta({
   canonical: 'https://joebailey.xyz/projects/'
 })
 
-function goToPage (page) {
+function goToPage (page: number) {
   router.push({ path: route.path, query: { ...route.query, p: page.toString() } })
 }
 </script>

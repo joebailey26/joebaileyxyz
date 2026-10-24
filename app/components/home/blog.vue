@@ -9,6 +9,6 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { data: blog } = await useCmsIndex('blog')
 </script>

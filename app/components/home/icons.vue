@@ -48,23 +48,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    items: {
-      type: Number,
-      required: true
-    },
-    current: {
-      type: Number,
-      required: true
-    }
-  },
-  emits: ['icon-clicked'],
-  methods: {
-    bubble (i) {
-      this.$emit('icon-clicked', i)
-    }
-  }
+<script setup lang="ts">
+defineProps<{
+  items: number
+  current: number
+}>()
+
+const emit = defineEmits<{
+  'icon-clicked': [index: number]
+}>()
+
+function bubble (i: number) {
+  emit('icon-clicked', i)
 }
 </script>

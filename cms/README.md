@@ -3,7 +3,7 @@
 The browser WordPress CMS at `cms.joebailey.xyz` runs [`@joebailey26/static-wordpress`](https://github.com/joebailey26/static-wordpress/tree/master/packages/cms). This folder holds only what belongs to this site; the package README covers the editor, synchronisation, imports, deployment and limits.
 
 - `cms.config.json`: sections `blog` and `projects` (category slugs `blog` and `projects`, public paths `/blog/` and `/projects/`) and the **Project details** fields `project_url`, `github` and `icons`.
-- `worker.mjs`: the Worker entry, `createCms(config)`.
+- `worker.ts`: the Worker entry, `createCms(config)`; `tsconfig.json` typechecks it with the Workers types (`pnpm --dir cms run typecheck`).
 - `wrangler.jsonc`: production uses D1 `joebailey-cms` and R2 `joebailey-cms-files`; previews use `joebailey-cms-preview` and `joebailey-cms-preview-files` with website builds disabled. Migrations come from the package.
 - `access-policy.json`: the Access allowlist (`joe@joebailey.xyz`, `billybidley26@gmail.com`).
 

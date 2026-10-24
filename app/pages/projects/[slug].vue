@@ -11,7 +11,7 @@
               </NuxtLink>
             </div>
             <h1 class="page-header__title" v-text="project.title" />
-            <LayoutTechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="project.acf.icons" :show-post-name="true" />
+            <LayoutTechStack v-if="project.acf && project.acf.icons" class="page-header__tech-stack page-header__description" :tech-stack="acfList(project.acf.icons)" :show-post-name="true" />
           </div>
         </div>
       </div>
@@ -24,8 +24,8 @@
               <article>
                 <div class="post__content" v-html="project.content" />
                 <div v-if="project.acf && (project.acf.project_url || project.acf.github)" class="post__buttons buttonsContainer">
-                  <a v-if="project.acf.project_url" class="btn" :href="project.acf.project_url">View project</a>
-                  <a v-if="project.acf.github" class="btn" :href="project.acf.github">View repo</a>
+                  <a v-if="project.acf.project_url" class="btn" :href="acfText(project.acf.project_url)">View project</a>
+                  <a v-if="project.acf.github" class="btn" :href="acfText(project.acf.github)">View repo</a>
                 </div>
                 <ClientOnly>
                   <GalexiaShare :title="fullTitle(project.title)" :description="project.excerpt.plain" />
@@ -46,9 +46,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const route = useRoute()
-const project = await useCmsPost('projects', route.params.slug, { notFound: 'Project not found' })
+const project = await useCmsPost('projects', String(route.params.slug), { notFound: 'Project not found' })
 
 usePageMeta({
   title: () => project.value.title,

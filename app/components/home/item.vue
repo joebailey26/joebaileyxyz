@@ -49,42 +49,30 @@ article {
       </NuxtLink>
       <span v-else v-text="item.title" />
     </h3>
-    <LayoutTechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="item.acf.icons" />
+    <LayoutTechStack v-if="item.acf && item.acf.icons && showTechStack" :tech-stack="acfList(item.acf.icons)" />
     <p v-text="item.excerpt.plain" />
     <div class="buttonsContainer">
       <NuxtLink v-if="showLink" :to="link" class="btn">
         Continue Reading
       </NuxtLink>
-      <a v-if="item.acf && item.acf.project_url" class="btn" :href="item.acf.project_url" target="_blank">View project</a>
-      <a v-if="item.acf && item.acf.github" class="btn" :href="item.acf.github" target="_blank">View repo</a>
+      <a v-if="item.acf && item.acf.project_url" class="btn" :href="acfText(item.acf.project_url)" target="_blank">View project</a>
+      <a v-if="item.acf && item.acf.github" class="btn" :href="acfText(item.acf.github)" target="_blank">View repo</a>
     </div>
   </article>
 </template>
 
-<script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true
-    },
-    linkPrefix: {
-      type: String,
-      required: true
-    },
-    showLink: {
-      type: Boolean,
-      default: true
-    },
-    showTechStack: {
-      type: Boolean,
-      default: true
-    }
-  },
-  computed: {
-    link () {
-      return `/${this.linkPrefix}/${this.item.slug}/`
-    }
-  }
-}
+<script setup lang="ts">
+import type { CmsPostSummary } from '@joebailey26/nuxt-static-wordpress'
+
+const props = withDefaults(defineProps<{
+  item: CmsPostSummary
+  linkPrefix: string
+  showLink?: boolean
+  showTechStack?: boolean
+}>(), {
+  showLink: true,
+  showTechStack: true
+})
+
+const link = computed(() => `/${props.linkPrefix}/${props.item.slug}/`)
 </script>
