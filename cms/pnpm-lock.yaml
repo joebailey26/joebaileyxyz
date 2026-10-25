@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@joebailey26/static-wordpress':
-        specifier: 0.1.0-next-4e36bd9
-        version: 0.1.0-next-4e36bd9(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))
+        specifier: ^0.1.0
+        version: 0.1.0(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^5.20261024.1
@@ -535,8 +535,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@joebailey26/static-wordpress@0.1.0-next-4e36bd9':
-    resolution: {integrity: sha512-Fd0wHO7L9ryJ6qUD6ocCePbOeOJQY4PGxxTzFCGZCkvjqa8JlrN26UC0doEuc3AwRc3v43yts/REc0YkyXCAew==, tarball: https://npm.pkg.github.com/download/@joebailey26/static-wordpress/0.1.0-next-4e36bd9/dd6224e980bd4ca3593328d0885255760756d51d}
+  '@joebailey26/static-wordpress@0.1.0':
+    resolution: {integrity: sha512-e6BzdLRnZ9c/dreaOznRKJ02iQW2bC+pxiroVPjphkaTPMD9KyAhqsZO+wQB9DbJLIF7Nu3QyXDR/jP2xHMLBw==, tarball: https://npm.pkg.github.com/download/@joebailey26/static-wordpress/0.1.0/f5b4f152df89987f803d0ade3ac262a1e0c11866}
     engines: {node: ^24.18.0}
     hasBin: true
     peerDependencies:
@@ -1559,7 +1559,7 @@ snapshots:
   '@img/sharp-win32-x64@0.35.5':
     optional: true
 
-  '@joebailey26/static-wordpress@0.1.0-next-4e36bd9(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))':
+  '@joebailey26/static-wordpress@0.1.0(@cloudflare/workers-types@5.20261024.1)(wrangler@4.151.3(@cloudflare/workers-types@5.20261024.1))':
     dependencies:
       '@cloudflare/workers-types': 5.20261024.1
       '@php-wasm/progress': 3.1.60

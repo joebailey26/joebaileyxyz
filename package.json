@@ -31,7 +31,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.3.3",
-    "@joebailey26/nuxt-static-wordpress": "0.1.0-next-4e36bd9",
+    "@joebailey26/nuxt-static-wordpress": "^0.1.0",
     "@torchlight-api/client": "^0.0.4",
     "nuxt": "^4.6.2",
     "nuxt-component-date": "git+https://github.com/Galexia-Agency/nuxt-component-date.git#0b7351eee27645e0a4a64172e46d40b3b87b6a61",
