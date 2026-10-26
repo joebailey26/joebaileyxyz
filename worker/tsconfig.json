@@ -1,0 +1,19 @@
+{
+  // The contact Worker and its API tests: Workers runtime types, plus Node's for node:test.
+  // The tests run with Node's type stripping, so only erasable syntax and .ts import extensions.
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": ["@cloudflare/workers-types", "node"],
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": ["index.ts", "test/contact.test.ts", "test/cloudflare-email.ts"]
+}

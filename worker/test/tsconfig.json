@@ -1,0 +1,19 @@
+{
+  // The contact form UI tests, which import the browser composables from app/; DOM and Node types.
+  // The tests run with Node's type stripping, so only erasable syntax and .ts import extensions.
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": ["contact-ui.test.ts"]
+}

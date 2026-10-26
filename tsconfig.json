@@ -1,10 +1,13 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
+  // The Worker projects have their own runtime types; `nuxt typecheck` builds every reference.
   "files": [],
   "references": [
     { "path": "./.nuxt/tsconfig.app.json" },
     { "path": "./.nuxt/tsconfig.server.json" },
     { "path": "./.nuxt/tsconfig.shared.json" },
-    { "path": "./.nuxt/tsconfig.node.json" }
+    { "path": "./.nuxt/tsconfig.node.json" },
+    { "path": "./worker/tsconfig.json" },
+    { "path": "./worker/test/tsconfig.json" }
   ]
 }

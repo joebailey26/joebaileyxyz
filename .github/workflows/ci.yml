@@ -9,6 +9,10 @@ concurrency:
 
 permissions:
   contents: read
+  packages: read
+
+env:
+  GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   lint:
@@ -32,8 +36,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run ${{ matrix.check.script }}
 
-  cms-test:
-    name: CMS tests
+  cms-build:
+    name: CMS build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -47,29 +51,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: cms/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run check
-      - run: pnpm test
-
-  cms-runtime:
-    name: CMS runtime (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    defaults:
-      run:
-        working-directory: cms
-    steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-          cache-dependency-path: cms/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run check
-      - run: pnpm test
-      - run: pnpm run build:ci
-      - run: pnpm run test:wordpress
+      # The Worker entry's types, the editor shell and the Worker bundle; runtime and WordPress tests live in joebailey26/static-wordpress.
+      - run: pnpm run typecheck
+      - run: pnpm run build
+      - run: pnpm exec wrangler deploy --dry-run --outdir .wrangler/dry-run

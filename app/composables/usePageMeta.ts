@@ -2,7 +2,7 @@ import type { MaybeRefOrGetter } from 'vue'
 import { computed, toValue, useHead, useSeoMeta } from '#imports'
 import { fullTitle } from '~/utils/site'
 
-interface PageMeta {
+interface PageMetaOptions {
   title: MaybeRefOrGetter<string>
   description?: MaybeRefOrGetter<string | undefined>
   canonical?: string
@@ -10,7 +10,7 @@ interface PageMeta {
 }
 
 // The title, description, image and canonical URL tags that pages set. Values may be refs or getters.
-export function usePageMeta ({ title, description, canonical, image }: PageMeta) {
+export function usePageMeta ({ title, description, canonical, image }: PageMetaOptions) {
   const pageTitle = computed(() => fullTitle(toValue(title)))
   useHead({
     title,
