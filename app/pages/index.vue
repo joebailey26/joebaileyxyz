@@ -56,7 +56,7 @@ useHead({
         '@type': 'Person',
         email: 'joe@joebailey.xyz',
         image: 'https://joebailey.xyz/img/joe-bailey-shuffleboard.jpg',
-        jobTitle: 'Software Engineer',
+        jobTitle: 'Lead Project Engineer',
         name: 'Joe Bailey',
         birthPlace: 'Cambridge, UK',
         birthDate: '2000-06-02',

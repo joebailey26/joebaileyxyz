@@ -106,3 +106,5 @@ cms/.cache/
 cms/.wrangler/
 cms/.dev.vars
 cms/migration/
+
+static
