@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import { useTurnstileWidget } from '@joebailey26/turnstile-forms/vue'
+
 const props = withDefaults(defineProps<{
   siteKey?: string
 }>(), {
@@ -25,6 +27,8 @@ const widgetElement = useTemplateRef<HTMLElement>('widget')
 const { error, renderWidget, reset, retry, dispose } = useTurnstileWidget({
   siteKey: () => props.siteKey,
   container: widgetElement,
+  action: 'contact',
+  contactEmail: 'joe@joebailey.xyz',
   onToken: (token) => emit('token', token)
 })
 

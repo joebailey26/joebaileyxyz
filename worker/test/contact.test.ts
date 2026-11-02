@@ -5,6 +5,7 @@ import type { Env } from '../index.ts'
 import { EmailMessage } from './cloudflare-email.ts'
 
 // Only replace the Workers-only email constructor; exercise the real request handler.
+// The handler itself is tested in @joebailey26/turnstile-forms; these cover the site's route and form.
 const hooks = registerHooks({
   resolve (specifier, context, next) {
     if (specifier === 'cloudflare:email') {
@@ -14,25 +15,25 @@ const hooks = registerHooks({
     return next(specifier, context)
   }
 })
-const { handleContact, default: worker } = await import('../index.ts')
+const { default: worker } = await import('../index.ts')
 hooks.deregister()
 
-function request (token: string | Blob | null = 'valid-token', options: RequestInit<IncomingRequestCfProperties> = {}) {
+function request (fields: Record<string, string> = { name: 'Test Visitor', email: 'visitor@example.com', message: 'A contact message' }, options: RequestInit<IncomingRequestCfProperties> = {}) {
   const body = new FormData()
-  body.set('name', 'Test Visitor')
-  body.set('email', 'visitor@example.com')
-  body.set('message', 'A contact message')
-  if (token !== null) body.set('cf-turnstile-response', token)
+  for (const [key, value] of Object.entries(fields)) {
+    body.set(key, value)
+  }
+  body.set('cf-turnstile-response', 'valid-token')
 
   // Typed as an incoming request, as the Worker's fetch handler receives
   return new Request<unknown, IncomingRequestCfProperties>('https://joebailey.xyz/api/contact', { method: 'POST', body, ...options })
 }
 
-function setup (t: TestContext, result: unknown = { success: true, action: 'contact', hostname: 'joebailey.xyz' }) {
-  const send = t.mock.fn<(message: unknown) => Promise<EmailSendResult>>(async () => ({ messageId: 'test-message' }))
-  const verify = t.mock.method(globalThis, 'fetch', async () => Response.json(result))
+function setup (t: TestContext) {
+  const send = t.mock.fn<(message: unknown) => Promise<unknown>>(async () => ({ messageId: 'test-message' }))
+  const verify = t.mock.method(globalThis, 'fetch', async () => Response.json({ success: true, action: 'contact', hostname: 'joebailey.xyz' }))
   const env = {
-    ASSETS: { fetch: async () => new Response('asset'), connect: () => assert.fail('unexpected connect') },
+    ASSETS: { fetch: async () => new Response('asset') },
     TURNSTILE_SECRET_KEY: 'private-test-key',
     CONTACT_FROM: 'contact@joebailey.xyz',
     CONTACT_EMAIL: { send }
@@ -41,81 +42,43 @@ function setup (t: TestContext, result: unknown = { success: true, action: 'cont
   return { send, verify, env }
 }
 
-test('verified contact sends email after checking the token', async (t) => {
+const decode = (raw: string) => new TextDecoder().decode(Uint8Array.from(atob(raw.split('\r\n\r\n')[1]?.replace(/\r\n/g, '') ?? ''), (c) => c.charCodeAt(0)))
+
+test('a verified contact message is emailed to joe@joebailey.xyz', async (t) => {
   const { env, send, verify } = setup(t)
-  const response = await worker.fetch(request(), env)
+  const response = await worker.fetch(request({ name: 'Test Visitor', email: 'visitor@example.com', message: 'A contact message', extra: 'Not emailed' }), env)
   assert.equal(response.status, 200)
   assert.deepEqual(await response.json(), { ok: true })
-  assert.equal(send.mock.callCount(), 1)
-  const [url, options] = verify.mock.calls[0].arguments
-  assert.equal(url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify')
-  assert.ok(typeof options?.body === 'string')
-  assert.deepEqual(JSON.parse(options.body), { secret: 'private-test-key', response: 'valid-token' })
-  assert.equal(options.method, 'POST')
-  assert.ok(options.signal instanceof AbortSignal)
-  assert.equal(response.headers.get('Cache-Control'), 'no-store')
-  const [message] = send.mock.calls[0].arguments
+  assert.equal(verify.mock.callCount(), 1)
+  const [message] = send.mock.calls[0]?.arguments ?? []
   assert.ok(message instanceof EmailMessage)
+  assert.equal(message.from, 'contact@joebailey.xyz')
+  assert.equal(message.to, 'joe@joebailey.xyz')
+  assert.match(message.raw, /^From: Website <contact@joebailey.xyz>/)
   assert.match(message.raw, /Reply-To: visitor@example.com/)
+  assert.ok(message.raw.includes(`Subject: =?UTF-8?B?${btoa('Message from Test Visitor')}?=`))
+  assert.equal(decode(message.raw), 'Contact form from Test Visitor\n\nName:\nTest Visitor\n\nEmail:\nvisitor@example.com\n\nMessage:\nA contact message\n')
 })
 
-for (const token of [null, '', '   ', 'x'.repeat(2049), new Blob(['file'])]) {
-  test(`missing or invalid token is blocked (${token === null ? 'missing' : typeof token === 'string' ? token.length : 'file'})`, async (t) => {
-    const { env, send, verify } = setup(t)
-    assert.equal((await handleContact(request(token), env)).status, 400)
-    assert.equal(send.mock.callCount(), 0)
-    assert.equal(verify.mock.callCount(), 0)
-  })
-}
-
-for (const result of [
-  { success: false, 'error-codes': ['invalid-input-response'] },
-  { success: false, 'error-codes': ['timeout-or-duplicate'] },
-  { success: true, hostname: 'joebailey.xyz', action: 'login' },
-  { success: true, hostname: 'attacker.example', action: 'contact' },
-  { success: true },
-  { success: 'true', hostname: 'joebailey.xyz', action: 'contact' },
-  null
-]) {
-  test(`failed or mismatched verification cannot send email: ${JSON.stringify(result)}`, async (t) => {
-    const { env, send } = setup(t, result)
-    assert.ok([403, 503].includes((await handleContact(request(), env)).status))
-    assert.equal(send.mock.callCount(), 0)
-  })
-}
-
-test('missing secret fails closed without calling verification', async (t) => {
-  const { env, send, verify } = setup(t)
-  assert.equal((await handleContact(request(), { ...env, TURNSTILE_SECRET_KEY: undefined })).status, 503)
+test('the name, email and message are all required', async (t) => {
+  const { env, send } = setup(t)
+  for (const missing of ['name', 'email', 'message']) {
+    const fields: Record<string, string> = { name: 'Test Visitor', email: 'visitor@example.com', message: 'A contact message' }
+    Reflect.deleteProperty(fields, missing)
+    assert.equal((await worker.fetch(request(fields), env)).status, 400, missing)
+  }
   assert.equal(send.mock.callCount(), 0)
+})
+
+test('an unset secret fails closed and offers the email address', async (t) => {
+  const { env, verify } = setup(t)
+  const response = await worker.fetch(request(), { ...env, TURNSTILE_SECRET_KEY: undefined })
+  assert.equal(response.status, 503)
+  assert.match(JSON.stringify(await response.json()), /joe@joebailey.xyz/)
   assert.equal(verify.mock.callCount(), 0)
 })
 
-for (const failure of ['network', 'timeout', 'http', 'json']) {
-  test(`verification ${failure} failure cannot send email`, async (t) => {
-    const { env, send, verify } = setup(t)
-    verify.mock.mockImplementation(async () => {
-      if (failure === 'http') return new Response('unavailable', { status: 503 })
-      if (failure === 'json') return new Response('invalid JSON')
-      throw new DOMException('Unavailable', failure === 'timeout' ? 'TimeoutError' : 'NetworkError')
-    })
-    assert.equal((await handleContact(request(), env)).status, 503)
-    assert.equal(send.mock.callCount(), 0)
-  })
-}
-
-test('a token cannot be reused for a second email', async (t) => {
-  const { env, send, verify } = setup(t)
-  assert.equal((await handleContact(request(), env)).status, 200)
-  verify.mock.mockImplementation(async () => Response.json({ success: false, 'error-codes': ['timeout-or-duplicate'] }))
-  assert.equal((await handleContact(request(), env)).status, 403)
-  assert.equal(send.mock.callCount(), 1)
-})
-
-test('method and origin guards run before verification', async (t) => {
-  const { env, send, verify } = setup(t)
-  assert.equal((await handleContact(new Request('https://joebailey.xyz/api/contact'), env)).status, 405)
-  assert.equal((await handleContact(request('valid-token', { headers: { Origin: 'https://other.example' } }), env)).status, 403)
-  assert.equal(send.mock.callCount(), 0)
-  assert.equal(verify.mock.callCount(), 0)
+test('other requests are served from the static assets', async (t) => {
+  const { env } = setup(t)
+  assert.equal(await (await worker.fetch(new Request('https://joebailey.xyz/blog/'), env)).text(), 'asset')
 })

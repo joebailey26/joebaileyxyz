@@ -136,11 +136,13 @@
           </div>
         </div>
         <form
-          ref="contactForm"
+          ref="formEl"
           class="contact-form"
           method="post"
           name="contactForm"
-          @submit.prevent="submit"
+          @input="changed"
+          @change="changed"
+          @submit.prevent="send"
         >
           <div class="row">
             <div class="col-md-6">
@@ -186,7 +188,7 @@
                 <TurnstileWidget
                   ref="turnstile"
                   :site-key="$config.public.turnstileSiteKey"
-                  @token="turnstileToken = $event"
+                  @token="setToken"
                 />
               </div>
               <input
@@ -198,11 +200,11 @@
               >
             </div>
             <div class="col-md-12">
-              <p v-show="!submitted">
+              <p v-show="!message">
               &nbsp;
               </p>
               <Transition name="fade">
-                <p v-show="submitted" class="message" role="status" v-text="submitted" />
+                <p v-show="message" class="message" role="status" v-text="message" />
               </Transition>
             </div>
           </div>
@@ -213,12 +215,15 @@
 </template>
 
 <script setup lang="ts">
-const contactFormElement = useTemplateRef<HTMLFormElement>('contactForm')
-const turnstileWidget = useTemplateRef<{ reset: () => void }>('turnstile')
-const { submitted, turnstileToken, form, canSubmit, restoreDraft, submit } = useContactForm({
-  formElement: contactFormElement,
-  turnstile: turnstileWidget
+import { useForm } from '@joebailey26/turnstile-forms/vue'
+
+const { form, formEl, canSubmit, message, changed, setToken, submit } = useForm('contact', {
+  endpoint: '/api/contact',
+  storageKey: 'contactForm',
+  turnstile: useTemplateRef<{ reset: () => void }>('turnstile')
 })
 
-onMounted(restoreDraft)
+function send () {
+  return submit('Message sent successfully! We’ll be in touch within 2-3 working days')
+}
 </script>

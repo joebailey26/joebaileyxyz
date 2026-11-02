@@ -38,6 +38,9 @@ importers:
       '@joebailey26/nuxt-static-wordpress':
         specifier: ^0.1.0
         version: 0.1.0(9ef185e1f66e205413ecc5d7e812be5e)
+      '@joebailey26/turnstile-forms':
+        specifier: 0.0.0-next-d8e06ee
+        version: 0.0.0-next-d8e06ee(vue@3.5.44(typescript@6.0.3))
       '@torchlight-api/client':
         specifier: ^0.0.4
         version: 0.0.4
@@ -849,6 +852,12 @@ packages:
     peerDependencies:
       '@torchlight-api/client': ^0.0.4
       nuxt: ^4.6.2
+
+  '@joebailey26/turnstile-forms@0.0.0-next-d8e06ee':
+    resolution: {integrity: sha512-yEQD94X2R2jWKZiXW54+q0mXRyMElqvO4TqTBAz2uXLyxynRYyopaKxupzHFsVUalIwvsY2Nj+d0uxe2NEhZfA==, tarball: https://npm.pkg.github.com/download/@joebailey26/turnstile-forms/0.0.0-next-d8e06ee/1974edea2c822e36102069755218b39583bd265c}
+    engines: {node: ^24.18.0}
+    peerDependencies:
+      vue: ^3.5.0
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -5798,6 +5807,10 @@ snapshots:
       - oxc-parser
       - rolldown
       - unplugin
+
+  '@joebailey26/turnstile-forms@0.0.0-next-d8e06ee(vue@3.5.44(typescript@6.0.3))':
+    dependencies:
+      vue: 3.5.44(typescript@6.0.3)
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:

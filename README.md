@@ -19,7 +19,7 @@ The browser-based WordPress CMS integration is documented in [cms/README.md](cms
 pnpm dev
 ```
 
-CI runs `pnpm lint:scripts`, `pnpm lint:styles`, `pnpm typecheck` and `pnpm test:contact`. `pnpm typecheck` builds the Nuxt projects and the contact Worker (`worker/tsconfig.json`, Workers types) and its UI tests (`worker/test/tsconfig.json`, DOM types), which are referenced from the root `tsconfig.json`.
+CI runs `pnpm lint:scripts`, `pnpm lint:styles`, `pnpm typecheck` and `pnpm test:contact`. `pnpm typecheck` builds the Nuxt projects and the contact Worker and its tests (`worker/tsconfig.json`, Workers types), which are referenced from the root `tsconfig.json`.
 
 ## Build and deploy
 
@@ -62,8 +62,10 @@ server alone does not serve `/api/contact`. Use dummy keys only locally. Preview
 emails use the configured contact inbox, so use the automated tests for mail-free
 verification.
 
-Run `pnpm test:contact` to test the API and widget lifecycle without sending email
-or calling Cloudflare. Implementation references:
+The form handler, `useForm` and `useTurnstileWidget` come from
+[`@joebailey26/turnstile-forms`](https://github.com/joebailey26/static-wordpress/tree/master/packages/forms),
+which tests the verification and widget lifecycle. Run `pnpm test:contact` to test
+the site's route and form without sending email or calling Cloudflare. Implementation references:
 [client rendering](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/),
 [server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/),
 and [test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/).

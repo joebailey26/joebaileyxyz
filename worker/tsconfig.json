@@ -1,5 +1,5 @@
 {
-  // The contact Worker and its API tests: Workers runtime types, plus Node's for node:test.
+  // The contact Worker and its tests: Workers runtime types, plus Node's for node:test.
   // The tests run with Node's type stripping, so only erasable syntax and .ts import extensions.
   "compilerOptions": {
     "target": "ES2024",

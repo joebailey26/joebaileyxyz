@@ -7,7 +7,6 @@
     { "path": "./.nuxt/tsconfig.server.json" },
     { "path": "./.nuxt/tsconfig.shared.json" },
     { "path": "./.nuxt/tsconfig.node.json" },
-    { "path": "./worker/tsconfig.json" },
-    { "path": "./worker/test/tsconfig.json" }
+    { "path": "./worker/tsconfig.json" }
   ]
 }
