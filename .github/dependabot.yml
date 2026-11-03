@@ -1,0 +1,35 @@
+version: 2
+
+# @joebailey26 and @galexia-agency packages come from GitHub Packages. Dependabot can't use the
+# workflow GITHUB_TOKEN, so it reads a read:packages token from the GITHUB_PACKAGES_TOKEN Dependabot secret.
+registries:
+  github-packages:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{ secrets.GITHUB_PACKAGES_TOKEN }}
+
+updates:
+  - package-ecosystem: npm
+    directories: ["/", "/cms"]
+    registries:
+      - github-packages
+    schedule:
+      interval: weekly
+    # One PR a week for everything that shouldn't break; majors still come one at a time.
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # 2.x still sets rules Stylelint 16 removed, so it stays on its 1.0.6 commit until that is fixed upstream.
+      - dependency-name: stylelint-config-galexia
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - '*'
