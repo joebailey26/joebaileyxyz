@@ -47,7 +47,7 @@
     "@stylistic/eslint-plugin": "^4.4.1",
     "@types/node": "^24.19.2",
     "eslint": "^10.13.0",
-    "eslint-config-galexia": "git+https://github.com/Galexia-Agency/eslint-config.git#e94753a7ed8a94ae746f5f6ccf605ce288565ff2",
+    "eslint-config-galexia": "npm:@galexia-agency/eslint-config-galexia@3.3.0",
     "globals": "^17.0.0",
     "jiti": "^2.7.0",
     "postcss": "^8.5.6",
