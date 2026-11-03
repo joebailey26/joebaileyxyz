@@ -15,15 +15,18 @@ updates:
       - github-packages
     schedule:
       interval: weekly
-    # One PR a week for everything that shouldn't break; majors still come one at a time.
+    # Patches come in one PR a week; minor and major updates get a PR each.
     groups:
-      minor-and-patch:
+      patch:
         update-types:
-          - minor
           - patch
+    # Our own packages are updated by hand, alongside the changes that need them.
     ignore:
-      # 2.x still sets rules Stylelint 16 removed, so it stays on its 1.0.6 commit until that is fixed upstream.
+      - dependency-name: '@joebailey26/*'
+      - dependency-name: '@galexia-agency/*'
+      - dependency-name: eslint-config-galexia
       - dependency-name: stylelint-config-galexia
+      - dependency-name: nuxt-component-*
 
   - package-ecosystem: github-actions
     directory: /
