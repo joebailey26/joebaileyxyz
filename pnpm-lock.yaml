@@ -36,8 +36,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3(@fortawesome/fontawesome-svg-core@6.7.2)(vue@3.5.44(typescript@6.0.3))
       '@joebailey26/nuxt-static-wordpress':
-        specifier: ^0.1.0
-        version: 0.1.0(fc2e8b76feda1fb8eb117e72ec91b13c)
+        specifier: ^0.1.1
+        version: 0.1.1(fc2e8b76feda1fb8eb117e72ec91b13c)
       '@joebailey26/turnstile-forms':
         specifier: ^0.1.1
         version: 0.1.1(vue@3.5.44(typescript@6.0.3))
@@ -850,8 +850,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@joebailey26/nuxt-static-wordpress@0.1.0':
-    resolution: {integrity: sha512-OA379fF3YwNgLwvIOXXiFkFTOWJx0zc+P2P/gxmMLdKmMPgJOLLB/F157ZuxJJjMPg8KL8zh9MjI06JZ8WFGUg==, tarball: https://npm.pkg.github.com/download/@joebailey26/nuxt-static-wordpress/0.1.0/52a39c53f1b68780ba05afc6670d7f11c0e35641}
+  '@joebailey26/nuxt-static-wordpress@0.1.1':
+    resolution: {integrity: sha512-zrZh3BQi2UsCK6aYpQZu4q9v6e9P+HelzzZ60g/9KY+jbXwJbWCW890uuTVx3QWH1ZcLPVIwqtvxiOAMzWxOnA==, tarball: https://npm.pkg.github.com/download/@joebailey26/nuxt-static-wordpress/0.1.1/fee603f0d6396f405fb3011a119f29da53a3c646}
     engines: {node: ^24.18.0}
     peerDependencies:
       '@torchlight-api/client': ^0.0.4
@@ -984,36 +984,6 @@ packages:
     resolution: {integrity: sha512-h/fn4K09tA5tvdLj9Zlu5mb3TOVO2zLAetCsfJ1/LLVm2XWtgDVhfSB+Sm93cF1rCGxahmHZd4RJz2nAsWTDvg==}
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
-
-  '@nuxt/kit@4.6.2':
-    resolution: {integrity: sha512-Vn9DJobc30WdR1vrlRcEAFSFy7NV5CWq3o6gxsfrdGb2FmCh0fuDyvbZC30rm2enyiPaOUPafKctFE/ToBjybw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    peerDependencies:
-      '@nuxt/schema': ^3.0.0 || ^4.0.0 || ^5.0.0-0
-      confbox: '>=0.1.0'
-      dotenv: '*'
-      giget: '>=3.1.0'
-      jiti: ^2.0.0
-      mlly: ^1.2.0
-      oxc-parser: '>=0.56.0'
-      rolldown: '>=1.0.0'
-    peerDependenciesMeta:
-      '@nuxt/schema':
-        optional: true
-      confbox:
-        optional: true
-      dotenv:
-        optional: true
-      giget:
-        optional: true
-      jiti:
-        optional: true
-      mlly:
-        optional: true
-      oxc-parser:
-        optional: true
-      rolldown:
-        optional: true
 
   '@nuxt/kit@4.6.3':
     resolution: {integrity: sha512-djNup72hMvn7C9xp0/KAYeoY9uzbrPguv91SUBjEeSHh49kP/YI4BvxUVHP8sZd3kms5Ht+IZTJ6XAfm9hofKw==}
@@ -5841,9 +5811,9 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@joebailey26/nuxt-static-wordpress@0.1.0(fc2e8b76feda1fb8eb117e72ec91b13c)':
+  '@joebailey26/nuxt-static-wordpress@0.1.1(fc2e8b76feda1fb8eb117e72ec91b13c)':
     dependencies:
-      '@nuxt/kit': 4.6.2(@nuxt/schema@4.6.3)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.67.4)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))
+      '@nuxt/kit': 4.6.3(@nuxt/schema@4.6.3)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.67.4)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))
       '@torchlight-api/client': 0.0.4
       cheerio: 1.1.2
       he: 1.2.0
@@ -6108,38 +6078,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
-
-  '@nuxt/kit@4.6.2(@nuxt/schema@4.6.3)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.67.4)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))':
-    dependencies:
-      consola: 3.4.2
-      defu: 6.1.7
-      destr: 2.0.5
-      errx: 0.2.2
-      exsolve: 1.2.0
-      ignore: 7.0.14
-      klona: 2.0.6
-      microdiff: 1.6.0
-      nostics: 1.3.0
-      package-manager-detector: 1.9.0
-      pathe: 2.0.3
-      rc9: 3.1.0
-      scule: 1.3.0
-      std-env: 4.3.0
-      tinyexec: 1.3.1
-      tinyglobby: 0.2.17
-      unctx: 3.0.1(magic-string@1.4.5)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.67.4)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))
-      verkit: 0.5.0
-    optionalDependencies:
-      '@nuxt/schema': 4.6.3
-      confbox: 0.3.2
-      dotenv: 17.4.2
-      giget: 3.3.1
-      jiti: 2.7.0
-      mlly: 1.8.2
-      rolldown: 1.2.16
-    transitivePeerDependencies:
-      - magic-string
-      - unplugin
 
   '@nuxt/kit@4.6.3(@nuxt/schema@4.6.3)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.67.4)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))':
     dependencies:
