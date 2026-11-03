@@ -63,7 +63,7 @@ emails use the configured contact inbox, so use the automated tests for mail-fre
 verification.
 
 The form handler, `useForm` and `useTurnstileWidget` come from
-[`@joebailey26/turnstile-forms`](https://github.com/joebailey26/static-wordpress/tree/master/packages/forms),
+[`@joebailey26/turnstile-forms`](https://github.com/joebailey26/turnstile-forms),
 which tests the verification and widget lifecycle. Run `pnpm test:contact` to test
 the site's route and form without sending email or calling Cloudflare. Implementation references:
 [client rendering](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/),
