@@ -31,7 +31,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.3.3",
-    "@joebailey26/nuxt-static-wordpress": "^0.1.0",
+    "@joebailey26/nuxt-static-wordpress": "^0.1.1",
     "@joebailey26/turnstile-forms": "^0.1.1",
     "@torchlight-api/client": "^0.0.4",
     "nuxt": "^4.6.2",

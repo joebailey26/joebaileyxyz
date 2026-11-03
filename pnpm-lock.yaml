@@ -36,8 +36,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3(@fortawesome/fontawesome-svg-core@6.7.2)(vue@3.5.44(typescript@6.0.3))
       '@joebailey26/nuxt-static-wordpress':
-        specifier: ^0.1.0
-        version: 0.1.0(a0297379c4d85311a756fb6fdbb455b7)
+        specifier: ^0.1.1
+        version: 0.1.1(a0297379c4d85311a756fb6fdbb455b7)
       '@joebailey26/turnstile-forms':
         specifier: ^0.1.1
         version: 0.1.1(vue@3.5.44(typescript@6.0.3))
@@ -841,8 +841,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@joebailey26/nuxt-static-wordpress@0.1.0':
-    resolution: {integrity: sha512-OA379fF3YwNgLwvIOXXiFkFTOWJx0zc+P2P/gxmMLdKmMPgJOLLB/F157ZuxJJjMPg8KL8zh9MjI06JZ8WFGUg==, tarball: https://npm.pkg.github.com/download/@joebailey26/nuxt-static-wordpress/0.1.0/52a39c53f1b68780ba05afc6670d7f11c0e35641}
+  '@joebailey26/nuxt-static-wordpress@0.1.1':
+    resolution: {integrity: sha512-zrZh3BQi2UsCK6aYpQZu4q9v6e9P+HelzzZ60g/9KY+jbXwJbWCW890uuTVx3QWH1ZcLPVIwqtvxiOAMzWxOnA==, tarball: https://npm.pkg.github.com/download/@joebailey26/nuxt-static-wordpress/0.1.1/fee603f0d6396f405fb3011a119f29da53a3c646}
     engines: {node: ^24.18.0}
     peerDependencies:
       '@torchlight-api/client': ^0.0.4
@@ -5812,7 +5812,7 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@joebailey26/nuxt-static-wordpress@0.1.0(a0297379c4d85311a756fb6fdbb455b7)':
+  '@joebailey26/nuxt-static-wordpress@0.1.1(a0297379c4d85311a756fb6fdbb455b7)':
     dependencies:
       '@nuxt/kit': 4.6.2(@nuxt/schema@4.6.2)(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.15)(unplugin@3.4.0(esbuild@0.28.2)(rolldown@1.2.15)(rollup@4.65.0)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.97.2)(terser@5.51.2)(yaml@2.9.1)))
       '@torchlight-api/client': 0.0.4
