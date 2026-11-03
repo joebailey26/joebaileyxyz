@@ -49,17 +49,18 @@
 const darkmode = ref(false)
 
 onBeforeMount(() => {
+  // Set by the inline head script in nuxt.config.ts before the page paints
   darkmode.value = window.darkmode
 })
 
-function handleDarkmodeChange (value: boolean) {
-  darkmode.value = value
+function handleDarkmodeChange ($event: boolean) {
+  darkmode.value = $event
   const bodyClasses = document.body.classList
-  if (value) {
+  if (darkmode.value) {
     bodyClasses.add('darkTheme')
   } else {
     bodyClasses.remove('darkTheme')
   }
-  window.localStorage.setItem('darkmode', String(value))
+  window.localStorage.setItem('darkmode', String($event))
 }
 </script>

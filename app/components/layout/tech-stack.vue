@@ -56,6 +56,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  techStack: string[]
+  techStack: string[] | undefined
 }>()
 </script>

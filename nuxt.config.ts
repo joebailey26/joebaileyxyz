@@ -1,17 +1,21 @@
 import { fileURLToPath } from 'node:url'
 import { titleSuffix } from './app/utils/site'
-import { imageTransformationsEnabled } from './modules/cms/prepare-wordpress-content/utils/image-transformations.ts'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-22',
-  // Shared with the CMS package's tests, so it stays in modules/, but it is not a Nuxt module.
-  // Everything else in modules/ (cms/, sitemap.ts) is registered automatically.
-  ignore: ['modules/cms-content.cjs', 'modules/cms-content.d.cts'],
+  modules: ['@joebailey26/nuxt-static-wordpress'],
+  // Loads the CMS feed at build time; also sets runtimeConfig.public.imageTransformations and writes sitemap.xml.
+  cms: {
+    siteUrl: 'https://joebailey.xyz',
+    sections: {
+      blog: { paginate: true }
+    },
+    favicons: true,
+    torchlight: true
+  },
   runtimeConfig: {
     public: {
-      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || '',
-      // Decided at build time, like the CMS content, because /cdn-cgi/image only exists on the production zone.
-      imageTransformations: imageTransformationsEnabled()
+      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || ''
     }
   },
   app: {
@@ -115,7 +119,7 @@ export default defineNuxtConfig({
     // and the worker lives in worker/, so always emit plain static output.
     preset: 'static',
     prerender: {
-      // Content routes and blog pagination are added by modules/cms.
+      // Content routes and blog pagination are added by @joebailey26/nuxt-static-wordpress.
       crawlLinks: true,
       routes: ['/', '/cv/'],
       failOnError: true

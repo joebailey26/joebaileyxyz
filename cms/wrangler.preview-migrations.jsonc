@@ -6,6 +6,6 @@
     "binding": "DB",
     "database_name": "joebailey-cms-preview",
     "database_id": "1d12eb8a-f1b8-436c-b98a-fac609b026c0",
-    "migrations_dir": "migrations"
+    "migrations_dir": "node_modules/@joebailey26/static-wordpress/migrations"
   }]
 }

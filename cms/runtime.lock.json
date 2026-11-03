@@ -1,9 +1,0 @@
-{
-  "playground": "3.1.60",
-  "downloadUrl": "https://github.com/joebailey26/joebaileyxyz/releases/download/cms-runtime-3.1.60/playground-3.1.60.zip",
-  "wordpressMajor": "7.0",
-  "commit": "16a098b0e927b8fb3525ced104f0157344894802",
-  "artifactId": 12279044198,
-  "artifactSha256": "9c6090dad35c176bd07e9c9141d6dc5b98bdf2d6a3bcb83be805b7e9998593ab",
-  "repository": "WordPress/wordpress-playground"
-}

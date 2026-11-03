@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  postType: CmsSection
+  postType: string
   nextPostText: string
   previousPostText: string
   showPostName?: boolean

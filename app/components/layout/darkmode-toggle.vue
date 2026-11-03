@@ -71,8 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { toHtml, icon } from '@fortawesome/fontawesome-svg-core'
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { toHtml, icon, type IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
@@ -85,7 +84,7 @@ const emit = defineEmits<{
 
 function getSvgForCSS (svg: IconDefinition) {
   const { abstract } = icon(svg)
-  const iconAsSVG = toHtml(abstract[0])
+  const iconAsSVG = toHtml(abstract[0] ?? '')
 
   // The SVG markup is ASCII, so btoa encodes it the same on the server and in the browser.
   return `data:image/svg+xml;base64,${btoa(iconAsSVG)}`
@@ -95,7 +94,7 @@ const sunIcon = getSvgForCSS(faSun)
 const moonIcon = getSvgForCSS(faMoon)
 
 const inputVal = computed({
-  get: () => props.model ?? false,
+  get: () => props.model,
   set: (val) => emit('input', val)
 })
 </script>

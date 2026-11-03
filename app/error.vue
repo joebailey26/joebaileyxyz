@@ -40,9 +40,11 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   error?: NuxtError | null
-}>()
+}>(), {
+  error: null
+})
 
 const statusCode = computed(() => props.error?.status || props.error?.statusCode || 500)
 const message = computed(() => props.error?.message || 'Error')

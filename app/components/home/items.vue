@@ -120,7 +120,7 @@
     <div ref="container" class="row grid" @scroll="containerScroll">
       <template v-for="item, index in items" :key="`${item.title}${index}`">
         <HomeItem
-          ref="itemComponents"
+          ref="item"
           :item="item"
           :link-prefix="linkPrefix"
           :show-link="showLinks"
@@ -144,9 +144,11 @@
 
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
+import type { CmsPostSummary } from '@joebailey26/nuxt-static-wordpress'
 
 withDefaults(defineProps<{
-  items: Pick<PostSummary, 'title' | 'slug' | 'acf' | 'excerpt'>[] | undefined
+  // The home page passes the first page of the section, which is missing for an empty section
+  items: CmsPostSummary[] | undefined
   linkPrefix: string
   showLinks?: boolean
   showTechStack?: boolean
@@ -156,59 +158,21 @@ withDefaults(defineProps<{
 })
 
 const container = useTemplateRef<HTMLElement>('container')
-const itemComponents = useTemplateRef<ComponentPublicInstance[]>('itemComponents')
+const itemComponents = useTemplateRef<ComponentPublicInstance[]>('item')
 
 const current = ref(0)
 const itemWidth = ref(0)
-let position = { left: 0, x: 0 }
+const position = ref({
+  left: 0,
+  x: 0
+})
 
-function hasTouchScreen () {
-  return ('ontouchstart' in window)
-}
-
-function hasOverflowAuto () {
-  /*
-    Rather than worrying about breakpoints here, we let CSS handle it, as they may be different for each component
-    If overflow-x: auto is not on the element, then it is not a scrolling element, so we don't need to run DragToScroll
-  */
-  return !!container.value && getComputedStyle(container.value).getPropertyValue('overflow-x') === 'auto'
-}
-
-function mouseDownHandler (e: MouseEvent) {
-  if (!container.value) {
-    return
+function dragScrollWatcher () {
+  if (!hasTouchScreen() && hasOverflowAuto()) {
+    startDragScroll()
+  } else {
+    stopDragScroll()
   }
-  container.value.classList.add('drag-scroll--scrolling')
-
-  position = {
-    // The current scroll
-    left: container.value.scrollLeft,
-    // Get the current mouse position
-    x: e.clientX
-  }
-  container.value.addEventListener('mousemove', mouseMoveHandler)
-  container.value.addEventListener('mouseup', mouseUpHandler)
-}
-
-function mouseMoveHandler (e: MouseEvent) {
-  if (!container.value) {
-    return
-  }
-  // How far the mouse has been moved
-  const dx = e.clientX - position.x
-
-  // Scroll the element
-  container.value.scrollLeft = position.left - dx
-}
-
-function mouseUpHandler () {
-  if (!container.value) {
-    return
-  }
-  container.value.removeEventListener('mousemove', mouseMoveHandler)
-  container.value.removeEventListener('mouseup', mouseUpHandler)
-
-  container.value.classList.remove('drag-scroll--scrolling')
 }
 
 function startDragScroll () {
@@ -223,15 +187,54 @@ function stopDragScroll () {
   mouseUpHandler()
 }
 
-function dragScrollWatcher () {
-  if (!hasTouchScreen() && hasOverflowAuto()) {
-    startDragScroll()
-  } else {
-    stopDragScroll()
+function hasTouchScreen () {
+  return ('ontouchstart' in window)
+}
+
+function hasOverflowAuto () {
+  /*
+    Rather than worrying about breakpoints here, we let CSS handle it, as they may be different for each component
+    If overflow-x: auto is not on the element, then it is not a scrolling element, so we don't need to run DragToScroll
+  */
+  return !!container.value && (getComputedStyle(container.value).getPropertyValue('overflow-x') === 'auto')
+}
+
+function mouseDownHandler (e: MouseEvent) {
+  if (!container.value) {
+    return
   }
+  container.value.classList.add('drag-scroll--scrolling')
+
+  position.value = {
+    // The current scroll
+    left: container.value.scrollLeft,
+    // Get the current mouse position
+    x: e.clientX
+  }
+  container.value.addEventListener('mousemove', mouseMoveHandler)
+  container.value.addEventListener('mouseup', mouseUpHandler)
+}
+
+function mouseMoveHandler (e: MouseEvent) {
+  if (!container.value) {
+    return
+  }
+  // How far the mouse has been moved
+  const dx = e.clientX - position.value.x
+
+  // Scroll the element
+  container.value.scrollLeft = position.value.left - dx
+}
+
+function mouseUpHandler () {
+  container.value?.removeEventListener('mousemove', mouseMoveHandler)
+  container.value?.removeEventListener('mouseup', mouseUpHandler)
+
+  container.value?.classList.remove('drag-scroll--scrolling')
 }
 
 function updateWidth () {
+  // Each item is a HomeItem, whose root element is its <article>
   const firstItem = itemComponents.value?.[0]?.$el
   itemWidth.value = firstItem instanceof HTMLElement ? firstItem.offsetWidth : 0
 }
