@@ -39,8 +39,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(9ef185e1f66e205413ecc5d7e812be5e)
       '@joebailey26/turnstile-forms':
-        specifier: ^0.1.0
-        version: 0.1.0(vue@3.5.44(typescript@6.0.3))
+        specifier: 0.1.0-next-00089db
+        version: 0.1.0-next-00089db(vue@3.5.44(typescript@6.0.3))
       '@torchlight-api/client':
         specifier: ^0.0.4
         version: 0.0.4
@@ -852,8 +852,8 @@ packages:
       '@torchlight-api/client': ^0.0.4
       nuxt: ^4.6.2
 
-  '@joebailey26/turnstile-forms@0.1.0':
-    resolution: {integrity: sha512-xquraZbwPHu9J+Cn5+syO7ffsVfzmC7V/s7A1PQy/FEo9N6F4RfZn8izefcXAVMsNWnSEriU2qoKKsJf//FHAA==, tarball: https://npm.pkg.github.com/download/@joebailey26/turnstile-forms/0.1.0/601452feca185429cc463a934f78f6a1e2fd51bf}
+  '@joebailey26/turnstile-forms@0.1.0-next-00089db':
+    resolution: {integrity: sha512-05UbXNS0oAZLIwshPg8N6QJc6wkWbBU2s4IfqMCA1Tdjxsu1BB3A9NS93GSKEXWjlbrB7/u8nbI+0aTlyqnDBg==, tarball: https://npm.pkg.github.com/download/@joebailey26/turnstile-forms/0.1.0-next-00089db/8620a9c6299b0c8a9261ddc3053edc19cb7d7682}
     engines: {node: ^24.18.0, pnpm: ^10.11.1}
     peerDependencies:
       vue: ^3.5.0
@@ -5803,7 +5803,7 @@ snapshots:
       - rolldown
       - unplugin
 
-  '@joebailey26/turnstile-forms@0.1.0(vue@3.5.44(typescript@6.0.3))':
+  '@joebailey26/turnstile-forms@0.1.0-next-00089db(vue@3.5.44(typescript@6.0.3))':
     dependencies:
       vue: 3.5.44(typescript@6.0.3)
 
