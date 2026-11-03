@@ -125,6 +125,11 @@ footer {
   @page {
     margin-bottom: 0
   }
+
+  // The dark theme's body background prints when background graphics are on.
+  :global(body.darkTheme) {
+    background-color: white
+  }
   footer {
     position: fixed;
     bottom: 0;
