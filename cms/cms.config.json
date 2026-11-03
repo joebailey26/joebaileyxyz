@@ -12,7 +12,7 @@
       "fields": [
         { "key": "project_url", "label": "Project URL", "type": "url" },
         { "key": "github", "label": "Repository URL", "type": "url" },
-        { "key": "icons", "label": "Technology icons", "type": "checkboxes", "options": ["Firebase", "PHP", "Vue", "React", "WordPress", "Figma", "Netlify", "XD", "InDesign", "Custom"] }
+        { "key": "icons", "label": "Technology icons", "type": "checkboxes", "options": ["Firebase", "PHP", "Vue", "React", "WordPress", "Figma", "Netlify", "XD", "InDesign", "Cloudflare", "Nuxt", "TypeScript", "Custom"] }
       ]
     }
   ]
