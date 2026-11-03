@@ -51,7 +51,7 @@
     "globals": "^17.0.0",
     "jiti": "^2.7.0",
     "postcss": "^8.5.32",
-    "postcss-html": "^1.8.0",
+    "postcss-html": "^2.0.0",
     "postcss-scss": "^4.0.9",
     "stylelint": "^15.11.0",
     "stylelint-config-galexia": "git+https://github.com/Galexia-Agency/stylelint-config.git#861ee9c7f547f05547658dd78de8519e80c9a23f",
