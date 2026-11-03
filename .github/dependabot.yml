@@ -24,6 +24,10 @@ updates:
       patch:
         update-types:
           - patch
+        # Dependabot treats update-types as more specific than patterns, so without this the patch
+        # group claims FontAwesome and its major updates fall back to one PR per package.
+        exclude-patterns:
+          - '@fortawesome/*'
     # Our own packages are updated by hand, alongside the changes that need them.
     ignore:
       - dependency-name: '@joebailey26/*'
