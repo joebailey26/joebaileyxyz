@@ -1,12 +1,12 @@
 version: 2
 
 # @joebailey26 and @galexia-agency packages come from GitHub Packages. Dependabot can't use the
-# workflow GITHUB_TOKEN, so it reads a read:packages token from the GITHUB_PACKAGES_TOKEN Dependabot secret.
+# workflow GITHUB_TOKEN, so it reads a read:packages token from the PACKAGES_TOKEN Dependabot secret.
 registries:
   github-packages:
     type: npm-registry
     url: https://npm.pkg.github.com
-    token: ${{ secrets.GITHUB_PACKAGES_TOKEN }}
+    token: ${{ secrets.PACKAGES_TOKEN }}
 
 updates:
   - package-ecosystem: npm
