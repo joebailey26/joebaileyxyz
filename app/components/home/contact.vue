@@ -52,7 +52,36 @@
     resize: vertical
   }
 }
+.form-submit {
+  display: flex;
+  gap: .75rem;
+  align-items: center
+}
+
+// Shown beside the button while the message is sent
+.sending {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--grey);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: sending .75s linear infinite
+}
+@keyframes sending {
+  to {
+    transform: rotate(360deg)
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sending {
+    animation-duration: 3s
+  }
+}
 @include dark-theme {
+  .sending {
+    border-color: var(--light-green);
+    border-top-color: transparent
+  }
   .contact-methods {
     svg {
       fill: var(--light-green)
@@ -191,13 +220,17 @@
                   @token="setToken"
                 />
               </div>
-              <input
-                id="formSubmit"
-                class="btn"
-                value="Send Message"
-                type="submit"
-                :disabled="!canSubmit"
-              >
+              <div class="form-submit">
+                <input
+                  id="formSubmit"
+                  class="btn"
+                  value="Send Message"
+                  type="submit"
+                  :disabled="!canSubmit"
+                  :aria-busy="sending"
+                >
+                <span v-if="sending" class="sending" role="status" aria-label="Sending your message" />
+              </div>
             </div>
             <div class="col-md-12">
               <p v-show="!message">
@@ -217,7 +250,7 @@
 <script setup lang="ts">
 import { useForm } from '@joebailey26/turnstile-forms/vue'
 
-const { form, formEl, canSubmit, message, changed, setToken, submit } = useForm('contact', {
+const { form, formEl, canSubmit, sending, message, changed, setToken, submit } = useForm('contact', {
   endpoint: '/api/contact',
   storageKey: 'contactForm',
   turnstile: useTemplateRef<{ reset: () => void }>('turnstile')
