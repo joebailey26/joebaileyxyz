@@ -2,12 +2,23 @@
 * {
   margin: 0
 }
+
+// Outside @media screen so print doesn't inherit the dark theme's light body text.
+.cv {
+  color: var(--grey)
+}
 .header__title {
   text-align: center
 }
+.header__role {
+  margin-top: .25rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center
+}
 p.header__description {
-  margin-top: 1rem;
-  font-size: 1.2rem;
+  margin-top: .75rem;
+  font-size: 1.1rem;
   text-align: center
 }
 p {
@@ -65,6 +76,9 @@ footer {
       color: var(--light-green)!important
     }
   }
+  p {
+    white-space: nowrap
+  }
   p:not(:last-child):after {
     padding-right: .5em;
     padding-left: .5em;
@@ -79,7 +93,6 @@ footer {
     max-width: 210mm; /* A4 width in millimeters */
     margin: 0 auto; /* Optional: centers the page horizontally */
     padding: 15mm 20mm; /* Optional: adds some padding inside the A4 page */
-    color: var(--grey);
     background: white; /* Optional: sets a white background */
     border: 1px solid lightgray; /* Optional: adds a border around the A4 page */
   }
@@ -136,69 +149,64 @@ footer {
       <h1 class="header__title">
         Joe Bailey
       </h1>
+      <h2 class="header__role">
+        Lead Project Engineer
+      </h2>
       <p class="header__description">
-        I deliver great websites, applications, and experiences.
+        I turn client problems into engineering plans, and lead teams to deliver them.
       </p>
     </header>
     <section>
       <h2>Work History</h2>
       <div class="block">
         <div class="block__info">
-          <h3>Software Engineer at Priority Digital Health Ltd</h3>
-          <h4>Remote, Full-time, July 2023 - Present</h4>
+          <h3>Lead Project Engineer at Priority Digital Health Ltd</h3>
+          <h4>Remote, Full-time, January 2026 - Present</h4>
         </div>
         <div class="block__description">
-          <p>PDH provides a patient management system for councils and charities, built with Symfony 6.4 and deployed to AWS ECS, alongside multiple React / TypeScript front-ends hosted on S3 via CloudFormation.</p>
-          <p>I joined as a Backend Engineer, designing and building new APIs and core platform features. Within three months, I progressed to leading feature delivery end-to-end, working directly from client specifications through technical breakdown, development, testing, and deployment.</p>
-          <p>After nine months, I transitioned into a Full-Stack Engineer, contributing extensively to the React front-end applications. At the twelve-month mark, I also took ownership of DevOps responsibilities, collaborating with our cloud partner to optimise deployment workflows, improve system stability under high concurrent load, and introduce proactive monitoring and bug-tracking capabilities.</p>
-          <p>Over the past year, I have led multiple projects ranging from delivering new functionality (such as mailing list features) to optimising platform performance, including integrating Symfony Messenger to offload communication processing and significantly improve API response times.</p>
+          <p>PDH provides a patient management system for councils and charities: a Symfony 6.4 platform on AWS ECS, React / TypeScript front-ends on S3, and a Flutter app where patients track goals like stopping smoking or losing weight.</p>
+          <p>I own projects end-to-end and lead the developers who deliver them, from designing the engineering solution and estimating the work to running stakeholder demos through to sign-off.</p>
+          <p>I manage our external DevOps team. We moved ECS to scaling on PHP-FPM capacity, which ended outages from traffic spikes and cut costs by reducing our minimum containers from 8 to 3.</p>
+          <p>I proposed and am leading our move from GoGrow to Grafana, cutting dashboard update times from 2 hours to near-instant and letting anyone in the business build reports.</p>
+          <p>I replaced manual patient entry with an AI PDF reader that creates patients from GP forms, cutting the time to add a patient by 40%.</p>
+          <p>I moved us from reactive to proactive, with uptime monitoring across 150+ sites and production errors raised automatically as Jira issues from New Relic, so we catch problems before clients report them.</p>
+          <p>I rolled out GitHub Copilot and Claude to our developers, taking feature delivery from 1-2 a month to 3-4, and PRs from 5-6 a week to 10-15.</p>
         </div>
       </div>
+      <div class="block">
+        <div class="block__info">
+          <h3>Software Engineer at Priority Digital Health Ltd</h3>
+          <h4>Hybrid, Full-time, July 2023 - January 2026</h4>
+        </div>
+        <div class="block__description">
+          <p>I joined as a Backend Engineer building APIs and core platform features, and was delivering my own features independently within three months. I moved to full-stack work on our React front-ends at nine months and took on DevOps at twelve.</p>
+          <p>Transactional emails were sent by a cron job that timed out on large batches, dropping client-critical comms. I moved sending onto a Symfony Messenger queue that now delivers every message. Event-driven comms also moved to the queue, making API response times 30% faster.</p>
+          <p>I also upgraded the platform from PHP 7.4 to 8.4, connected it to the NHS Personal Demographics Service (PDS), and integrated GOV.UK Notify and Power2SMS.</p>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <div class="block">
         <div class="block__info">
           <h3>Web Developer at Rareloop Ltd</h3>
           <h4>Hybrid, Full-time, April 2022 - July 2023</h4>
         </div>
         <div class="block__description">
-          <p>Rareloop is a WordPress agency in Southampton supporting a small roster of impactful clients, mainly charities.</p>
-          <p>When I joined, I quickly ramped up on OOP PHP and Laravel, applying these principles to build and maintain MVC-based WordPress sites using ACF, Lumberjack, and Rareloop’s bespoke page builder.</p>
-          <p>I contributed to the delivery of multiple client projects while continuously improving internal development processes, including iterating on the shared Canopy theme to improve maintainability and development efficiency.</p>
-          <p>I valued working at a B Corp–certified company, focused on building high-quality, sustainable digital products and improving standards across the web.</p>
+          <p>Rareloop is a B Corp–certified WordPress agency in Southampton working mainly with charities. I ramped up quickly on OOP PHP and Laravel, building MVC-based WordPress sites with ACF and Lumberjack, and improved the shared Canopy theme used across client projects.</p>
         </div>
       </div>
       <div class="block">
         <div class="block__info">
-          <h3>Development Liaison at Toolkit Websites Ltd</h3>
-          <h4>Part-time, October 2021 – March 2022</h4>
+          <h3>Web Developer, then Development Liaison at Toolkit Websites Ltd</h3>
+          <h4>Full-time, then part-time, October 2020 – March 2022</h4>
         </div>
         <div class="block__description">
-          <p>In a part-time capacity, I focused on higher-level technical initiatives while continuing my core responsibilities. I led the definition and technical breakdown of new features for internal CRM and CMS platforms, briefing backend developers and overseeing delivery.</p>
-          <br>
-          <br>
-          <p>I managed critical infrastructure projects, including the migration of 1,400 domains from eNom to Cloudflare in response to a third-party outage, and supported the migration of the server stack from Rackspace to Azure.</p>
-          <p>Alongside project delivery, I assessed team needs and implemented technical solutions to reduce operational friction, while ensuring thorough testing and stability across all internal systems.</p>
-        </div>
-      </div>
-      <div class="block">
-        <div class="block__info">
-          <h3>Development Liaison at Toolkit Websites Ltd</h3>
-          <h4>Full-time, June 2021 – October 2021</h4>
-        </div>
-        <div class="block__description">
-          <p>As my role at Toolkit Websites expanded, I took ownership of engineering standards, onboarding, and platform quality. I trained and onboarded new developers, creating comprehensive technical documentation, coding standards, and structured learning programmes to accelerate ramp-up time and ensure consistency across the codebase.</p>
-          <p>I managed shared code snippets and style guides, reviewed development procedures and best practices, and performed regular code reviews and quality assurance across newly launched websites.</p>
-          <p>In addition, I led the redesign of Toolkit’s main and support websites, carried out email migrations for clients, and managed client domain portfolios, including transfers and DNS configuration.</p>
-        </div>
-      </div>
-      <div class="block">
-        <div class="block__info">
-          <h3>Web Developer at Toolkit Websites Ltd</h3>
-          <h4>Full-time, October 2020 – June 2021</h4>
-        </div>
-        <div class="block__description">
-          <p>Toolkit Websites is a small Chichester agency supporting over 2,000 clients, emphasizing HTML5, CSS, and JavaScript to deliver responsive builds that stay easy to maintain.</p>
-          <p>I worked across design, development, and client support, gaining hands-on experience in the full website delivery lifecycle. I designed logos and websites, built custom functionality to meet client requirements, and managed content using Toolkit’s bespoke CMS.</p>
-          <p>Alongside delivery work, I provided direct client support via email and phone, consistently meeting a one-hour SLA, which helped build strong communication skills and an understanding of client needs.</p>
+          <p>Toolkit Websites is a Chichester agency supporting over 2,000 clients. I started as a Web Developer, designing and building client sites and supporting clients to a one-hour SLA.</p>
+          <p>As Development Liaison, I trained new developers, wrote our coding standards and documentation, and ran code reviews. I briefed and oversaw new CRM and CMS features, migrated 1,400 domains from eNom to Cloudflare after a third-party outage, and supported a server move from Rackspace to Azure.</p>
         </div>
       </div>
     </section>
@@ -206,17 +214,19 @@ footer {
       <h2>Education</h2>
       <div class="block">
         <div class="block__info">
-          <h3>Digital Design and Development Bsc with First Class Honours</h3>
+          <h3>Digital Design and Development BSc with First Class Honours</h3>
           <h4>Southampton Solent University</h4>
-          <h4>September 2018 – June 2022</h4>
+          <h4>September 2018 – June 2022, completed alongside full-time work</h4>
         </div>
       </div>
     </section>
     <footer>
-      <p>Portfolio: <a href="https://joebailey.xyz" target="_blank">https://joebailey.xyz</a></p>
-      <p>GitHub: <a href="https://github.com/joebailey26" target="_blank">@joebailey26</a></p>
-      <p>Email: <a href="mailto:joe@joebailey.xyz" target="_blank">joe@joebailey.xyz</a></p>
-      <p>Phone: <a href="tel:+447477737535" target="_blank">07477737535</a></p>
+      <p>Cambridge, UK</p>
+      <p><a href="mailto:joe@joebailey.xyz" target="_blank">joe@joebailey.xyz</a></p>
+      <p><a href="tel:+447477737535" target="_blank">07477 737535</a></p>
+      <p><a href="https://github.com/joebailey26" target="_blank">GitHub</a></p>
+      <p><a href="https://www.linkedin.com/in/joe-bailey-b68b17171/" target="_blank">LinkedIn</a></p>
+      <p><a href="https://joebailey.xyz" target="_blank">joebailey.xyz</a></p>
     </footer>
   </div>
 </template>
