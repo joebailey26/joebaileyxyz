@@ -50,6 +50,15 @@
       <i v-if="techName === 'InDesign'" title="Adobe InDesign">
         <font-awesome-icon :icon="['fa-solid', 'fa-book']" />
       </i>
+      <i v-if="techName === 'Cloudflare'" title="Cloudflare">
+        <font-awesome-icon :icon="['fa-brands', 'fa-cloudflare']" />
+      </i>
+      <i v-if="techName === 'Nuxt'" title="Nuxt">
+        <font-awesome-icon :icon="['fa-brands', 'fa-nuxt']" />
+      </i>
+      <i v-if="techName === 'TypeScript'" title="TypeScript">
+        <font-awesome-icon :icon="['fa-brands', 'fa-typescript']" />
+      </i>
     </template>
   </div>
 </template>
