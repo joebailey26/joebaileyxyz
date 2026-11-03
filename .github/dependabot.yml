@@ -17,6 +17,10 @@ updates:
       interval: weekly
     # Patches come in one PR a week; minor and major updates get a PR each.
     groups:
+      # FontAwesome's packages only work at the same major version, so they move together.
+      fontawesome:
+        patterns:
+          - '@fortawesome/*'
       patch:
         update-types:
           - patch
