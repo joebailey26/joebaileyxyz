@@ -31,6 +31,9 @@ updates:
       - dependency-name: eslint-config-galexia
       - dependency-name: stylelint-config-galexia
       - dependency-name: nuxt-component-*
+      # Node's types follow the Node major in .nvmrc, so they're bumped by hand alongside it.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directory: /
