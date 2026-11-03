@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "env": { "CMS_API_URL": "http://127.0.0.1:4010", "CMS_BUILD_TOKEN": "local-dev" }
+    }
+  ]
+}
