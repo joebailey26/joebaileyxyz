@@ -57,7 +57,7 @@
     "stylelint-config-galexia": "git+https://github.com/Galexia-Agency/stylelint-config.git#861ee9c7f547f05547658dd78de8519e80c9a23f",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.14",
-    "wrangler": "4.151.3"
+    "wrangler": "4.156.0"
   },
   "browserslist": [
     "last 5 versions and not ie <= 11 and > 0.2% and not dead and not op_mini all"
