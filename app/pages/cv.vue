@@ -158,7 +158,7 @@ footer {
         Lead Project Engineer
       </h2>
       <p class="header__description">
-        I turn client problems into engineering plans, and lead teams to deliver them.
+        I lead software engineers, shape technical decisions and stay hands-on with the code and infrastructure that deliver them.
       </p>
     </header>
     <section>
@@ -169,8 +169,10 @@ footer {
           <h4>Remote, Full-time, January 2026 - Present</h4>
         </div>
         <div class="block__description">
-          <p>PDH provides a patient management system for councils and charities: a Symfony 6.4 platform on AWS ECS, React / TypeScript front-ends on S3, and a Flutter app where patients track goals like stopping smoking or losing weight.</p>
-          <p>I own projects end-to-end and lead the developers who deliver them, from designing the engineering solution and estimating the work to running stakeholder demos through to sign-off.</p>
+          <p>PDH provides a patient management system for councils and charities: a Symfony 6.4 platform on AWS ECS, React / TypeScript front-ends on S3, and a Flutter app where patients track health goals.</p>
+          <p>I lead developers through the full delivery lifecycle, translating requirements into technical solutions, estimating and allocating work, managing priorities and taking projects through to stakeholder sign-off.</p>
+          <p>I mentor engineers through pair programming, code reviews and delegated ownership, developing their technical skills and confidence in leading demos, contributing to discussions and making decisions.</p>
+          <p>I improve engineering practices across development and QA, aligning teams on effective testing standards, introducing Dependabot and establishing clearer ownership of production error triage.</p>
           <p>I manage our external DevOps team. We moved ECS to scaling on PHP-FPM capacity, which ended outages from traffic spikes and cut costs by reducing our minimum containers from 8 to 3.</p>
           <p>I proposed and am leading our move from GoGrow to Grafana, cutting dashboard update times from 2 hours to near-instant and letting anyone in the business build reports.</p>
           <p>I replaced manual patient entry with an AI PDF reader that creates patients from GP forms, cutting the time to add a patient by 40%.</p>
