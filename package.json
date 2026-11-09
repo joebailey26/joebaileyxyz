@@ -42,7 +42,7 @@
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261031.1",
+    "@cloudflare/workers-types": "^5.20261106.1",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^24.19.2",
