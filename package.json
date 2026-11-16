@@ -37,7 +37,7 @@
     "nuxt": "^4.6.4",
     "nuxt-component-date": "git+https://github.com/Galexia-Agency/nuxt-component-date.git#0b7351eee27645e0a4a64172e46d40b3b87b6a61",
     "nuxt-component-pagination": "git+https://github.com/Galexia-Agency/nuxt-component-pagination.git#dd4d0bea6b2853a977b5a97528c0b286a40534ba",
-    "sass": "^1.97.2",
+    "sass": "^1.108.2",
     "vue": "^3.5.45",
     "vue-router": "^5.5.0"
   },
