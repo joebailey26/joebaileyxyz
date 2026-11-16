@@ -39,7 +39,7 @@
     "nuxt-component-pagination": "git+https://github.com/Galexia-Agency/nuxt-component-pagination.git#dd4d0bea6b2853a977b5a97528c0b286a40534ba",
     "sass": "^1.97.2",
     "vue": "^3.5.45",
-    "vue-router": "^5.4.0"
+    "vue-router": "^5.5.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261106.1",
