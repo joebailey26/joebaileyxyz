@@ -38,8 +38,8 @@
     "nuxt-component-date": "git+https://github.com/Galexia-Agency/nuxt-component-date.git#0b7351eee27645e0a4a64172e46d40b3b87b6a61",
     "nuxt-component-pagination": "git+https://github.com/Galexia-Agency/nuxt-component-pagination.git#dd4d0bea6b2853a977b5a97528c0b286a40534ba",
     "sass": "^1.108.2",
-    "vue": "^3.5.45",
-    "vue-router": "^5.5.0"
+    "vue": "^3.5.46",
+    "vue-router": "^5.5.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261113.1",
@@ -50,8 +50,8 @@
     "eslint-config-galexia": "npm:@galexia-agency/eslint-config-galexia@3.3.0",
     "globals": "^17.14.0",
     "jiti": "^2.7.0",
-    "postcss": "^8.5.32",
-    "postcss-html": "^2.0.0",
+    "postcss": "^8.5.33",
+    "postcss-html": "^2.0.1",
     "postcss-scss": "^4.0.9",
     "stylelint": "^15.11.0",
     "stylelint-config-galexia": "git+https://github.com/Galexia-Agency/stylelint-config.git#861ee9c7f547f05547658dd78de8519e80c9a23f",
