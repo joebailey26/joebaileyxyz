@@ -16,7 +16,7 @@
         </picture>
         <div class="page-header__content">
           <h1 class="page-header__title">
-            Hi, I’m Joe -<br>I make websites work
+            Hi, I’m Joe -<br>Lead Project Engineer
           </h1>
         </div>
       </div>
